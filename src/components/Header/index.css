@@ -1,0 +1,46 @@
+.logo_agile h1 a {
+    color: #f45c5d;
+    font-size: 38px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.logo_agile h1 a:hover {
+    text-decoration: none;
+}
+
+.logo_agile h1 a img {
+    position: absolute;
+    left: -40%;
+    top: -23px;
+}
+
+.logo_agile {
+    padding: 26px 0 21px;
+}
+
+.agileits_search input[type="search"] {
+    color: #191e21;
+    width: 78%;
+    letter-spacing: 1px;
+    padding: 10px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.22);
+}
+
+.agileits_search button {
+    border-radius: 0;
+    background: #f45c5d;
+    color: #fff;
+    width: 20%;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.22);
+    padding: 10px;
+}
+button.w3view-cart {
+    font-size: 20px;
+    color: #fff;
+    width: 50px;
+    height: 44px;
+    background: #000;
+    border: 1px solid rgba(27, 25, 25, 0.27);
+}

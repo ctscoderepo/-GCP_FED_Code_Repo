@@ -1,0 +1,21 @@
+.promotionalBackground {
+	background: #0879c9;
+}
+.promotionalHeader span {
+	letter-spacing: 1px;
+	font-size: 15px;
+}
+.promotionalHeaderRight ul li {
+	display: inline-block;
+	width: 19%;
+	font-size: 13px;
+	letter-spacing: 1px;
+}
+
+.promotionalHeaderRight ul li a {
+	text-decoration: none;
+}
+
+.promotionalHeaderRight ul li i {
+	font-size: 15px;
+}
