@@ -1,5 +1,5 @@
-##Lot of effot has been put in developing site.
+## Lot of effot has been put in developing site.
 
-#copyright
+##### copyrights
 
--Author: Chandra kumar reddy penugonda
+> author- Chandra kumar reddy penugonda
