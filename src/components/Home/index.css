@@ -1,0 +1,17 @@
+.featuredProductsHeading {
+	color: #333;
+	text-align: center;
+	text-transform: capitalize;
+	letter-spacing: 1px;
+	font-size: 23px;
+}
+.imagewrapper {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.imagewrapper img {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}

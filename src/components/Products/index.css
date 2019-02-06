@@ -1,0 +1,22 @@
+.imageWrapper img {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	height: 200px;
+	width: 100%;
+}
+.productDetail {
+	padding: 0 5px;
+}
+p.title {
+	color: #0084cd;
+	text-transform: capitalize;
+	font-size: 17px;
+}
+span.rated {
+	fill: gold;
+}
+p.price {
+	text-transform: capitalize;
+	color: grey;
+}

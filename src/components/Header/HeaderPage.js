@@ -18,9 +18,12 @@ import Drawer from '@material-ui/core/Drawer';
 import {Link} from 'react-router-dom';
 import Location from '../Location';
 import NavigationMenu from '../Navigation';
-import './index.css';
+import './Header.css';
 
 const styles = theme => ({
+  root: {
+    width: '100%',
+  },
   grow:{
   flexGrow:1
   },
@@ -64,10 +67,9 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color:"#fff",
+    color:"red",
     right:0,
-    backgroundColor:'#0084CD',
-    borderRadius:"0 3px 3px 0px"
+    fill:'red'
   },
   inputRoot: {
     color: '#000',
@@ -81,20 +83,24 @@ const styles = theme => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     backgroundColor:'#fff',
-    border:"1px solid rgba(0,0,0,0.1)",
     [theme.breakpoints.up('sm')]: {
       width: 500,
+      "&:focus":{
+        border:"1px solid rgba(0,0,0,0.1)"
+      }
     },
     [theme.breakpoints.down('sm')]: {
           paddingTop: theme.spacing.unit,
           paddingBottom: theme.spacing.unit,
-        
+          "&:focus":{
+              border:"1px solid rgba(0,0,0,0.1)"
+       },
     },
     borderRadius:'3px',
 },
 appBar:{
-    backgroundColor:"#fff",
-    boxShadow: "none"
+    backgroundColor:"darkOrange",
+    boxShadow: "none",
   },
   signin:{
     fill:'#000',
@@ -111,16 +117,11 @@ appBar:{
     }
   },
   logo:{
-    width:'100px',
-    height:'40px'
+    width:'60px',
+    height:'60px'
   },
   toolBar:{
     minHeight:'70px',
-    width:'90%',
-    marginLeft:'auto',
-    marginRight:'auto',
-    borderBottom:'1px solid lightgrey',
-    boxSizing: "border-box",
     [theme.breakpoints.down('sm')]: {
         minHeight:'65px',
       }
@@ -164,7 +165,7 @@ function SearchAppBar(props) {
     );
   return (
   <>
-    <div className='componentContainer'>
+    <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={toggleDrawer}>

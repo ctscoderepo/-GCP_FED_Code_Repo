@@ -3,7 +3,7 @@ import {Grid} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Featured from '../Featured';
 import featured01 from '../../resources/Products/featured-01.jpg';
-import './index.css';
+import './Homes.css';
 
 const styles = theme => ({
 HomeComponent :{
@@ -20,7 +20,7 @@ itemContainer:{
 const HomeComponent = (props) => {
   const {classes}=props;
   return (
-    <div className={`${classes.HomeComponent} componentContainer`}>
+    <div className={classes.HomeComponent}>
     <Grid container spacing={16}>
     <Grid item lg={12} xs={12}>
     <Featured/>
