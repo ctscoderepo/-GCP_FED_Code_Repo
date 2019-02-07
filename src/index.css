@@ -1,9 +1,13 @@
+html {
+  font-family: monospace;
+  color: #080808;
+  font-weight: 100;
+}
 body {
-	margin: 70px 0 0 0;
-	font-family: "Raleway !important", sans-serif;
+  margin: 70px 0 0 0;
 }
 .componentContainer {
-	width: 90%;
-	margin-right: auto;
-	margin-left: auto;
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
 }

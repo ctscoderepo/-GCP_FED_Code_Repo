@@ -1,17 +1,50 @@
 .featuredProductsHeading {
-	color: #333;
 	text-align: center;
 	text-transform: capitalize;
 	letter-spacing: 1px;
 	font-size: 23px;
+	font-weight: normal;
+	color: #444;
+	padding-bottom: 10px;
+	border-bottom: 1px solid lightgrey;
 }
 .imagewrapper {
-	position: absolute;
 	width: 100%;
-	height: 100%;
+	height: 250px;
+	margin: 4px;
+	box-sizing: border-box;
 }
 .imagewrapper img {
-	margin-left: auto;
-	margin-right: auto;
+	position: relative;
 	display: block;
+	height: 200px;
+	width: 100%;
+	margin: 1px auto;
+	transition: 0.2s;
+	border-radius: 4px;
+}
+
+.imagewrapper:hover img {
+	filter: blur(4px) brightness(80%);
+	cursor: pointer;
+}
+
+.imagewrapper div.featuredProductButton {
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	transition: 0.2s;
+}
+.imagewrapper div.featuredProductButton button {
+	color: #fff;
+	text-transform: capitalize;
+}
+.imagewrapper:hover div.featuredProductButton {
+	opacity: 1;
+}
+.featuredProductContent {
+	padding: 5px;
 }

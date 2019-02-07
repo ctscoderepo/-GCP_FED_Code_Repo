@@ -1,7 +1,13 @@
 .imageWrapper img {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-	height: 170px;
-	width: 220px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  height: 170px;
+  width: 220px;
+}
+a.catergoryLink {
+  font-size: 18px;
+}
+a:hover {
+  color: "#0084CD";
 }
