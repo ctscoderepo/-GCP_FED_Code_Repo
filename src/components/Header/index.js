@@ -67,7 +67,11 @@ const styles = theme => ({
     color:"#fff",
     right:0,
     backgroundColor:'#0084CD',
-    borderRadius:"0 3px 3px 0px"
+    borderRadius:"0 3px 3px 0px",
+    [theme.breakpoints.down('sm')]: {
+      color: '#0084CD',
+      backgroundColor:'transparent'
+    }
   },
   inputRoot: {
     color: '#000',
@@ -112,7 +116,10 @@ appBar:{
   },
   logo:{
     width:'100px',
-    height:'40px'
+    height:'40px',
+    [theme.breakpoints.down('sm')]: {
+      display:"none"
+    }
   },
   toolBar:{
     minHeight:'70px',
@@ -149,7 +156,7 @@ function SearchAppBar(props) {
           {[{category:'Electronics', url:'/shopping/Electronics'},
   {category:'Toys',url:'/shopping/Toys'},{category:'Lowels',url:'/shopping/Lowels'}].map((text, index) => (
             <ListItem button key={text.category}>
-            <Link to={text.url}>
+            <Link to={text.url} className='drawerStyles'>
               <ListItemText primary={text.category} />
               <ListItemIcon>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/></svg>

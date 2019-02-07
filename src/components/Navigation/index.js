@@ -9,7 +9,7 @@ const styles = theme => ({
 
 function NavigationMenu(props) {
   const NavBar=[{category:'Electronics', url:'/shopping/Electronics'},
-  {category:'Toys',url:'/shopping/Toys'},{category:'Apparels',url:'/shopping/apparels'}]
+  {category:'Toys',url:'/shopping/Toys'},{category:'Apparel',url:'/shopping/apparels'}]
   .map(item => <li key={item.category}><Link to={item.url} className='nav-item'>{item.category}</Link></li>)
   return (
         <div className="navigationMenu">

@@ -16,6 +16,7 @@ CarouselHeight:{
 },
 slide_01:{
   backgroundImage: `url(${slide_one})`,
+  borderRadius:"3px",
   height: window.innerHeight + "px",
   [theme.breakpoints.down('sm')]: {
      height:'300px',
@@ -24,6 +25,7 @@ slide_01:{
 slide_02:{
   backgroundImage: `url(${slide_two})`,
   height: window.innerHeight + "px",
+    borderRadius:"3px",
   [theme.breakpoints.down('sm')]: {
      height:'300px',
     }
@@ -31,6 +33,7 @@ slide_02:{
 slide_03:{
   backgroundImage: `url(${slide_three})`,
   height: window.innerHeight + "px",
+    borderRadius:"3px",
   [theme.breakpoints.down('sm')]: {
      height:'300px',
     }
