@@ -1,13 +1,22 @@
 html {
-  font-family: monospace;
-  color: #080808;
-  font-weight: 100;
+	font-family: Human BBY Web, Arial, Helvetica, sans-serif;
+	color: #080808;
+	font-weight: 100;
 }
 body {
-  margin: 70px 0 0 0;
+	margin: 70px 0 0 0;
+	background-color: #fafafa;
 }
-.componentContainer {
-  width: 90%;
-  margin-right: auto;
-  margin-left: auto;
+
+@media only screen and (max-width: 600px) {
+	.componentContainer {
+		width: 100%;
+	}
+}
+@media only screen and (min-width: 600px) {
+	.componentContainer {
+		width: 90%;
+		margin-right: auto;
+		margin-left: auto;
+	}
 }

@@ -18,6 +18,8 @@ import Drawer from "@material-ui/core/Drawer";
 import { Link } from "react-router-dom";
 import Location from "../Location";
 import NavigationMenu from "../Navigation";
+import SearchMobile from '../Search';
+import Advertisement from '../Advertisement';
 import "./index.css";
 
 const styles = theme => ({
@@ -54,6 +56,9 @@ const styles = theme => ({
       marginLeft: theme.spacing.unit,
       width: "auto",
       marginRight: "15px"
+    },
+    [theme.breakpoints.down("xs")]: {
+     display:'none'
     }
   },
   searchIcon: {
@@ -97,7 +102,14 @@ const styles = theme => ({
   },
   appBar: {
     backgroundColor: "#fff",
-    boxShadow: "none"
+    zIndex:'2000',
+    width: "100% !important",
+    boxSizing: "border-box",
+    left: 0,
+    boxShadow: "none",
+    [theme.breakpoints.up("sm")]: {
+      boxShadow: "none",
+    }
   },
   signin: {
     fill: "#000",
@@ -115,20 +127,25 @@ const styles = theme => ({
   },
   logo: {
     width: "100px",
-    height: "40px",
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
+    height: "30px",
+    position: "relative",
+    top: "4px"
   },
   toolBar: {
     minHeight: "70px",
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
-    borderBottom: "1px solid lightgrey",
+    border: "1px solid lightgrey",
+    botterTop:0,
     boxSizing: "border-box",
     [theme.breakpoints.down("sm")]: {
-      minHeight: "65px"
+      minHeight: "65px",
+      borderBottom: "none",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width:'100%',
+      border: "none",
     }
   },
   NavigationMenu: {
@@ -138,11 +155,26 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       display: "none"
     }
+  },
+   paper: {
+    height: 'calc(100% - 66px)',
+    top: 66
+  },
+  mobileSearch:{
+    display:'none',
+    [theme.breakpoints.down("xs")]: {
+      display: "flex"
+    }
+  },
+  searchIconMobile:{
+    color:'#000',
+    padding:'0 10px'
   }
 });
 
 function SearchAppBar(props) {
-  const [open, setOpen] = useState(false);
+  let [open, setOpen] = useState(false);
+  let [searchOpen,setSearchOpen]=useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -151,12 +183,14 @@ function SearchAppBar(props) {
     <div className={classes.list}>
       <List>
         {[
-          { category: "Electronics", url: "/shopping/Electronics" },
-          { category: "Toys", url: "/shopping/Toys" },
-          { category: "Lowels", url: "/shopping/Lowels" }
+          { category: "Electronics", url: "/shopping/electronics" },
+          { category: "Toys", url: "/shopping/toys" },
+          { category: "Apparel", url: "/shopping/apparel" },
+          { category: "Home Decor", url: "/shopping/home-decor" },
+          { category: "Gift Card", url: "/shopping/gift-cards" }
         ].map((text, index) => (
           <ListItem button key={text.category}>
-            <Link to={text.url} className="drawerStyles">
+            <Link to={text.url} className="drawerListStyles">
               <ListItemText primary={text.category} />
               <ListItemIcon>
                 <svg
@@ -179,6 +213,7 @@ function SearchAppBar(props) {
     <>
       <div className="componentContainer">
         <AppBar position="fixed" className={classes.appBar}>
+          <Advertisement/>
           <Toolbar className={classes.toolBar}>
             <IconButton
               className={classes.menuButton}
@@ -211,6 +246,24 @@ function SearchAppBar(props) {
                   input: classes.inputInput
                 }}
               />
+            </div>
+            <div className={classes.mobileSearch}>
+                <div className={classes.searchIconMobile}>
+                  <SearchIcon onClick={()=>{setSearchOpen(state=> !state)}}/>
+                </div>
+                <div className={classes.searchIconMobile}>
+                    <i className={`material-icons`} >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 18 18"
+                      >
+                        <path d="M9 1C4.58 1 1 4.58 1 9s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 2.75c1.24 0 2.25 1.01 2.25 2.25S10.24 8.25 9 8.25 6.75 7.24 6.75 6 7.76 3.75 9 3.75zM9 14.5c-1.86 0-3.49-.92-4.49-2.33C4.62 10.72 7.53 10 9 10c1.47 0 4.38.72 4.49 2.17-1 1.41-2.63 2.33-4.49 2.33z" />
+                      </svg>
+                    </i>
+                    {searchOpen && <SearchMobile open={searchOpen} closeSearch={setSearchOpen}/>}
+                </div>
             </div>
             <div>
               <i className={`material-icons ${classes.signin}`}>
@@ -247,7 +300,7 @@ function SearchAppBar(props) {
               </i>
             </div>
 
-            <Drawer open={open} onClose={toggleDrawer}>
+            <Drawer open={open} onClose={toggleDrawer} classes={{paper: classes.paper}}>
               <div
                 tabIndex={0}
                 role="button"

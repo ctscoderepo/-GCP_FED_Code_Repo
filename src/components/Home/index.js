@@ -10,7 +10,8 @@ import "./index.css";
 
 const styles = theme => ({
   HomeComponent: {
-    padding: "60px 20px 10px 20px",
+    padding: "60px 0px 10px 0px",
+    boxSizing:'border-box',
     [theme.breakpoints.down("sm")]: {
       padding: "5px 10px 5px 10px"
     }

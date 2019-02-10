@@ -9,7 +9,7 @@ import "./index.css";
 
 const styles = theme => ({
   Products: {
-    marginTop: "140px"
+    marginTop: "150px"
   },
   catItem: {
     textAlign: "center"

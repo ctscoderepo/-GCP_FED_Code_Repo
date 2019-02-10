@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button, Link } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
 import { withStyles } from "@material-ui/core/styles";
@@ -7,6 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 import computers from "../../resources/Products/computers.jpg";
 import c2 from "../../resources/Products/c2.jpg";
 import c1 from "../../resources/Products/c1.jpg";
+import ExanpsionPanel from '../helpers/ExpansionPanel';
 import "./index.css";
 
 const styles = theme => ({
@@ -35,6 +36,11 @@ const styles = theme => ({
       fill: "#0084CD",
       border: "1px solid #0084CD"
     }
+  },
+  producttitle:{
+    padding:'0 10% 0 0',
+    fontWeight:"400",
+    color:"cornflowerblue"
   }
 });
 
@@ -58,29 +64,17 @@ const ProductDetailComponent = props => {
   return (
     <div className="productDetailComponent">
       <Grid container>
-        <Grid lg={6} sm={6} xs={12} item>
-          <ImageGallery
-            items={images}
-            autoPlay={false}
-            thumbnailPosition="left"
-            showPlayButton={false}
-            showNav={false}
-          />
-        </Grid>
-        <Grid lg={6} sm={6} xs={12} item>
-          <p className={classes.producttitle}>
+        <Grid lg={7} sm={6} xs={12} item>
+          <h3 className={classes.producttitle}>
             Apple - MacBook Air - 13.3" Retina Display - Intel Core i5 - 8GB
             Memory - 128GB Flash Storage (Latest Model) - Gold
-          </p>
+          </h3>
           <p className={classes.productIdName}>
             <strong>Model :</strong>
             <span className={classes.productid}>SMJ737VZKV</span>
             &nbsp;&nbsp;&nbsp;<strong>SKU :</strong>
             <span className={classes.productid}>6251810</span>
           </p>
-          <p>Shipping: Unavailable for 96939</p>
-          <p>Store Pickup: Available for pickup today at Aiea.</p>
-          <p>Act Quick – Only 2 left at your store!</p>
           <p>
             <span className="rated">
               <svg
@@ -117,6 +111,20 @@ const ProductDetailComponent = props => {
               <path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z" />
             </svg>
           </p>
+          <ImageGallery
+            items={images}
+            autoPlay={false}
+            thumbnailPosition="left"
+            showPlayButton={false}
+            showNav={false}
+            showFullscreenButton={false}
+          />
+        </Grid>
+        <Grid lg={5} sm={6} xs={12} item>
+          <p>Shipping: Unavailable for 96939</p>
+          <p>Store Pickup: Available for pickup today at Aiea.</p>
+          <p>Act Quick – Only 2 left at your store!</p>
+          
           <p>
             Unfortunately, this item is only available for shipping in certain
             markets.
@@ -165,6 +173,12 @@ const ProductDetailComponent = props => {
             </Grid>
           </Grid>
         </Grid>
+      </Grid>
+      <Grid container>
+        <Grid lg={6} sm={12} xs={12} item>
+      <ExanpsionPanel heading="Specifications" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."/>
+        </Grid>
+        <Grid item lg={6}></Grid>
       </Grid>
     </div>
   );
