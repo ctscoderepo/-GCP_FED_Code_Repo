@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import c6 from "../../resources/Products/c6.jpeg";
 import c7 from "../../resources/Products/c7.jpeg";
 import c8 from "../../resources/Products/c8.jpeg";
+import Select from '../helpers/Select';
 import "./index.css";
 
 const styles = theme => ({
@@ -18,6 +19,11 @@ const styles = theme => ({
     borderBottom: "1px solid lightgrey",
     paddingBottom: "10px",
     fontSize: "20px"
+  },
+  categories:{
+    [theme.breakpoints.down("sm")]: {
+        display:'none'
+    }
   }
 });
 
@@ -26,7 +32,7 @@ const CategoryComponent = props => {
   return (
     <div className="componentContainer">
       <div className={classes.Products}>
-        <Grid container spacing={32} className={classes.productHeadings}>
+       {/** <Grid container spacing={32} className={classes.productHeadings}>
           <Grid item lg={3} sm={3}>
             <div className={classes.categoriesHeading}>Categories</div>
           </Grid>
@@ -36,6 +42,7 @@ const CategoryComponent = props => {
             </Grid>
           </Grid>
         </Grid>
+      **/}
         <Grid container spacing={32}>
           <Grid item lg={3} sm={3} className={classes.categories}>
             <p>
@@ -82,7 +89,11 @@ const CategoryComponent = props => {
           <Grid item lg={9} sm={9}>
             <Grid container>
               <Grid lg={12} item>
-                Sort by Display per page
+                <Grid container>
+                    <Grid item lg={3} sm={3} xs={6}><div className='sortByPrice'>Sort by <Select/></div></Grid>
+                    <Grid item lg={5} sm={3} xs={6}><div className='displayPerPage'> Display per page <Select/></div></Grid>
+                    <Grid lg={4} item/>
+                </Grid>    
               </Grid>
             </Grid>
             <Grid container spacing={16}>

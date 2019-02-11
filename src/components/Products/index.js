@@ -10,7 +10,7 @@ import "./index.css";
 const styles = theme => ({
   Products: {
     padding: "0 15px",
-    marginTop: "140px"
+    marginTop: "165px"
   },
   categories: {
     [theme.breakpoints.down("xs")]: {
@@ -26,9 +26,6 @@ const styles = theme => ({
     borderBottom: "1px solid lightgrey",
     padding: "5px 0",
     fontSize: "20px"
-  },
-  active: {
-    color: "#4ab2f1"
   }
 });
 
@@ -39,7 +36,7 @@ const ProductsComponent = props => {
   return (
     <div className="componentContainer">
       <div className={classes.Products}>
-        <Grid container spacing={32} className={classes.productHeadings}>
+        {/**<Grid container spacing={32} className={classes.productHeadings}>
           <Grid item lg={3} sm={3}>
             <div className={classes.categoriesHeading}>Categories</div>
           </Grid>
@@ -48,7 +45,7 @@ const ProductsComponent = props => {
               <div className={classes.categoriesHeading}>Others</div>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid>**/}
         <Grid container spacing={32}>
           <Grid item lg={2} sm={3} className={classes.categories}>
             <div>

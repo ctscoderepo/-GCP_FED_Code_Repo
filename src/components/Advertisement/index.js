@@ -15,7 +15,7 @@ function Advertisement(props){
 	return (
 			<div className="AdvertisementComponent">
           			<Toolbar className={classes.toolBar}>
-          					<div className='promotion'>This is a dummy site.&#9786;Happy coding</div>
+          					<div className='promotion'>This is a Demo Store.&#9786;Happy coding</div>
           			</Toolbar>
 			</div>
 		)

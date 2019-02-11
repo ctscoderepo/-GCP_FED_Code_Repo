@@ -8,6 +8,8 @@ import computers from "../../resources/Products/computers.jpg";
 import c2 from "../../resources/Products/c2.jpg";
 import c1 from "../../resources/Products/c1.jpg";
 import ExanpsionPanel from '../helpers/ExpansionPanel';
+import {connect} from 'react-redux';
+import {addToCart }from '../../actions/Cart';
 import "./index.css";
 
 const styles = theme => ({
@@ -31,10 +33,10 @@ const styles = theme => ({
     fontWeight: "500",
     fill: "#000",
     "&:hover": {
-      color: "#0084CD",
-      backgroundColor: "#fff",
-      fill: "#0084CD",
-      border: "1px solid #0084CD"
+      color: "#fff",
+      backgroundColor: "#0084CD",
+      fill: "#fff",
+      border: "1px solid #fff"
     }
   },
   producttitle:{
@@ -60,7 +62,7 @@ const images = [
 ];
 
 const ProductDetailComponent = props => {
-  const { classes } = props;
+  const { classes,addtoCart } = props;
   return (
     <div className="productDetailComponent">
       <Grid container>
@@ -119,8 +121,11 @@ const ProductDetailComponent = props => {
             showNav={false}
             showFullscreenButton={false}
           />
+          <p className='productdesc'>The A600 features a 21.5in screen, DVD or optional Blu-Ray drive, support for the full beans 1920 x 1080 HD, Dolby Home Cinema certification and an optional hybrid analogue/digital TV tuner.</p>
+          <p className='productdesc'>Connectivity is handled by 802.11a/b/g - 802.11n is optional - and an ethernet port. You also get four USB ports, a Firewire slot, a six-in-one card reader and a 1.3- or two-megapixel webcam.</p>
         </Grid>
         <Grid lg={5} sm={6} xs={12} item>
+          <h1>$999.99</h1>
           <p>Shipping: Unavailable for 96939</p>
           <p>Store Pickup: Available for pickup today at Aiea.</p>
           <p>Act Quick – Only 2 left at your store!</p>
@@ -135,6 +140,7 @@ const ProductDetailComponent = props => {
                 variant="contained"
                 color="secondary"
                 className={classes.addToCart}
+                onClick={addtoCart}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -172,16 +178,17 @@ const ProductDetailComponent = props => {
               </Button>
             </Grid>
           </Grid>
+          <Grid container>
+          <Grid lg={12} sm={12} xs={12} item>
+              <ExanpsionPanel heading="Specifications" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."/>
+              <ExanpsionPanel heading="Warrenty" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."/>
+          </Grid>
+      </Grid>
         </Grid>
       </Grid>
-      <Grid container>
-        <Grid lg={6} sm={12} xs={12} item>
-      <ExanpsionPanel heading="Specifications" content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."/>
-        </Grid>
-        <Grid item lg={6}></Grid>
-      </Grid>
+      
     </div>
   );
 };
 
-export default withStyles(styles)(ProductDetailComponent);
+export default connect(null,dispatch=>({addtoCart(){dispatch(addToCart(1))}}))(withStyles(styles)(ProductDetailComponent));

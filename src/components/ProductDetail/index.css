@@ -1,6 +1,6 @@
 .productDetailComponent {
   width: 90%;
-  margin: 130px auto 20px auto;
+  margin: 150px auto 20px auto;
   padding: 0 40px;
 }
 .image-gallery-slides {
@@ -44,4 +44,8 @@ span.rated {
 
 button {
   border-radius: 10px;
+}
+.productdesc {
+  font-size: 14px;
+  padding: 0 40px 0 0;
 }

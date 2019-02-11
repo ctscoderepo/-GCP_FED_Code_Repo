@@ -15,13 +15,16 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
+  expansionPanel:{
+    borderRadius:"0 !important"
+  }
 });
 
 function SimpleExpansionPanel(props) {
   const { classes,heading,content } = props;
   return (
     <div className={classes.root}>
-      <ExpansionPanel>
+      <ExpansionPanel className={classes.expansionPanel}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography className={classes.heading}>{heading}</Typography>
         </ExpansionPanelSummary>
