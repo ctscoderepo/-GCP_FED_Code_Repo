@@ -1,8 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {withRouter} from 'react-router-dom';
 import ProductDetailComponent from '../../components/ProductDetail';
+import {connect} from 'react-redux';
+import {getProduct} from '../../actions/Product';
 
 const ProductDetailContainer=(props)=>{
-	return (<ProductDetailComponent/>)
+	useEffect(()=>{
+		props.fetchProduct(props.match.params.id)
+	},[]);
+	return (<ProductDetailComponent product={props.product}/>)
 }
 
-export default ProductDetailContainer;
+export default connect(state=>({product:state.product}), dispatch=>({
+	fetchProduct(id){
+		dispatch(getProduct(id))
+	}
+}))(withRouter(ProductDetailContainer));

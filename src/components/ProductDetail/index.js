@@ -62,20 +62,20 @@ const images = [
 ];
 
 const ProductDetailComponent = props => {
-  const { classes,addtoCart } = props;
+  const { classes,addtoCart , product:{product}} = props;
   return (
     <div className="productDetailComponent">
+      {Object.keys(product).length > 0 ? (
       <Grid container>
         <Grid lg={7} sm={6} xs={12} item>
           <h3 className={classes.producttitle}>
-            Apple - MacBook Air - 13.3" Retina Display - Intel Core i5 - 8GB
-            Memory - 128GB Flash Storage (Latest Model) - Gold
+            {product.productName}
           </h3>
           <p className={classes.productIdName}>
             <strong>Model :</strong>
-            <span className={classes.productid}>SMJ737VZKV</span>
+            <span className={classes.productid}>{product.shortDescription}</span>
             &nbsp;&nbsp;&nbsp;<strong>SKU :</strong>
-            <span className={classes.productid}>6251810</span>
+            <span className={classes.productid}>{product.skuId}</span>
           </p>
           <p>
             <span className="rated">
@@ -121,19 +121,10 @@ const ProductDetailComponent = props => {
             showNav={false}
             showFullscreenButton={false}
           />
-          <p className='productdesc'>The A600 features a 21.5in screen, DVD or optional Blu-Ray drive, support for the full beans 1920 x 1080 HD, Dolby Home Cinema certification and an optional hybrid analogue/digital TV tuner.</p>
-          <p className='productdesc'>Connectivity is handled by 802.11a/b/g - 802.11n is optional - and an ethernet port. You also get four USB ports, a Firewire slot, a six-in-one card reader and a 1.3- or two-megapixel webcam.</p>
-        </Grid>
+          <p className='productdesc'>{product.longtDescription}</p>
+           </Grid>
         <Grid lg={5} sm={6} xs={12} item>
-          <h1>$999.99</h1>
-          <p>Shipping: Unavailable for 96939</p>
-          <p>Store Pickup: Available for pickup today at Aiea.</p>
-          <p>Act Quick – Only 2 left at your store!</p>
-          
-          <p>
-            Unfortunately, this item is only available for shipping in certain
-            markets.
-          </p>
+          <h1>{product.currency}{product.price}</h1>
           <Grid container spacing={8}>
             <Grid item lg={6} sm={6} xs={12}>
               <Button
@@ -186,7 +177,7 @@ const ProductDetailComponent = props => {
       </Grid>
         </Grid>
       </Grid>
-      
+      ) :  <h1>Loading........</h1>}
     </div>
   );
 };
