@@ -1,5 +1,7 @@
 import axios from 'axios';
+import URL from "../constants/Urls";
+
 export const getProducts=()=>async dispatch=>{
-    const res=await axios.get('http://35.184.60.172/api/product-list/v1');
+    const res=await axios.get(URL.HTTP + URL.HOST +URL.getProductsURL);
     dispatch({type:"PRODUCTS", payload:res.data});
 }

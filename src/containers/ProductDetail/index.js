@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import ProductDetailComponent from '../../components/ProductDetail';
 import {connect} from 'react-redux';
-import {getProduct} from '../../actions/Product';
+import {getProduct} from '../../actions/ProductDetails';
 
 const ProductDetailContainer=(props)=>{
 	useEffect(()=>{
