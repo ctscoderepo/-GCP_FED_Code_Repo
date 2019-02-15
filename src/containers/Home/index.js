@@ -1,15 +1,21 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import HomeComponent from '../../components/Home';
+import React, { useEffect } from "react";
+import HomeComponent from "../../components/Home";
+import * as actions from "../../actions/Header";
+import { connect } from "react-redux";
 
-export class HomeContainer extends React.Component {
-	render() {
-		return (
-			<div><HomeComponent/></div>
-		);
-	}
+function Home(props) {
+  useEffect(() => {
+    props.setHeaderStatus(true);
+    props.setFooterStatus(true);
+  }, []);
+  return (
+    <div>
+      <HomeComponent />
+    </div>
+  );
 }
 
 export default connect(
-	null
-)(HomeContainer)
+  null,
+  actions
+)(Home);

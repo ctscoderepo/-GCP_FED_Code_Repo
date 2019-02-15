@@ -1,18 +1,21 @@
-import React, {useEffect, Fragment} from 'react';
-import ProductsComponent from '../../components/Products';
-import {connect} from 'react-redux';
-import {getProducts} from '../../actions/Products';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import * as actions from "../../actions/Products";
+import ProductsComponent from "../../components/Products";
 
-const ProductsContainer=(props)=>{
-	const {products:{products}}=props;
-	useEffect(()=>{
-		props.fetchProducts();
-	}, []);
-	return (<Fragment><ProductsComponent products={products}/></Fragment>)
-}
+const Products = ({ match, getProducts, products }) => {
+  useEffect(() => {
+    getProducts(match.params);
+  }, [match.params.category, match.params.subCategory]);
+  return (
+    <div>
+      <ProductsComponent products={products} />
+    </div>
+  );
+};
 
-export default connect(({products})=>({products:products}), disptach=>({
-	fetchProducts(){
-		disptach(getProducts());
-	}}
-))(ProductsContainer)
+export default connect(
+  ({ products }) => ({ products: products.products }),
+  actions
+)(withRouter(Products));

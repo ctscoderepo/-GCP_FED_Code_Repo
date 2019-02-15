@@ -1,6 +1,6 @@
 .navigationMenu {
   width: 100%;
-  margin-bottom: 5px;
+  background: #fafafa;
 }
 ul.NavigationMenu-nav-bar {
   list-style-type: none;
@@ -10,6 +10,7 @@ ul.NavigationMenu-nav-bar {
   flex-direction: row;
   border: 1px solid lightgrey;
   border-top: 0;
+  box-sizing: border-box;
 }
 
 ul.NavigationMenu-nav-bar li {

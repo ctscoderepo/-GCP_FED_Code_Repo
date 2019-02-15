@@ -1,17 +1,14 @@
 import React from "react";
 import { Grid, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Featured from "../Featured";
-import f1 from "../../resources/featuredproducts/f1.jpeg";
-import f2 from "../../resources/featuredproducts/f2.jpeg";
-import f3 from "../../resources/featuredproducts/f3.jpeg";
-import f4 from "../../resources/featuredproducts/f4.jpeg";
+import Featured from "../HeroContentBlock";
+import f1 from "./images/f1.jpeg";
 import "./index.css";
 
 const styles = theme => ({
   HomeComponent: {
-    padding: "60px 0px 10px 0px",
-    boxSizing:'border-box',
+    padding: "150px 0px 10px 0px",
+    boxSizing: "border-box",
     [theme.breakpoints.down("sm")]: {
       padding: "5px 10px 5px 10px"
     }
@@ -27,7 +24,7 @@ const styles = theme => ({
 const HomeComponent = props => {
   const { classes } = props;
   return (
-    <div className={`${classes.HomeComponent} componentContainer`}>
+    <div className={classes.HomeComponent}>
       <Grid container>
         <Grid item lg={12} xs={12}>
           <Featured />
@@ -46,48 +43,6 @@ const HomeComponent = props => {
             <section className="featuredProductContent">
               <p>Apple iCam</p>
               <p>$1300.00</p>
-            </section>
-          </div>
-        </Grid>
-        <Grid lg={3} sm={3} xs={6} item className={classes.itemContainer}>
-          <div className="imagewrapper">
-            <img src={f2} alt="featured-02" />
-            <div className="featuredProductButton">
-              <Button variant="outlined" className={classes.button}>
-                view
-              </Button>
-            </div>
-            <section className="featuredProductContent">
-              <p>HTC One M8 Android L 5.0 Lollipop</p>
-              <p>$245.00</p>
-            </section>
-          </div>
-        </Grid>
-        <Grid lg={3} sm={3} xs={6} item className={classes.itemContainer}>
-          <div className="imagewrapper">
-            <img src={f3} alt="featured-03" />
-            <div className="featuredProductButton">
-              <Button variant="outlined" className={classes.button}>
-                view
-              </Button>
-            </div>
-            <section className="featuredProductContent">
-              <p>Portable loud speaker</p>
-              <p>$745.00</p>
-            </section>
-          </div>
-        </Grid>
-        <Grid lg={3} sm={3} xs={6} item className={classes.itemContainer}>
-          <div className="imagewrapper">
-            <img src={f4} alt="featured-04" />
-            <div className="featuredProductButton">
-              <Button variant="outlined" className={classes.button}>
-                view
-              </Button>
-            </div>
-            <section className="featuredProductContent">
-              <p>Custom T-shirt</p>
-              <p>$245.00</p>
             </section>
           </div>
         </Grid>

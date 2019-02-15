@@ -7,9 +7,9 @@ const styles = theme => ({});
 
 function NavigationMenu(props) {
   const NavBar = [
-    { category: "Electronics", url: "/shopping/electronics" },
-    { category: "Toys", url: "/shopping/toys" },
-    { category: "Apparel", url: "/shopping/apparels" },
+    { category: "Electronics", url: "/shopping/Electronics" },
+    { category: "Toys", url: "/shopping/Toys" },
+    { category: "Apparel", url: "/shopping/Apparel" },
     { category: "Home Decor", url: "/shopping/home-decor" },
     { category: "Gift Cards", url: "/shopping/gift-cards" }
   ].map(item => (
@@ -21,7 +21,7 @@ function NavigationMenu(props) {
   ));
   return (
     <div className="navigationMenu">
-      <div className="componentContainer">
+      <div className="customContainer">
         <ul className="NavigationMenu-nav-bar">{NavBar}</ul>
       </div>
     </div>

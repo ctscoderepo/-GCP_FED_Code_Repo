@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {connect} from 'react-redux';
+import { withRouter, Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -16,12 +16,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Drawer from "@material-ui/core/Drawer";
-import { Link } from "react-router-dom";
 import Location from "../Location";
 import NavigationMenu from "../Navigation";
-import SearchMobile from '../Search';
-import Advertisement from '../Advertisement';
-import CartBadge from '../helpers/Badge';
+import Advertisement from "../Advertisement";
+import CartBadge from "../helpers/Badge";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import "./index.css";
 
 const styles = theme => ({
@@ -58,14 +58,11 @@ const styles = theme => ({
       marginLeft: theme.spacing.unit,
       width: "auto",
       marginRight: "15px"
-    },
-    [theme.breakpoints.down("xs")]: {
-     display:'none'
     }
   },
   searchIcon: {
-    width: theme.spacing.unit * 9,
     height: "100%",
+    width: "40px",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
@@ -85,9 +82,9 @@ const styles = theme => ({
     width: "100%"
   },
   inputInput: {
-    paddingTop: theme.spacing.unit * 1.5,
+    paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit * 1.5,
+    paddingBottom: theme.spacing.unit,
     paddingLeft: theme.spacing.unit * 4,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -103,21 +100,26 @@ const styles = theme => ({
     borderRadius: "3px"
   },
   appBar: {
-    backgroundColor: "#fff",
-    zIndex:'2000',
+    backgroundColor: "#fafafa",
+    zIndex: "1000",
     width: "100% !important",
     boxSizing: "border-box",
     left: 0,
     boxShadow: "none",
     [theme.breakpoints.up("sm")]: {
-      boxShadow: "none",
+      boxShadow: "none"
     }
   },
   signin: {
-    fill: "#000",
+    position: "relative",
+    top: "4px",
+    fill: "rgba(0, 0, 0, 0.54)",
     display: "flex",
     [theme.breakpoints.down("sm")]: {
       display: "none"
+    },
+    "&:hover": {
+      cursor: "pointer"
     }
   },
   cart: {
@@ -139,48 +141,64 @@ const styles = theme => ({
     marginLeft: "auto",
     marginRight: "auto",
     border: "1px solid lightgrey",
-    borderTop:0,
+    borderTop: 0,
     boxSizing: "border-box",
     [theme.breakpoints.down("sm")]: {
       minHeight: "65px",
-      borderBottom: "none",
+      borderBottom: "none"
     },
     [theme.breakpoints.down("xs")]: {
-      width:'100%',
-      border: "none",
+      width: "100%",
+      border: "none"
     }
   },
   NavigationMenu: {
     padding: "0",
-    backgroundColor: "#fff",
+    backgroundColor: "#fafafa",
     minHeight: "40px",
     [theme.breakpoints.down("sm")]: {
       display: "none"
     }
   },
-   paper: {
-    height: 'calc(100% - 90px)',
+  paper: {
+    height: "calc(100% - 90px)",
     top: 90
   },
-  mobileSearch:{
-    display:'none',
+  mobileSearch: {
+    display: "none",
     [theme.breakpoints.down("xs")]: {
       display: "flex"
     }
   },
-  searchIconMobile:{
-    color:'#000',
-    padding:'0 10px'
+  searchIconMobile: {
+    color: "rgba(0, 0, 0, 0.54)",
+    padding: "0 10px"
+  },
+  cameraIconMobile: {
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      display: "flex"
+    }
+  },
+  iconStyles: {
+    margin: "0 20px"
   }
 });
 
 function SearchAppBar(props) {
   let [open, setOpen] = useState(false);
-  let [searchOpen,setSearchOpen]=useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const { classes,cartLength } = props;
+  let [anchorEl, setAnchorE1] = useState(null);
+  const handleClick = event => {
+    setAnchorE1(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorE1(null);
+  };
+  const { classes, history } = props;
   const sideList = (
     <div className={classes.list}>
       <List>
@@ -212,10 +230,10 @@ function SearchAppBar(props) {
     </div>
   );
   return (
-    <>
-      <div className="componentContainer">
+    <div className="customContainer">
+      <div className="Header">
         <AppBar position="fixed" className={classes.appBar}>
-          <Advertisement/>
+          <Advertisement />
           <Toolbar className={classes.toolBar}>
             <IconButton
               className={classes.menuButton}
@@ -236,10 +254,22 @@ function SearchAppBar(props) {
             </Typography>
 
             <Location />
-            <div className={classes.grow} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
+                <div className={classes.cameraIconMobile}>
+                  <i className={`material-icons`}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle cx="12" cy="12" r="3.2" />
+                      <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+                    </svg>
+                  </i>
+                </div>
               </div>
               <InputBase
                 placeholder="Search....."
@@ -249,26 +279,12 @@ function SearchAppBar(props) {
                 }}
               />
             </div>
-            <div className={classes.mobileSearch}>
-                <div className={classes.searchIconMobile}>
-                  <SearchIcon onClick={()=>{setSearchOpen(state=> !state)}}/>
-                </div>
-                <div className={classes.searchIconMobile}>
-                    <i className={`material-icons`} >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 18 18"
-                      >
-                        <path d="M9 1C4.58 1 1 4.58 1 9s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 2.75c1.24 0 2.25 1.01 2.25 2.25S10.24 8.25 9 8.25 6.75 7.24 6.75 6 7.76 3.75 9 3.75zM9 14.5c-1.86 0-3.49-.92-4.49-2.33C4.62 10.72 7.53 10 9 10c1.47 0 4.38.72 4.49 2.17-1 1.41-2.63 2.33-4.49 2.33z" />
-                      </svg>
-                    </i>
-                    {searchOpen && <SearchMobile open={searchOpen} closeSearch={setSearchOpen}/>}
-                </div>
-            </div>
+            <div className={classes.grow} />
             <div>
-              <i className={`material-icons ${classes.signin}`}>
+              <i
+                className={`material-icons ${classes.signin}`}
+                onClick={handleClick}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -288,12 +304,41 @@ function SearchAppBar(props) {
                   </svg>
                 </span>
               </i>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    history.push("/login");
+                  }}
+                >
+                  Login
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    history.push("/register");
+                  }}
+                >
+                  Register
+                </MenuItem>
+              </Menu>
             </div>
-            <div>
-              <CartBadge items={cartLength}/>
+            <div className={classes.iconStyles}>
+              <Link to="/cart">
+                <CartBadge items={1} />{" "}
+              </Link>
             </div>
 
-            <Drawer open={open} onClose={toggleDrawer} classes={{paper: classes.paper}}>
+            <Drawer
+              open={open}
+              onClose={toggleDrawer}
+              classes={{ paper: classes.paper }}
+            >
               <div
                 tabIndex={0}
                 role="button"
@@ -309,7 +354,7 @@ function SearchAppBar(props) {
           </Toolbar>
         </AppBar>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -317,4 +362,4 @@ SearchAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(state=>({cartLength:state.cart.cart.length}))(withStyles(styles)(SearchAppBar));
+export default withRouter(withStyles(styles)(SearchAppBar));
