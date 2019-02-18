@@ -8,11 +8,7 @@ const Login = ({ setHeaderStatus, setFooterStatus }) => {
     setHeaderStatus(false);
     setFooterStatus(false);
   }, []);
-  return (
-    <div>
-      <LoginComponent />
-    </div>
-  );
+  return <LoginComponent />;
 };
 
 export default connect(

@@ -1,12 +1,15 @@
 import React from "react";
 import HeaderComponent from "../../components/Header";
+import { connect } from "react-redux";
 
-const Header = () => {
+const Header = ({ showNavbar }) => {
   return (
     <div>
-      <HeaderComponent />
+      <HeaderComponent showNavbar={showNavbar} />
     </div>
   );
 };
 
-export default Header;
+export default connect(({ header }) => ({ showNavbar: header.showNavbar }))(
+  Header
+);

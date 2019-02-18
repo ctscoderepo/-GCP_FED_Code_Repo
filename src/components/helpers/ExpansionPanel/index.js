@@ -35,9 +35,9 @@ function SimpleExpansionPanel(props) {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.expansionDetails}>
           <ul className="expansionPanel">
-            {content.map(item => (
-              <Link to={`/shopping/${item.path}/${item.cat}`}>
-                <li key={item.id}>{item.cat}</li>
+            {typeof content === 'string' ? (content):content.map(item => (
+              <Link to={`/shopping/${item.path}/${item.cat}`} key={item.id}>
+                <li>{item.cat}</li>
               </Link>
             ))}
           </ul>

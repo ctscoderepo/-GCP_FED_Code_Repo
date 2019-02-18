@@ -69,12 +69,34 @@ const styles = theme => ({
     alignItems: "center",
     justifyContent: "center",
     color: "#fff",
+    right: "0",
+    backgroundColor: "#0084CD",
+    borderRadius: "0 3px 3px 0px",
+    [theme.breakpoints.down("sm")]: {
+      color: "#000",
+      backgroundColor: "transparent",
+      borderRadius: 0,
+      left: "0"
+    }
+  },
+  cameraIcon: {
+    height: "100%",
+    width: "40px",
+    lineHeight: "40px",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "none",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#fff",
     right: 0,
     backgroundColor: "#0084CD",
     borderRadius: "0 3px 3px 0px",
     [theme.breakpoints.down("sm")]: {
-      color: "#0084CD",
-      backgroundColor: "transparent"
+      color: "#000",
+      backgroundColor: "transparent",
+      borderRadius: 0,
+      display: "block"
     }
   },
   inputRoot: {
@@ -82,10 +104,8 @@ const styles = theme => ({
     width: "100%"
   },
   inputInput: {
-    paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 4,
+    paddingLeft: theme.spacing.unit,
     transition: theme.transitions.create("width"),
     width: "100%",
     backgroundColor: "#fff",
@@ -94,20 +114,20 @@ const styles = theme => ({
       width: 500
     },
     [theme.breakpoints.down("sm")]: {
-      paddingTop: theme.spacing.unit,
-      paddingBottom: theme.spacing.unit
-    },
-    borderRadius: "3px"
+      fontSize: "12px",
+      paddingLeft: theme.spacing.unit * 4
+    }
   },
   appBar: {
     backgroundColor: "#fafafa",
     zIndex: "1000",
-    width: "100% !important",
+    width: "100%",
     boxSizing: "border-box",
     left: 0,
     boxShadow: "none",
-    [theme.breakpoints.up("sm")]: {
-      boxShadow: "none"
+    [theme.breakpoints.down("sm")]: {
+      boxShadow: "none",
+      width: "100%"
     }
   },
   signin: {
@@ -115,11 +135,11 @@ const styles = theme => ({
     top: "4px",
     fill: "rgba(0, 0, 0, 0.54)",
     display: "flex",
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    },
     "&:hover": {
       cursor: "pointer"
+    },
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
     }
   },
   cart: {
@@ -133,23 +153,29 @@ const styles = theme => ({
     width: "100px",
     height: "30px",
     position: "relative",
-    top: "4px"
+    top: "4px",
+    [theme.breakpoints.down("sm")]: {
+      width: "30px"
+    }
   },
   toolBar: {
     minHeight: "70px",
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
-    border: "1px solid lightgrey",
+    border: "none",
     borderTop: 0,
     boxSizing: "border-box",
     [theme.breakpoints.down("sm")]: {
-      minHeight: "65px",
+      minHeight: "45px",
       borderBottom: "none"
+    },
+    [theme.breakpoints.up("sm")]: {
+      border: "1px solid lightgrey"
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%",
-      border: "none"
+      borderBottom: "1px solid lightgrey"
     }
   },
   NavigationMenu: {
@@ -161,8 +187,7 @@ const styles = theme => ({
     }
   },
   paper: {
-    height: "calc(100% - 90px)",
-    top: 90
+    height: "calc(100%)"
   },
   mobileSearch: {
     display: "none",
@@ -181,7 +206,10 @@ const styles = theme => ({
     }
   },
   iconStyles: {
-    margin: "0 20px"
+    margin: "0 20px",
+    [theme.breakpoints.down("sm")]: {
+      margin: 0
+    }
   }
 });
 
@@ -198,7 +226,7 @@ function SearchAppBar(props) {
   const handleClose = () => {
     setAnchorE1(null);
   };
-  const { classes, history } = props;
+  const { classes, history, showNavbar } = props;
   const sideList = (
     <div className={classes.list}>
       <List>
@@ -209,7 +237,7 @@ function SearchAppBar(props) {
           { category: "Home Decor", url: "/shopping/home-decor" },
           { category: "Gift Card", url: "/shopping/gift-cards" }
         ].map((text, index) => (
-          <ListItem button key={text.category}>
+          <ListItem button key={index}>
             <Link to={text.url} className="drawerListStyles">
               <ListItemText primary={text.category} />
               <ListItemIcon>
@@ -257,19 +285,19 @@ function SearchAppBar(props) {
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
-                <div className={classes.cameraIconMobile}>
-                  <i className={`material-icons`}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle cx="12" cy="12" r="3.2" />
-                      <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
-                    </svg>
-                  </i>
-                </div>
+              </div>
+              <div className={classes.cameraIcon}>
+                <i className={`material-icons`}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle cx="12" cy="12" r="3.2" />
+                    <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+                  </svg>
+                </i>
               </div>
               <InputBase
                 placeholder="Search....."
@@ -349,9 +377,11 @@ function SearchAppBar(props) {
               </div>
             </Drawer>
           </Toolbar>
-          <Toolbar className={classes.NavigationMenu}>
-            <NavigationMenu />
-          </Toolbar>
+          {showNavbar && (
+            <Toolbar className={classes.NavigationMenu}>
+              <NavigationMenu />
+            </Toolbar>
+          )}
         </AppBar>
       </div>
     </div>

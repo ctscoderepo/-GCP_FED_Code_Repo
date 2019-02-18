@@ -8,9 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Divider from "@material-ui/core/Divider";
-import Select from "@material-ui/core/Select";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import MenuItem from "@material-ui/core/MenuItem";
 import c1 from "../Home/images/f1.jpeg";
 import "./index.css";
 
@@ -49,27 +46,24 @@ const styles = theme => ({
   },
   btnStyle: {
     textTransform: "uppercase",
-    backgroundColor: "#fff",
+    backgroundColor: "#0084CD",
     borderRadius: "5px",
     width: "100%",
     margin: "10px 0",
     fontSize: "12px",
     boxShadow: "none",
     outline: "none",
-    color: "#202121",
-    border: "1px solid #202121",
-    fontWeight: "500",
+    color: "#fff",
+    border: "none",
+    fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      color: "#fff",
-      backgroundColor: "#0084CD",
-      fill: "#fff",
-      border: "1px solid #fff"
+      backgroundColor: "#0084CD"
     }
   },
   promoButton: {
-    backgroundColor: "#fff",
     borderRadius: "5px",
+    border: "1px solid #333",
     width: "70%",
     height: "39%",
     margin: "15px 0",
@@ -77,14 +71,10 @@ const styles = theme => ({
     boxShadow: "none",
     outline: "none",
     color: "#202121",
-    border: "2px solid #0084CD",
     fontWeight: "500",
     fill: "#000",
     "&:hover": {
-      color: "#fff",
-      backgroundColor: "#0084CD",
-      fill: "#fff",
-      border: "1px solid #fff"
+      backgroundColor: "transparent"
     }
   },
   promoInput: {
@@ -99,7 +89,7 @@ const styles = theme => ({
     backgroundColor: "#bfbfbf"
   },
   marLeft: {
-    marginLeft: "15px"
+    margin: "10px 0 10px 15px"
   },
   subHide: {
     [theme.breakpoints.down("sm")]: {
@@ -150,8 +140,10 @@ const styles = theme => ({
   dsCartHead: {
     fontSize: "30px",
     fontStyle: "italic",
-    padding: "10px 0px 20px 0px",
-    marginLeft: "10px"
+     padding: "10px 0px 20px 0px",
+      [theme.breakpoints.down("sm")]: {
+      fontSize: "22px"
+    }
   },
   shopMoreBtn: {
     width: "100%",
@@ -159,12 +151,20 @@ const styles = theme => ({
     marginTop: "20px",
     border: "1px solid gray",
     "&:hover": {
-      color: "#fff",
-      backgroundColor: "#0084CD",
-      fill: "#fff",
-      border: "1px solid #fff"
-    }
+      backgroundColor: "transparent"
+    },
+      [theme.breakpoints.down("sm")]: {
+      fontSize: "10px",
+      marginTop: "10px",
+      marginBottom:"10px",
+          padding:"3px"
+    },
+      
   },
+    cartLabel:{[theme.breakpoints.down("sm")]: {
+      fontSize: "14px"
+    }
+    },
   helpSection: {
     border: "1px solid black",
     padding: "5px",
@@ -172,8 +172,12 @@ const styles = theme => ({
   },
   orderContainer: {
     padding: "25px",
-    backgroundColor: "#f2f2f2"
+    backgroundColor: "#f2f2f2",
+      [theme.breakpoints.down("sm")]: {
+      padding: "0px",
+    }
   },
+   
   bgColorWhite: {
     backgroundColor: "#fff"
   },
@@ -211,7 +215,19 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       display: "none"
     }
-  }
+  },
+    qtyCol:{
+    textAlign:"center",
+        [theme.breakpoints.down("sm")]: {
+      textAlign:"right",
+    }
+    },
+    shipping: {
+  fontSize:"14px",
+      [theme.breakpoints.down("sm")]: {
+      fontSize:"13px",
+    }    
+}
 });
 
 function CartComponent(props) {
@@ -220,63 +236,51 @@ function CartComponent(props) {
   const cartList = [
     {
       Item: "Item 1",
-      How: "Ship to Home FREE Arrival:Feb. 22  – Feb. 26",
+      How: "Feb. 22  – Feb. 26",
       Price: "$100"
     },
     {
       Item: "Item 2",
-      How: "Ship to Home FREE Arrival:Feb. 22  – Feb. 26",
+      How: "Feb. 22  – Feb. 26",
       Qty: "2",
       Price: "$100"
     }
   ].map(item => (
-    <Grid item lg={12} sm={12} xs={12} key={item.Item}>
-      <Grid container style={{ padding: "15px" }}>
-        <Grid item lg={5} sm={5} xs={5}>
-          <Grid container spacing={8}>
-            <Grid item lg={4} sm={4} xs={4}>
-              <div className="imageWrapper1">
-                <img src={c1} alt="mac book prop" />
-              </div>
-            </Grid>
-            <Grid item lg={8} sm={8} xs={12}>
-              Item Description
-            </Grid>
+    <Grid container style={{ padding: "15px" }} key={item.Item}>
+      <Grid item lg={3} sm={3} xs={5}>
+        <Grid container spacing={8}>
+          <Grid item lg={12} sm={12} xs={12}>
+            <div className="imageWrapper1">
+              <img src={c1} alt="mac book prop" />
+            </div>
+            Item Description
           </Grid>
         </Grid>
-        <Grid item lg={3} sm={3} xs={3}>
-          {item.How}
-        </Grid>
-        <Grid item lg={2} sm={2} xs={2}>
-          <Select
-            className={classes.menuList}
-            input={<OutlinedInput name="Name" id="outlined-age-simple" />}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-            <MenuItem value={3}>3</MenuItem>
-          </Select>
-        </Grid>
-        <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
-          {item.Price}
-        </Grid>
       </Grid>
-      <Grid container>
-        <Grid
-          item
-          lg={12}
-          sm={12}
-          xs={12}
-          style={{ textAlign: "right", marginBottom: "10px" }}
-        >
-          <Link style={{ padding: "10px", color: "#33adff" }}>
-            Save for later
-          </Link>
-          <Link style={{ padding: "10px", color: "#33adff" }}>Remove</Link>
-        </Grid>
+      <Grid item lg={4} sm={4} xs={3} >
+        <div className={classes.shipping}>
+          Ship to Home FREE Estimated Arrival: <br />
+          {item.How}
+        </div>
+      </Grid>
+      <Grid item lg={3} sm={3} xs={2} display="flex" flexDirection="column" className={classes.qtyCol}>
+        <button className="qtyBtn">-</button> <span className="qty">1</span>
+        <button className="qtyBtn">+</button>
+      </Grid>
+      <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
+        {item.Price}
+      </Grid>
+      <Grid
+        item
+        lg={12}
+        sm={12}
+        xs={12}
+        style={{ textAlign: "right", marginBottom: "10px" }}
+      >
+        <Link style={{ padding: "0 10px", color: "#33adff" }}>
+          Save for later
+        </Link>
+        <Link style={{ padding: "0 10px", color: "#33adff" }}>Remove</Link>
       </Grid>
       <Divider variant="middle" style={{ backgroundColor: "#bfbfbf" }} />
     </Grid>
@@ -288,16 +292,10 @@ function CartComponent(props) {
           <Grid item lg={8} sm={8} xs={12} className={classes.padding}>
             <Grid container className={classes.cartDiv1}>
               <Grid item lg={8} sm={8} xs={8}>
-                <div className={classes.dsCartHead}>Your Shopping Cart</div>
-
-                <div>
-                  <strong>
-                    FREE Shipping on eligible items.<Link> See Details</Link>
-                  </strong>
-                </div>
+                <div className={classes.dsCartHead}>Your Shopping Cart</div>                
               </Grid>
               <Grid item lg={4} sm={4} xs={4}>
-                <div>Shop More</div>
+                <Typography>Shop More</Typography>
                 <Button
                   className={classes.shopMoreBtn}
                   onClick={() => history.push("/")}
@@ -305,18 +303,23 @@ function CartComponent(props) {
                   Continue Shopping
                 </Button>
               </Grid>
+                <Grid item lg={12} sm={12} xs={12}>
+                    <div className={classes.cartLabel}><strong>
+                    FREE Shipping on eligible items.<Link> See Details</Link>
+                  </strong>
+                </div></Grid>
             </Grid>
 
             <Grid container spacing={24}>
               <Grid item lg={12} sm={12} xs={12} className={classes.marLeft}>
                 <Grid container className={classes.marTop}>
-                  <Grid item lg={5} sm={5} xs={5}>
+                  <Grid item lg={3} sm={3} xs={5}>
                     <strong>Item</strong>
                   </Grid>
-                  <Grid item lg={3} sm={3} xs={3}>
+                  <Grid item lg={4} sm={4} xs={3}>
                     <strong>Shipping</strong>
                   </Grid>
-                  <Grid item lg={2} sm={2} xs={2}>
+                  <Grid item lg={3} sm={3} xs={2} className={classes.txtAlnCenter}>
                     <strong>Qty</strong>
                   </Grid>
                   <Grid item lg={2} sm={2} xs={2}>
@@ -572,12 +575,17 @@ function CartComponent(props) {
                     Shipping and delivery charges are calculated at the lowest
                     rate available. Other methods will be viewable on the next
                     page.
-                    <Button className={classes.btnStyle}>CHECKOUT</Button>
+                    
+                   
+                    
+                    <Button className={classes.btnStyle} >CHECKOUT</Button>
                   </div>
                   <div className={classes.txtAlnCenter}>--or--</div>
                   <div className={classes.txtAlnCenter}>
                     <Link>Check out with</Link>
-                    <Button className={classes.marLeft}>PayPal / Visa </Button>
+                    <Button className={classes.marLeft} variant="contained">
+                      PayPal / Visa{" "}
+                    </Button>
                   </div>
                 </Grid>
               </Grid>

@@ -11,7 +11,7 @@ const styles = theme => ({
     height: "400px",
     overflow: "hidden",
     [theme.breakpoints.down("sm")]: {
-      height: "300px"
+      height: "150px"
     }
   },
   slide_01: {
@@ -19,7 +19,7 @@ const styles = theme => ({
     borderRadius: "3px",
     height: "400px",
     [theme.breakpoints.down("sm")]: {
-      height: "300px"
+      height: "150px"
     }
   },
   slide_02: {
@@ -27,7 +27,7 @@ const styles = theme => ({
     height: "400px",
     borderRadius: "3px",
     [theme.breakpoints.down("sm")]: {
-      height: "300px"
+      height: "150px"
     }
   },
   slide_03: {
@@ -35,7 +35,7 @@ const styles = theme => ({
     height: "400px",
     borderRadius: "3px",
     [theme.breakpoints.down("sm")]: {
-      height: "300px"
+      height: "150px"
     }
   }
 });

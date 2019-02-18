@@ -1,137 +1,164 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import RestoreIcon from "@material-ui/icons/Restore";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
-import FourKIcon from "@material-ui/icons/FourK";
+import "./index.css";
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1
+  linkColor: {
+    color: "#333",
+    fontSize: "14px"
   },
-  login: {
-    margin: "0 70px",
-    textAlign: ""
+  footerBottomLinks: {
+    color: "#0086b3",
+    fontSize: "12px",
+    margin: "0px 15px 0px 0px"
   },
-  footerAppbar: {
-    background: "#e6e6e6",
-    width: "100%",
-    margin: "10px 0px",
-    height: "100%",
-    padding: "10px"
+  margin15: {
+    background: "#f2f2f2",
+    padding: "20px"
   },
-  footerTypo: {
-    margin: "0px 0px",
-    textAlign: "right"
+  footerHeader: {
+    marginRight: "8px",
+    marginLeft: "8px"
   },
-  footDem: {
-    fontSize: "16px",
-    fontWeight: "500"
+  fhead: {
+    height: "25px",
+    marginBottom: "10px",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "10px"
+    }
   },
-  rowHeight30: {
-    height: "30px"
+  footerLink: {
+    height: "28px",
+    [theme.breakpoints.down("sm")]: {
+      width: "auto",
+      float: "left",
+      fontSize: "8px",
+      marginRight: "15px"
+    }
+  },
+  footerLabel: {
+    textAlign: "center",
+    marginTop: "25px",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "left",
+      marginTop: "15px"
+    }
+  },
+  footerNav: {
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "left"
+    }
   }
 });
-const informations = [
-  { info: "Features" },
-  { info: "Your Order" },
-  { info: "Download DemoStore" },
-  { info: "Marketplace" }
-].map(infolist => (
-  <ListItem button>
-    <Link key={infolist.info}>{infolist.info}</Link>
-  </ListItem>
-));
-const socialMeadia = [
-  { info: "Facebook" },
-  { info: "Twitter" },
-  { info: "Pintrest" },
-  { info: "Blog" }
-].map(media => (
-  <ListItem button>
-    <Link key={media.info}>{media.info}</Link>
-  </ListItem>
-));
-const Supports = [
-  { sup: "Customer Services" },
-  { sup: "Documentations" },
-  { sup: "Premium Support" },
-  { sup: "Solution Partners" }
-].map(support => (
-  <ListItem button>
-    <Link key={support.sup}>{support.sup}</Link>
-  </ListItem>
-));
 
-function Footercomponent(props) {
-  const { classes } = props;
+const FooterComoponent = props => {
+  const { classes, history } = props;
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={16}>
-        <Grid container>
-          <Grid item lg={12} sm={12} xs={12} className={classes.footerAppbar}>
-            <Grid container spacing={8}>
-              <Grid item lg={6} sm={6} xs={12}>
-                <Typography className={classes.footDem}>
-                  More Savings @Demo Store{" "}
-                </Typography>
-              </Grid>
-              <Grid item lg={6} sm={6} xs={12}>
-                <Typography className={classes.footerTypo}>
-                  Need Help? Please call us at:
-                  <Link>1-800-DEMO-STORE (1-800-000-000000)</Link>
-                </Typography>
-              </Grid>
+    <>
+      <Grid container className={classes.margin15}>
+        <Grid item lg={4} sm={4} xs={12}>
+          <div className={classes.fhead}>
+            <Typography>
+              <strong>Demostore</strong>
+            </Typography>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Features</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Your Order</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Download DemoStore</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Returns</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Shipping & Delivery</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Help & FAQs</Link>
+          </div>
+        </Grid>
+
+        <Grid item lg={4} sm={4} xs={12}>
+          <div className={classes.fhead}>
+            <Typography>
+              <strong>Follow Us</strong>
+            </Typography>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Facebook</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Twitter</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}> Pintrest</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Blog</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Instagram</Link>
+          </div>
+        </Grid>
+        <Grid item lg={4} sm={4} xs={12}>
+          <div className={classes.fhead}>
+            <Typography>
+              <strong>Support & Services</strong>
+            </Typography>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Customer Services</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}> Documentations</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}> Help</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Premium Support</Link>
+          </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Solution Partners</Link>
+          </div>
+        </Grid>
+        <Grid item lg={12} sm={12} xs={12}>
+          <Grid container spacing={24}>
+            <Grid item lg={12} sm={12} xs={12} className={classes.footerLabel}>
+              <Typography>
+                ©2019 Demo Store.All Rights Reserved. Use of this site is
+                subject to certain Terms Of Use.
+              </Typography>
+              <strong>Need Help?</strong>, please call ....... or text .......
+            </Grid>
+
+            <Grid item lg={12} sm={12} xs={12} className={classes.footerNav}>
+              <Link className={classes.footerBottomLinks}>
+                Privacy and Security
+              </Link>
+              <Link
+                className={classes.footerBottomLinks}
+                onClick={() => history.push("/")}
+              >
+                Mobile Site
+              </Link>
+              <Link className={classes.footerBottomLinks}>Site map</Link>
             </Grid>
           </Grid>
         </Grid>
-        <Grid container item className={classes.mar}>
-          <Grid item lg={4} sm={4} xs={12}>
-            <ListItemText>
-              <strong>Demostore</strong>
-            </ListItemText>
-            <List component="nav" className={classes.root}>
-              {informations}
-            </List>
-          </Grid>
-          <Grid item lg={4} sm={4} xs={12}>
-            <ListItemText className={classes.login}>
-              <strong>Follow US</strong>
-            </ListItemText>
-            <List component="nav" className={classes.root}>
-              {socialMeadia}
-            </List>
-          </Grid>
-          <Grid item lg={4} sm={4} xs={12}>
-            <ListItemText>
-              <strong>Support & Services</strong>
-            </ListItemText>
-            <List component="nav" className={classes.root}>
-              {Supports}
-            </List>
-          </Grid>
-        </Grid>
       </Grid>
-    </div>
+    </>
   );
-}
-
-Footercomponent.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Footercomponent);
+export default withRouter(withStyles(styles)(FooterComoponent));
