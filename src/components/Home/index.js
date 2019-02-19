@@ -10,14 +10,19 @@ const styles = theme => ({
     padding: "150px 0px 10px 0px",
     boxSizing: "border-box",
     [theme.breakpoints.down("sm")]: {
-      padding: "5px 10px 5px 10px"
+      padding: "0",
+      marginTop: "80px"
     }
   },
   itemContainer: {
     position: "relative"
   },
-  featuredproducts: {
-    marginBottom: "20px"
+  FeaturedProducts: {
+    boxSizing: "border-box",
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 20px",
+      marginBottom: "20px"
+    }
   }
 });
 
@@ -31,8 +36,15 @@ const HomeComponent = props => {
         </Grid>
       </Grid>
       <h3 className="featuredProductsHeading">Featured products</h3>
-      <Grid container spacing={32} className={classes.featuredproducts}>
-        <Grid lg={3} sm={3} xs={6} item className={classes.itemContainer}>
+      <Grid container className={classes.FeaturedProducts} spacing={8}>
+        <Grid
+          lg={2}
+          md={2}
+          sm={3}
+          xs={3}
+          item
+          className={classes.itemContainer}
+        >
           <div className="imagewrapper">
             <img src={f1} alt="featured-01" />
             <div className="featuredProductButton">
@@ -41,8 +53,33 @@ const HomeComponent = props => {
               </Button>
             </div>
             <section className="featuredProductContent">
-              <p>Apple iCam</p>
-              <p>$1300.00</p>
+              <div className="featuredContent">
+                <div>Apple iCam</div>
+                <div>$1300.00</div>
+              </div>
+            </section>
+          </div>
+        </Grid>
+        <Grid
+          lg={2}
+          md={2}
+          sm={3}
+          xs={3}
+          item
+          className={classes.itemContainer}
+        >
+          <div className="imagewrapper">
+            <img src={f1} alt="featured-01" />
+            <div className="featuredProductButton">
+              <Button variant="outlined" className={classes.button}>
+                view
+              </Button>
+            </div>
+            <section className="featuredProductContent">
+              <div className="featuredContent">
+                <div>Apple iCam</div>
+                <div>$1300.00</div>
+              </div>
             </section>
           </div>
         </Grid>

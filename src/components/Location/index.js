@@ -4,14 +4,14 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   locationContainer: {
     margin: "0 40px 0 20px",
-    display: "flex"
-  },
-  location: {
-    flexDirection: "row",
-    fill: "#000",
+    display: "flex",
     [theme.breakpoints.down("sm")]: {
       display: "none"
     }
+  },
+  location: {
+    flexDirection: "row",
+    fill: "#000"
   },
   shopText: {
     color: "#0084CD",

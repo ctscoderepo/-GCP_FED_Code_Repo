@@ -14,7 +14,7 @@ const styles = theme => ({
   footerBottomLinks: {
     color: "#0086b3",
     fontSize: "12px",
-    margin: "15px"
+    margin: "0px 15px 0px 0px"
   },
   margin15: {
     background: "#f2f2f2",
@@ -26,7 +26,33 @@ const styles = theme => ({
   },
   fhead: {
     height: "25px",
-    marginBottom: "15px"
+    marginBottom: "10px",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "10px"
+    }
+  },
+  footerLink: {
+    height: "28px",
+    [theme.breakpoints.down("sm")]: {
+      width: "auto",
+      float: "left",
+      fontSize: "8px",
+      marginRight: "15px"
+    }
+  },
+  footerLabel: {
+    textAlign: "center",
+    marginTop: "25px",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "left",
+      marginTop: "15px"
+    }
+  },
+  footerNav: {
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "left"
+    }
   }
 });
 
@@ -36,80 +62,87 @@ const FooterComoponent = props => {
   return (
     <>
       <Grid container className={classes.margin15}>
-        <Grid item lg={4} sm={4} xs={3}>
+        <Grid item lg={4} sm={4} xs={12}>
           <div className={classes.fhead}>
             <Typography>
               <strong>Demostore</strong>
             </Typography>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Features</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Your Order</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Download DemoStore</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Returns</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Shipping & Delivery</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Help & FAQs</Link>
           </div>
         </Grid>
 
-        <Grid item lg={4} sm={4} xs={3}>
+        <Grid item lg={4} sm={4} xs={12}>
           <div className={classes.fhead}>
             <Typography>
               <strong>Follow Us</strong>
             </Typography>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Facebook</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Twitter</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}> Pintrest</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Blog</Link>
           </div>
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}>Instagram</Link>
+          </div>
         </Grid>
-        <Grid item lg={4} sm={4} xs={3}>
+        <Grid item lg={4} sm={4} xs={12}>
           <div className={classes.fhead}>
             <Typography>
               <strong>Support & Services</strong>
             </Typography>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Customer Services</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}> Documentations</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
+            <Link className={classes.linkColor}> Help</Link>
+          </div>
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Premium Support</Link>
           </div>
-          <div className="footerLink">
+          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Solution Partners</Link>
           </div>
         </Grid>
         <Grid item lg={12} sm={12} xs={12}>
-          <Grid container spacing={24} direction="column" align="center">
-            <Grid item lg={8} sm={8} xs={8}>
+          <Grid container spacing={24}>
+            <Grid item lg={12} sm={12} xs={12} className={classes.footerLabel}>
               <Typography>
                 ©2019 Demo Store.All Rights Reserved. Use of this site is
                 subject to certain Terms Of Use.
               </Typography>
               <strong>Need Help?</strong>, please call ....... or text .......
             </Grid>
-            <Grid item lg={8} sm={8} xs={8}>
+
+            <Grid item lg={12} sm={12} xs={12} className={classes.footerNav}>
               <Link className={classes.footerBottomLinks}>
                 Privacy and Security
               </Link>

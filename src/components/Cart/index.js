@@ -140,8 +140,10 @@ const styles = theme => ({
   dsCartHead: {
     fontSize: "30px",
     fontStyle: "italic",
-    padding: "10px 0px 20px 0px",
-    marginLeft: "10px"
+     padding: "10px 0px 20px 0px",
+      [theme.breakpoints.down("sm")]: {
+      fontSize: "22px"
+    }
   },
   shopMoreBtn: {
     width: "100%",
@@ -150,8 +152,19 @@ const styles = theme => ({
     border: "1px solid gray",
     "&:hover": {
       backgroundColor: "transparent"
-    }
+    },
+      [theme.breakpoints.down("sm")]: {
+      fontSize: "10px",
+      marginTop: "10px",
+      marginBottom:"10px",
+          padding:"3px"
+    },
+      
   },
+    cartLabel:{[theme.breakpoints.down("sm")]: {
+      fontSize: "14px"
+    }
+    },
   helpSection: {
     border: "1px solid black",
     padding: "5px",
@@ -159,8 +172,12 @@ const styles = theme => ({
   },
   orderContainer: {
     padding: "25px",
-    backgroundColor: "#f2f2f2"
+    backgroundColor: "#f2f2f2",
+      [theme.breakpoints.down("sm")]: {
+      padding: "0px",
+    }
   },
+   
   bgColorWhite: {
     backgroundColor: "#fff"
   },
@@ -198,7 +215,19 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       display: "none"
     }
-  }
+  },
+    qtyCol:{
+    textAlign:"center",
+        [theme.breakpoints.down("sm")]: {
+      textAlign:"right",
+    }
+    },
+    shipping: {
+  fontSize:"14px",
+      [theme.breakpoints.down("sm")]: {
+      fontSize:"13px",
+    }    
+}
 });
 
 function CartComponent(props) {
@@ -228,13 +257,13 @@ function CartComponent(props) {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item lg={4} sm={4} xs={3}>
-        <div className="shipping">
-          Ship to Home FREE Arrival: <br />
+      <Grid item lg={4} sm={4} xs={3} >
+        <div className={classes.shipping}>
+          Ship to Home FREE Estimated Arrival: <br />
           {item.How}
         </div>
       </Grid>
-      <Grid item lg={3} sm={3} xs={2} display="flex" flexDirection="column">
+      <Grid item lg={3} sm={3} xs={2} display="flex" className={classes.qtyCol}>
         <button className="qtyBtn">-</button> <span className="qty">1</span>
         <button className="qtyBtn">+</button>
       </Grid>
@@ -263,16 +292,10 @@ function CartComponent(props) {
           <Grid item lg={8} sm={8} xs={12} className={classes.padding}>
             <Grid container className={classes.cartDiv1}>
               <Grid item lg={8} sm={8} xs={8}>
-                <div className={classes.dsCartHead}>Your Shopping Cart</div>
-
-                <div>
-                  <strong>
-                    FREE Shipping on eligible items.<Link> See Details</Link>
-                  </strong>
-                </div>
+                <div className={classes.dsCartHead}>Your Shopping Cart</div>                
               </Grid>
               <Grid item lg={4} sm={4} xs={4}>
-                <div>Shop More</div>
+                <Typography>Shop More</Typography>
                 <Button
                   className={classes.shopMoreBtn}
                   onClick={() => history.push("/")}
@@ -280,6 +303,11 @@ function CartComponent(props) {
                   Continue Shopping
                 </Button>
               </Grid>
+                <Grid item lg={12} sm={12} xs={12}>
+                    <div className={classes.cartLabel}><strong>
+                    FREE Shipping on eligible items.<Link> See Details</Link>
+                  </strong>
+                </div></Grid>
             </Grid>
 
             <Grid container spacing={24}>
@@ -291,7 +319,7 @@ function CartComponent(props) {
                   <Grid item lg={4} sm={4} xs={3}>
                     <strong>Shipping</strong>
                   </Grid>
-                  <Grid item lg={3} sm={3} xs={2}>
+                  <Grid item lg={3} sm={3} xs={2} className={classes.txtAlnCenter}>
                     <strong>Qty</strong>
                   </Grid>
                   <Grid item lg={2} sm={2} xs={2}>
@@ -547,7 +575,10 @@ function CartComponent(props) {
                     Shipping and delivery charges are calculated at the lowest
                     rate available. Other methods will be viewable on the next
                     page.
-                    <Button className={classes.btnStyle}>CHECKOUT</Button>
+                    
+                   
+                    
+                    <Button className={classes.btnStyle} >CHECKOUT</Button>
                   </div>
                   <div className={classes.txtAlnCenter}>--or--</div>
                   <div className={classes.txtAlnCenter}>

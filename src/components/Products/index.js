@@ -8,9 +8,11 @@ import c1 from "../Home/images/f1.jpeg";
 import "./index.css";
 
 const styles = theme => ({
-  Products: {
-    padding: "0 15px",
-    marginTop: "165px"
+  productsComponent: {
+    margin: "180px 0 20px 0",
+    [theme.breakpoints.down("sm")]: {
+      margin: "95px 20px 20px 20px"
+    }
   },
   categories: {
     [theme.breakpoints.down("xs")]: {
@@ -26,6 +28,16 @@ const styles = theme => ({
     borderBottom: "1px solid lightgrey",
     padding: "5px 0",
     fontSize: "20px"
+  },
+  sideNav: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
+  },
+  gridHide: {
+    [theme.breakpoints.down("md")]: {
+      display: "none"
+    }
   }
 });
 
@@ -78,8 +90,7 @@ const rating = () => (
   </>
 );
 
-function Products({ products, location, classes }) {
-  console.log(products);
+function Products({ products, classes }) {
   const spinner =
     products.length === 0 ? (
       <div className="spinner">
@@ -88,7 +99,7 @@ function Products({ products, location, classes }) {
     ) : (
       <Grid container spacing={16}>
         {products.map(product => (
-          <Grid item lg={4} sm={4} xs={12} key={product.skuId}>
+          <Grid item lg={4} md={4} sm={4} xs={6} key={product.skuId}>
             <Link
               to={`/store/product/${product.skuId}`}
               className={classes.item}
@@ -112,13 +123,13 @@ function Products({ products, location, classes }) {
       </Grid>
     );
   return (
-    <div className="productsComponent">
+    <div className={classes.productsComponent}>
       <Grid container spacing={16}>
-        <Grid item lg={2}>
+        <Grid item lg={2} md={3} sm={3} className={classes.sideNav}>
           <SideNav />
         </Grid>
-        <Grid item lg={1} />
-        <Grid item lg={9}>
+        <Grid item lg={1} className={classes.gridHide} />
+        <Grid item lg={9} md={9} sm={9}>
           {spinner}
         </Grid>
       </Grid>

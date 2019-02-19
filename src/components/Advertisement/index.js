@@ -6,7 +6,7 @@ import './index.css';
 const styles = theme => ({
 	toolBar:{
 		minHeight:'25px',
-		backgroundColor:'orangered'
+		backgroundColor:'blue'
 	}
 })
 
@@ -15,7 +15,7 @@ function Advertisement(props){
 	return (
 			<div className="AdvertisementComponent">
           			<Toolbar className={classes.toolBar}>
-          					<div className='promotion'>This is a Demo Store.&#9786;Happy coding</div>
+          					<div className='promotion'>This is a Demo Store</div>
           			</Toolbar>
 			</div>
 		)
