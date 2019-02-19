@@ -10,8 +10,8 @@ function NavigationMenu(props) {
     { category: "Electronics", url: "/shopping/Electronics" },
     { category: "Toys", url: "/shopping/Toys" },
     { category: "Apparel", url: "/shopping/Apparel" },
-    { category: "Home Decor", url: "/shopping/home-decor" },
-    { category: "Gift Cards", url: "/shopping/gift-cards" }
+    { category: "Home Decor", url: "/shopping/Home-Decor" },
+    { category: "Gift Cards", url: "/shopping/Gift-Cards" }
   ].map(item => (
     <li key={item.category}>
       <Link to={item.url} className="nav-item">

@@ -110,12 +110,19 @@ const styles = theme => ({
     width: "100%",
     backgroundColor: "#fff",
     border: "1px solid rgba(0,0,0,0.1)",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       width: 500
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: 600
+    },
+    [theme.breakpoints.down("md")]: {
+      width: 450
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: "12px",
-      paddingLeft: theme.spacing.unit * 4
+      paddingLeft: theme.spacing.unit * 4,
+      width: "100%"
     }
   },
   appBar: {
@@ -186,8 +193,10 @@ const styles = theme => ({
       display: "none"
     }
   },
+
   paper: {
-    height: "calc(100%)"
+    height: "calc(100%)",
+    top: 75
   },
   mobileSearch: {
     display: "none",
@@ -231,11 +240,11 @@ function SearchAppBar(props) {
     <div className={classes.list}>
       <List>
         {[
-          { category: "Electronics", url: "/shopping/electronics" },
-          { category: "Toys", url: "/shopping/toys" },
-          { category: "Apparel", url: "/shopping/apparel" },
-          { category: "Home Decor", url: "/shopping/home-decor" },
-          { category: "Gift Card", url: "/shopping/gift-cards" }
+          { category: "Electronics", url: "/shopping/Electronics" },
+          { category: "Toys", url: "/shopping/Toys" },
+          { category: "Apparel", url: "/shopping/Apparel" },
+          { category: "Home Decor", url: "/shopping/Home-Decor" },
+          { category: "Gift Card", url: "/shopping/Gift-Cards" }
         ].map((text, index) => (
           <ListItem button key={index}>
             <Link to={text.url} className="drawerListStyles">
@@ -357,7 +366,7 @@ function SearchAppBar(props) {
               </Menu>
             </div>
             <div className={classes.iconStyles}>
-              <Link to="/cart">
+              <Link to="/Cart">
                 <CartBadge items={1} />{" "}
               </Link>
             </div>

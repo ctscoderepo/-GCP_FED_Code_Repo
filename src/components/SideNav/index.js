@@ -35,7 +35,7 @@ export default () => {
       <ExpansionPanel
         heading="Toys"
         content={[
-          { id: 4, cat: "All ", path: "Toys" },
+          { id: 5, cat: "All ", path: "Toys" },
           { id: 1, cat: "Shapes & Colors", path: "Toys" },
           { id: 2, cat: "Kid's Electronics", path: "Toys" },
           { id: 3, cat: "Sports & Outdoor play", path: "Toys" },

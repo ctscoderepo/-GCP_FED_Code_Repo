@@ -99,7 +99,7 @@ function Products({ products, classes }) {
     ) : (
       <Grid container spacing={16}>
         {products.map(product => (
-          <Grid item lg={4} sm={4} xs={6} key={product.skuId}>
+          <Grid item lg={4} md={4} sm={4} xs={6} key={product.skuId}>
             <Link
               to={`/store/product/${product.skuId}`}
               className={classes.item}
@@ -125,11 +125,11 @@ function Products({ products, classes }) {
   return (
     <div className={classes.productsComponent}>
       <Grid container spacing={16}>
-        <Grid item lg={2} sm={3} className={classes.sideNav}>
+        <Grid item lg={2} md={3} sm={3} className={classes.sideNav}>
           <SideNav />
         </Grid>
         <Grid item lg={1} className={classes.gridHide} />
-        <Grid item lg={9} sm={9}>
+        <Grid item lg={9} md={9} sm={9}>
           {spinner}
         </Grid>
       </Grid>

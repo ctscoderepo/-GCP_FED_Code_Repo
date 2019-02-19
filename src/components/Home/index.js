@@ -37,7 +37,14 @@ const HomeComponent = props => {
       </Grid>
       <h3 className="featuredProductsHeading">Featured products</h3>
       <Grid container className={classes.FeaturedProducts} spacing={8}>
-        <Grid lg={2} sm={2} xs={3} item className={classes.itemContainer}>
+        <Grid
+          lg={2}
+          md={2}
+          sm={3}
+          xs={3}
+          item
+          className={classes.itemContainer}
+        >
           <div className="imagewrapper">
             <img src={f1} alt="featured-01" />
             <div className="featuredProductButton">
@@ -53,7 +60,14 @@ const HomeComponent = props => {
             </section>
           </div>
         </Grid>
-        <Grid lg={2} sm={2} xs={3} item className={classes.itemContainer}>
+        <Grid
+          lg={2}
+          md={2}
+          sm={3}
+          xs={3}
+          item
+          className={classes.itemContainer}
+        >
           <div className="imagewrapper">
             <img src={f1} alt="featured-01" />
             <div className="featuredProductButton">
