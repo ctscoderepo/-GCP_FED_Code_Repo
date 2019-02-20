@@ -1,5 +1,1 @@
-## Lot of effot has been put in developing site.
-
-##### copyrights
-
-> author- Chandra kumar reddy penugonda
+## updated: 17/2/2019-22:36
