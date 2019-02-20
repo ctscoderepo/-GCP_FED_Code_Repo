@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-import Spinner from "../helpers/Spinner";
 import Grid from "@material-ui/core/Grid";
 import SideNav from "../SideNav";
 import c1 from "../Home/images/f1.jpeg";
@@ -90,15 +89,13 @@ const rating = () => (
   </>
 );
 
-function Products({ products, classes }) {
+function Products({ searchResults, classes }) {
   const spinner =
-    products.length === 0 ? (
-      <div className="spinner">
-        <Spinner />
-      </div>
+    searchResults.length === 0 ? (
+      "No products found"
     ) : (
       <Grid container spacing={16}>
-        {products.map(product => (
+        {searchResults.map(product => (
           <Grid item lg={4} md={4} sm={4} xs={6} key={product.skuId}>
             <Link
               to={`/store/product/${product.skuId}`}

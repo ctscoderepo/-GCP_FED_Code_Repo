@@ -231,9 +231,16 @@ function SearchAppBar(props) {
   const handleClick = event => {
     setAnchorE1(event.currentTarget);
   };
-
+  const [search, setSearch] = useState("");
   const handleClose = () => {
     setAnchorE1(null);
+  };
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log("search results", search);
+    props.searchResults(search).then(() => {
+      props.history.push("/search");
+    });
   };
   const { classes, history, showNavbar } = props;
   const sideList = (
@@ -308,13 +315,17 @@ function SearchAppBar(props) {
                   </svg>
                 </i>
               </div>
-              <InputBase
-                placeholder="Search....."
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
+              <form onSubmit={handleSubmit}>
+                <InputBase
+                  placeholder="Search....."
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                />
+              </form>
             </div>
             <div className={classes.grow} />
             <div>

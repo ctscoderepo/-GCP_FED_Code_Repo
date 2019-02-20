@@ -38,7 +38,7 @@ const styles = theme => ({
       float: "left",
       fontSize: "8px",
       marginRight: "15px",
-      height: "20px"
+      height:"20px",
     }
   },
   footerLabel: {
@@ -52,24 +52,24 @@ const styles = theme => ({
   footerNav: {
     textAlign: "center",
     [theme.breakpoints.down("sm")]: {
-      textAlign: "left"
+      textAlign: "left",
     }
-  },
-  mobView: {
+  },    
+    mobView: {
     [theme.breakpoints.down("sm")]: {
-      marginTop: "15px"
+      marginTop:"15px"
     }
   },
-  footerImage: {
-    width: "20px",
-    height: "20px",
-    marginRight: "10px"
-  },
-  socialLinks: {
-    color: "#333",
+    footerImage:{
+        width:"20px",
+        height:"20px",
+        marginRight:"10px"
+    },
+    socialLinks:{
+        color: "#333",
     fontSize: "14px",
-    padding: "0px 0px 30px 0px"
-  }
+        padding:"0px 0px 30px 0px"
+    }
 });
 
 const FooterComoponent = props => {
@@ -111,44 +111,24 @@ const FooterComoponent = props => {
             </Typography>
           </div>
           <div className={classes.footerLink}>
-            <img
-              src="/assets/images/facebook.png"
-              alt="facebook"
-              className={classes.footerImage}
-            />
+            <img src="/assets/images/facebook.png" alt="facebook" className={classes.footerImage}/>
             <Link className={classes.socialLinks}>Facebook</Link>
           </div>
           <div className={classes.footerLink}>
-            <img
-              src="/assets/images/twitter.png"
-              alt="twitter"
-              className={classes.footerImage}
-            />
+           <img src="/assets/images/twitter.png" alt="twitter" className={classes.footerImage}/>
             <Link className={classes.linkColor}>Twitter</Link>
           </div>
           <div className={classes.footerLink}>
-            <img
-              src="/assets/images/pintrest1.png"
-              alt="pintrest"
-              className={classes.footerImage}
-            />
+           <img src="/assets/images/pintrest1.png" alt="pintrest" className={classes.footerImage}/>
             <Link className={classes.linkColor}> Pintrest</Link>
           </div>
-
+          
           <div className={classes.footerLink}>
-            <img
-              src="/assets/images/instagram1.png"
-              alt="instagram"
-              className={classes.footerImage}
-            />
+             <img src="/assets/images/instagram1.png" alt="instagram" className={classes.footerImage}/>
             <Link className={classes.linkColor}>Instagram</Link>
           </div>
-          <div className={classes.footerLink}>
-            <img
-              src="/assets/images/blog1.png"
-              alt="pintrest"
-              className={classes.footerImage}
-            />
+      <div className={classes.footerLink}>
+            <img src="/assets/images/blog1.png" alt="pintrest" className={classes.footerImage}/>
             <Link className={classes.linkColor}>Blog</Link>
           </div>
         </Grid>

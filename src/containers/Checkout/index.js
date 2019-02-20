@@ -11,7 +11,4 @@ const Checkout = ({ setHeaderStatus, setFooterStatus }) => {
   return <CheckOutComponent />;
 };
 
-export default connect(
-  null,
-  actions
-)(Checkout);
+export default connect(null,actions)(Checkout);

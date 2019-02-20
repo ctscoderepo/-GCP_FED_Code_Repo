@@ -68,13 +68,19 @@ const ProductDetailComponent = props => {
           <Grid lg={7} sm={6} xs={12} item>
             <h3 className={classes.producttitle}>{product.productName}</h3>
             <p className={classes.productIdName}>
-              <strong>Model :</strong>
-              <span className={classes.productid}>
+              
+                        </p>
+            <div className="productSku">
+              <div>
+              <strong>Model :</strong><span className={classes.productid}>
                 {product.shortDescription}
               </span>
-              &nbsp;&nbsp;&nbsp;<strong>SKU :</strong>
+              </div>
+              <div>
+              <strong>SKU :</strong>
               <span className={classes.productid}>{product.skuId}</span>
-            </p>
+              </div>
+            </div>
             <p>
               <span className="rated">
                 <svg
@@ -119,13 +125,14 @@ const ProductDetailComponent = props => {
               showNav={false}
               showFullscreenButton={false}
             />
-            <p className="productdesc">{product.longtDescription}</p>
+            <p className="productdesc">{product.longDescription}</p>
           </Grid>
           <Grid lg={5} sm={6} xs={12} item>
             <h1>
               {product.currencyCode === 'USD' && "$"}
               {product.price}
             </h1>
+            <div className='stockQnty'>Stock Quantity : <span>{product.stockQuantity}</span></div>
             <Grid container spacing={8}>
               <Grid item lg={6} sm={6} xs={12}>
                 <Button
