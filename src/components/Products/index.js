@@ -4,7 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Spinner from "../helpers/Spinner";
 import Grid from "@material-ui/core/Grid";
 import SideNav from "../SideNav";
-import c1 from "../Home/images/f1.jpeg";
 import "./index.css";
 
 const styles = theme => ({
