@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import SideNav from "../SideNav";
-import c1 from "../Home/images/f1.jpeg";
 import "./index.css";
 
 const styles = theme => ({
@@ -102,7 +101,7 @@ function Products({ searchResults, classes }) {
               className={classes.item}
             >
               <div className="imageWrapper">
-                <img src={c1} alt="mac book prop" />
+                <img src={product.images[0]} alt="mac book prop" />
               </div>
               <div className="productDetail">
                 <div className="title">{product.productName}</div>
