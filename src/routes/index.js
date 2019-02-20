@@ -3,7 +3,7 @@ import Products from "../containers/Products";
 import Login from "../containers/Login";
 import Register from "../containers/Register";
 import Cart from "../containers/Cart";
-import PLP from "../containers/Plp";
+import PDP from "../containers/PDP";
 import Checkout from "../containers/Checkout";
 import Search from "../containers/Search";
 
@@ -19,7 +19,7 @@ export default [
   { path: "/login", component: Login, id: 4 },
   { path: "/register", component: Register, id: 5 },
   { path: "/cart", component: Cart, id: 6 },
-  { path: "/store/product/:item", component: PLP, id: 7 },
+  { path: "/store/product/:item", component: PDP, id: 7 },
   { path: "/checkout", component: Checkout, id: 8 },
   { path: "/search", component: Search, id: 9 }
 ];

@@ -105,7 +105,7 @@ function Products({ products, classes }) {
               className={classes.item}
             >
               <div className="imageWrapper">
-                <img src={c1} alt="mac book prop" />
+                <img src={product.images[0]} alt="mac book prop" />
               </div>
               <div className="productDetail">
                 <div className="title">{product.productName}</div>
