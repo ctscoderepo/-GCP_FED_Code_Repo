@@ -84,11 +84,10 @@ function LoginComponent(props) {
   return (
     <div className={classes.root}>
       <div>
-        <img
-          src="/assets/images/logo.png"
+      <Link to="/"><img src="/assets/images/logo.png"
           alt="logo"
-          className={classes.logo}
-        />
+          className={classes.logo}         
+        /></Link>
         <p className={classes.loginHead}>Sign in to DemoStore</p>
       </div>
       <Grid container className={classes.loginComponent}>
@@ -165,7 +164,7 @@ function LoginComponent(props) {
                     margin="normal"
                     variant="outlined"
                     className={classes.txtStyle}
-                    Type="password"
+                    type="password"
                   />
                 </Grid>
                 <Grid item lg={1} sm={1} />
@@ -182,7 +181,7 @@ function LoginComponent(props) {
                 <Grid item lg={10} sm={10} xs={12}>
                   <p className={classes.register}>
                     New to DemoStore?&nbsp;
-                    <Link to="/register" className="link">
+                    <Link to="/Register" className="link">
                       Create account here
                     </Link>
                   </p>

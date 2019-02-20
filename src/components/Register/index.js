@@ -90,16 +90,16 @@ const styles = theme => ({
 });
 
 function LoginComponent(props) {
-  const { classes } = props;
+  const { classes, history } = props;
 
   return (
     <div className={classes.root}>
       <div>
-        <img
+      <Link to="/"><img
           src="/assets/images/logo.png"
           alt="logo"
           className={classes.logo}
-        />
+        /></Link>
         <p className={classes.registerHead}>Register to DemoStore</p>
       </div>
       <Grid container>

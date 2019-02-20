@@ -44,23 +44,23 @@ const styles = theme => ({
   }
 });
 
-const images = [
-  {
-    original: "https://via.placeholder.com/350",
-    thumbnail: "https://via.placeholder.com/50"
-  },
-  {
-    original: "https://via.placeholder.com/350" ,
-    thumbnail: "https://via.placeholder.com/50" 
-  },
-  {
-    original: "https://via.placeholder.com/350" ,
-    thumbnail: "https://via.placeholder.com/50" 
-  }
-];
 
 const ProductDetailComponent = props => {
   const { classes, addtoCart, product } = props;
+const images =(a)=> [
+  {
+    original: a,
+    thumbnail: a
+  },
+  {
+    original: a,
+    thumbnail: a 
+  },
+  {
+    original: a ,
+    thumbnail: a 
+  }
+];
   return (
     <div className="productDetailComponent">
       {product ? (
@@ -118,7 +118,7 @@ const ProductDetailComponent = props => {
               </svg>
             </p>
             <ImageGallery
-              items={images}
+              items={images(product.images[0])}
               autoPlay={false}
               thumbnailPosition="left"
               showPlayButton={false}

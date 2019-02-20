@@ -5,6 +5,8 @@ import * as actions from "../../actions/Header";
 
 function Cart(props) {
   useEffect(() => {
+    props.setHeaderStatus(true);
+    props.setFooterStatus(true);
     props.setNavBarStatus(false);
     return () => {
       props.setNavBarStatus(true);
