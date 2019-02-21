@@ -7,5 +7,10 @@ ul.expansionPanel {
 
 ul.expansionPanel li {
   font-size: 12px;
-  padding: 5px 0;
+  padding:8px;
+}
+.active{
+    background-color: #e6e6e6;
+    margin-right: 10px;
+    font-weight: bold;
 }

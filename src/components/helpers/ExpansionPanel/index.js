@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useRef} from "react";
 import PropTypes from "prop-types";
 import { withRouter, Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
@@ -22,11 +22,19 @@ const styles = theme => ({
   },
   expansionDetails: {
     padding: "0 0 10px 40px"
-  }
+  },
+    
 });
 
 function SimpleExpansionPanel(props) {
   const { classes, heading, content } = props;
+    
+    const [itemValue,setItemValue]=useState(4);
+    const abc=useRef()
+    const handleActive=(val)=>{
+        setItemValue(val)
+  }
+    
   return (
     <div className={classes.root}>
       <ExpansionPanel className={classes.expansionPanel}>
@@ -36,8 +44,10 @@ function SimpleExpansionPanel(props) {
         <ExpansionPanelDetails className={classes.expansionDetails}>
           <ul className="expansionPanel">
             {typeof content === 'string' ? (content):content.map(item => (
-              <Link to={`/shopping/${item.path}/${item.cat}`} key={item.id}>
-                <li>{item.cat}</li>
+              <Link to={`/shopping/${item.path}/${item.cat}`} key={item.id} >
+                <li className={item.id===itemValue?"active":null}
+                 onClick={()=>handleActive(item.id)} 
+               >{item.cat}</li>
               </Link>
             ))}
           </ul>

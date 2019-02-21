@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
+import "./index.css";
 
 const styles = theme => ({
   root: {
@@ -86,11 +87,69 @@ const styles = theme => ({
   login: {
     fontSize: "14px",
     textAlign: "center"
-  }
+  },
+    marginTop10:{
+        marginTop:"10px"
+    },
+    marginTop30:{
+        marginTop:"30px"
+    }
 });
 
 function LoginComponent(props) {
-  const { classes } = props;
+  const { classes, history } = props;
+
+    const [firstName,setFirstName]=useState('');
+    const [errorFirstName, setErrorFirstName]=useState('');
+    
+    const [lastName, setLastName]=useState('');
+    const [errorLastName, setErrorLastName]=useState('');
+    
+    const [email, setEmail]=useState('');
+    const [errorEmail, setErrorEmail]=useState('');
+    
+     const [password, setPassword]=useState('');
+    const [errorPassword, setErrorPassword]=useState('');
+    
+    const [phoneNumber, setPhoneNumber]=useState('');
+    const [errorPhoneNumber, setErrorPhoneNumber]=useState('');
+ 
+    const handleFirstName=(value)=>{
+        setFirstName(value);
+  }
+    const handleLastName=(value)=>{
+      setLastName(value);
+  }
+    const handleEmail=(value)=>{
+      setEmail(value);
+  }
+     const handlePassword=(value)=>{
+      setPassword(value);
+  }     
+     const handlePhoneNumber=(value)=>{
+      setPhoneNumber(value);
+  }
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+      if(firstName.length === 0){setErrorFirstName("Please enter first name");}
+      else{setErrorFirstName("");}
+      
+      if(lastName.length === 0){setErrorLastName("Please enter last name");}
+      else{setErrorLastName("");}
+      
+      if(email.length === 0){setErrorEmail("Please enter email address");}
+      else{setErrorEmail("");}
+      
+      if(password.length === 0){setErrorPassword("Please enter password");}
+      else{setErrorPassword("");}
+      
+      if(phoneNumber.length === 0){setErrorPhoneNumber("Please enter phone number");}
+      else{setErrorPhoneNumber("");}
+  }
+  
+  
+    
+  
 
   return (
     <div className={classes.root}>
@@ -102,6 +161,7 @@ function LoginComponent(props) {
         /></Link>
         <p className={classes.registerHead}>Register to DemoStore</p>
       </div>
+      <form onSubmit={handleSubmit}>
       <Grid container>
         <Grid lg={4} sm={4} xs={12} item />
         <Grid item lg={4} sm={4} xs={12}>
@@ -136,10 +196,14 @@ function LoginComponent(props) {
                     placeholder="Enter First Name"
                     margin="normal"
                     variant="outlined"
+                    name="firstName"
                     className={classes.txtStyle}
+                    value={firstName.firstName}
+                    onChange={(e)=>handleFirstName(e.target.value)}
                   />
                 </Grid>
                 <Grid lg={1} sm={1} item />
+                    {errorFirstName && (<div className="errorReg">{errorFirstName}</div>)}
               </Grid>
               <Grid container>
                 <Grid lg={1} sm={1} item />
@@ -171,9 +235,13 @@ function LoginComponent(props) {
                     margin="normal"
                     variant="outlined"
                     className={classes.txtStyle}
+                    value={lastName.lastName}
+                    onChange={(e)=>handleLastName(e.target.value)}
+                    
                   />
                 </Grid>
-                <Grid lg={1} sm={1} item />
+               <Grid lg={1} sm={1} item />
+                    {errorLastName && (<div className="errorReg">{errorLastName}</div>)}
               </Grid>
               <Grid container>
                 <Grid lg={1} sm={1} item />
@@ -203,9 +271,12 @@ function LoginComponent(props) {
                     margin="normal"
                     variant="outlined"
                     className={classes.txtStyle}
+                    value={email.email}
+                    onChange={(e)=>handleEmail(e.target.value)}
                   />
                 </Grid>
-                <Grid lg={1} sm={1} item />
+               <Grid lg={1} sm={1} item />
+                    {errorEmail && (<div className="errorReg">{errorEmail}</div>)}
               </Grid>
               <Grid container>
                 <Grid lg={1} sm={1} item />
@@ -237,9 +308,12 @@ function LoginComponent(props) {
                     margin="normal"
                     variant="outlined"
                     className={classes.txtStyle}
+                    value={password.password}
+                    onChange={(e)=>handlePassword(e.target.value)}
                   />
                 </Grid>
                 <Grid lg={1} sm={1} item />
+                    {errorPassword && (<div className="errorReg">{errorPassword}</div>)}
               </Grid>
               <Grid container>
                 <Grid lg={1} sm={1} item />
@@ -254,23 +328,28 @@ function LoginComponent(props) {
                 </Grid>
                 <Grid lg={1} sm={1} item />
               </Grid>
+      
               <Grid container>
                 <Grid lg={1} sm={1} item />
-                <Grid item lg={10} sm={10} xs={12}>
+                <Grid item lg={10} sm={10} xs={12} style={{marginBottom:"-15px"}}>
                   <TextField
                     id="outlined-bare"
                     placeholder="Enter Phone number"
                     margin="normal"
                     variant="outlined"
+                    type="number"
                     className={classes.txtStyle}
+                    value={phoneNumber.phoneNumber}
+                    onChange={(e)=>handlePhoneNumber(e.target.value)}
                   />
                 </Grid>
                 <Grid lg={1} sm={1} item />
+                    {errorPhoneNumber && (<div className="errorReg">{errorPhoneNumber}</div>)}
               </Grid>
-              <Grid container>
+              <Grid container className={classes.marginTop30}>
                 <Grid lg={1} sm={1} item />
                 <Grid item lg={10} sm={10} xs={12} className={classes.txtaln}>
-                  <Button className={classes.btnStyle}>REGISTER</Button>
+                  <Button className={classes.btnStyle} type="submit">REGISTER</Button>
                 </Grid>
                 <Grid lg={1} sm={1} item />
               </Grid>
@@ -291,6 +370,7 @@ function LoginComponent(props) {
         </Grid>
         <Grid lg={4} sm={4} xs={12} item />
       </Grid>
+   </form>
     </div>
   );
 }
