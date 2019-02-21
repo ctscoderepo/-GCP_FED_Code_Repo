@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link ,withRouter} from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -79,15 +79,31 @@ const styles = theme => ({
 });
 
 function LoginComponent(props) {
-  const { classes } = props;
-
+  const { classes ,login, history,user} = props;
+  const [logonId,setLogonId]=useState('');
+  const [password,setPassword]=useState('');
+  const [error,setError]=useState('');
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    login({
+      logonId,
+      password
+    })
+    .then(()=> validateLogin())
+  }
+  const validateLogin=()=>{
+    return user? history.push('/'):setError("Login failed.Please check credentials");
+  }
   return (
     <div className={classes.root}>
       <div>
-      <Link to="/"><img src="/assets/images/logo.png"
-          alt="logo"
-          className={classes.logo}         
-        /></Link>
+        <Link to="/">
+          <img
+            src="/assets/images/logo.png"
+            alt="logo"
+            className={classes.logo}
+          />
+        </Link>
         <p className={classes.loginHead}>Sign in to DemoStore</p>
       </div>
       <Grid container className={classes.loginComponent}>
@@ -110,6 +126,7 @@ function LoginComponent(props) {
                 </Grid>
                 <Grid item lg={1} sm={1} />
               </Grid>
+              <form onSubmit={handleSubmit}>
               <Grid container>
                 <Grid item lg={1} sm={1} />
                 <Grid
@@ -120,11 +137,12 @@ function LoginComponent(props) {
                   className={classes.rowHeight}
                 >
                   <TextField
-                    id="outlined-bare"
                     placeholder="Enter User name"
                     margin="normal"
                     variant="outlined"
                     className={classes.txtStyle}
+                    value={logonId}
+                    onChange={(e)=>setLogonId(e.target.value)}
                   />
                 </Grid>
                 <Grid item lg={1} sm={1} />
@@ -159,12 +177,13 @@ function LoginComponent(props) {
                 <Grid item lg={1} sm={1} />
                 <Grid item lg={10} sm={10} xs={12}>
                   <TextField
-                    id="outlined-bare"
                     placeholder="Enter password"
                     margin="normal"
                     variant="outlined"
                     className={classes.txtStyle}
                     type="password"
+                    value={password}
+                    onChange={(e)=> setPassword(e.target.value)}
                   />
                 </Grid>
                 <Grid item lg={1} sm={1} />
@@ -172,16 +191,18 @@ function LoginComponent(props) {
               <Grid container>
                 <Grid item lg={1} sm={1} />
                 <Grid item lg={10} sm={10} xs={12} className={classes.txtaln}>
-                  <Button className={classes.btnStyle}>LOG IN</Button>
+                  <Button className={classes.btnStyle} type="submit">LOG IN</Button>
                 </Grid>
                 <Grid item lg={1} sm={1} />
+                {error && (<div className="error">{error}</div>)}
               </Grid>
+              </form>
               <Grid container>
                 <Grid item lg={1} sm={1} />
                 <Grid item lg={10} sm={10} xs={12}>
                   <p className={classes.register}>
                     New to DemoStore?&nbsp;
-                    <Link to="/Register" className="link">
+                    <Link to="/register" className="link">
                       Create account here
                     </Link>
                   </p>
@@ -201,4 +222,4 @@ LoginComponent.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(LoginComponent);
+export default withStyles(styles)(withRouter(LoginComponent));

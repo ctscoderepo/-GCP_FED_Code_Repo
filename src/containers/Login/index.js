@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import LoginComponent from "../../components/Login";
-import * as actions from "../../actions/Header";
+import {setHeaderStatus,setFooterStatus} from "../../actions/Header";
+import {login} from '../../actions/Login';
 
-const Login = ({ setHeaderStatus, setFooterStatus }) => {
+const Login = ({ setHeaderStatus, setFooterStatus, login, user }) => {
   useEffect(() => {
     setHeaderStatus(false);
     setFooterStatus(false);
   }, []);
-  return <LoginComponent />;
+  return <LoginComponent login={login}/>;
 };
 
 export default connect(
-  null,
-  actions
+  ({login})=> ({user:login.user}),
+  {setHeaderStatus,setFooterStatus,login}
 )(Login);

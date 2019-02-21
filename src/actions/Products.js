@@ -16,3 +16,5 @@ export const getProducts = type => async dispatch => {
   const res = await axios.get(url);
   dispatch({ type: "PRODUCTS", payload: res.data.products });
 };
+
+export const clearProducts=()=>({type:"CLEARPRODUCTS"})

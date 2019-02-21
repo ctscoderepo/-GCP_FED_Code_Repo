@@ -95,7 +95,8 @@ function Products({ searchResults, classes }) {
     ) : (
       <Grid container spacing={16}>
         {searchResults.map(product => (
-          <Grid item lg={4} md={4} sm={4} xs={6} key={product.skuId}>
+          <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
+          <div class="productWrapper">
             <Link
               to={`/store/product/${product.skuId}`}
               className={classes.item}
@@ -105,15 +106,14 @@ function Products({ searchResults, classes }) {
               </div>
               <div className="productDetail">
                 <div className="title">{product.productName}</div>
-                <>
                   <span className="rated">{rating()}</span>
-                </>
                 <div className="price">
                   {product.currencyCode === "USD" && "$"}{" "}
                   <span>{product.price}</span>
                 </div>
               </div>
             </Link>
+            </div>
           </Grid>
         ))}
       </Grid>

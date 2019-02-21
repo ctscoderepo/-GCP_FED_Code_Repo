@@ -98,25 +98,25 @@ function Products({ products, classes }) {
     ) : (
       <Grid container spacing={16}>
         {products.map(product => (
-          <Grid item lg={4} md={4} sm={4} xs={6} key={product.skuId}>
-            <Link
-              to={`/store/product/${product.skuId}`}
-              className={classes.item}
-            >
-              <div className="imageWrapper">
-                <img src={product.images[0]} alt="mac book prop" />
+          <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
+              <div className="productWrapper">
+                <Link
+                  to={`/store/product/${product.skuId}`}
+                  className={classes.item}
+                >
+                  <div className="imageWrapper">
+                    <img src={product.images[0]} alt="mac book prop" />
+                  </div>
+                  <div className="productDetail">
+                    <div className="title">{product.productName}</div>
+                      <span className="rated">{rating()}</span>
+                    <div className="price">
+                      {product.currencyCode === "USD" && "$"}{" "}
+                      <span>{product.price}</span>
+                    </div>
+                  </div>
+                </Link>
               </div>
-              <div className="productDetail">
-                <div className="title">{product.productName}</div>
-                <>
-                  <span className="rated">{rating()}</span>
-                </>
-                <div className="price">
-                  {product.currencyCode === "USD" && "$"}{" "}
-                  <span>{product.price}</span>
-                </div>
-              </div>
-            </Link>
           </Grid>
         ))}
       </Grid>

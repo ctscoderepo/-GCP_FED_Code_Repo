@@ -90,7 +90,7 @@ const styles = theme => ({
 });
 
 function LoginComponent(props) {
-  const { classes, history } = props;
+  const { classes } = props;
 
   return (
     <div className={classes.root}>

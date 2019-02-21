@@ -11,8 +11,7 @@
   width: 100%;
 }
 .productDetail {
-  padding: 0 5px;
-  padding-top: 15px;
+  padding: 10px;
 }
 p.title {
   color: #0084cd;
@@ -54,4 +53,13 @@ ul.productCats li::before {
 
 a.catergoryLink {
   font-size: 18px;
+}
+.productWrapper {
+  border: 1px solid lightgrey;
+}
+.title {
+  font-size: 13px;
+  height: 30px;
+  display: flex;
+  flex-wrap: nowrap;
 }
