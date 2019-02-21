@@ -5,17 +5,15 @@
   box-sizing: border-box;
 }
 .imagewrapper {
-  width: 150px;
   box-sizing: border-box;
+  border: 1px solid lightgrey;
 }
 .imagewrapper img {
   position: relative;
   display: block;
   height: 150px;
   width: 100%;
-  margin: 1px auto;
   transition: 0.2s;
-  border-radius: 4px;
   box-sizing: border-box;
 }
 
@@ -43,6 +41,9 @@
 .featuredProductContent {
   padding: 5px;
   box-sizing: border-box;
+}
+.featuredContent_name {
+  height: 30px;
 }
 
 @media only screen and (max-width: 600px) {
