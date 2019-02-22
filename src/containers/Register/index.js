@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import RegisterComponent from "../../components/Register";
-import * as actions from "../../actions/Header";
+import  {registration} from "../../actions/Register";
+import {setHeaderStatus,setFooterStatus} from "../../actions/Header";
 
-const Login = ({ setHeaderStatus, setFooterStatus }) => {
+const Register  = ({ setHeaderStatus, setFooterStatus, registration  }) => {
   useEffect(() => {
     setHeaderStatus(false);
     setFooterStatus(false);
   }, []);
   return (
     <div>
-      <RegisterComponent />
+      <RegisterComponent registration={registration}/>
     </div>
   );
 };
 
 export default connect(
   null,
-  actions
-)(Login);
+  {setHeaderStatus,setFooterStatus,registration}
+)(Register);

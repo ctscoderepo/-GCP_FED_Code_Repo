@@ -146,7 +146,7 @@ const styles = theme => ({
   }
 });
 
-const CheckoutComoponent = props => {
+const AuthUserCheckout = props => {
   const { classes, history } = props;
 
   const Months = [
@@ -487,4 +487,4 @@ const CheckoutComoponent = props => {
   );
 };
 
-export default withRouter(withStyles(styles)(CheckoutComoponent));
+export default withRouter(withStyles(styles)(AuthUserCheckout));

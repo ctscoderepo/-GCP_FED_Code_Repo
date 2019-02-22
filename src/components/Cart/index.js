@@ -576,7 +576,7 @@ function CartComponent(props) {
                     rate available. Other methods will be viewable on the next
                     page.                   
                    
-                    <Button className={classes.btnStyle} onClick={() => history.push("/Checkout")}>CHECKOUT</Button>
+                    <Button className={classes.btnStyle} onClick={() => history.push("/signIn")}>CHECKOUT</Button>
                   </div>
                   <div className={classes.txtAlnCenter}>--or--</div>
                   <div className={classes.txtAlnCenter}>

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import CheckoutPage from "../../components/Checkout";
+import SignInpage from "../../components/SignIn";
 import * as actions from "../../actions/Header";
 
-const Checkout = ({ setHeaderStatus, setFooterStatus }) => {
+const SignIn = ({ setHeaderStatus, setFooterStatus }) => {
   useEffect(() => {
     setHeaderStatus(false);
     setFooterStatus(false);
   }, []);
-  return <CheckoutPage />;
+  return <SignInpage />;
 };
 
-export default connect(null,actions)(Checkout);
+export default connect(null,actions)(SignIn);

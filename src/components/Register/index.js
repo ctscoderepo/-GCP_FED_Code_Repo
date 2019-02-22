@@ -97,7 +97,7 @@ const styles = theme => ({
 });
 
 function LoginComponent(props) {
-  const { classes, history } = props;
+  const { classes, history, registration } = props;
 
     const [firstName,setFirstName]=useState('');
     const [errorFirstName, setErrorFirstName]=useState('');
@@ -131,24 +131,35 @@ function LoginComponent(props) {
   }
   const handleSubmit=(e)=>{
     e.preventDefault();
-      if(firstName.length === 0){setErrorFirstName("Please enter first name");}
+      if(!firstName){setErrorFirstName("Please enter first name");}
       else{setErrorFirstName("");}
       
-      if(lastName.length === 0){setErrorLastName("Please enter last name");}
+      if(!lastName){setErrorLastName("Please enter last name");}
       else{setErrorLastName("");}
       
-      if(email.length === 0){setErrorEmail("Please enter email address");}
+      if(!email){setErrorEmail("Please enter email address");}
       else{setErrorEmail("");}
       
-      if(password.length === 0){setErrorPassword("Please enter password");}
+      if(!password){setErrorPassword("Please enter password");}
       else{setErrorPassword("");}
       
-      if(phoneNumber.length === 0){setErrorPhoneNumber("Please enter phone number");}
+      if(!phoneNumber){setErrorPhoneNumber("Please enter phone number");}
       else{setErrorPhoneNumber("");}
-  }
-  
-  
     
+    if(!errorFirstName && !errorLastName && !errorEmail && !errorPassword && !errorPhoneNumber)
+      {
+          registration({
+          "logonId": email,
+          "password": password,
+          "address": {
+                firstName,
+                lastName,
+                email,
+                phoneNumber    
+            }
+        })
+      }
+  }
   
 
   return (
@@ -271,6 +282,7 @@ function LoginComponent(props) {
                     margin="normal"
                     variant="outlined"
                     className={classes.txtStyle}
+                    type="email"
                     value={email.email}
                     onChange={(e)=>handleEmail(e.target.value)}
                   />
@@ -308,6 +320,7 @@ function LoginComponent(props) {
                     margin="normal"
                     variant="outlined"
                     className={classes.txtStyle}
+                    type="password"
                     value={password.password}
                     onChange={(e)=>handlePassword(e.target.value)}
                   />
@@ -337,7 +350,9 @@ function LoginComponent(props) {
                     placeholder="Enter Phone number"
                     margin="normal"
                     variant="outlined"
-                    type="number"
+                    type="tel"
+                    name="phone"
+                    defaultValue= "+91"
                     className={classes.txtStyle}
                     value={phoneNumber.phoneNumber}
                     onChange={(e)=>handlePhoneNumber(e.target.value)}

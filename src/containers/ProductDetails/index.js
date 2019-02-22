@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actions from "../../actions/PDP";
-import PDPComponent from "../../components/PDP";
+import * as actions from "../../actions/ProductDetails";
+import ProductDetailsPage from "../../components/ProductDetails";
 
-const PDP = ({ match, getProduct, product,clearProduct }) => {
+const ProductDetails = ({ match, getProduct, product,clearProduct }) => {
   useEffect(() => {
     getProduct(match.params.item);
     return ()=>{
@@ -13,7 +13,7 @@ const PDP = ({ match, getProduct, product,clearProduct }) => {
   }, [match.params.item]);
   return (
     <div>
-      <PDPComponent product={product} />
+      <ProductDetailsPage product={product} />
     </div>
   );
 };
@@ -21,4 +21,4 @@ const PDP = ({ match, getProduct, product,clearProduct }) => {
 export default connect(
   ({ product }) => ({ product: product.product }),
   actions
-)(withRouter(PDP));
+)(withRouter(ProductDetails));
