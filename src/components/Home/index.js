@@ -19,7 +19,6 @@ const styles = theme => ({
   FeaturedProducts: {
     boxSizing: "border-box",
     [theme.breakpoints.down("sm")]: {
-      padding: "0 20px",
       marginBottom: "20px"
     }
   }

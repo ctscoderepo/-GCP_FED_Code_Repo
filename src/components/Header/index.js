@@ -22,6 +22,7 @@ import Advertisement from "../Advertisement";
 import CartBadge from "../helpers/Badge";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import Camera from "../Camera";
 import "./index.css";
 
 const styles = theme => ({
@@ -54,7 +55,7 @@ const styles = theme => ({
     marginLeft: 0,
     marginRight: "5px",
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       marginLeft: theme.spacing.unit,
       width: "auto",
       marginRight: "15px"
@@ -224,6 +225,8 @@ const styles = theme => ({
 
 function SearchAppBar(props) {
   let [open, setOpen] = useState(false);
+  const [cameraOpen, setCameraOpen] = useState(false);
+  console.log(cameraOpen);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -237,11 +240,11 @@ function SearchAppBar(props) {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("search results", search);
     props.searchResults(search).then(() => {
       props.history.push("/search");
     });
   };
+
   const { classes, history, showNavbar } = props;
   const sideList = (
     <div className={classes.list}>
@@ -302,19 +305,7 @@ function SearchAppBar(props) {
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
-              <div className={classes.cameraIcon}>
-                <i className={`material-icons`}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle cx="12" cy="12" r="3.2" />
-                    <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
-                  </svg>
-                </i>
-              </div>
+
               <form onSubmit={handleSubmit}>
                 <InputBase
                   placeholder="Search....."
@@ -328,6 +319,28 @@ function SearchAppBar(props) {
               </form>
             </div>
             <div className={classes.grow} />
+            <div className={classes.cameraIconMobile}>
+              <i
+                className={`material-icons`}
+                onClick={() => setCameraOpen(true)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="12" cy="12" r="3.2" />
+                  <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+                </svg>
+                {cameraOpen && (
+                  <Camera
+                    open={cameraOpen}
+                    toggleDialog={() => setCameraOpen(false)}
+                  />
+                )}
+              </i>
+            </div>
             <div>
               <i
                 className={`material-icons ${classes.signin}`}
