@@ -61,6 +61,24 @@ const styles = theme => ({
       backgroundColor: "#0084CD"
     }
   },
+  btnGuestCheckout: {
+    textTransform: "uppercase",
+    backgroundColor: "white",
+    borderRadius: "5px",
+    width: "100%",
+    margin: "10px 0",
+    fontSize: "12px",
+    boxShadow: "none",
+    outline: "none",
+    color: "#0084CD",
+    border: "2px solid #0084CD",
+    fontWeight: "400",
+    fill: "#000",
+    "&:hover": {
+      backgroundColor: "#0084CD",
+        color:"white"
+    }
+  },
   promoButton: {
     borderRadius: "5px",
     border: "1px solid #333",
@@ -80,6 +98,9 @@ const styles = theme => ({
   promoInput: {
     width: "100%",
     height: "40%"
+  },
+  rowHeight30: {
+    height: "30px"
   },
 
   marTop: {
@@ -574,10 +595,14 @@ function CartComponent(props) {
                   <div className={classes.yourOrdTxt}>
                     Shipping and delivery charges are calculated at the lowest
                     rate available. Other methods will be viewable on the next
-                    page.                   
-                   
-                    <Button className={classes.btnStyle} onClick={() => history.push("/signIn")}>CHECKOUT</Button>
+                    page.                  
+                    <Button className={classes.btnStyle} onClick={() => history.push("/Checkout")}>CHECKOUT</Button>
                   </div>
+
+                <div className={classes.yourOrdTxt}>
+                  <Button className={classes.btnGuestCheckout} onClick={() => history.push("/Checkout")}><strong>CHECKOUT AS A GUEST</strong></Button>
+                </div>
+
                   <div className={classes.txtAlnCenter}>--or--</div>
                   <div className={classes.txtAlnCenter}>
                     <Link>Check out with</Link>

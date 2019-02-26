@@ -1,7 +1,7 @@
-import axios from "axios";
+import {post} from './BaseApi';
 
 export const login = details => dispatch => {
-  return axios.get(
+  return post(
     "http://104.198.155.47/api/login-service",
     details
   ).then(res=> dispatch({ TYPE: "LOGIN", payload: res.data })).catch(err=> err)

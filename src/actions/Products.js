@@ -1,4 +1,4 @@
-import axios from "axios";
+import {get} from './BaseApi';
 
 export const getProducts = type => async dispatch => {
   let url = "http://104.154.92.99/search?category1=";
@@ -13,7 +13,7 @@ export const getProducts = type => async dispatch => {
   } else {
     url = `${url}${type.category}`;
   }
-  const res = await axios.get(url);
+  const res = await get(url);
   dispatch({ type: "PRODUCTS", payload: res.data.products });
 };
 
