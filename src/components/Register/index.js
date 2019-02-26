@@ -155,7 +155,17 @@ function LoginComponent(props) {
                 firstName,
                 lastName,
                 email,
-                phoneNumber    
+                phoneNumber,
+                "gender": "",
+                "dateOfBirth": "",
+                "address1": "",
+                "address2": "",
+                "city": "",
+                "state": "",
+                "country": "",
+                "zipCode": "",
+                "status": "1",
+                "addressType": "SB"   
             }
         })
       }
@@ -352,7 +362,6 @@ function LoginComponent(props) {
                     variant="outlined"
                     type="tel"
                     name="phone"
-                    defaultValue= "+91"
                     className={classes.txtStyle}
                     value={phoneNumber.phoneNumber}
                     onChange={(e)=>handlePhoneNumber(e.target.value)}

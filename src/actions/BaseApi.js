@@ -11,14 +11,14 @@ export const get = (url, params) => {
 }
 
 export const post = (url, postData) => {
-    return Axios.post(url,  postData , {
-        headers: getHeadersPost()
-    }).then(resp => {
-        return resp;
-    },
-        err => {
-            console.error("Error from POST call of ", url);
-        })
+    console.log(postData)
+    return Axios.post(url,  postData)
+        .then(resp => {
+            return resp;
+            },
+            err => {
+                console.error("Error from POST call of ", url);
+            })
 }
 
 function getHeadersPost() {
