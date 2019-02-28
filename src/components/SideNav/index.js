@@ -11,7 +11,7 @@ export default (activePanel) => {
         activePanel = {activePanel.category === "Electronics" ? activePanel:false}
         content={[
           { id: 1, cat: "All", path: "Electronics" },
-          { id: 2, cat: "Camera & Photo", path: "Electronics" },
+          { id: 2, cat: "Camera & photo", path: "Electronics" },
           { id: 3, cat: "Cell phones", path: "Electronics" },
           { id: 4, cat: "Others", path: "Electronics" }
         ]}
@@ -43,7 +43,7 @@ export default (activePanel) => {
           { id: 1, cat: "All ", path: "Toys" },
           { id: 2, cat: "Shapes & Colors", path: "Toys" },
           { id: 3, cat: "Kid's Electronics", path: "Toys" },
-          { id: 4, cat: "Sports & Outdoor play", path: "Toys" },
+          { id: 4, cat: "Sports & Outdoor Play", path: "Toys" },
           { id: 5, cat: "Stuffed Animals & Plush Toys", path: "Toys" }
         ]}
       />
