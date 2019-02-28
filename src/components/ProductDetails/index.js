@@ -69,6 +69,12 @@ const ProductDetailComponent = props => {
       thumbnail: a
     }
   ];
+
+  const addToCartClick = (e) => {
+    e.preventDefault();
+    addtoCart(product);
+  }
+
   return (
     <div className="productDetailComponent">
       {product ? (
@@ -147,7 +153,7 @@ const ProductDetailComponent = props => {
                   variant="contained"
                   color="secondary"
                   className={classes.addToCart}
-                  onClick={addtoCart}
+                  onClick={addToCartClick}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -209,8 +215,8 @@ const ProductDetailComponent = props => {
 export default connect(
   null,
   dispatch => ({
-    addtoCart() {
-      dispatch(addToCart(1));
+    addtoCart : (product) =>{
+      dispatch(addToCart(product));
     }
   })
 )(withStyles(styles)(ProductDetailComponent));
