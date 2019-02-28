@@ -88,7 +88,7 @@ const rating = () => (
   </>
 );
 
-function Products({ searchResults, classes }) {
+function Products({ searchResults, categoryDetails, classes }) {
   const spinner =
     searchResults.length === 0 ? (
       "No products found"
@@ -96,7 +96,7 @@ function Products({ searchResults, classes }) {
       <Grid container spacing={16}>
         {searchResults.map(product => (
           <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
-          <div class="productWrapper">
+          <div className="productWrapper">
             <Link
               to={`/store/product/${product.skuId}`}
               className={classes.item}
@@ -122,7 +122,7 @@ function Products({ searchResults, classes }) {
     <div className={classes.productsComponent}>
       <Grid container spacing={16}>
         <Grid item lg={2} md={3} sm={3} className={classes.sideNav}>
-          <SideNav />
+          <SideNav  {...categoryDetails}/>
         </Grid>
         <Grid item lg={1} className={classes.gridHide} />
         <Grid item lg={9} md={9} sm={9}>

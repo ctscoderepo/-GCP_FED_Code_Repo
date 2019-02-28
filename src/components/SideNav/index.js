@@ -2,11 +2,13 @@ import React from "react";
 import ExpansionPanel from "../helpers/ExpansionPanel";
 import "./index.css";
 
-export default () => {
+export default (activePanel) => {
+  //console.log("Search Result category", activePanel );
   return (
     <>
       <ExpansionPanel
         heading="Electronics"
+        activePanel = {activePanel.category === "Electronics" ? activePanel:false}
         content={[
           { id: 1, cat: "All", path: "Electronics" },
           { id: 2, cat: "Camera & Photo", path: "Electronics" },
@@ -16,6 +18,7 @@ export default () => {
       />
       <ExpansionPanel
         heading="Apparel"
+        activePanel = {activePanel.category === "Apparel" ? activePanel :false}
         content={[
           { id: 1, cat: "All", path: "Apparel" },
           { id: 2, cat: "Accessories", path: "Apparel" },
@@ -25,6 +28,7 @@ export default () => {
       />
       <ExpansionPanel
         heading="Home-Decor"
+        activePanel = {activePanel.category === "Home-Decor" ? activePanel :false}
         content={[
           { id: 1, cat: "All", path: "Home-Decor" },
           { id: 2, cat: "Art prints", path: "Home-Decor" },
@@ -34,6 +38,7 @@ export default () => {
       />
       <ExpansionPanel
         heading="Toys"
+        activePanel = {activePanel.category === "Toys" ? activePanel :false}
         content={[
           { id: 1, cat: "All ", path: "Toys" },
           { id: 2, cat: "Shapes & Colors", path: "Toys" },
