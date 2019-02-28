@@ -32,13 +32,13 @@ const styles = theme => ({
     }
   },
   footerLink: {
-    height: "28px",
+    height: "26px",
     [theme.breakpoints.down("sm")]: {
       width: "auto",
       float: "left",
       fontSize: "8px",
       marginRight: "15px",
-      height:"20px",
+      height:"28px",
     }
   },
   footerLabel: {

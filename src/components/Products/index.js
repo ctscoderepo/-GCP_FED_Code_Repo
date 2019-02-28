@@ -37,6 +37,14 @@ const styles = theme => ({
     [theme.breakpoints.down("md")]: {
       display: "none"
     }
+  },
+  Spin: {
+    textAlign: "center",
+    marginTop: "200px",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "100px",
+      marginLeft: "130px"
+    }
   }
 });
 
@@ -89,16 +97,16 @@ const rating = () => (
   </>
 );
 
-function Products({ products, classes }) {
+function Products({ products, catType, classes }) {
   const spinner =
     products.length === 0 ? (
-      <div className="spinner">
+      <div className={classes.Spin}>
         <Spinner />
       </div>
     ) : (
-      <Grid container spacing={16}>
-        {products.map(product => (
-          <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
+        <Grid container spacing={16}>
+          {products.map(product => (
+            <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
               <div className="productWrapper">
                 <Link
                   to={`/store/product/${product.skuId}`}
@@ -109,7 +117,7 @@ function Products({ products, classes }) {
                   </div>
                   <div className="productDetail">
                     <div className="title">{product.productName}</div>
-                      <span className="rated">{rating()}</span>
+                    <span className="rated">{rating()}</span>
                     <div className="price">
                       {product.currencyCode === "USD" && "$"}{" "}
                       <span>{product.price}</span>
@@ -117,10 +125,10 @@ function Products({ products, classes }) {
                   </div>
                 </Link>
               </div>
-          </Grid>
-        ))}
-      </Grid>
-    );
+            </Grid>
+          ))}
+        </Grid>
+      );
   return (
     <div className={classes.productsComponent}>
       <Grid container spacing={16}>

@@ -41,26 +41,34 @@ const styles = theme => ({
     padding: "0 10% 0 0",
     fontWeight: "400",
     color: "cornflowerblue"
+  },
+  Spinner: {
+    textAlign: "center",
+    marginTop: "200px",
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: "30px",
+
+    }
   }
 });
 
 
 const ProductDetailComponent = props => {
   const { classes, addtoCart, product } = props;
-const images =(a)=> [
-  {
-    original: a,
-    thumbnail: a
-  },
-  {
-    original: a,
-    thumbnail: a 
-  },
-  {
-    original: a ,
-    thumbnail: a 
-  }
-];
+  const images = (a) => [
+    {
+      original: a,
+      thumbnail: a
+    },
+    {
+      original: a,
+      thumbnail: a
+    },
+    {
+      original: a,
+      thumbnail: a
+    }
+  ];
   return (
     <div className="productDetailComponent">
       {product ? (
@@ -68,17 +76,17 @@ const images =(a)=> [
           <Grid lg={7} sm={6} xs={12} item>
             <h3 className={classes.producttitle}>{product.productName}</h3>
             <p className={classes.productIdName}>
-              
-                        </p>
+
+            </p>
             <div className="productSku">
               <div>
-              <strong>Model :</strong><span className={classes.productid}>
-                {product.shortDescription}
-              </span>
+                <strong>Model :</strong><span className={classes.productid}>
+                  {product.shortDescription}
+                </span>
               </div>
               <div>
-              <strong>SKU :</strong>
-              <span className={classes.productid}>{product.skuId}</span>
+                <strong>SKU :</strong>
+                <span className={classes.productid}>{product.skuId}</span>
               </div>
             </div>
             <p>
@@ -178,24 +186,22 @@ const images =(a)=> [
               </Grid>
             </Grid>
             <div className='expansionContainer'>
-            <Grid container >
-              <Grid lg={12} sm={12} xs={12} item>
-                <ExanpsionPanel
-                  heading="Specifications"
-                  content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."
-                />
-                <ExanpsionPanel
-                  heading="Warrenty"
-                  content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."
-                />
+              <Grid container >
+                <Grid lg={12} sm={12} xs={12} item>
+                  <ExanpsionPanel
+                    heading="Specifications"
+                    content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."
+                  />
+                  <ExanpsionPanel
+                    heading="Warrenty"
+                    content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."
+                  />
+                </Grid>
               </Grid>
-            </Grid>
-          </div>
+            </div>
           </Grid>
         </Grid>
-      ) : (
-        <Spinner />
-      )}
+      ) : (<div className={classes.Spinner}>	<Spinner /> </div> )}
     </div>
   );
 };
