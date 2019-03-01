@@ -4,14 +4,14 @@ import RegisterComponent from "../../components/Register";
 import  {registration} from "../../actions/Register";
 import {setHeaderStatus,setFooterStatus} from "../../actions/Header";
 
-const Register  = ({ setHeaderStatus, setFooterStatus, registration  }) => {
+const Register  = ({ setHeaderStatus, setFooterStatus, registration, user  }) => {
   useEffect(() => {
     setHeaderStatus(false);
     setFooterStatus(false);
   }, []);
   return (
     <div>
-      <RegisterComponent registration={registration}/>
+      <RegisterComponent registration={registration} user={user} />
     </div>
   );
 };
