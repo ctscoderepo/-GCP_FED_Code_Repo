@@ -8,7 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
+import Paper from '@material-ui/core/Paper';
 import "./index.css";
+import { registerPartial } from "handlebars";
+import { red } from "ansi-colors";
 
 const styles = theme => ({
   root: {
@@ -93,6 +96,11 @@ const styles = theme => ({
   },
   marginTop30: {
     marginTop: "30px"
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: '#FF0000',
   }
 });
 
@@ -168,12 +176,15 @@ function LoginComponent(props) {
           "status": "1",
           "addressType": "SB"
         }
-      }).then(()=>navigateToHome());
+      }).then((resp) => navigateToHome(resp));
     }
   }
 
-  const navigateToHome = () => {
-    return user ? (user.message == "User successfully registered." ? history.push("/") : setErrorRegister(user.message)) : null;
+  const navigateToHome = (resp) => {
+    console.log("resp register", resp);
+    return user ?
+      (user.message == "User successfully registered." ? history.push("/") :
+        setErrorRegister(user.message)) : setErrorRegister("Sorry!! There is some error with Registration service.");
   }
 
 
@@ -191,6 +202,12 @@ function LoginComponent(props) {
         <Grid container>
           <Grid lg={4} sm={4} xs={12} item />
           <Grid item lg={4} sm={4} xs={12}>
+            {errorRegister &&
+              <Paper className={classes.paper}>
+                {errorRegister}
+              </Paper>
+            }
+
             <Card>
               <CardContent>
                 <Grid container>
@@ -381,7 +398,6 @@ function LoginComponent(props) {
                     <Button className={classes.btnStyle} type="submit">REGISTER</Button>
                   </Grid>
                   <Grid lg={1} sm={1} item />
-                  {errorRegister && (<div className="errorReg">{errorRegister}</div>)}
                 </Grid>
                 <Grid container>
                   <Grid item lg={1} sm={1} />
