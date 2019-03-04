@@ -92,7 +92,9 @@ function LoginComponent(props) {
     .then(()=> validateLogin())
   }
   const validateLogin=()=>{
-    return user? history.push('/'):setError("Login failed.Please check credentials");
+    return user? 
+              (user.errorMessage? setError(user.errorMessage) : history.push('/')) 
+            :setError("Login failed.Please check credentials") ;
   }
   return (
     <div className={classes.root}>

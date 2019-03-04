@@ -24,11 +24,6 @@ const styles = theme => ({
     width: "100%",
     flexDirection: "column"
   },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: "center",
-    color: theme.palette.text.secondary
-  },
   wid50: {
     width: "200px",
     float: "left",
@@ -183,8 +178,8 @@ function LoginComponent(props) {
   const navigateToHome = (resp) => {
     console.log("resp register", resp);
     return user ?
-      (user.message == "User successfully registered." ? history.push("/") :
-        setErrorRegister(user.message)) : setErrorRegister("Sorry!! There is some error with Registration service.");
+      (user.errorMessage ? setErrorRegister(user.errorMessage): history.push("/")) :
+        setErrorRegister("Sorry!! There is some error with Registration service.");
   }
 
 

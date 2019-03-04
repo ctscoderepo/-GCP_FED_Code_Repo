@@ -101,7 +101,7 @@ function Products({ products, catType, classes }) {
   const spinner =
     products.length === 0 ? (
       <div className={classes.Spin}>
-        <Spinner />
+        No Products to display at this moment.
       </div>
     ) : (
         <Grid container spacing={16}>

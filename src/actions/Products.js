@@ -33,7 +33,12 @@ export const getProducts = type => async dispatch => {
     
   }
   const res = await get(url);
-  dispatch({ type: "PRODUCTS", payload: res.data.products });
+  if(res && res.data){
+    dispatch({ type: "PRODUCTS", payload: res.data.products });
+  }else {
+    clearProducts();
+  }
+  
 };
 
 export const clearProducts=()=>({type:"CLEARPRODUCTS"})
