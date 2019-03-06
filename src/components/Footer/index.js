@@ -91,9 +91,6 @@ const FooterComoponent = props => {
             <Link className={classes.linkColor}>Your Order</Link>
           </div>
           <div className={classes.footerLink}>
-            <Link className={classes.linkColor}>Download DemoStore</Link>
-          </div>
-          <div className={classes.footerLink}>
             <Link className={classes.linkColor}>Returns</Link>
           </div>
           <div className={classes.footerLink}>

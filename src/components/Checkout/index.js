@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -15,6 +15,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Checkbox from "@material-ui/core/Checkbox";
+//import "./index.css";
 
 const styles = theme => ({
   root: {
@@ -44,6 +45,14 @@ const styles = theme => ({
     marginTop: "0px",
     margin: "0px 0px 10px 0px"
   },
+    InputTextError:{
+    width: "100%",
+    height: "45px",
+    marginTop: "0px",
+    margin: "0px 0px 10px 0px",
+    borderBottom:"solid 3px red",
+     borderRadius: "5px",
+    },
   marginTop5: {
     marginTop: "5px"
   },
@@ -53,10 +62,13 @@ const styles = theme => ({
   marginTop15: {
     marginTop: "15px"
   },
+    marginTop40: {
+    marginTop: "40px"
+  },
   rightNav: {
     backgroundColor: "#e6e6e6",
     width: "100%",
-    height: "auto",
+    height: "99%",
     padding: "25px",
     marginTop: "30px",
     [theme.breakpoints.down("sm")]: {
@@ -143,11 +155,70 @@ const styles = theme => ({
   LinkColor: {
     color: "#0088cc",
     fontSize: "14px"
-  }
+  },
+    FirstNamePad:{
+        paddingRight:"20px",
+        [theme.breakpoints.down("sm")]: {
+      paddingRight:"0px"
+    }
+    }
 });
 
 const AuthUserCheckout = props => {
   const { classes, history } = props;
+    
+    
+    const [guestEmail,setguestEmail]=useState('');
+    const [errorGuestEmail, setErrorGuestEmail]=useState('');
+    
+    const [fName,setFName]=useState('');
+    const [errorFName, setErrorFName]=useState('');
+    
+   const [lName,setLName]=useState('');
+    const [errorLName, setErrorLName]=useState('');
+    
+    const [phone,setphone]=useState('');
+    const [errorPhone, setErrorPhone]=useState('');
+    
+    const [shipping,setShipping]=useState('');
+    const [errorShipping, setErrorShipping]=useState('');
+    
+     const handleguestEmail=(value)=>{
+        setguestEmail(value);
+        }
+     const handleFName=(value)=>{
+        setFName(value);
+        }     
+     const handleLName=(value)=>{
+        setLName(value);
+        }
+      const handlePhone=(value)=>{
+        setphone(value);
+        }
+      
+       const handleShipping=(value)=>{
+        setShipping(value);
+        }
+   
+     
+      const handleSubmit=(e)=>{
+    e.preventDefault();
+        if(guestEmail.length === 0){setErrorGuestEmail("Please enter your email address");}
+      else{setErrorGuestEmail("");}
+          
+           if(fName.length === 0){setErrorFName("Please enter your first name");}
+      else{setErrorFName("");}
+          
+          if(lName.length === 0){setErrorLName("Please enter your last name");}
+      else{setErrorLName("");}
+             
+          if(phone.length === 0){setErrorPhone("Please enter your phone number");}
+      else{setErrorPhone("");}
+          
+          if(shipping.length === 0){setErrorShipping("Please enter shipping address");}
+      else{setErrorShipping("");}
+    }
+    
 
   const Months = [
     { month: "01 - January", Value: "1" },
@@ -165,7 +236,7 @@ const AuthUserCheckout = props => {
   ].map(months => (
     <MenuItem
       key={months.Value}
-      value={months.Value}
+      value=""
       style={{ height: "10px" }}
     >
       {months.month}
@@ -191,6 +262,7 @@ const AuthUserCheckout = props => {
     <>
       <div style={{ padding: "10px" }}>
         <div className={classes.root}>
+      
           <Grid container spacing={24}>
             <Grid item lg={8} sm={8} xs={12}>
               <div className={classes.paddingTop30}>
@@ -200,10 +272,170 @@ const AuthUserCheckout = props => {
                   className={classes.logo}
                 />
                 <Typography className={classes.checkoutHeader}>
-                  Demo Store Checkout
+                  Secure Checkout
                 </Typography>
               </div>
-              <Grid cotainer>
+      
+    <Grid cotainer>   
+    <form onSubmit={handleSubmit}>
+      
+      <div className={classes.paddingTop30}>
+       
+                  <Typography className={classes.checkoutHeader}>
+                    Shipping
+                  </Typography>
+                  <Divider
+                    variant="left"
+                    style={{ backgroundColor: "#bfbfbf" }}
+                  />
+                </div>
+      <div className={classes.paddingTop30} style={{width:"95%"}}>           
+      <Grid item lg={12} sm={12} xs={12} >
+      <Grid container>
+      <Grid item lg={6} sm={6} xs={12} className={classes.FirstNamePad}>
+      <div>
+             <Typography>First Name :</Typography>
+            </div>
+             <div className="marginTop10">
+                    <TextField
+                        id="outlined-name"
+                        label=""
+                        className={classes.InputText}
+                        margin="normal"
+                        variant="outlined"
+                        placeholder="Enter First Name" 
+                    value={fName.fName}
+                    onChange={(e)=>handleFName(e.target.value)}
+                      />
+             </div>
+        <div>
+                {errorFName && (<div className="errorCheckout">{errorFName}</div>)}
+                </div>
+      </Grid>
+      <Grid item lg={6} sm={6} xs={12} >
+      <div>
+             <Typography>Last Name :</Typography>
+            </div>
+             <div className="marginTop10">
+                    <TextField
+                        id="outlined-name"
+                        label=""
+                        className={classes.InputText}
+                        margin="normal"
+                        variant="outlined"
+                        placeholder="Enter Last Name" 
+                        value={lName.lName}
+                    onChange={(e)=>handleLName(e.target.value)}
+                      />
+             </div>
+<div>
+                {errorLName && (<div className="errorCheckout">{errorLName}</div>)}
+                </div>
+      </Grid>
+      <Grid item lg={12} sm={12} xs={12} className={classes.marginTop15}>
+      <div>
+             <Typography>Email Address :</Typography>
+            </div>
+             <div className="marginTop10">
+                    <TextField
+                        id="outlined-name"
+                        label=""
+                        className={classes.InputText}
+                        margin="normal"
+                        variant="outlined"
+                        type="email"
+                        placeholder="Enter Email Address" 
+                     value={guestEmail.guestEmail}
+                    onChange={(e)=>handleguestEmail(e.target.value)}
+                      />
+             </div>
+<div>
+                {errorGuestEmail && (<div className="errorCheckout">{errorGuestEmail}</div>)}
+                </div>
+      </Grid>
+      <Grid item lg={12} sm={12} xs={12} className={classes.marginTop15}>
+      <div>
+             <Typography>Phone Number :</Typography>
+            </div>
+             <div className="marginTop10">
+                    <TextField
+                        id="outlined-name"
+                        label=""
+                        className={classes.InputText}
+                        margin="normal"
+                        variant="outlined"
+                        type="number"
+                        placeholder="Enter Phone Number" 
+                value={phone.phone}
+                    onChange={(e)=>handlePhone(e.target.value)}
+                      />
+             </div>
+            <div>
+                {errorPhone && (<div className="errorCheckout">{errorPhone}</div>)}
+                </div>
+      </Grid>
+      
+      <Grid item lg={12} sm={12} xs={12} className={classes.marginTop15}>
+      <div>
+             <Typography>Shipping Address :</Typography>
+            </div>
+             <div className="marginTop10">
+                    <TextField
+                        id="outlined-name"
+                        label=""
+                        className={classes.InputText}
+                        margin="normal"
+                        variant="outlined"
+                        placeholder="Enter Shipping Address" 
+                    value={shipping.shipping}
+                    onChange={(e)=>handleShipping(e.target.value)}
+                      />
+             </div>
+<div>
+                {errorShipping && (<div className="errorCheckout">{errorShipping}</div>)}
+                </div>
+      </Grid>
+      
+      <Grid item lg={12} sm={12} xs={12} className={classes.marginTop15}>
+      <Grid container>
+      <Grid item lg={4} sm={4} xs={12}>
+      <div>
+             <Typography>ZIP Code:</Typography>
+            </div>
+             <div className="marginTop10">
+                    <TextField
+                        id="outlined-name"
+                        label=""
+                        className={classes.InputText}
+                        margin="normal"
+                        variant="outlined"
+                        placeholder="" 
+                      />
+             </div>
+      <div style={{marginLeft:"-15px"}}>
+      <Checkbox
+             
+             checked
+              value="checkedB"
+              color="primary"
+            />Use as Billing Address
+      
+      </div>
+      </Grid>
+      <Grid item lg={8} sm={8} xs={12}>
+      <div className={classes.marginTop40}><Typography className={classes.marginLeft10}>Enter ZIP code to see products availability</Typography></div>
+      </Grid>      
+      </Grid>
+      </Grid>
+    
+      </Grid>
+      </Grid>
+     
+     </div>   
+      
+      
+      
+      
                 <div className={classes.paddingTop30}>
                   <Typography className={classes.checkoutHeader}>
                     Payment
@@ -213,7 +445,6 @@ const AuthUserCheckout = props => {
                     style={{ backgroundColor: "#bfbfbf" }}
                   />
                 </div>
-
                 <div className={classes.marginTop15}>
                   <FormControl component="fieldset">
                     <RadioGroup aria-label="payment" name="payment">
@@ -244,13 +475,8 @@ const AuthUserCheckout = props => {
                     </RadioGroup>
                   </FormControl>
                 </div>
-                <Grid
-                  item
-                  lg={8}
-                  sm={8}
-                  xs={12}
-                  className={classes.marginTop15}
-                >
+      
+                <Grid item lg={8} sm={8} xs={12} className={classes.marginTop15}>
                   <TextField
                     id="outlined-name"
                     label=""
@@ -325,6 +551,7 @@ const AuthUserCheckout = props => {
                         margin="normal"
                         variant="outlined"
                         placeholder="Enter CVV number"
+                        type="number"
                       />
                     </Grid>
                   </Grid>
@@ -344,9 +571,11 @@ const AuthUserCheckout = props => {
                   </Link>
                 </Grid>
                 <Grid item lg={12} sm={12} xs={12}>
-                  <Button className={classes.PlaceOrderBtn}>Place Order</Button>
+                  <Button type="submit" className={classes.PlaceOrderBtn}>Place Order</Button>
                 </Grid>
+      </form>
               </Grid>
+      
             </Grid>
 
             <Grid item lg={4} sm={4} xs={12}>
@@ -413,7 +642,7 @@ const AuthUserCheckout = props => {
                     <div className={classes.txtAlignRight}>
                       <Button
                         className={classes.btnStyle}
-                        onClick={() => history.push("/cart")}
+                        onClick={() => history.push("/Cart")}
                       >
                         View Cart
                       </Button>

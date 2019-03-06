@@ -220,6 +220,14 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       margin: 0
     }
+  },
+  signLabel: {
+    color: "black",
+    fontSize: "12px",
+    margin: "6px 5px 0px -15px",
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
   }
 });
 
@@ -244,6 +252,9 @@ function SearchAppBar(props) {
       props.history.push("/search");
     });
   };
+
+  let userInfo = JSON.parse(localStorage.getItem("userData1"));
+
 
   const { classes, history, showNavbar } = props;
   const sideList = (
@@ -341,7 +352,7 @@ function SearchAppBar(props) {
                 )}
               </i>
             </div>
-            <div>
+            <div><span className={classes.signLabel}>{(userInfo && userInfo.userFirstName) ? userInfo.userFirstName : ""}</span>
               <i
                 className={`material-icons ${classes.signin}`}
                 onClick={handleClick}
@@ -365,29 +376,45 @@ function SearchAppBar(props) {
                   </svg>
                 </span>
               </i>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    history.push("/login");
-                  }}
+
+              {!(userInfo && userInfo.userFirstName) &&
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
                 >
-                  Login
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      history.push("/login");
+                    }}
+                  >
+                    Login
                 </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    history.push("/register");
-                  }}
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      history.push("/register");
+                    }}
+                  >
+                    Register
+                </MenuItem>
+                </Menu>
+              }
+              {(userInfo && userInfo.userFirstName) &&
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
                 >
-                  Register
-                </MenuItem>
-              </Menu>
+                  <MenuItem>
+                    Signout
+                  </MenuItem>
+                </Menu >}
+
+
             </div>
             <div className={classes.iconStyles}>
               <Link to="/Cart">
@@ -426,3 +453,5 @@ SearchAppBar.propTypes = {
 };
 
 export default withRouter(withStyles(styles)(SearchAppBar));
+
+

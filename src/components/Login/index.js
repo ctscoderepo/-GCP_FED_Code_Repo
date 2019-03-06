@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link ,withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -79,23 +79,31 @@ const styles = theme => ({
 });
 
 function LoginComponent(props) {
-  const { classes ,login, history,user} = props;
-  const [logonId,setLogonId]=useState('');
-  const [password,setPassword]=useState('');
-  const [error,setError]=useState('');
-  const handleSubmit=(e)=>{
+  const { classes, login, history, user } = props;
+  const [logonId, setLogonId] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const handleSubmit = (e) => {
     e.preventDefault();
     login({
       logonId,
       password
     })
-    .then(()=> validateLogin())
+      .then(() => validateLogin())
   }
-  const validateLogin=()=>{
-    return user? 
-              (user.errorMessage? setError(user.errorMessage) : history.push('/')) 
-            :setError("Login failed.Please check credentials") ;
+  const validateLogin = () => {
+    return user ?
+      (user.errorMessage ? setError(user.errorMessage) : history.push('/'))
+      : setError("Login failed.Please check credentials");
   }
+
+  let userLogInfo = {
+    userLogedId: user ? user.userDetails.address.id : "",
+    userFirstName: user ? user.userDetails.address.firstName : "",
+  }
+
+  let objectSerialized = JSON.stringify(userLogInfo);
+  localStorage.setItem("userData1", objectSerialized);
   return (
     <div className={classes.root}>
       <div>
@@ -129,75 +137,75 @@ function LoginComponent(props) {
                 <Grid item lg={1} sm={1} />
               </Grid>
               <form onSubmit={handleSubmit}>
-              <Grid container>
-                <Grid item lg={1} sm={1} />
-                <Grid
-                  item
-                  lg={10}
-                  sm={10}
-                  xs={12}
-                  className={classes.rowHeight}
-                >
-                  <TextField
-                    placeholder="Enter User name"
-                    margin="normal"
-                    variant="outlined"
-                    className={classes.txtStyle}
-                    value={logonId}
-                    onChange={(e)=>setLogonId(e.target.value)}
-                  />
-                </Grid>
-                <Grid item lg={1} sm={1} />
-              </Grid>
-              <Grid container>
-                <Grid item lg={1} sm={1} />
-                <Grid
-                  item
-                  lg={10}
-                  sm={10}
-                  xs={12}
-                  className={classes.rowHeight30}
-                >
-                  <Grid container>
-                    <Grid item lg={6} sm={6} xs={6}>
-                      <Typography className={classes.lblStyle}>
-                        Password
-                      </Typography>
-                    </Grid>
-                    <Grid item lg={6} sm={6} xs={6} className={classes.txtaln}>
-                      <Typography className={classes.lblStyle}>
-                        <Link to="/forgotpassword" className="link">
-                          Forgot password?
-                        </Link>
-                      </Typography>
-                    </Grid>
+                <Grid container>
+                  <Grid item lg={1} sm={1} />
+                  <Grid
+                    item
+                    lg={10}
+                    sm={10}
+                    xs={12}
+                    className={classes.rowHeight}
+                  >
+                    <TextField
+                      placeholder="Enter User name"
+                      margin="normal"
+                      variant="outlined"
+                      className={classes.txtStyle}
+                      value={logonId}
+                      onChange={(e) => setLogonId(e.target.value)}
+                    />
                   </Grid>
                   <Grid item lg={1} sm={1} />
                 </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item lg={1} sm={1} />
-                <Grid item lg={10} sm={10} xs={12}>
-                  <TextField
-                    placeholder="Enter password"
-                    margin="normal"
-                    variant="outlined"
-                    className={classes.txtStyle}
-                    type="password"
-                    value={password}
-                    onChange={(e)=> setPassword(e.target.value)}
-                  />
+                <Grid container>
+                  <Grid item lg={1} sm={1} />
+                  <Grid
+                    item
+                    lg={10}
+                    sm={10}
+                    xs={12}
+                    className={classes.rowHeight30}
+                  >
+                    <Grid container>
+                      <Grid item lg={6} sm={6} xs={6}>
+                        <Typography className={classes.lblStyle}>
+                          Password
+                      </Typography>
+                      </Grid>
+                      <Grid item lg={6} sm={6} xs={6} className={classes.txtaln}>
+                        <Typography className={classes.lblStyle}>
+                          <Link to="/forgotpassword" className="link">
+                            Forgot password?
+                        </Link>
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid item lg={1} sm={1} />
+                  </Grid>
                 </Grid>
-                <Grid item lg={1} sm={1} />
-              </Grid>
-              <Grid container>
-                <Grid item lg={1} sm={1} />
-                <Grid item lg={10} sm={10} xs={12} className={classes.txtaln}>
-                  <Button className={classes.btnStyle} type="submit">LOG IN</Button>
+                <Grid container>
+                  <Grid item lg={1} sm={1} />
+                  <Grid item lg={10} sm={10} xs={12}>
+                    <TextField
+                      placeholder="Enter password"
+                      margin="normal"
+                      variant="outlined"
+                      className={classes.txtStyle}
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item lg={1} sm={1} />
                 </Grid>
-                <Grid item lg={1} sm={1} />
-                {error && (<div className="error">{error}</div>)}
-              </Grid>
+                <Grid container>
+                  <Grid item lg={1} sm={1} />
+                  <Grid item lg={10} sm={10} xs={12} className={classes.txtaln}>
+                    <Button className={classes.btnStyle} type="submit">LOG IN</Button>
+                  </Grid>
+                  <Grid item lg={1} sm={1} />
+                  {error && (<div className="error">{error}</div>)}
+                </Grid>
               </form>
               <Grid container>
                 <Grid item lg={1} sm={1} />
