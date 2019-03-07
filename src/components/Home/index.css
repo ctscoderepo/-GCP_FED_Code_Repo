@@ -46,6 +46,10 @@
   height: 30px;
 }
 
+.featuredContent_price {
+  font-weight: bold;
+}
+
 @media only screen and (max-width: 600px) {
   .imagewrapper {
     width: 100%;

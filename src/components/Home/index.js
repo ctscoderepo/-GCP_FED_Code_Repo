@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import Featured from "../HeroContentBlock";
 import Slider from "react-slick";
 import "./index.css";
@@ -45,37 +46,43 @@ const featuredProducts = [
   {
     imageURL: "https://storage.googleapis.com/gcpimage/images/electronics/0000046_beats-pill-20-wireless-speaker_550.jpeg",
     price: 39,
-    name: "portable-sound-speakers"
+    name: "portable-sound-speakers",
+    skuId : "PT_SPK_SN"
   },
   {
     imageURL:
       "https://storage.googleapis.com/gcpimage/images/electronics/0000039_leica-t-mirrorless-digital-camera_550.jpeg",
     price: 67,
-    name: "Leica T Mirrorless Digital camera"
+    name: "Leica T Mirrorless Digital camera",
+    skuId: "LT_MIR_DC"
   },
   {
     imageURL:
-      "https://storage.googleapis.com/gcpimage/images/toys/71B-0V7CutL._SX679_.jpg",
-    price: 90,
-    name: "wifi FPV Drone"
+      "https://storage.googleapis.com/gcpimage/images/electronics/0000042_htc-one-mini-blue_550.jpeg",
+    price: 100,
+    name: "HTC One Mini Blue",
+    skuId: "OM_HTC_BL"
   },
   {
     imageURL:
       "https://storage.googleapis.com/gcpimage/images/appreals/0000051_nike-floral-roshe-customized-running-shoes_550.jpg",
     price: 99,
-    name: "Nike Shoes"
+    name: "Nike Shoes",
+    skuId: "NK_FRC_RS"
   },
   {
     imageURL:
       "https://storage.googleapis.com/gcpimage/images/appreals/0000064_ray-ban-aviator-sunglasses_550.jpg",
     price: 16,
-    name: "Sun glasses"
+    name: "Sun glasses",
+    skuId: "RB_AVR_SG"
   },
   {
     imageURL:
       "https://storage.googleapis.com/gcpimage/images/toys/911c0QWW3uL._SL1500_.jpg",
     price: 34,
-    name: "Basket Ball"
+    name: "Basket Ball",
+    skuId: "304274307"
   }]
 
 const featuredProducts2 = featuredProducts.slice(0, 3);
@@ -127,21 +134,27 @@ const HomeComponent = props => {
         <Slider {...settings}>
           <div >
             <Grid container className={classes.FeaturedProducts} spacing={8}>
-              {featuredProducts.map((item, i )=> (
+              {featuredProducts.map((item, i) => (
                 <Grid lg={2} md={2} sm={3} xs={4} item className={classes.itemContainer} key={item.name}>
                   <div className="imagewrapper">
                     <img src={item.imageURL} alt={item.name} />
-                    <div className="featuredProductButton">
-                      <Button variant="outlined" className={classes.button}>
-                        view
-                </Button>
-                    </div>
-                    <section className="featuredProductContent">
-                      <div className="featuredContent">
-                        <div className="featuredContent_name">{item.name}</div>
-                        <div>${item.price}</div>
+                    <Link
+                      to={`/store/product/${item.skuId}`}
+                      className={classes.item}
+                    >
+                      <div className="featuredProductButton">
+                        <Button variant="outlined" className={classes.button}>
+                          view
+                      </Button>
+
                       </div>
-                    </section>
+                      <section className="featuredProductContent">
+                        <div className="featuredContent">
+                          <div className="featuredContent_name">{item.name}</div>
+                          <div className="featuredContent_price">${item.price}</div>
+                        </div>
+                      </section>
+                    </Link>
                   </div>
                 </Grid>
               ))}
@@ -165,7 +178,7 @@ const HomeComponent = props => {
                     <section className="featuredProductContent">
                       <div className="featuredContent">
                         <div className="featuredContent_name">{item.name}</div>
-                        <div>${item.price}</div>
+                        <div className="featuredContent_price">${item.price}</div>
                       </div>
                     </section>
                   </div>
@@ -187,7 +200,7 @@ const HomeComponent = props => {
                     <section className="featuredProductContent">
                       <div className="featuredContent">
                         <div className="featuredContent_name">{item.name}</div>
-                        <div>${item.price}</div>
+                        <div className="featuredContent_price">${item.price}</div>
                       </div>
                     </section>
                   </div>
