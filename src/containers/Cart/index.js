@@ -1,24 +1,23 @@
 import React, { useEffect } from "react";
 import CartComponent from "../../components/Cart";
 import { connect } from "react-redux";
-import * as actions from "../../actions/Header";
+import {setHeaderStatus,setFooterStatus,setNavBarStatus} from "../../actions/Header";
+import {updateCart,removeItemsFromCart} from "../../actions/Cart";
 
-function Cart(props) {
+const Cart  = ({ setHeaderStatus,setFooterStatus,setNavBarStatus, cartItems,updateCart, removeItemsFromCart}) => {
   useEffect(() => {
-    props.setHeaderStatus(true);
-    props.setFooterStatus(true);
-    props.setNavBarStatus(false);
+    setHeaderStatus(true); 
+    setFooterStatus(true); 
+    setNavBarStatus(false);
     return () => {
-      props.setNavBarStatus(true);
+        setNavBarStatus(true);
     };
   }, []);
   return (
     <div>
-      <CartComponent />
+      <CartComponent  cartItems={cartItems} updateCart={updateCart} removeItemsFromCart={removeItemsFromCart} />
     </div>
   );
-}
-export default connect(
-  null,
-  actions
-)(Cart);
+};
+
+export default connect(({cart})=>({cartItems: cart.cartItems}), {setHeaderStatus,setFooterStatus,setNavBarStatus,updateCart,removeItemsFromCart})(Cart);

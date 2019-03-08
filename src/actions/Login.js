@@ -4,7 +4,8 @@ export const login = details => dispatch => {
   return post(
     "http://104.198.155.47/api/login-service",
     details
-  ).then(res=> dispatch({ TYPE: "LOGIN", payload: res.data })).catch(err=> err)
+  ).then(res=> dispatch({ type: "LOGIN", payload: res.data }))
+   .catch(err=> console.log("Login Error" , err))
   
 };
 

@@ -17,7 +17,20 @@ export const post = (url, postData) => {
             return resp;
             },
             err => {
-                console.error("Error from POST call of ", url);
+                console.error("Error from POST call of ", url, err);
+                return err.response;
+            })
+}
+
+export const deleteCall = (url, data) => {
+    console.log(data)
+    return Axios.delete(url,  data)
+        .then(resp => {
+            return resp;
+            },
+            err => {
+                console.error("Error from DELETE call of ", url, err);
+                return err.response;
             })
 }
 

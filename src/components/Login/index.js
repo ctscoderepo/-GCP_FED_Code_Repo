@@ -89,21 +89,30 @@ function LoginComponent(props) {
       logonId,
       password
     })
-      .then(() => validateLogin())
+      .then((resp) => validateLogin(resp))
   }
-  const validateLogin = () => {
-    return user ?
-      (user.errorMessage ? setError(user.errorMessage) : history.push('/'))
-      : setError("Login failed.Please check credentials");
+  const validateLogin = (data) => {
+    // return user ?
+    //   (user.errorMessage ? setError(user.errorMessage) : history.push('/'))
+    //   : setError("Login failed.Please check credentials");
+
+      const userData=data.payload;
+      
+      const userFirstName=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.firstName:"";
+      const userId=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.id:"";     
+      let userLogInfo = {
+      userLogedId:userId,
+      userFirstName:userFirstName,
+      }
+          
+      let objectSerialized = JSON.stringify(userLogInfo);
+      localStorage.setItem("userData1", objectSerialized);
+        
+      return userData ?
+        (userData.errorMessage? setError(userData.errorMessage): history.push('/'))
+        : setError("Login failed.Please check credentials");
   }
 
-  let userLogInfo = {
-    userLogedId: user ? user.userDetails.address.id : "",
-    userFirstName: user ? user.userDetails.address.firstName : "",
-  }
-
-  let objectSerialized = JSON.stringify(userLogInfo);
-  localStorage.setItem("userData1", objectSerialized);
   return (
     <div className={classes.root}>
       <div>

@@ -9,7 +9,7 @@ const Login = ({ setHeaderStatus, setFooterStatus, login, user }) => {
     setHeaderStatus(false);
     setFooterStatus(false);
   }, []);
-  return <LoginComponent login={login}/>;
+  return <LoginComponent login={login} user={user}/>;
 };
 
 export default connect(

@@ -255,6 +255,12 @@ function SearchAppBar(props) {
 
   let userInfo = JSON.parse(localStorage.getItem("userData1"));
 
+  const signOut = () => {
+    console.log("Signing Out");
+    localStorage.removeItem('userData1')
+    userInfo ="";
+  }
+
 
   const { classes, history, showNavbar } = props;
   const sideList = (
@@ -352,7 +358,7 @@ function SearchAppBar(props) {
                 )}
               </i>
             </div>
-            <div><span className={classes.signLabel}>{(userInfo && userInfo.userFirstName) ? userInfo.userFirstName : ""}</span>
+            <div><p className={classes.signLabel}>{(userInfo && userInfo.userFirstName) ? userInfo.userFirstName : ""}</p>
               <i
                 className={`material-icons ${classes.signin}`}
                 onClick={handleClick}
@@ -409,7 +415,7 @@ function SearchAppBar(props) {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem>
+                  <MenuItem onClick={signOut}>
                     Signout
                   </MenuItem>
                 </Menu >}

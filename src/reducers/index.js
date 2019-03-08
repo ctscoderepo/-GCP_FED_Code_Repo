@@ -5,6 +5,7 @@ import product from "./ProductDetails";
 import search from "./Search";
 import login from './Login';
 import register from './Register';
+import cart from './Cart';
 
 export default combineReducers({
   header,
@@ -12,5 +13,6 @@ export default combineReducers({
   product,
   search,
   login,
-  register    
+  register,
+  cart   
 });

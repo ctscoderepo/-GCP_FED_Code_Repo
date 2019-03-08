@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -175,11 +175,28 @@ function LoginComponent(props) {
     }
   }
 
-  const navigateToHome = (resp) => {
-    console.log("resp register", resp);
-    return user ?
-      (user.errorMessage ? setErrorRegister(user.errorMessage): history.push("/")) :
-        setErrorRegister("Sorry!! There is some error with Registration service.");
+  const navigateToHome = (data) => {
+    console.log("resp register", data);
+    // return user ?
+    //   (user.errorMessage ? setErrorRegister(user.errorMessage): history.push("/")) :
+    //     setErrorRegister("Sorry!! There is some error with Registration service.");
+
+        const userData=data.payload;
+      
+        const userFirstName=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.firstName:"";
+        const userId=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.id:"";     
+        let userLogInfo = {
+        userLogedId:userId,
+        userFirstName:userFirstName,
+        }
+            
+        let objectSerialized = JSON.stringify(userLogInfo);
+        localStorage.setItem("userData1", objectSerialized);
+          
+          
+           return userData ?
+          (userData.errorMessage?setErrorRegister(userData.errorMessage):history.push('/'))
+          : setErrorRegister("Sorry!! There is some error with Registration service.");
   }
 
 
@@ -420,4 +437,4 @@ LoginComponent.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(LoginComponent);
+export default withStyles(styles)(withRouter(LoginComponent));

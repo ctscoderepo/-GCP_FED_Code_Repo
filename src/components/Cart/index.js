@@ -224,7 +224,8 @@ const styles = theme => ({
     marginLeft: "15px"
   },
   devider: {
-    backgroundColor: "#bfbfbf"
+    backgroundColor: "#bfbfbf",
+      marginLeft:"15px"
   },
   padding15: {
     padding: "15px"
@@ -245,67 +246,93 @@ const styles = theme => ({
     },
     shipping: {
   fontSize:"14px",
+  padding:"10px",
       [theme.breakpoints.down("sm")]: {
       fontSize:"13px",
     }    
-}
+},
+    removeItem:{
+        padding: "0 10px", 
+        color: "#33adff",
+        "&:hover": {
+      cursor: "pointer"
+    },
+    },
+    
 });
 
 function CartComponent(props) {
-  const { classes, history } = props;
-
-  const cartList = [
-    {
-      Item: "Item 1",
-      How: "Feb. 22  – Feb. 26",
-      Price: "$100"
-    },
-    {
-      Item: "Item 2",
-      How: "Feb. 22  – Feb. 26",
-      Qty: "2",
-      Price: "$100"
-    }
-  ].map(item => (
-    <Grid container style={{ padding: "15px" }} key={item.Item}>
+  const { classes, history, cartItems, updateCart, removeItemsFromCart } = props;
+    
+  console.log(cartItems);
+   
+  const cartList =!cartItems.orderItems?(<div>Your cart is empty</div>
+                                       ):(cartItems.orderItems.map((item) => (
+    <Grid container className="cartContainer" key={item.id}>
       <Grid item lg={3} sm={3} xs={5}>
         <Grid container spacing={8}>
           <Grid item lg={12} sm={12} xs={12}>
             <div className="imageWrapper1">
-              <img src={c1} alt="mac book prop" />
+              <img src={item.imageUrl} alt="mac book prop" />
             </div>
-            Item Description
+            <div className="productDes">{item.productDesciption}</div>
           </Grid>
         </Grid>
       </Grid>
       <Grid item lg={4} sm={4} xs={3} >
         <div className={classes.shipping}>
           Ship to Home FREE Estimated Arrival: <br />
-          {item.How}
+          {item.fullfillmentType}
         </div>
       </Grid>
       <Grid item lg={3} sm={3} xs={2} display="flex" className={classes.qtyCol}>
-        <button className="qtyBtn">-</button> <span className="qty">1</span>
-        <button className="qtyBtn">+</button>
+        <button className="qtyBtn" onClick={()=>removeQuantity([item.id,item.quantity])}>-</button> 
+        <span className="qty">{item.quantity}</span>
+        <button className="qtyBtn" onClick={()=>addQuantity([item.id,item.quantity])}>+</button>       
       </Grid>
-      <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
-        {item.Price}
+      <Grid item lg={2} sm={2} xs={2} style={{ textAlign:"right"}}>
+        ${item.price}
       </Grid>
-      <Grid
-        item
-        lg={12}
-        sm={12}
-        xs={12}
-        style={{ textAlign: "right", marginBottom: "10px" }}
-      >
-        <Link style={{ padding: "0 10px", color: "#33adff" }}>
+    <Grid item lg={12} sm={12} xs={12} style={{ textAlign: "right", marginBottom: "10px" }}>
+        <Link  className={classes.removeItem}>
           Save for later
         </Link>
-        <Link style={{ padding: "0 10px", color: "#33adff" }}>Remove</Link>
+        <Link onClick={()=>removeItems(item.Id)} className={classes.removeItem}>Remove</Link>
       </Grid>
       <Divider variant="middle" style={{ backgroundColor: "#bfbfbf" }} />
     </Grid>
-  ));
+  )));
+
+
+const removeItems =(value) =>{
+    removeItemsFromCart({
+       "orderItemsId": value,
+    })
+}
+
+const addQuantity = (value) =>{    
+    const val =parseInt(value[1]);
+    const updateQty =val+1 ;
+    updateCart({
+        "orderItemsId":value[0],	                                    
+        "quantity": updateQty				
+     })
+}
+
+const removeQuantity=(value)=>{    
+    const val =parseInt(value[1]);
+    const updateQty =val-1 ;
+    if(updateQty===0){
+        removeItems(value[0]);
+    }
+    else{
+        updateCart({
+        "orderItemsId":value[0],	                                    
+        "quantity": updateQty				
+     })
+    }
+}
+
   return (
     <div className="cartComponent">
       <div className={classes.root}>
@@ -343,12 +370,12 @@ function CartComponent(props) {
                   <Grid item lg={3} sm={3} xs={2} className={classes.txtAlnCenter}>
                     <strong>Qty</strong>
                   </Grid>
-                  <Grid item lg={2} sm={2} xs={2}>
+                  <Grid item lg={2} sm={2} xs={2} style={{textAlign:"right"}}>
                     <strong>Item Total</strong>
                   </Grid>
                 </Grid>
                 <Divider
-                  variant="middle"
+                  variant="left"
                   style={{ backgroundColor: "#bfbfbf", marginTop: "10px" }}
                 />
               </Grid>
@@ -379,12 +406,12 @@ function CartComponent(props) {
                     <Grid container className={classes.marTop}>
                       <Grid item lg={6} sm={6} xs={6}>
                         <Typography className={classes.txtaln}>
-                          Items : <strong>2</strong>
+                          Items : <strong>3</strong>
                         </Typography>
                       </Grid>
                       <Grid item lg={6} sm={6} xs={6}>
                         <Typography className={classes.txtaln}>
-                          Subtotal:<strong>$200</strong>
+                          Subtotal:<strong>${cartItems.totalPrice}</strong>
                         </Typography>
                       </Grid>
                     </Grid>
@@ -398,7 +425,7 @@ function CartComponent(props) {
                   <Typography className={classes.recentItemHead}>
                     <strong>Your recently viewed items </strong>
                   </Typography>
-                  <Divider variant="middle" className={classes.devider} />
+                  <Divider variant="left" className={classes.devider} />
                 </div>
                 <Grid item lg={12} sm={12} xs={12}>
                   <Grid container className={classes.padding15}>
@@ -460,7 +487,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        $200
+                        ${cartItems.totalPrice}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -485,7 +512,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        -$24
+                        ---
                       </Grid>
                     </Grid>
                   </Grid>
@@ -508,7 +535,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        $50
+                        ${cartItems.totalShipping}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -531,7 +558,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        ----
+                        ${cartItems.totalTax}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -545,7 +572,7 @@ function CartComponent(props) {
                       </Typography>
                     </Grid>
                     <Grid item lg={6} sm={6} xs={6} className={classes.txtaln}>
-                      $274
+                      ${cartItems.totalPrice + cartItems.totalTax + cartItems.totalShipping}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -646,3 +673,10 @@ CartComponent.propTypes = {
 };
 
 export default withRouter(withStyles(styles)(CartComponent));
+
+
+
+
+
+
+
