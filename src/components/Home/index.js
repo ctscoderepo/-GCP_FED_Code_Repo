@@ -47,7 +47,7 @@ const featuredProducts = [
     imageURL: "https://storage.googleapis.com/gcpimage/images/electronics/0000046_beats-pill-20-wireless-speaker_550.jpeg",
     price: 39,
     name: "portable-sound-speakers",
-    skuId : "PT_SPK_SN"
+    skuId: "PT_SPK_SN"
   },
   {
     imageURL:
@@ -170,11 +170,17 @@ const HomeComponent = props => {
                 <Grid lg={2} md={2} sm={3} xs={4} item className={classes.itemContainer} key={item.name}>
                   <div className="imagewrapper">
                     <img src={item.imageURL} alt={item.name} />
-                    <div className="featuredProductButton">
-                      <Button variant="outlined" className={classes.button}>
-                        view
-                </Button>
-                    </div>
+                    <Link
+                      to={`/store/product/${item.skuId}`}
+                      className={classes.item}
+                    >
+                      <div className="featuredProductButton">
+                        <Button variant="outlined" className={classes.button}>
+                          view
+                        </Button>
+
+                      </div>
+                    </Link>
                     <section className="featuredProductContent">
                       <div className="featuredContent">
                         <div className="featuredContent_name">{item.name}</div>
@@ -192,11 +198,16 @@ const HomeComponent = props => {
                 <Grid lg={2} md={2} sm={3} xs={4} item className={classes.itemContainer} key={item.name}>
                   <div className="imagewrapper">
                     <img src={item.imageURL} alt={item.name} />
-                    <div className="featuredProductButton">
-                      <Button variant="outlined" className={classes.button}>
-                        view
-                </Button>
-                    </div>
+                    <Link
+                      to={`/store/product/${item.skuId}`}
+                      className={classes.item}
+                    >
+                      <div className="featuredProductButton">
+                        <Button variant="outlined" className={classes.button}>
+                          view
+                        </Button>
+                      </div>
+                    </Link>
                     <section className="featuredProductContent">
                       <div className="featuredContent">
                         <div className="featuredContent_name">{item.name}</div>

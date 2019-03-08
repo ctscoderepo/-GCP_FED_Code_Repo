@@ -38,7 +38,7 @@ const styles = theme => ({
       float: "left",
       fontSize: "8px",
       marginRight: "15px",
-      height:"28px",
+      height: "28px",
     }
   },
   footerLabel: {
@@ -54,22 +54,26 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       textAlign: "left",
     }
-  },    
-    mobView: {
+  },
+  mobView: {
     [theme.breakpoints.down("sm")]: {
-      marginTop:"15px"
+      marginTop: "15px"
     }
   },
-    footerImage:{
-        width:"20px",
-        height:"20px",
-        marginRight:"10px"
-    },
-    socialLinks:{
-        color: "#333",
+
+  footerImage: {
+    width: "20px",
+    height: "20px",
+    marginRight: "10px"
+  },
+  socialLinks: {
+    color: "#333",
     fontSize: "14px",
-        padding:"0px 0px 30px 0px"
+    padding: "0px 0px 30px 0px",
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
     }
+  }
 });
 
 const FooterComoponent = props => {
@@ -108,25 +112,25 @@ const FooterComoponent = props => {
             </Typography>
           </div>
           <div className={classes.footerLink}>
-            <img src="/assets/images/facebook.png" alt="facebook" className={classes.footerImage}/>
+            <img src="/assets/images/facebook.png" alt="facebook" className={classes.footerImage} />
             <Link className={classes.socialLinks}>Facebook</Link>
           </div>
           <div className={classes.footerLink}>
-           <img src="/assets/images/twitter.png" alt="twitter" className={classes.footerImage}/>
-            <Link className={classes.linkColor}>Twitter</Link>
+            <img src="/assets/images/twitter.png" alt="twitter" className={classes.footerImage} />
+            <Link className={[classes.linkColor, classes.socialLinks]}>Twitter</Link>
           </div>
           <div className={classes.footerLink}>
-           <img src="/assets/images/pintrest1.png" alt="pintrest" className={classes.footerImage}/>
-            <Link className={classes.linkColor}> Pintrest</Link>
+            <img src="/assets/images/pintrest1.png" alt="pintrest" className={classes.footerImage} />
+            <Link className={[classes.linkColor, classes.socialLinks]}> Pintrest</Link>
           </div>
-          
+
           <div className={classes.footerLink}>
-             <img src="/assets/images/instagram1.png" alt="instagram" className={classes.footerImage}/>
-            <Link className={classes.linkColor}>Instagram</Link>
+            <img src="/assets/images/instagram1.png" alt="instagram" className={classes.footerImage} />
+            <Link className={[classes.linkColor, classes.socialLinks]}>Instagram</Link>
           </div>
-      <div className={classes.footerLink}>
-            <img src="/assets/images/blog1.png" alt="pintrest" className={classes.footerImage}/>
-            <Link className={classes.linkColor}>Blog</Link>
+          <div className={classes.footerLink}>
+            <img src="/assets/images/blog1.png" alt="pintrest" className={classes.footerImage} />
+            <Link className={[classes.linkColor, classes.socialLinks]}>Blog</Link>
           </div>
         </Grid>
         <Grid item lg={4} sm={4} xs={12} className={classes.mobView}>
