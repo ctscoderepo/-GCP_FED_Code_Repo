@@ -158,12 +158,13 @@ const styles = theme => ({
     }
   },
   logo: {
-    width: "100px",
-    height: "30px",
+    width: "60px",
+    height: "60px",
     position: "relative",
     top: "4px",
     [theme.breakpoints.down("sm")]: {
-      width: "30px"
+      width: "40px",
+      height: "40px",
     }
   },
   toolBar: {
@@ -258,7 +259,7 @@ function SearchAppBar(props) {
   const signOut = () => {
     console.log("Signing Out");
     localStorage.removeItem('userData1')
-    userInfo ="";
+    userInfo = "";
   }
 
 
