@@ -96,7 +96,7 @@ function LoginComponent(props) {
     //   (user.errorMessage ? setError(user.errorMessage) : history.push('/'))
     //   : setError("Login failed.Please check credentials");
 
-      const userData=data.payload;
+      const userData=data?data.payload:"";
       
       const userFirstName=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.firstName:"";
       const userId=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.id:"";     

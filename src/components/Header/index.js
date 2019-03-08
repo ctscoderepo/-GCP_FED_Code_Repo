@@ -147,7 +147,7 @@ const styles = theme => ({
       cursor: "pointer"
     },
     [theme.breakpoints.down("sm")]: {
-      display: "none"
+      display: "block"
     }
   },
   cart: {
@@ -225,9 +225,29 @@ const styles = theme => ({
   signLabel: {
     color: "black",
     fontSize: "12px",
-    margin: "6px 5px 0px -15px",
+    margin: "-6px 5px 0px 0px",
+    [theme.breakpoints.down("sm")]: {
+      display: "block",
+      fontSize: "8px",
+      marginLeft: "5px",
+      marginTop: "-3px"
+    },
+
+  },
+  svgArrowDown: {
     [theme.breakpoints.down("sm")]: {
       display: "none"
+    }
+  },
+  svgMyAcc: {
+    margin: "0px 0px 7px 12px",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "-3px"
+    }
+  },
+  accIconDiv: {
+    [theme.breakpoints.down("sm")]: {
+      marginRight: ""
     }
   }
 });
@@ -359,12 +379,13 @@ function SearchAppBar(props) {
                 )}
               </i>
             </div>
-            <div><p className={classes.signLabel}>{(userInfo && userInfo.userFirstName) ? userInfo.userFirstName : ""}</p>
+            <div className={classes.accIconDiv}><p className={classes.signLabel}>{(userInfo && userInfo.userFirstName) ? userInfo.userFirstName : ""}</p>
               <i
                 className={`material-icons ${classes.signin}`}
                 onClick={handleClick}
               >
                 <svg
+                  className={classes.svgMyAcc}
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
                   height="20"
@@ -374,10 +395,11 @@ function SearchAppBar(props) {
                 </svg>
                 <span>
                   <svg
+                  className={classes.svgArrowDown}
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
                   >
                     <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />
                   </svg>

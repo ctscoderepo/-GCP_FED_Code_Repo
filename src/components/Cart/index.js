@@ -76,7 +76,7 @@ const styles = theme => ({
     fill: "#000",
     "&:hover": {
       backgroundColor: "#0084CD",
-        color:"white"
+      color: "white"
     }
   },
   promoButton: {
@@ -161,8 +161,8 @@ const styles = theme => ({
   dsCartHead: {
     fontSize: "30px",
     fontStyle: "italic",
-     padding: "10px 0px 20px 0px",
-      [theme.breakpoints.down("sm")]: {
+    padding: "10px 0px 20px 0px",
+    [theme.breakpoints.down("sm")]: {
       fontSize: "22px"
     }
   },
@@ -174,18 +174,19 @@ const styles = theme => ({
     "&:hover": {
       backgroundColor: "transparent"
     },
-      [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "10px",
       marginTop: "10px",
-      marginBottom:"10px",
-          padding:"3px"
+      marginBottom: "10px",
+      padding: "3px"
     },
-      
+
   },
-    cartLabel:{[theme.breakpoints.down("sm")]: {
+  cartLabel: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "14px"
     }
-    },
+  },
   helpSection: {
     border: "1px solid black",
     padding: "5px",
@@ -194,11 +195,12 @@ const styles = theme => ({
   orderContainer: {
     padding: "25px",
     backgroundColor: "#f2f2f2",
-      [theme.breakpoints.down("sm")]: {
+    height: "auto",
+    [theme.breakpoints.down("sm")]: {
       padding: "0px",
     }
   },
-   
+
   bgColorWhite: {
     backgroundColor: "#fff"
   },
@@ -225,7 +227,7 @@ const styles = theme => ({
   },
   devider: {
     backgroundColor: "#bfbfbf",
-      marginLeft:"15px"
+    marginLeft: "15px"
   },
   padding15: {
     padding: "15px"
@@ -238,36 +240,52 @@ const styles = theme => ({
       display: "none"
     }
   },
-    qtyCol:{
-    textAlign:"center",
-        [theme.breakpoints.down("sm")]: {
-      textAlign:"right",
+  qtyCol: {
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "right",
     }
-    },
-    shipping: {
-  fontSize:"14px",
-  padding:"10px",
-      [theme.breakpoints.down("sm")]: {
-      fontSize:"13px",
-    }    
-},
-    removeItem:{
-        padding: "0 10px", 
-        color: "#33adff",
-        "&:hover": {
+  },
+  shipping: {
+    fontSize: "14px",
+    padding: "10px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "13px",
+    }
+  },
+  removeItem: {
+    padding: "0 10px",
+    color: "#33adff",
+    "&:hover": {
       cursor: "pointer"
     },
-    },
-    
+  },
+
 });
 
 function CartComponent(props) {
-  const { classes, history, cartItems, updateCart, removeItemsFromCart } = props;
-    
+  const { classes, history, cartItems, updateCart, removeItemsFromCart, getCart } = props;
+
   console.log(cartItems);
-   
-  const cartList =!cartItems.orderItems?(<div>Your cart is empty</div>
-                                       ):(cartItems.orderItems.map((item) => (
+
+  let userInfo = JSON.parse(localStorage.getItem("userData1"));
+  const orderId = cartItems && cartItems.orderId ? cartItems.orderId : "";
+  const memberId = userInfo && userInfo.id ? userInfo.id : "";
+
+  let orderDetails = {
+    orderId: orderId,
+    memberId: memberId
+  }
+
+  // if(!cartItems && memberId){
+  //   getCart(orderDetails);
+  // }
+
+  let objectSerialized = JSON.stringify(orderDetails);
+  localStorage.setItem("orderDetails", objectSerialized);
+
+  const cartList = !cartItems.orderItems ? (<div>Your cart is empty</div>
+  ) : (cartItems.orderItems.map((item) => (
     <Grid container className="cartContainer" key={item.id}>
       <Grid item lg={3} sm={3} xs={5}>
         <Grid container spacing={8}>
@@ -286,52 +304,50 @@ function CartComponent(props) {
         </div>
       </Grid>
       <Grid item lg={3} sm={3} xs={2} display="flex" className={classes.qtyCol}>
-        <button className="qtyBtn" onClick={()=>removeQuantity([item.id,item.quantity])}>-</button> 
+        <button className="qtyBtn" onClick={() => removeQuantity([item.id, item.quantity])}>-</button>
         <span className="qty">{item.quantity}</span>
-        <button className="qtyBtn" onClick={()=>addQuantity([item.id,item.quantity])}>+</button>       
+        <button className="qtyBtn" onClick={() => addQuantity([item.id, item.quantity])}>+</button>
       </Grid>
-      <Grid item lg={2} sm={2} xs={2} style={{ textAlign:"right"}}>
+      <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
         ${item.price}
       </Grid>
-    <Grid item lg={12} sm={12} xs={12} style={{ textAlign: "right", marginBottom: "10px" }}>
-        <Link  className={classes.removeItem}>
+      <Grid item lg={12} sm={12} xs={12} style={{ textAlign: "right", marginBottom: "10px" }}>
+        <Link className={classes.removeItem}>
           Save for later
         </Link>
-        <Link onClick={()=>removeItems(item.Id)} className={classes.removeItem}>Remove</Link>
+        <Link onClick={() => removeItems(item.id)} className={classes.removeItem}>Remove</Link>
       </Grid>
       <Divider variant="middle" style={{ backgroundColor: "#bfbfbf" }} />
     </Grid>
   )));
 
 
-const removeItems =(value) =>{
-    removeItemsFromCart({
-       "orderItemsId": value,
-    })
-}
+  const removeItems = (value) => {
+    removeItemsFromCart(value);
+  }
 
-const addQuantity = (value) =>{    
-    const val =parseInt(value[1]);
-    const updateQty =val+1 ;
+  const addQuantity = (value) => {
+    const val = parseInt(value[1]);
+    const updateQty = val + 1;
     updateCart({
-        "orderItemsId":value[0],	                                    
-        "quantity": updateQty				
-     })
-}
+      "orderItemsId": value[0],
+      "quantity": updateQty
+    })
+  }
 
-const removeQuantity=(value)=>{    
-    const val =parseInt(value[1]);
-    const updateQty =val-1 ;
-    if(updateQty===0){
-        removeItems(value[0]);
+  const removeQuantity = (value) => {
+    const val = parseInt(value[1]);
+    const updateQty = val - 1;
+    if (updateQty === 0) {
+      removeItems(value[0]);
     }
-    else{
-        updateCart({
-        "orderItemsId":value[0],	                                    
-        "quantity": updateQty				
-     })
+    else {
+      updateCart({
+        "orderItemsId": value[0],
+        "quantity": updateQty
+      })
     }
-}
+  }
 
   return (
     <div className="cartComponent">
@@ -340,7 +356,7 @@ const removeQuantity=(value)=>{
           <Grid item lg={8} sm={8} xs={12} className={classes.padding}>
             <Grid container className={classes.cartDiv1}>
               <Grid item lg={8} sm={8} xs={8}>
-                <div className={classes.dsCartHead}>Your Shopping Cart</div>                
+                <div className={classes.dsCartHead}>Your Shopping Cart</div>
               </Grid>
               <Grid item lg={4} sm={4} xs={4}>
                 <Typography>Shop More</Typography>
@@ -351,10 +367,10 @@ const removeQuantity=(value)=>{
                   Continue Shopping
                 </Button>
               </Grid>
-                <Grid item lg={12} sm={12} xs={12}>
-                    <div className={classes.cartLabel}><strong>
-                    FREE Shipping on eligible items.<Link> See Details</Link>
-                  </strong>
+              <Grid item lg={12} sm={12} xs={12}>
+                <div className={classes.cartLabel}><strong>
+                  FREE Shipping on eligible items.<Link> See Details</Link>
+                </strong>
                 </div></Grid>
             </Grid>
 
@@ -370,7 +386,7 @@ const removeQuantity=(value)=>{
                   <Grid item lg={3} sm={3} xs={2} className={classes.txtAlnCenter}>
                     <strong>Qty</strong>
                   </Grid>
-                  <Grid item lg={2} sm={2} xs={2} style={{textAlign:"right"}}>
+                  <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
                     <strong>Item Total</strong>
                   </Grid>
                 </Grid>
@@ -622,13 +638,13 @@ const removeQuantity=(value)=>{
                   <div className={classes.yourOrdTxt}>
                     Shipping and delivery charges are calculated at the lowest
                     rate available. Other methods will be viewable on the next
-                    page.                  
+                    page.
                     <Button className={classes.btnStyle} onClick={() => history.push("/Checkout")}>CHECKOUT</Button>
                   </div>
 
-                <div className={classes.yourOrdTxt}>
-                  <Button className={classes.btnGuestCheckout} onClick={() => history.push("/Checkout")}><strong>CHECKOUT AS A GUEST</strong></Button>
-                </div>
+                  <div className={classes.yourOrdTxt}>
+                    <Button className={classes.btnGuestCheckout} onClick={() => history.push("/Checkout")}><strong>CHECKOUT AS A GUEST</strong></Button>
+                  </div>
 
                   <div className={classes.txtAlnCenter}>--or--</div>
                   <div className={classes.txtAlnCenter}>

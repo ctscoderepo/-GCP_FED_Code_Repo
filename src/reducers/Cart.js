@@ -6,6 +6,8 @@ export default (state = { cartItems:{}}, action) => {
             return {...state, cartItems:{...state.cartItems,...action.payload}}
       case "REMOVEITEMS":
             return {...state, cartItems:{...state.cartItems,...action.payload}}
+      case "GETCART" :
+            return {...state, cartItems:{...state.cartItems, ...action.payload}}
       default:
         return state;
     }

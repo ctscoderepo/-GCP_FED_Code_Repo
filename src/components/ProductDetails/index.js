@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Button } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
 import { withStyles } from "@material-ui/core/styles";
@@ -54,7 +55,7 @@ const styles = theme => ({
 
 
 const ProductDetailComponent = props => {
-  const { classes, addtoCart, product } = props;
+  const { classes, addtoCart, product, history } = props;
   const images = (a) => [
     {
       original: a,
@@ -70,10 +71,26 @@ const ProductDetailComponent = props => {
     }
   ];
 
+  let orderInfo = JSON.parse(localStorage.getItem("orderDetails"));
+  let userInfo = JSON.parse(localStorage.getItem("userData1"));
+
+  const memerId = userInfo && userInfo.id ? userInfo.id : "";
+  const orderId = orderInfo && orderInfo.orderId ? orderInfo.orderId : "";
+
+
   const addToCartClick = (e) => {
     e.preventDefault();
-    addtoCart(product);
+
+    addtoCart({
+      "orderId": orderId,
+      "memerId": memerId,
+      "productId": product.id,
+      "price": product.price,
+      "quantity": 1
+    });
+    history.push("/Cart")
   }
+
 
   return (
     <div className="productDetailComponent">
@@ -207,7 +224,7 @@ const ProductDetailComponent = props => {
             </div>
           </Grid>
         </Grid>
-      ) : (<div className={classes.Spinner}>	<Spinner /> </div> )}
+      ) : (<div className={classes.Spinner}>	<Spinner /> </div>)}
     </div>
   );
 };
@@ -215,8 +232,8 @@ const ProductDetailComponent = props => {
 export default connect(
   null,
   dispatch => ({
-    addtoCart : (product) =>{
+    addtoCart: (product) => {
       dispatch(addToCart(product));
     }
   })
-)(withStyles(styles)(ProductDetailComponent));
+)(withStyles(styles)(withRouter(ProductDetailComponent)));

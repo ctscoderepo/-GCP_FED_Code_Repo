@@ -117,20 +117,20 @@ const FooterComoponent = props => {
           </div>
           <div className={classes.footerLink}>
             <img src="/assets/images/twitter.png" alt="twitter" className={classes.footerImage} />
-            <Link className={[classes.linkColor, classes.socialLinks]}>Twitter</Link>
+            <Link className='{[classes.linkColor, classes.socialLinks]}'>Twitter</Link>
           </div>
           <div className={classes.footerLink}>
             <img src="/assets/images/pintrest1.png" alt="pintrest" className={classes.footerImage} />
-            <Link className={[classes.linkColor, classes.socialLinks]}> Pintrest</Link>
+            <Link className='{[classes.linkColor, classes.socialLinks]}'> Pintrest</Link>
           </div>
 
           <div className={classes.footerLink}>
             <img src="/assets/images/instagram1.png" alt="instagram" className={classes.footerImage} />
-            <Link className={[classes.linkColor, classes.socialLinks]}>Instagram</Link>
+            <Link className='{[classes.linkColor, classes.socialLinks]}'>Instagram</Link>
           </div>
           <div className={classes.footerLink}>
             <img src="/assets/images/blog1.png" alt="pintrest" className={classes.footerImage} />
-            <Link className={[classes.linkColor, classes.socialLinks]}>Blog</Link>
+            <Link className='{[classes.linkColor, classes.socialLinks]}'>Blog</Link>
           </div>
         </Grid>
         <Grid item lg={4} sm={4} xs={12} className={classes.mobView}>
