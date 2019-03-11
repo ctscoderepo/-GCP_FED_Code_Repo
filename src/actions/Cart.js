@@ -16,7 +16,8 @@ export const updateCart = quantityUpdate => dispatch => {
 };
 
 export const removeItemsFromCart = removeItems => dispatch => {
-  return deleteCall("http://35.202.122.135/api/shoppingcart/delete", removeItems)
+  console.log(removeItems);
+  return deleteCall(`http://35.202.122.135/api/shoppingcart/delete/${removeItems}`)
     .then(res => dispatch({ type: "REMOVEITEMS", payload: res.data }))
     .catch(err => err)
 };

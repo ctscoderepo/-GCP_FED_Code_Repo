@@ -60,7 +60,7 @@ const styles = theme => ({
     height: "40px"
   },
   rowHeight30: {
-    height: "30px"
+    height: "40px"
   },
   loginHead: {
     textAlign: "center",
@@ -80,6 +80,10 @@ const styles = theme => ({
     spinnerDiv:{
         textAlign:"center",
         marginTop:"20%"
+    },
+    forgotPwd:{
+       textAlign:"right",
+        
     }
 });
 
@@ -106,11 +110,18 @@ function LoginComponent(props) {
 
       const userData=data?data.payload:"";
       
+      console.log(userData);
+      
       const userFirstName=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.firstName:"";
-      const userId=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.id:"";     
+      const userId=userData && userData.userDetails && userData.userDetails.id?userData.userDetails.id:""; 
+      const userAddressId=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.id:"";
+      
+      
+      
       let userLogInfo = {
       userLogedId:userId,
       userFirstName:userFirstName,
+      addressId:userAddressId      
       }
           
       let objectSerialized = JSON.stringify(userLogInfo);
@@ -189,12 +200,11 @@ function LoginComponent(props) {
                           Password
                       </Typography>
                       </Grid>
-                      <Grid item lg={6} sm={6} xs={6} className={classes.txtaln}>
-                        <Typography className={classes.lblStyle}>
-                          <Link to="/forgotpassword" className="link">
+                      <Grid item lg={6} sm={6} xs={6} style={{marginTop:"20px"}} >                        
+                          <div className={classes.forgotPwd}><Link to="/forgotpassword" className="forgotPassword">
                             Forgot password?
                         </Link>
-                        </Typography>
+                       </div>
                       </Grid>
                     </Grid>
                     <Grid item lg={1} sm={1} />

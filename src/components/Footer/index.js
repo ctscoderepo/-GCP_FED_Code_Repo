@@ -14,7 +14,15 @@ const styles = theme => ({
   footerBottomLinks: {
     color: "#0086b3",
     fontSize: "12px",
-    margin: "0px 15px 0px 0px"
+    margin: "0px 15px 0px 0px",
+      borderRight:"1px solid gray",
+      paddingRight:"12px"
+  },
+    footerLastTab: {
+    color: "#0086b3",
+    fontSize: "12px",
+    margin: "0px 15px 0px 0px",
+      
   },
   margin15: {
     background: "#f2f2f2",
@@ -175,7 +183,7 @@ const FooterComoponent = props => {
               >
                 Mobile Site
               </Link>
-              <Link className={classes.footerBottomLinks}>Site map</Link>
+              <Link className={classes.footerLastTab}>Site map</Link>
             </Grid>
           </Grid>
         </Grid>

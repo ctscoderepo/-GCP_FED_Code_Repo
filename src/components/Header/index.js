@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { withRouter, Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
@@ -23,6 +23,7 @@ import CartBadge from "../helpers/Badge";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Camera from "../Camera";
+import Button from "@material-ui/core/Button";
 import "./index.css";
 
 const styles = theme => ({
@@ -65,7 +66,7 @@ const styles = theme => ({
     height: "100%",
     width: "40px",
     position: "absolute",
-    pointerEvents: "none",
+    pointerEvents: "auto",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -77,7 +78,8 @@ const styles = theme => ({
       color: "#000",
       backgroundColor: "transparent",
       borderRadius: 0,
-      left: "0"
+      left: "0",
+      minWidth: "10px"
     }
   },
   cameraIcon: {
@@ -164,7 +166,7 @@ const styles = theme => ({
     top: "4px",
     [theme.breakpoints.down("sm")]: {
       width: "40px",
-      height: "40px",
+      height: "40px"
     }
   },
   toolBar: {
@@ -231,8 +233,7 @@ const styles = theme => ({
       fontSize: "8px",
       marginLeft: "5px",
       marginTop: "-3px"
-    },
-
+    }
   },
   svgArrowDown: {
     [theme.breakpoints.down("sm")]: {
@@ -269,21 +270,34 @@ function SearchAppBar(props) {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    props.searchResults(search).then(() => {
-      props.history.push("/search");
-    });
+    if(search){
+      props.searchResults(search).then(() => {
+        props.history.push("/search");
+      });
+    }
+    
   };
 
   let userInfo = JSON.parse(localStorage.getItem("userData1"));
 
   const signOut = () => {
     console.log("Signing Out");
-    localStorage.removeItem('userData1')
+    localStorage.removeItem("userData1");
     userInfo = "";
-  }
+  };
 
+  const { classes, history, showNavbar, cartItems } = props;
+  const [totalQuantity, setTotalQuantity] = useState();
+  useEffect(() => {
+    if (cartItems) {
+      let count = 0;
+      cartItems.forEach(item => {
+        count = count + item.quantity;
+      });
 
-  const { classes, history, showNavbar } = props;
+      setTotalQuantity(count);
+    }
+  });
   const sideList = (
     <div className={classes.list}>
       <List>
@@ -340,11 +354,14 @@ function SearchAppBar(props) {
 
             <Location />
             <div className={classes.search}>
-              <div className={classes.searchIcon}>
+              {/* <div className={classes.searchIcon}>
                 <SearchIcon />
-              </div>
+              </div> */}
 
               <form onSubmit={handleSubmit}>
+                <Button type="submit" className={classes.searchIcon}>
+                  <SearchIcon />
+                </Button>
                 <InputBase
                   placeholder="Search....."
                   classes={{
@@ -379,7 +396,12 @@ function SearchAppBar(props) {
                 )}
               </i>
             </div>
-            <div className={classes.accIconDiv}><p className={classes.signLabel}>{(userInfo && userInfo.userFirstName) ? userInfo.userFirstName : ""}</p>
+            <div className={classes.accIconDiv}>
+              <p className={classes.signLabel}>
+                {userInfo && userInfo.userFirstName
+                  ? userInfo.userFirstName
+                  : ""}
+              </p>
               <i
                 className={`material-icons ${classes.signin}`}
                 onClick={handleClick}
@@ -395,7 +417,7 @@ function SearchAppBar(props) {
                 </svg>
                 <span>
                   <svg
-                  className={classes.svgArrowDown}
+                    className={classes.svgArrowDown}
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
                     height="20"
@@ -406,7 +428,7 @@ function SearchAppBar(props) {
                 </span>
               </i>
 
-              {!(userInfo && userInfo.userFirstName) &&
+              {!(userInfo && userInfo.userFirstName) && (
                 <Menu
                   id="simple-menu"
                   anchorEl={anchorEl}
@@ -420,7 +442,7 @@ function SearchAppBar(props) {
                     }}
                   >
                     Login
-                </MenuItem>
+                  </MenuItem>
                   <MenuItem
                     onClick={() => {
                       handleClose();
@@ -428,26 +450,23 @@ function SearchAppBar(props) {
                     }}
                   >
                     Register
-                </MenuItem>
+                  </MenuItem>
                 </Menu>
-              }
-              {(userInfo && userInfo.userFirstName) &&
+              )}
+              {userInfo && userInfo.userFirstName && (
                 <Menu
                   id="simple-menu"
                   anchorEl={anchorEl}
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={signOut}>
-                    Signout
-                  </MenuItem>
-                </Menu >}
-
-
+                  <MenuItem onClick={signOut}>Signout</MenuItem>
+                </Menu>
+              )}
             </div>
             <div className={classes.iconStyles}>
               <Link to="/Cart">
-                <CartBadge items={1} />{" "}
+                <CartBadge items={totalQuantity} />{" "}
               </Link>
             </div>
 
@@ -482,5 +501,3 @@ SearchAppBar.propTypes = {
 };
 
 export default withRouter(withStyles(styles)(SearchAppBar));
-
-

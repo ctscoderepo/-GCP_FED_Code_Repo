@@ -282,6 +282,8 @@ function CartComponent(props) {
   const orderId = cartItems && cartItems.orderId ? cartItems.orderId : "";
   const memberId = userInfo && userInfo.id ? userInfo.id : "";
 
+  
+
   let orderDetails = {
     orderId: orderId,
     memberId: memberId
@@ -290,6 +292,9 @@ function CartComponent(props) {
   // if(!cartItems && memberId){
   //   getCart(orderDetails);
   // }
+
+  
+
 
   let objectSerialized = JSON.stringify(orderDetails);
   localStorage.setItem("orderDetails", objectSerialized);
@@ -401,7 +406,6 @@ function CartComponent(props) {
                   </Grid>
                 </Grid>
                 <Divider
-                  variant="left"
                   style={{ backgroundColor: "#bfbfbf", marginTop: "10px" }}
                 />
               </Grid>
@@ -451,7 +455,7 @@ function CartComponent(props) {
                   <Typography className={classes.recentItemHead}>
                     <strong>Your recently viewed items </strong>
                   </Typography>
-                  <Divider variant="left" className={classes.devider} />
+                  <Divider className={classes.devider} />
                 </div>
                 <Grid item lg={12} sm={12} xs={12}>
                   <Grid container className={classes.padding15}>

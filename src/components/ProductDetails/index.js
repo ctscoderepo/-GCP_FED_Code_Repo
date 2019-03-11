@@ -157,7 +157,7 @@ const ProductDetailComponent = props => {
               showNav={false}
               showFullscreenButton={false}
             />
-            <p className="productdesc"><Markup content={product.longDescription}/> </p>
+            <div className="productdesc"> <Markup content={product.longDescription}/> </div>
           </Grid>
           <Grid lg={5} sm={6} xs={12} item>
             <h1>
