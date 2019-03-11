@@ -9,6 +9,7 @@ import ExanpsionPanel from "../helpers/ExpansionPanel";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/Cart";
 import Spinner from "../helpers/Spinner";
+import { Markup } from 'interweave';
 import "./index.css";
 
 const styles = theme => ({
@@ -104,7 +105,7 @@ const ProductDetailComponent = props => {
             <div className="productSku">
               <div>
                 <strong>Model :</strong><span className={classes.productid}>
-                  {product.shortDescription}
+                  <Markup content={product.shortDescription} />
                 </span>
               </div>
               <div>
@@ -156,7 +157,7 @@ const ProductDetailComponent = props => {
               showNav={false}
               showFullscreenButton={false}
             />
-            <p className="productdesc">{product.longDescription}</p>
+            <p className="productdesc"><Markup content={product.longDescription}/> </p>
           </Grid>
           <Grid lg={5} sm={6} xs={12} item>
             <h1>

@@ -11,6 +11,7 @@ import Card from "@material-ui/core/Card";
 import Paper from '@material-ui/core/Paper';
 import "./index.css";
 import { registerPartial } from "handlebars";
+import Spinner from "../helpers/Spinner";
 import { red } from "ansi-colors";
 
 const styles = theme => ({
@@ -96,7 +97,11 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     textAlign: 'center',
     color: '#FF0000',
-  }
+  },
+    spinnerDiv:{
+        textAlign:"center",
+        marginTop:"20%"
+    }
 });
 
 function LoginComponent(props) {
@@ -134,7 +139,9 @@ function LoginComponent(props) {
   const handlePhoneNumber = (value) => {
     setPhoneNumber(value);
   }
+  const [isLoading, setIsLoading] = useState('');
   const handleSubmit = (e) => {
+    
     e.preventDefault();
     if (!firstName) { setErrorFirstName("Please enter first name"); }
     else { setErrorFirstName(""); }
@@ -152,6 +159,7 @@ function LoginComponent(props) {
     else { setErrorPhoneNumber(""); }
 
     if (!errorFirstName && !errorLastName && !errorEmail && !errorPassword && !errorPhoneNumber) {
+        setIsLoading(true);
       registration({
         "logonId": email,
         "password": password,
@@ -193,7 +201,7 @@ function LoginComponent(props) {
         let objectSerialized = JSON.stringify(userLogInfo);
         localStorage.setItem("userData1", objectSerialized);
           
-          
+          setIsLoading(false);
            return userData ?
           (userData.errorMessage?setErrorRegister(userData.errorMessage):history.push('/'))
           : setErrorRegister("Sorry!! There is some error with Registration service.");
@@ -201,7 +209,7 @@ function LoginComponent(props) {
 
 
   return (
-    <div className={classes.root}>
+    <div>{isLoading?<div className={classes.spinnerDiv}><Spinner /> </div>:<div className={classes.root}>
       <div>
         <Link to="/"><img
           src="/assets/images/logo.png"
@@ -429,7 +437,7 @@ function LoginComponent(props) {
           <Grid lg={4} sm={4} xs={12} item />
         </Grid>
       </form>
-    </div>
+    </div>}</div>
   );
 }
 

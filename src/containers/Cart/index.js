@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import { setHeaderStatus, setFooterStatus, setNavBarStatus } from "../../actions/Header";
 import { updateCart, removeItemsFromCart, getCart } from "../../actions/Cart";
 
-const Cart = ({ setHeaderStatus, 
-                setFooterStatus, 
-                setNavBarStatus, 
-                cartItems, 
-                updateCart, 
-                removeItemsFromCart,
-                getCart }) => {
+const Cart = ({ setHeaderStatus,
+  setFooterStatus,
+  setNavBarStatus,
+  cartItems,
+  updateCart,
+  removeItemsFromCart,
+  getCart, isLoading }) => {
   useEffect(() => {
     setHeaderStatus(true);
     setFooterStatus(true);
@@ -21,20 +21,23 @@ const Cart = ({ setHeaderStatus,
   }, []);
   return (
     <div>
-      <CartComponent 
-          cartItems={cartItems} 
-          updateCart={updateCart} 
-          removeItemsFromCart={removeItemsFromCart} 
-          getCart={getCart} />
+      <CartComponent
+        cartItems={cartItems}
+        updateCart={updateCart}
+        removeItemsFromCart={removeItemsFromCart}
+        getCart={getCart}
+        isLoading={isLoading}
+      />
     </div>
   );
 };
 
-export default connect(({ cart }) => 
-          ({ cartItems: cart.cartItems }), 
-          { setHeaderStatus, 
-            setFooterStatus, 
-            setNavBarStatus, 
-            updateCart, 
-            removeItemsFromCart, 
-            getCart })(Cart);
+export default connect(({ cart }) => ({ cartItems: cart.cartItems, isLoading: cart.isLoading }),
+  {
+    setHeaderStatus,
+    setFooterStatus,
+    setNavBarStatus,
+    updateCart,
+    removeItemsFromCart,
+    getCart
+  })(Cart);

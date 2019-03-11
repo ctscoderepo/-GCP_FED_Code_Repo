@@ -1,7 +1,7 @@
 import { post, deleteCall, get } from './BaseApi';
 
 export const addToCart = addToCartRequest => dispatch => {
-
+  dispatch({type:"ISLOADING"});
   return post("http://35.202.122.135/api/shoppingcart/add", addToCartRequest)
     .then(res => dispatch({ type: "ADDTOCART", payload: res.data }))
     .catch(err => console.log("Error from addToCart", err))

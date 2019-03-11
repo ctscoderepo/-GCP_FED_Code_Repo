@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
+import Spinner from "../helpers/Spinner";
 import "./index.css";
 
 const styles = theme => ({
@@ -75,7 +76,11 @@ const styles = theme => ({
   register: {
     fontSize: "14px",
     textAlign: "center"
-  }
+  },
+    spinnerDiv:{
+        textAlign:"center",
+        marginTop:"20%"
+    }
 });
 
 function LoginComponent(props) {
@@ -83,7 +88,10 @@ function LoginComponent(props) {
   const [logonId, setLogonId] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState('');
+    
   const handleSubmit = (e) => {
+      setIsLoading(true);
     e.preventDefault();
     login({
       logonId,
@@ -107,14 +115,14 @@ function LoginComponent(props) {
           
       let objectSerialized = JSON.stringify(userLogInfo);
       localStorage.setItem("userData1", objectSerialized);
-        
+        setIsLoading(false);
       return userData ?
         (userData.errorMessage? setError(userData.errorMessage): history.push('/'))
         : setError("Login failed.Please check credentials");
   }
 
   return (
-    <div className={classes.root}>
+    <div>{isLoading?<div className={classes.spinnerDiv}><Spinner /> </div>:<div className={classes.root}>
       <div>
         <Link to="/">
           <img
@@ -233,7 +241,7 @@ function LoginComponent(props) {
         </Grid>
         <Grid lg={4} sm={4} item />
       </Grid>
-    </div>
+    </div>}</div>
   );
 }
 

@@ -1,6 +1,8 @@
 import {get} from './BaseApi';
 
 export const getProducts = type => async dispatch => {
+    
+     dispatch({type:"ISLOADING"});
   let url = "http://104.154.92.99/search?category1=";
   if (type.subCategory) {
     if(type.subCategory==="All")
@@ -42,3 +44,8 @@ export const getProducts = type => async dispatch => {
 };
 
 export const clearProducts=()=>({type:"CLEARPRODUCTS"})
+
+
+
+
+

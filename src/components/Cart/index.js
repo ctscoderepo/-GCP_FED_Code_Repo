@@ -9,6 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Divider from "@material-ui/core/Divider";
 import c1 from "../Home/images/f1.jpeg";
+import Spinner from "../helpers/Spinner";
 import "./index.css";
 
 const styles = theme => ({
@@ -260,11 +261,20 @@ const styles = theme => ({
       cursor: "pointer"
     },
   },
-
+  spinnerDiv:{
+    textAlign:"center",
+    marginTop:"5%"
+}
 });
 
 function CartComponent(props) {
-  const { classes, history, cartItems, updateCart, removeItemsFromCart, getCart } = props;
+  const { classes, 
+          history, 
+          cartItems, 
+          updateCart, 
+          removeItemsFromCart, 
+          getCart,
+          isLoading } = props;
 
   console.log(cartItems);
 
@@ -284,8 +294,8 @@ function CartComponent(props) {
   let objectSerialized = JSON.stringify(orderDetails);
   localStorage.setItem("orderDetails", objectSerialized);
 
-  const cartList = !cartItems.orderItems ? (<div>Your cart is empty</div>
-  ) : (cartItems.orderItems.map((item) => (
+  const cartList = !cartItems.orderItems ? (isLoading?<div className={classes.spinnerDiv}><Spinner /></div>:<div className={classes.spinnerDiv}>Your cart is empty</div>
+    ) : (cartItems.orderItems.map((item) => (
     <Grid container className="cartContainer" key={item.id}>
       <Grid item lg={3} sm={3} xs={5}>
         <Grid container spacing={8}>

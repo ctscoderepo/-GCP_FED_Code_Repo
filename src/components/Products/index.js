@@ -45,7 +45,11 @@ const styles = theme => ({
       marginTop: "100px",
       marginLeft: "130px"
     }
-  }
+  },
+    spinnerDiv:{
+        textAlign:"center",
+        marginTop:"5%"
+    }
 });
 
 const rating = () => (
@@ -97,10 +101,12 @@ const rating = () => (
   </>
 );
 
-function Products({ products, catType, classes }) {
+function Products({ products, catType, classes, isLoading}) {
+    
+    console.log(isLoading);
+    
   const spinner =
-    products.length === 0 ? (
-      <div className={classes.Spin}>
+    products.length === 0 ? (isLoading?<div className={classes.spinnerDiv}><Spinner /></div>:<div className={classes.Spin}>
         No Products to display at this moment.
       </div>
     ) : (

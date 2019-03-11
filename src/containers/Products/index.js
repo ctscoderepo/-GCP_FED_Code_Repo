@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import * as actions from "../../actions/Products";
 import ProductsComponent from "../../components/Products";
 
-const Products = ({ match, getProducts, products,clearProducts }) => {
+const Products = ({ match, getProducts, products,clearProducts, isLoading }) => {
   useEffect(() => {
     getProducts(match.params);
     return ()=>{
@@ -13,12 +13,16 @@ const Products = ({ match, getProducts, products,clearProducts }) => {
   }, [match.params.category, match.params.subCategory]);
   return (
     <div>
-      <ProductsComponent products={products} />
+      <ProductsComponent products={products} isLoading={isLoading} />
     </div>
   );
 };
 
 export default connect(
-  ({ products }) => ({ products: products.products }),
+({ products }) => ({ products: products.products, isLoading:products.isLoading }),
   actions
 )(withRouter(Products));
+
+
+
+
