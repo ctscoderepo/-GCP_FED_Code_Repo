@@ -4,7 +4,8 @@ export default (
     showFooter: true,
     showNavbar: true,
     isLoading: false,
-    cartItems: []
+    cartItems: [],
+    userDetails:{}
   },
   action
 ) => {
@@ -17,6 +18,8 @@ export default (
       return { ...state, showNavbar: action.payload };
     case "SET_CART_ITEMS":
       return { ...state, cartItems: action.payload };
+    case "SET_USER_DETAILS":
+      return { ...state, userDetails: action.payload };
 
     // case "ISLOADING":
     //   return { ...state, isLoading: true };

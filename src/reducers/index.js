@@ -6,13 +6,21 @@ import search from "./Search";
 import login from './Login';
 import register from './Register';
 import cart from './Cart';
+import checkout from './Checkout';
 
-export default combineReducers({
+const appReducer = combineReducers({
   header,
   products,
   product,
   search,
   login,
   register,
-  cart   
+  cart,
+  checkout   
 });
+
+const rootReducer = (state, action) => {
+  return appReducer(state,action);
+}
+
+export default rootReducer;

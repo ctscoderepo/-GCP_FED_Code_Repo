@@ -165,7 +165,9 @@ const styles = theme => ({
 });
 
 const AuthUserCheckout = props => {
-  const { classes, history } = props;
+  const { classes, history, checkoutData } = props;
+
+  console.log("checkout data :", checkoutData)
     
     
     const [guestEmail,setguestEmail]=useState('');

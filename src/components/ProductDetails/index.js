@@ -75,7 +75,7 @@ const ProductDetailComponent = props => {
   let orderInfo = JSON.parse(localStorage.getItem("orderDetails"));
   let userInfo = JSON.parse(localStorage.getItem("userData1"));
 
-  const memerId = userInfo && userInfo.id ? userInfo.id : "";
+  const memberId = userInfo && userInfo.id ? userInfo.id : "";
   const orderId = orderInfo && orderInfo.orderId ? orderInfo.orderId : "";
 
 
@@ -84,7 +84,7 @@ const ProductDetailComponent = props => {
 
     addtoCart({
       "orderId": orderId,
-      "memerId": memerId,
+      "memberId": memberId,
       "productId": product.id,
       "price": product.price,
       "quantity": 1

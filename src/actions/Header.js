@@ -13,3 +13,7 @@ export const setNavBarStatus = value => {
 export const setCartItems = items => {
   return {type : "SET_CART_ITEMS", payload: items}
 }
+
+export const setUserDetails = userInfo => {
+  return {type : "SET_USER_DETAILS", payload: userInfo}
+}

@@ -1,9 +1,9 @@
 import {createStore,applyMiddleware,compose} from 'redux';
 import Thunk from 'redux-thunk';
 import reducer from '../reducers';
+import initialState from './initialState';
 
 const middleware=[Thunk];
-const initialState={};
 
 const composeEnhancers =
   typeof window === 'object' &&

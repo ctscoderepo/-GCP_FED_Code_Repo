@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import CheckoutPage from "../../components/Checkout";
 import * as actions from "../../actions/Header";
 
-const Checkout = ({ setHeaderStatus, setFooterStatus }) => {
+const Checkout = ({ setHeaderStatus, setFooterStatus, checkoutData }) => {
   useEffect(() => {
     setHeaderStatus(false);
     setFooterStatus(false);
   }, []);
-  return <CheckoutPage />;
+  return <CheckoutPage checkoutData={checkoutData} />;
 };
 
-export default connect(null,actions)(Checkout);
+export default connect(
+  ({ checkout }) => ({ checkoutData: checkout.checkoutData }),
+  actions
+)(Checkout);
