@@ -280,7 +280,9 @@ function CartComponent(props) {
 
   let userInfo = JSON.parse(localStorage.getItem("userData1"));
   const orderId = cartItems && cartItems.orderId ? cartItems.orderId : "";
-  const memberId = userInfo && userInfo.id ? userInfo.id : "";
+  const memberId = userInfo && userInfo.userLogedId ? userInfo.userLogedId : "";
+  const addressId = userInfo && userInfo.addressId ? userInfo.addressId : "";
+
 
   
 
@@ -363,6 +365,17 @@ function CartComponent(props) {
       })
     }
   }
+
+  
+  const checkoutCart =()=>{
+    props.checkout({
+    "orderId": orderId,		
+  "memberId": memberId,		
+  "addressId": addressId	
+  });
+  history.push("/Checkout")
+}
+
 
   return (
     <div className="cartComponent">
@@ -653,7 +666,7 @@ function CartComponent(props) {
                     Shipping and delivery charges are calculated at the lowest
                     rate available. Other methods will be viewable on the next
                     page.
-                    <Button className={classes.btnStyle} onClick={() => history.push("/Checkout")}>CHECKOUT</Button>
+                    <Button className={classes.btnStyle} onClick={() => checkoutCart()}>CHECKOUT</Button>
                   </div>
 
                   <div className={classes.yourOrdTxt}>
