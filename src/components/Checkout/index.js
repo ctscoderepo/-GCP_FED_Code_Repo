@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -167,7 +167,27 @@ const styles = theme => ({
 const AuthUserCheckout = props => {
   const { classes, history, checkoutData } = props;
 
-  console.log("checkout data :", checkoutData)
+  console.log("checkout data from checkout compo :", checkoutData)
+    
+    const orderItems=checkoutData?checkoutData.orderItems:'';
+    
+    const [totalQuantity, setTotalQuantity] = useState();
+    const [totalPrice, setTotalTotalPrice] = useState();
+   
+     useEffect(() => {
+    if (orderItems) {
+      let count = 0;
+      let price=0;    
+      orderItems.forEach(item => {
+        count = count + item.quantity;
+        price= price + item.price;
+        
+      });
+
+      setTotalQuantity(count);
+      setTotalTotalPrice(price);
+    }
+  });
     
     
     const [guestEmail,setguestEmail]=useState('');
@@ -221,6 +241,7 @@ const AuthUserCheckout = props => {
       else{setErrorShipping("");}
     }
     
+       const [monthExpir, setMonthExpir]=useState("month");
 
   const Months = [
     { month: "01 - January", Value: "1" },
@@ -281,7 +302,7 @@ const AuthUserCheckout = props => {
     <Grid cotainer>   
     <form onSubmit={handleSubmit}>
       
-      <div className={classes.paddingTop30}>
+      {checkoutData.memberId==0?<div><div className={classes.paddingTop30}>
        
                   <Typography className={classes.checkoutHeader}>
                     Shipping
@@ -429,15 +450,9 @@ const AuthUserCheckout = props => {
       </Grid>      
       </Grid>
       </Grid>
-    
       </Grid>
       </Grid>
-     
-     </div>   
-      
-      
-      
-      
+     </div></div>:""}   
                 <div className={classes.paddingTop30}>
                   <Typography className={classes.checkoutHeader}>
                     Payment
@@ -501,6 +516,7 @@ const AuthUserCheckout = props => {
                             <OutlinedInput
                               name="Expiration"
                               id="outlined-age-simple"
+                              value="fsdfsfsd"
                             />
                           }
                         >
@@ -605,7 +621,7 @@ const AuthUserCheckout = props => {
                       </Typography>
                       <Typography className={classes.txtAlignRight}>
                         {" "}
-                        <strong>3 item</strong>
+                        <strong>{totalQuantity?totalQuantity:0}</strong>
                       </Typography>
                     </div>
                     <div className={classes.marginTop15}>
@@ -614,7 +630,7 @@ const AuthUserCheckout = props => {
                       </Typography>
                       <Typography className={classes.txtAlignRight}>
                         {" "}
-                        <strong>$900.00</strong>
+                        <strong>${totalPrice?totalPrice:0}</strong>
                       </Typography>
                     </div>
                     <div className={classes.marginTop15}>
@@ -623,7 +639,7 @@ const AuthUserCheckout = props => {
                       </Typography>
                       <Typography className={classes.txtAlignRight}>
                         {" "}
-                        <strong>$59.00</strong>
+                        <strong>---</strong>
                       </Typography>
                     </div>
                     <div className={classes.marginTop10}>
@@ -638,7 +654,7 @@ const AuthUserCheckout = props => {
                       </Typography>
                       <Typography className={classes.txtAlignRight}>
                         {" "}
-                        <strong>$841.00</strong>
+                        <strong>${totalPrice?totalPrice:0}</strong>
                       </Typography>
                     </div>
                     <div className={classes.txtAlignRight}>

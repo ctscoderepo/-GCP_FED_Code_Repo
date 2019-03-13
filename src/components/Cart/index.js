@@ -10,6 +10,7 @@ import Link from "@material-ui/core/Link";
 import Divider from "@material-ui/core/Divider";
 import c1 from "../Home/images/f1.jpeg";
 import Spinner from "../helpers/Spinner";
+import Checkout from "../StripeCheckout";
 import "./index.css";
 
 const styles = theme => ({
@@ -40,6 +41,9 @@ const styles = theme => ({
   },
   lineHeight: {
     height: "35px"
+  },
+  setMargin:{
+    marginBottom: "20px"
   },
   yourOrdTxt: {
     fontSize: "11px",
@@ -180,8 +184,7 @@ const styles = theme => ({
       marginTop: "10px",
       marginBottom: "10px",
       padding: "3px"
-    },
-
+    }
   },
   cartLabel: {
     [theme.breakpoints.down("sm")]: {
@@ -198,7 +201,7 @@ const styles = theme => ({
     backgroundColor: "#f2f2f2",
     height: "auto",
     [theme.breakpoints.down("sm")]: {
-      padding: "0px",
+      padding: "0px"
     }
   },
 
@@ -244,14 +247,14 @@ const styles = theme => ({
   qtyCol: {
     textAlign: "center",
     [theme.breakpoints.down("sm")]: {
-      textAlign: "right",
+      textAlign: "right"
     }
   },
   shipping: {
     fontSize: "14px",
     padding: "10px",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "13px",
+      fontSize: "13px"
     }
   },
   removeItem: {
@@ -259,22 +262,24 @@ const styles = theme => ({
     color: "#33adff",
     "&:hover": {
       cursor: "pointer"
-    },
+    }
   },
-  spinnerDiv:{
-    textAlign:"center",
-    marginTop:"5%"
-}
+  spinnerDiv: {
+    textAlign: "center",
+    marginTop: "5%"
+  }
 });
 
 function CartComponent(props) {
-  const { classes, 
-          history, 
-          cartItems, 
-          updateCart, 
-          removeItemsFromCart, 
-          getCart,
-          isLoading } = props;
+  const {
+    classes,
+    history,
+    cartItems,
+    updateCart,
+    removeItemsFromCart,
+    getCart,
+    isLoading
+  } = props;
 
   console.log(cartItems);
 
@@ -283,99 +288,133 @@ function CartComponent(props) {
   const memberId = userInfo && userInfo.userLogedId ? userInfo.userLogedId : "";
   const addressId = userInfo && userInfo.addressId ? userInfo.addressId : "";
 
-
-  
-
   let orderDetails = {
     orderId: orderId,
     memberId: memberId
-  }
+  };
 
   // if(!cartItems && memberId){
   //   getCart(orderDetails);
   // }
 
-  
-
-
   let objectSerialized = JSON.stringify(orderDetails);
   localStorage.setItem("orderDetails", objectSerialized);
 
-  const cartList = !cartItems.orderItems ? (isLoading?<div className={classes.spinnerDiv}><Spinner /></div>:<div className={classes.spinnerDiv}>Your cart is empty</div>
-    ) : (cartItems.orderItems.map((item) => (
-    <Grid container className="cartContainer" key={item.id}>
-      <Grid item lg={3} sm={3} xs={5}>
-        <Grid container spacing={8}>
-          <Grid item lg={12} sm={12} xs={12}>
-            <div className="imageWrapper1">
-              <img src={item.imageUrl} alt="mac book prop" />
-            </div>
-            <div className="productDes">{item.productDesciption}</div>
+  const cartList = !cartItems.orderItems ? (
+    isLoading ? (
+      <div className={classes.spinnerDiv}>
+        <Spinner />
+      </div>
+    ) : (
+      <div className={classes.spinnerDiv}>Your cart is empty</div>
+    )
+  ) : (
+    cartItems.orderItems.map(item => (
+      <Grid container className="cartContainer" key={item.id}>
+        <Grid item lg={3} sm={3} xs={5}>
+          <Grid container spacing={8}>
+            <Grid item lg={12} sm={12} xs={12}>
+              <div className="imageWrapper1">
+                <img src={item.imageUrl} alt="mac book prop" />
+              </div>
+              <div className="productDes">{item.productDesciption}</div>
+            </Grid>
           </Grid>
         </Grid>
+        <Grid item lg={4} sm={4} xs={3}>
+          <div className={classes.shipping}>
+            Ship to Home FREE Estimated Arrival: <br />
+            {item.fullfillmentType}
+          </div>
+        </Grid>
+        <Grid
+          item
+          lg={3}
+          sm={3}
+          xs={2}
+          display="flex"
+          className={classes.qtyCol}
+        >
+          <button
+            className="qtyBtn"
+            onClick={() => removeQuantity([item.id, item.quantity])}
+          >
+            -
+          </button>
+          <span className="qty">{item.quantity}</span>
+          <button
+            className="qtyBtn"
+            onClick={() => addQuantity([item.id, item.quantity])}
+          >
+            +
+          </button>
+        </Grid>
+        <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
+          ${item.price}
+        </Grid>
+        <Grid
+          item
+          lg={12}
+          sm={12}
+          xs={12}
+          style={{ textAlign: "right", marginBottom: "10px" }}
+        >
+          <Link className={classes.removeItem}>Save for later</Link>
+          <Link
+            onClick={() => removeItems(item.id)}
+            className={classes.removeItem}
+          >
+            Remove
+          </Link>
+        </Grid>
+        <Divider variant="middle" style={{ backgroundColor: "#bfbfbf" }} />
       </Grid>
-      <Grid item lg={4} sm={4} xs={3} >
-        <div className={classes.shipping}>
-          Ship to Home FREE Estimated Arrival: <br />
-          {item.fullfillmentType}
-        </div>
-      </Grid>
-      <Grid item lg={3} sm={3} xs={2} display="flex" className={classes.qtyCol}>
-        <button className="qtyBtn" onClick={() => removeQuantity([item.id, item.quantity])}>-</button>
-        <span className="qty">{item.quantity}</span>
-        <button className="qtyBtn" onClick={() => addQuantity([item.id, item.quantity])}>+</button>
-      </Grid>
-      <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
-        ${item.price}
-      </Grid>
-      <Grid item lg={12} sm={12} xs={12} style={{ textAlign: "right", marginBottom: "10px" }}>
-        <Link className={classes.removeItem}>
-          Save for later
-        </Link>
-        <Link onClick={() => removeItems(item.id)} className={classes.removeItem}>Remove</Link>
-      </Grid>
-      <Divider variant="middle" style={{ backgroundColor: "#bfbfbf" }} />
-    </Grid>
-  )));
+    ))
+  );
 
-
-  const removeItems = (value) => {
-    removeItemsFromCart(value);
+  const totalPrice = () => {
+    return (cartItems && cartItems.totalPrice) ?
+    ( cartItems.totalPrice +
+                        cartItems.totalTax +
+                        cartItems.totalShipping ) : 0;
   }
 
-  const addQuantity = (value) => {
+  const removeItems = value => {
+    removeItemsFromCart(value);
+  };
+
+  const addQuantity = value => {
     const val = parseInt(value[1]);
     const updateQty = val + 1;
     updateCart({
-      "orderItemsId": value[0],
-      "quantity": updateQty
-    })
-  }
+      orderItemsId: value[0],
+      quantity: updateQty
+    });
+  };
 
-  const removeQuantity = (value) => {
+  const removeQuantity = value => {
     const val = parseInt(value[1]);
     const updateQty = val - 1;
     if (updateQty === 0) {
       removeItems(value[0]);
-    }
-    else {
+    } else {
       updateCart({
-        "orderItemsId": value[0],
-        "quantity": updateQty
-      })
+        orderItemsId: value[0],
+        quantity: updateQty
+      });
     }
-  }
+  };
 
-  
-  const checkoutCart =()=>{
+  const checkoutCart = () => {
     props.checkout({
-    "orderId": orderId,		
-  "memberId": memberId,		
-  "addressId": addressId	
-  });
-  history.push("/Checkout")
-}
+      orderId: orderId,
+      memberId: memberId,
+      addressId: addressId
+    });
+    history.push("/Checkout");
+  };
 
+  const multiClass =  [classes.lineHeight, classes.setMargin].join(' ');
 
   return (
     <div className="cartComponent">
@@ -396,10 +435,12 @@ function CartComponent(props) {
                 </Button>
               </Grid>
               <Grid item lg={12} sm={12} xs={12}>
-                <div className={classes.cartLabel}><strong>
-                  FREE Shipping on eligible items.<Link> See Details</Link>
-                </strong>
-                </div></Grid>
+                <div className={classes.cartLabel}>
+                  <strong>
+                    FREE Shipping on eligible items.<Link> See Details</Link>
+                  </strong>
+                </div>
+              </Grid>
             </Grid>
 
             <Grid container spacing={24}>
@@ -411,10 +452,22 @@ function CartComponent(props) {
                   <Grid item lg={4} sm={4} xs={3}>
                     <strong>Shipping</strong>
                   </Grid>
-                  <Grid item lg={3} sm={3} xs={2} className={classes.txtAlnCenter}>
+                  <Grid
+                    item
+                    lg={3}
+                    sm={3}
+                    xs={2}
+                    className={classes.txtAlnCenter}
+                  >
                     <strong>Qty</strong>
                   </Grid>
-                  <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
+                  <Grid
+                    item
+                    lg={2}
+                    sm={2}
+                    xs={2}
+                    style={{ textAlign: "right" }}
+                  >
                     <strong>Item Total</strong>
                   </Grid>
                 </Grid>
@@ -454,7 +507,7 @@ function CartComponent(props) {
                       </Grid>
                       <Grid item lg={6} sm={6} xs={6}>
                         <Typography className={classes.txtaln}>
-                          Subtotal:<strong>${cartItems.totalPrice}</strong>
+                          Subtotal:<strong>${cartItems && cartItems.totalPrice?cartItems.totalPrice:0}</strong>
                         </Typography>
                       </Grid>
                     </Grid>
@@ -530,7 +583,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        ${cartItems.totalPrice}
+                        ${cartItems &&  cartItems.totalPrice?cartItems.totalPrice:0}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -565,7 +618,7 @@ function CartComponent(props) {
                     lg={12}
                     sm={12}
                     xs={12}
-                    className={classes.lineHeight}
+                    className={multiClass}
                   >
                     <Grid container>
                       <Grid item lg={6} sm={6} xs={6}>
@@ -578,7 +631,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        ${cartItems.totalShipping}
+                        ${cartItems && cartItems.totalShipping?cartItems.totalShipping:0}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -601,13 +654,13 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        ${cartItems.totalTax}
+                        ${cartItems && cartItems.totalTax?cartItems.totalTax:0}
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
                 <Divider variant="middle" className={classes.bgcolor} />
-                <Grid item lg={12} sm={12} xs={12}>
+                <Grid item lg={12} sm={12} xs={12} className={classes.setMargin}> 
                   <Grid container className={classes.prilst}>
                     <Grid item lg={6} sm={6} xs={6}>
                       <Typography>
@@ -615,42 +668,8 @@ function CartComponent(props) {
                       </Typography>
                     </Grid>
                     <Grid item lg={6} sm={6} xs={6} className={classes.txtaln}>
-                      ${cartItems.totalPrice + cartItems.totalTax + cartItems.totalShipping}
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item lg={12} sm={12} xs={12} className={classes.marLeft}>
-                  <Grid container>
-                    <Typography>
-                      <Button className={classes.btnTextColor}>
-                        Add A Promotional Code
-                      </Button>
-                    </Typography>
-                    <Grid item lg={12} sm={12} xs={12}>
-                      <Grid
-                        container
-                        specing={8}
-                        className={classes.paddingRight}
-                      >
-                        <Grid item lg={8} sm={8} xs={8}>
-                          <TextField
-                            id="outlined-name"
-                            label=""
-                            className={classes.promoInput}
-                            margin="normal"
-                            variant="outlined"
-                          />
-                        </Grid>
-                        <Grid
-                          item
-                          lg={4}
-                          sm={4}
-                          xs={4}
-                          className={classes.txtaln}
-                        >
-                          <Button className={classes.promoButton}>Apply</Button>
-                        </Grid>
-                      </Grid>
+                      $
+                      {totalPrice()}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -666,11 +685,36 @@ function CartComponent(props) {
                     Shipping and delivery charges are calculated at the lowest
                     rate available. Other methods will be viewable on the next
                     page.
-                    <Button className={classes.btnStyle} onClick={() => checkoutCart()}>CHECKOUT</Button>
+                    <Button
+                      className={classes.btnStyle}
+                      onClick={() => checkoutCart()}
+                      disabled={!cartItems.orderItems?true:false}
+                    >
+                      CHECKOUT
+                    </Button>
                   </div>
 
                   <div className={classes.yourOrdTxt}>
-                    <Button className={classes.btnGuestCheckout} onClick={() => history.push("/Checkout")}><strong>CHECKOUT AS A GUEST</strong></Button>
+                    <Button
+                      className={classes.btnGuestCheckout}
+                      onClick={() => history.push("/Checkout")}
+                      disabled={!cartItems.orderItems?true:false}
+                    >
+                      <strong>CHECKOUT AS A GUEST</strong>
+                    </Button>
+                  </div>
+
+                  <div className={classes.yourOrdTxt}>
+                    <Checkout
+                      name={"Demo store checkout"}
+                      description={"DEMO store"}
+                      cartItems={cartItems}
+                      amount={
+                        cartItems.totalPrice +
+                        cartItems.totalTax +
+                        cartItems.totalShipping
+                      }
+                    />
                   </div>
 
                   <div className={classes.txtAlnCenter}>--or--</div>
@@ -716,10 +760,3 @@ CartComponent.propTypes = {
 };
 
 export default withRouter(withStyles(styles)(CartComponent));
-
-
-
-
-
-
-
