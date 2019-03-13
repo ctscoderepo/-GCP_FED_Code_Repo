@@ -11,6 +11,7 @@ import Divider from "@material-ui/core/Divider";
 import c1 from "../Home/images/f1.jpeg";
 import Spinner from "../helpers/Spinner";
 import "./index.css";
+import Checkout from '../StripeCheckout/Checkout';
 
 const styles = theme => ({
   root: {
@@ -673,6 +674,12 @@ function CartComponent(props) {
                     <Button className={classes.btnGuestCheckout} onClick={() => history.push("/Checkout")}><strong>CHECKOUT AS A GUEST</strong></Button>
                   </div>
 
+                  <div className={classes.yourOrdTxt}>
+
+                  <Checkout name={'Demo store checkout'}
+                    description={'DEMO store'}
+                    amount={cartItems.totalPrice + cartItems.totalTax + cartItems.totalShipping} />
+                  </div>
                   <div className={classes.txtAlnCenter}>--or--</div>
                   <div className={classes.txtAlnCenter}>
                     <Link>Check out with</Link>
