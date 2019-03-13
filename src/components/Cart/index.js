@@ -707,7 +707,7 @@ function CartComponent(props) {
                   <div className={classes.yourOrdTxt}>
                     <Checkout
                       name={"Demo store checkout"}
-                      description={"DEMO store"}
+                      description={`DEMO store order - ${orderId}`}
                       cartItems={cartItems}
                       amount={
                         cartItems.totalPrice +
