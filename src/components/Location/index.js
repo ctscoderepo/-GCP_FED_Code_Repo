@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
@@ -7,7 +8,10 @@ const styles = theme => ({
     display: "flex",
     [theme.breakpoints.down("sm")]: {
       display: "none"
-    }
+    },
+      "&:hover": {
+      cursor: "pointer"
+    },
   },
   location: {
     flexDirection: "row",
@@ -24,9 +28,16 @@ const styles = theme => ({
 });
 
 const Location = props => {
-  const { classes } = props;
+    
+    const { classes, history } = props;
+    
+    const clickhere=()=>{
+        history.push("/FindStore");
+    }
+    
+  
   return (
-    <div className={classes.locationContainer}>
+    <div className={classes.locationContainer} onClick={()=>clickhere()}>
       <i className={`material-icons ${classes.location}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,4 +56,4 @@ const Location = props => {
   );
 };
 
-export default withStyles(styles)(Location);
+export default withRouter(withStyles(styles)(Location));

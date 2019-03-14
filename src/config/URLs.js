@@ -8,6 +8,7 @@ export const URLList = {
     Checkout_IP_Old: "35.202.122.135",
     LoginAndRegistration_IP_Old:"104.198.155.47",
     LoginAndRegistration_IP_New: "104.197.18.180",
+    StoreFinder_IP:"104.154.36.71",
     ShoppingCartAPI:"/api/shoppingcart/",
     SearchAPI:"/keywordsearch?keyword=",
     ProdcutDetailsAPI:"/products/",
@@ -15,6 +16,9 @@ export const URLList = {
     OrderAPI:"/api/order/",
     LoginAPI:"/api/login-service/",
     RegistrationAPI:"/api/register-user/user",
+    getStoreFinderUsingAddress:function(zip, radius){
+        return this.HTTP + this.StoreFinder_IP + "/storelocator/getstoredetails?address=" + zip + "&radius=" + radius;
+    },
     getSearchURL: function(){
         return this.HTTP + this.Search_IP + this.SearchAPI;
     },

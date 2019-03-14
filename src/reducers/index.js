@@ -7,6 +7,7 @@ import login from './Login';
 import register from './Register';
 import cart from './Cart';
 import checkout from './Checkout';
+import storeFinder from './StoreFinder';
 
 const appReducer = combineReducers({
   header,
@@ -16,7 +17,8 @@ const appReducer = combineReducers({
   login,
   register,
   cart,
-  checkout   
+  checkout,
+  storeFinder   
 });
 
 const rootReducer = (state, action) => {

@@ -7,6 +7,7 @@ import ProductDetails from "../containers/ProductDetails";
 import Checkout from "../containers/Checkout";
 import Search from "../containers/Search";
 import SignIn from "../containers/SignIn";
+import StoreFinder from "../containers/StoreFinder";
 
 export default [
   { path: "/", component: Home, exact: true, id: 1 },
@@ -23,5 +24,6 @@ export default [
   { path: "/store/product/:item", component: ProductDetails, id: 7 },
   { path: "/checkout", component: Checkout, id: 8 },
   { path: "/search", component: Search, id: 9 },
-  { path: "/signIn", component: SignIn, id: 10 }
+  { path: "/signIn", component: SignIn, id: 10 },
+  { path: "/findStore", component: StoreFinder, id: 11 }
 ];
