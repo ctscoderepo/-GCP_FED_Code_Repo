@@ -334,7 +334,7 @@ function SearchAppBar(props) {
     <div className="customContainer">
       <div className="Header">
         <AppBar position="fixed" className={classes.appBar}>
-          <Advertisement />
+          {/* <Advertisement /> */}
           <Toolbar className={classes.toolBar}>
             <IconButton
               className={classes.menuButton}

@@ -169,30 +169,18 @@ const StoreFinderComponent = props => {
     }
     
 
-        
+    console.log("StoreList: " , storeList);
     
-    var stores = [
-		{   id:1,
-			name: 'Store 1',
-			location:"4174 Westport Rd, Louisville, KY 40207",
-			hours: '8AM to 10PM'
-		},
-		{
-            id:2,
-			name: 'Store 2',
-			location:"12535 Shelbyville Rd, Louisville, KY 40243",
-			hours: '9AM to 9PM'
-		}
-	];
+    var stores = [{"lat":38.2580403,"lng":-85.6427234,"address":"4174 Westport Rd, Louisville, KY 40207","store_info":"8:00 am - 11:00 pm","id":"1"},{"lat":38.2352777,"lng":-85.5723084,"address":"12535 Shelbyville Rd, Louisville, KY 40243","store_info":"8:00 am - 10:00 pm","id":"11"},{"lat":38.2352777,"lng":-85.5723084,"address":"14041 Shelbyville Rd, Louisville, KY 40245","store_info":"8:00 am - 10:00 pm","id":"12"},{"lat":38.2351533,"lng":-85.5723084,"address":"221 S Hurstbourne Pkwy, Louisville, KY 40222","store_info":"8:00 am - 10:00 pm","id":"9"},{"lat":38.2524155,"lng":-85.6804019,"address":"4123 Shelbyville Rd, Louisville, KY 40207","store_info":"8:00 am - 10:00 pm","id":"10"},{"lat":38.2972954,"lng":-85.5577398,"address":"4101 Towne Center Dr, Louisville, KY 40241","store_info":"8:00 am - 11:00 pm","id":"2"},{"lat":38.248999,"lng":-85.531099,"address":"12101 SHELBYVILLE RD, MIDDLETOWN, KY 40243","store_info":"10:00 am - 10:00 pm","id":"7"}];
     
     const storeDetails=stores.map((item,index) => (<div className={classes.storesDiv} key={item.name}>
            <div ><Avatar className={classes.avatarStyle} >{item.id}</Avatar>
               <div style={{marginLeft:"40px"}}><Typography >{item.name}</Typography></div>
             </div>
             <div className={classes.locationDiv}><strong className={classes.labelStyle}>Location :</strong>
-            <Typography style={{fontSize:"13px"}}>{item.location} </Typography></div>
+            <Typography style={{fontSize:"13px"}}>{item.address} </Typography></div>
             <div className={classes.hoursDiv}><strong className={classes.labelStyle}>Hours :</strong>
-            <Typography style={{fontSize:"13px"}}>{item.hours}</Typography></div>
+            <Typography style={{fontSize:"13px"}}>{item.store_info}</Typography></div>
            </div>));
     
     return (

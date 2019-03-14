@@ -19,7 +19,11 @@ const StoreFinder = ({
     setHeaderStatus(true);
     setFooterStatus(false);
     setNavBarStatus(false);
-    storeFinder();
+    let defaultStoreData = {
+        address: "40222",
+        radius:"5"
+    }
+    storeFinder(defaultStoreData);
     return () => {
       setNavBarStatus(true);
     };
