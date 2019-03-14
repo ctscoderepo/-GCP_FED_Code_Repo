@@ -10,7 +10,7 @@ export const setNavBarStatus = value => {
   return { type: "SET_NAVBAR_STATUS", payload: value };
 };
 
-export const setCartItems = items => {
+export const setCartItemsOnHeader = items => {
   return {type : "SET_CART_ITEMS", payload: items}
 }
 

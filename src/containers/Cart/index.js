@@ -5,25 +5,26 @@ import {
   setHeaderStatus,
   setFooterStatus,
   setNavBarStatus,
-  setCartItems
+  setCartItemsOnHeader
 } from "../../actions/Header";
+import {setCartItemsOnCheckout} from "../../actions/Checkout"
 import { updateCart, removeItemsFromCart, getCart } from "../../actions/Cart";
-import { checkout } from "../../actions/Checkout";
 
 const Cart = ({
   setHeaderStatus,
   setFooterStatus,
   setNavBarStatus,
-  setCartItems,
+  setCartItemsOnHeader,
+  setCartItemsOnCheckout,
   cartItems,
   updateCart,
   removeItemsFromCart,
   getCart,
-  checkout,
   isLoading
 }) => {
   useEffect(() => {
-    setCartItems(cartItems.orderItems);
+    setCartItemsOnHeader(cartItems.orderItems);
+    setCartItemsOnCheckout(cartItems)
     setHeaderStatus(true);
     setFooterStatus(true);
     setNavBarStatus(false);
@@ -40,7 +41,6 @@ const Cart = ({
         updateCart={updateCart}
         removeItemsFromCart={removeItemsFromCart}
         getCart={getCart}
-        checkout={checkout}
         isLoading={isLoading}
       />
     </div>
@@ -53,10 +53,10 @@ export default connect(
     setHeaderStatus,
     setFooterStatus,
     setNavBarStatus,
-    setCartItems,
+    setCartItemsOnHeader,
+    setCartItemsOnCheckout,
     updateCart,
     removeItemsFromCart,
-    getCart,
-    checkout
+    getCart
   }
 )(Cart);

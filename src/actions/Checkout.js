@@ -8,3 +8,7 @@ export const checkout = checkoutDetails => dispatch => {
     .then(res => dispatch({ type: "CHECKOUT", payload: res.data }))
     .catch(err => err);
 };
+
+export const setCartItemsOnCheckout = (items) =>{
+  return ({type : "SET_CART_ITEMS_ON_CHECKOUT", payload: items});
+}

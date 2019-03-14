@@ -228,11 +228,13 @@ const styles = theme => ({
     color: "black",
     fontSize: "12px",
     margin: "-6px 5px 0px 0px",
+    textAlign:"center", 
     [theme.breakpoints.down("sm")]: {
       display: "block",
       fontSize: "8px",
       marginLeft: "5px",
-      marginTop: "-3px"
+      marginTop: "-3px",
+      textAlign:"center"
     }
   },
   svgArrowDown: {

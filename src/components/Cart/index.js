@@ -42,9 +42,6 @@ const styles = theme => ({
   lineHeight: {
     height: "35px"
   },
-  setMargin:{
-    marginBottom: "20px"
-  },
   yourOrdTxt: {
     fontSize: "11px",
     padding: "0px 15px 0px 15px"
@@ -108,8 +105,11 @@ const styles = theme => ({
     height: "30px"
   },
 
-  marTop: {
-    marginTop: "15px"
+  marTopDest: {
+    marginTop: "15px",
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
   },
   bgcolor: {
     backgroundColor: "#bfbfbf"
@@ -183,7 +183,8 @@ const styles = theme => ({
       fontSize: "10px",
       marginTop: "10px",
       marginBottom: "10px",
-      padding: "3px"
+      padding: "3px",
+      whiteSpace: "nowrap"
     }
   },
   cartLabel: {
@@ -259,14 +260,45 @@ const styles = theme => ({
   },
   removeItem: {
     padding: "0 10px",
-    color: "#33adff",
+    color: "#005580",
     "&:hover": {
       cursor: "pointer"
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "14px"
     }
   },
   spinnerDiv: {
     textAlign: "center",
     marginTop: "5%"
+  },
+  imageWrapperMob: {
+    height: "110px",
+    width: "100%",
+    display: "block"
+  },
+  mobileView: {
+    [theme.breakpoints.down("lg")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "block",
+      marginTop: "-50px"
+    }
+  },
+
+  deskTabView: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
+  },
+  dividerDisplay: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
   }
 });
 
@@ -372,12 +404,125 @@ function CartComponent(props) {
     ))
   );
 
+  const cartListMobile = !cartItems.orderItems ? (
+    isLoading ? (
+      <div className={classes.spinnerDiv}>
+        <Spinner />
+      </div>
+    ) : (
+      <div className={classes.spinnerDiv}>Your cart is empty</div>
+    )
+  ) : (
+    cartItems.orderItems.map(item => (
+      <Grid container className="cartContainer" key={item.id}>
+        <Grid item lg={12} sm={12} xs={12}>
+          <Grid container>
+            <Grid item xs={4}>
+              <div className="imageWrapper1">
+                <img src={item.imageUrl} alt="mac book prop" />
+              </div>
+            </Grid>
+            <Grid item xs={8}>
+              <div style={{ paddingLeft: "10px", fontSize: "13px" }}>
+                {item.productDesciption}
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item lg={12} sm={12} xs={12}>
+          <Grid container>
+            <Grid item xs={5}>
+              <Typography style={{ marginTop: "10px" }}>
+                <strong>Shipping</strong>
+              </Typography>
+              <div style={{ fontSize: "13px" }}>{item.fullfillmentType}</div>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography style={{ marginTop: "10px", textAlign: "center" }}>
+                <strong>Quantity</strong>
+              </Typography>
+              <div style={{ textAlign: "center", paddingTop: "5px" }}>
+                <button
+                  className="qtyBtn"
+                  onClick={
+                    item.quantity > 1
+                      ? () => removeQuantity([item.id, item.quantity])
+                      : null
+                  }
+                >
+                  -
+                </button>
+                <span className="qty">{item.quantity}</span>
+                <button
+                  className="qtyBtn"
+                  onClick={() => addQuantity([item.id, item.quantity])}
+                >
+                  +
+                </button>
+              </div>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography
+                style={{
+                  marginTop: "10px",
+                  textAlign: "right",
+                  paddingRight: "10px"
+                }}
+              >
+                <strong>Item Total</strong>
+              </Typography>
+              <div
+                style={{
+                  textAlign: "right",
+                  paddingTop: "10px",
+                  paddingRight: "10px"
+                }}
+              >
+                ${item.price}
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          lg={12}
+          sm={12}
+          xs={12}
+          style={{
+            textAlign: "right",
+            marginTop: "15px",
+            marginBottom: "10px"
+          }}
+        >
+          <Link
+            className={classes.removeItem}
+            style={{ borderRight: "2px solid #bfbfbf" }}
+          >
+            Save for later
+          </Link>
+          <Link
+            onClick={() => removeItems(item.id)}
+            className={classes.removeItem}
+          >
+            Remove
+          </Link>
+          <Divider
+            variant="left"
+            style={{
+              backgroundColor: "#bfbfbf",
+              width: "100%",
+              marginTop: "10px"
+            }}
+          />
+        </Grid>
+      </Grid>
+    ))
+  );
+
   const totalPrice = () => {
-    return (cartItems && cartItems.totalPrice) ?
-    ( cartItems.totalPrice +
-                        cartItems.totalTax +
-                        cartItems.totalShipping ) : 0;
-  }
+    return cartItems && cartItems.totalPrice
+      ? cartItems.totalPrice + cartItems.totalTax + cartItems.totalShipping
+      : 0;
+  };
 
   const removeItems = value => {
     removeItemsFromCart(value);
@@ -405,16 +550,7 @@ function CartComponent(props) {
     }
   };
 
-  const checkoutCart = () => {
-    props.checkout({
-      orderId: orderId,
-      memberId: memberId,
-      addressId: addressId
-    });
-    history.push("/Checkout");
-  };
-
-  const multiClass =  [classes.lineHeight, classes.setMargin].join(' ');
+  const multiClass = [classes.lineHeight, classes.setMargin].join(" ");
 
   return (
     <div className="cartComponent">
@@ -445,7 +581,7 @@ function CartComponent(props) {
 
             <Grid container spacing={24}>
               <Grid item lg={12} sm={12} xs={12} className={classes.marLeft}>
-                <Grid container className={classes.marTop}>
+                <Grid container className={classes.marTopDest}>
                   <Grid item lg={3} sm={3} xs={5}>
                     <strong>Item</strong>
                   </Grid>
@@ -472,11 +608,21 @@ function CartComponent(props) {
                   </Grid>
                 </Grid>
                 <Divider
+                  className={classes.dividerDisplay}
                   style={{ backgroundColor: "#bfbfbf", marginTop: "10px" }}
                 />
               </Grid>
-              <Grid item lg={12} sm={12} xs={12}>
+              <Grid
+                item
+                lg={12}
+                sm={12}
+                xs={12}
+                className={classes.deskTabView}
+              >
                 {cartList}
+              </Grid>
+              <Grid item lg={12} sm={12} xs={12} className={classes.mobileView}>
+                {cartListMobile}
               </Grid>
               <Grid item lg={12} sm={12} xs={12}>
                 <Grid container className={classes.subHide}>
@@ -491,8 +637,6 @@ function CartComponent(props) {
                         {" "}
                         Online Customer Support:1-800-000-0000
                       </Typography>
-                      <Typography>Major Appliances:1-000-000-0000 </Typography>
-                      <Typography>Custom Blinds:1-800-000-0000 </Typography>
                       <Typography>
                         Call 7 days a week - 6 a.m. to 2 a.m. EST
                       </Typography>
@@ -507,7 +651,13 @@ function CartComponent(props) {
                       </Grid>
                       <Grid item lg={6} sm={6} xs={6}>
                         <Typography className={classes.txtaln}>
-                          Subtotal:<strong>${cartItems && cartItems.totalPrice?cartItems.totalPrice:0}</strong>
+                          Subtotal:
+                          <strong>
+                            $
+                            {cartItems && cartItems.totalPrice
+                              ? cartItems.totalPrice
+                              : 0}
+                          </strong>
                         </Typography>
                       </Grid>
                     </Grid>
@@ -583,7 +733,10 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        ${cartItems &&  cartItems.totalPrice?cartItems.totalPrice:0}
+                        $
+                        {cartItems && cartItems.totalPrice
+                          ? cartItems.totalPrice
+                          : 0}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -613,13 +766,7 @@ function CartComponent(props) {
                     </Grid>
                   </Grid>
 
-                  <Grid
-                    item
-                    lg={12}
-                    sm={12}
-                    xs={12}
-                    className={multiClass}
-                  >
+                  <Grid item lg={12} sm={12} xs={12} className={multiClass}>
                     <Grid container>
                       <Grid item lg={6} sm={6} xs={6}>
                         <Typography>Estimated Shipping*</Typography>
@@ -631,7 +778,10 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        ${cartItems && cartItems.totalShipping?cartItems.totalShipping:0}
+                        $
+                        {cartItems && cartItems.totalShipping
+                          ? cartItems.totalShipping
+                          : 0}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -654,13 +804,22 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        ${cartItems && cartItems.totalTax?cartItems.totalTax:0}
+                        $
+                        {cartItems && cartItems.totalTax
+                          ? cartItems.totalTax
+                          : 0}
                       </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
                 <Divider variant="middle" className={classes.bgcolor} />
-                <Grid item lg={12} sm={12} xs={12} className={classes.setMargin}> 
+                <Grid
+                  item
+                  lg={12}
+                  sm={12}
+                  xs={12}
+                  className={classes.setMargin}
+                >
                   <Grid container className={classes.prilst}>
                     <Grid item lg={6} sm={6} xs={6}>
                       <Typography>
@@ -668,46 +827,29 @@ function CartComponent(props) {
                       </Typography>
                     </Grid>
                     <Grid item lg={6} sm={6} xs={6} className={classes.txtaln}>
-                      $
-                      {totalPrice()}
+                      ${totalPrice()}
                     </Grid>
                   </Grid>
                 </Grid>
 
-                <Grid
-                  item
-                  lg={12}
-                  sm={12}
-                  xs={12}
-                  style={{ marginTop: "-20px" }}
-                >
+                <Grid item lg={12} sm={12} xs={12}>
                   <div className={classes.yourOrdTxt}>
                     Shipping and delivery charges are calculated at the lowest
                     rate available. Other methods will be viewable on the next
                     page.
                     <Button
                       className={classes.btnStyle}
-                      onClick={() => checkoutCart()}
-                      disabled={!cartItems.orderItems?true:false}
+                      onClick={() => history.push("/Checkout")}
+                      disabled={!cartItems.orderItems ? true : false}
                     >
                       CHECKOUT
                     </Button>
                   </div>
 
                   <div className={classes.yourOrdTxt}>
-                    <Button
-                      className={classes.btnGuestCheckout}
-                      onClick={() => history.push("/Checkout")}
-                      disabled={!cartItems.orderItems?true:false}
-                    >
-                      <strong>CHECKOUT AS A GUEST</strong>
-                    </Button>
-                  </div>
-
-                  <div className={classes.yourOrdTxt}>
                     <Checkout
                       name={"Demo store checkout"}
-                      description={"DEMO store"}
+                      description={`DEMO store order - ${orderId}`}
                       cartItems={cartItems}
                       amount={
                         cartItems.totalPrice +
