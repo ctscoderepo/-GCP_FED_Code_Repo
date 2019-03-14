@@ -1,8 +1,10 @@
 import {post} from './BaseApi';
+import {URLList} from "../config/URLs";
 
 export const login = details => dispatch => {
+  let url = URLList.getLoginURL();
   return post(
-    "http://104.198.155.47/api/login-service",
+    url,
     details
   ).then(res=> dispatch({ type: "LOGIN", payload: res.data }))
    .catch(err=> console.log("Login Error" , err))

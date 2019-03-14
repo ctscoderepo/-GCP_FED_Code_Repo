@@ -1,8 +1,10 @@
 import { post, deleteCall, get } from './BaseApi';
+import {URLList} from "../config/URLs";
 
 export const addToCart = addToCartRequest => dispatch => {
   dispatch({type:"ISLOADING"});
-  return post("http://35.202.122.135/api/shoppingcart/add", addToCartRequest)
+  let url =  URLList.getAddToCartURL();
+  return post(url, addToCartRequest)
     .then(res => dispatch({ type: "ADDTOCART", payload: res.data }))
     .catch(err => console.log("Error from addToCart", err))
 
@@ -10,20 +12,22 @@ export const addToCart = addToCartRequest => dispatch => {
 
 
 export const updateCart = quantityUpdate => dispatch => {
-  return post("http://35.202.122.135/api/shoppingcart/update", quantityUpdate)
+  let url =  URLList.getUpdateCartURL();
+  return post(url, quantityUpdate)
     .then(res => dispatch({ type: "UPDATECART", payload: res.data }))
     .catch(err => err)
 };
 
-export const removeItemsFromCart = removeItems => dispatch => {
-  console.log(removeItems);
-  return deleteCall(`http://35.202.122.135/api/shoppingcart/delete/${removeItems}`)
+export const removeItemsFromCart = itemId => dispatch => {
+  let url =  URLList.getDeleteCartURL()+itemId;
+  return deleteCall(url)
     .then(res => dispatch({ type: "REMOVEITEMS", payload: res.data }))
     .catch(err => err)
 };
 
 export const getCart = cartData => dispatch => {
-  return get("http://35.202.122.135/api/order/" + cartData.memberId)
+  let url =  URLList.getCart()+ cartData.memberId;
+  return get(url)
     .then(res => dispatch({ type: "GETCART", payload: res.data }))
     .catch(err => err);
 }

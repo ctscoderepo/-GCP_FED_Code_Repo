@@ -1,8 +1,10 @@
 import { post, get } from "./BaseApi";
+import {URLList} from "../config/URLs";
 
 export const checkout = checkoutDetails => dispatch => {
+  let url = URLList.getCheckoutURL();
   return post(
-    "http://35.202.122.135/api/shoppingcart/checkout",
+    url,
     checkoutDetails
   )
     .then(res => dispatch({ type: "CHECKOUT", payload: res.data }))

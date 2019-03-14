@@ -1,8 +1,9 @@
 import {post} from './BaseApi';
+import {URLList} from "../config/URLs";
 
 export const registration = userDetails => dispatch => { 
-	console.log(userDetails);
-	return post("http://104.198.155.47/api/register-user/user",  userDetails )
+	let url = URLList.getRegistrationURL();
+	return post(url,  userDetails )
 		.then(res => dispatch({ type: "REGISTRATION", payload: res.data }))
 		.catch(err => console.log("Error from Registration", err))
 };

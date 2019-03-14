@@ -1,9 +1,10 @@
 import {get} from './BaseApi';
+import {URLList} from "../config/URLs";
 
 export const getProducts = type => async dispatch => {
     
      dispatch({type:"ISLOADING"});
-  let url = "http://104.154.92.99/search?category1=";
+  let url = URLList.getProductsURL();
   if (type.subCategory) {
     if(type.subCategory==="All")
         {              
