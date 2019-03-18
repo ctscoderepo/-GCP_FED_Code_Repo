@@ -7,12 +7,13 @@ import {
   setNavBarStatus
 } from "../../actions/Header";
 import { connect } from "react-redux";
-import { storeFinder } from "../../actions/StoreFinder";
+import { storeFinder,getStoresByLatLng } from "../../actions/StoreFinder";
 
 const StoreFinder = ({
   setHeaderStatus,
   setFooterStatus,
   storeFinder,
+  getStoresByLatLng,
   storeList
 }) => {
   useEffect(() => {
@@ -28,11 +29,13 @@ const StoreFinder = ({
       setNavBarStatus(true);
     };
   }, []);
-  return <FindStoreComponent findStores={storeFinder} storeList={storeList} />;
+    
+    
+  return <FindStoreComponent findStores={storeFinder} storeList={storeList} getStoresByLatLng={getStoresByLatLng} />;
 };
 
 export default connect(
     ({ storeFinder }) => ({ storeList:storeFinder.storeList}),
-  { setHeaderStatus, setFooterStatus, storeFinder }
+  { setHeaderStatus, setFooterStatus, storeFinder,getStoresByLatLng }
   )(withRouter(StoreFinder));
   

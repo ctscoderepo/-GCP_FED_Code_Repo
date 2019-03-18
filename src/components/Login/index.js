@@ -116,7 +116,8 @@ function LoginComponent(props) {
       const userId=userData && userData.userDetails && userData.userDetails.id?userData.userDetails.id:""; 
       const userAddressId=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.id:"";
       
-      
+      let loggedInUserData=JSON.stringify(userData);
+      localStorage.setItem("loggedInUserData",loggedInUserData);
       
       let userLogInfo = {
       userLogedId:userId,

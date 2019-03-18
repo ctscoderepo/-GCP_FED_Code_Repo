@@ -79,7 +79,10 @@ const styles = theme => ({
       backgroundColor: "transparent",
       borderRadius: 0,
       left: "0",
-      minWidth: "10px"
+      minWidth: "10px",
+    },
+      [theme.breakpoints.down("xs")]: {
+      marginLeft:"-48px"    
     }
   },
   cameraIcon: {
@@ -113,6 +116,7 @@ const styles = theme => ({
     width: "100%",
     backgroundColor: "#fff",
     border: "1px solid rgba(0,0,0,0.1)",
+     
     [theme.breakpoints.up("md")]: {
       width: 500
     },
@@ -126,6 +130,10 @@ const styles = theme => ({
       fontSize: "12px",
       paddingLeft: theme.spacing.unit * 4,
       width: "100%"
+    },
+    [theme.breakpoints.down("xs")]: {
+       marginLeft:"-40px",
+        paddingLeft: theme.spacing.unit*3,
     }
   },
   appBar: {
@@ -164,10 +172,17 @@ const styles = theme => ({
     height: "60px",
     position: "relative",
     top: "4px",
+    
     [theme.breakpoints.down("sm")]: {
       width: "40px",
       height: "40px"
-    }
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "40px",
+      height: "40px",
+      marginRight:"-35px",
+      marginLeft:"-10px",
+    },
   },
   toolBar: {
     minHeight: "70px",
@@ -215,7 +230,7 @@ const styles = theme => ({
   cameraIconMobile: {
     display: "none",
     [theme.breakpoints.down("xs")]: {
-      display: "flex"
+      display: "flex",
     }
   },
   iconStyles: {

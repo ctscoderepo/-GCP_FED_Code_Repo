@@ -17,6 +17,9 @@ export const URLList = {
     OrderAPI:"/api/order/",
     LoginAPI:"/api/login-service/",
     RegistrationAPI:"/api/register-user/user",
+    getStoreFinderUsingLatLng:function(lat,lng){
+        return this.HTTP + this.StoreFinder_IP_New + "/storelocator/getstoresforlatlong?lat="+ lat + "&lng=" + lng;
+      },
     getStoreFinderUsingAddress:function(zip, radius){
         return this.HTTP + this.StoreFinder_IP_New + "/storelocator/getstoredetails?address=" + zip + "&radius=" + radius;
     },

@@ -13,10 +13,13 @@ import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react';
 const styles = theme => ({
     root: {
     flexGrow: 1,
-    marginTop: "150px",
+    marginTop: "130px",
         [theme.breakpoints.down("sm")]: {
-       marginTop: "90px",
-    }
+       marginTop: "60px",
+    },
+    [theme.breakpoints.down("xs")]: {
+       marginTop: "60px",
+    }    
   },
     heading:{
         fontWeight:"bold",
@@ -80,7 +83,7 @@ const styles = theme => ({
     }
   },
   storecontainer:{
-      backgroundColor:"#f2f2f2"
+      backgroundColor:"#f2f2f2",
   },
  marginTop30px:{
      marginTop:"30px"
@@ -95,7 +98,8 @@ const styles = theme => ({
      marginTop:"5px"
  },
     searchStoreGrid:{
-        padding:"10px", marginTop:"20px"
+        padding:"10px", 
+        marginTop:"10px"
     },
     searchStoreLblGrid:{
         borderRight:"2px Solid gray",
@@ -146,11 +150,33 @@ const styles = theme => ({
         width:"98%", 
         height:"300px",
         margin:"10px", 
-        border:"1px solid #bfbfbf"}
+        border:"1px solid #bfbfbf"
+    },
+    deskTopTabView:{
+      [theme.breakpoints.down("xs")]: {
+      display:"none"
+      }  
+    },
+    mobileViewXS:{
+      [theme.breakpoints.down("lg")]: {
+      display:"none"
+      },
+      [theme.breakpoints.down("sm")]: {
+      display:"none"
+      },
+        [theme.breakpoints.down("xs")]: {
+      display:"block"
+      }
+    }
 });
 
 const StoreFinderComponent = props => {
-  const { classes, history,findStores, storeList } = props;
+  const { classes, history,findStores,getStoresByLatLng, storeList } = props;
+    
+     console.log("From store component: " , storeList);
+    
+    
+    
     
    const [address,setAddress]=useState('');
     const getAddress=(value)=>{
@@ -168,12 +194,48 @@ const StoreFinderComponent = props => {
         });
     }
     
+    
+const getStoresForLatLong=()=> {
+const google=window.google;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition); 
+  } 
+    else{
+        return "Geolocation is not supported by this browser.";
+    }
+}
+const showPosition=(position)=>{
+	const lat= position.coords.latitude;
+    const lng= position.coords.longitude;
+    getStoresByLatLng({
+        "lat":lat,
+        "lng":lng
+    });
+}
 
-    console.log("StoreList: " , storeList);
+    const [showingInfoWindow,setShowingInfoWindow]=useState(false);
+    const [selectedPlace,setSelectedPlace]=useState({});
+    const [activeMarker,setActiveMarker]=useState({});
     
-    var stores = [{"lat":38.2580403,"lng":-85.6427234,"address":"4174 Westport Rd, Louisville, KY 40207","store_info":"8:00 am - 11:00 pm","id":"1"},{"lat":38.2352777,"lng":-85.5723084,"address":"12535 Shelbyville Rd, Louisville, KY 40243","store_info":"8:00 am - 10:00 pm","id":"11"},{"lat":38.2352777,"lng":-85.5723084,"address":"14041 Shelbyville Rd, Louisville, KY 40245","store_info":"8:00 am - 10:00 pm","id":"12"},{"lat":38.2351533,"lng":-85.5723084,"address":"221 S Hurstbourne Pkwy, Louisville, KY 40222","store_info":"8:00 am - 10:00 pm","id":"9"},{"lat":38.2524155,"lng":-85.6804019,"address":"4123 Shelbyville Rd, Louisville, KY 40207","store_info":"8:00 am - 10:00 pm","id":"10"},{"lat":38.2972954,"lng":-85.5577398,"address":"4101 Towne Center Dr, Louisville, KY 40241","store_info":"8:00 am - 11:00 pm","id":"2"},{"lat":38.248999,"lng":-85.531099,"address":"12101 SHELBYVILLE RD, MIDDLETOWN, KY 40243","store_info":"10:00 am - 10:00 pm","id":"7"}];
+    const onMarkerClick = (props, marker, e) => {
+        setSelectedPlace(props);
+        setActiveMarker(marker);
+        setShowingInfoWindow(true);
+    }
+   
+    const onMapClick = (props) => {
+    if (showingInfoWindow) {
+      setActiveMarker(null);
+      setShowingInfoWindow(false);
+    }
+  }
+
+   const googleMarker=storeList?storeList.map(item=>(<Marker key={item.id} onClick = {onMarkerClick} 
+                                                   position = {{ lat:item.lat, lng:item.lng }} />)):"";
+
+   const infoWindows=storeList?storeList.map(item=>(<InfoWindow  marker = {activeMarker } visible = {showingInfoWindow } ><Typography key={item.id}>{item.address}</Typography></InfoWindow>)):"";
     
-    const storeDetails=stores.map((item,index) => (<div className={classes.storesDiv} key={item.name}>
+    const storeDetails=storeList?storeList.map((item,index) => (<div className={classes.storesDiv} key={item.name}>
            <div ><Avatar className={classes.avatarStyle} >{item.id}</Avatar>
               <div style={{marginLeft:"40px"}}><Typography >{item.name}</Typography></div>
             </div>
@@ -181,8 +243,8 @@ const StoreFinderComponent = props => {
             <Typography style={{fontSize:"13px"}}>{item.address} </Typography></div>
             <div className={classes.hoursDiv}><strong className={classes.labelStyle}>Hours :</strong>
             <Typography style={{fontSize:"13px"}}>{item.store_info}</Typography></div>
-           </div>));
-    
+           </div>)):<div>No stores for this address</div>;
+     
     return (
     <>
     <div className={classes.root}>        
@@ -198,7 +260,7 @@ const StoreFinderComponent = props => {
         <div style={{fontSize:"14px"}}> Find a store</div>
         </Grid>
         <Grid item lg={3} sm={5} xs={7} >
-        <div><Button className={classes.nearMeBtn} >Near Me</Button></div>
+        <div><Button className={classes.nearMeBtn} onClick={getStoresForLatLong} >Near Me</Button></div>
         </Grid>
         </Grid>
            
@@ -254,23 +316,38 @@ const StoreFinderComponent = props => {
         
         <div>
         <Grid container style={{paddingTop:"10px"}}>
-        <Grid item  lg={4} sm={4} xs={12}>
-           <div>{storeDetails}</div>        
+        
+       <Grid item  lg={4} sm={4} xs={12} className={classes.deskTopTabView}>
+           {storeDetails}        
        </Grid>
-        <Grid item  lg={8} sm={8} xs={12} >
+       <Grid item  lg={8} sm={8} xs={12} className={classes.deskTopTabView}>
            <div className={classes.mapDiv} id="map">
-              <Map style={{width:"59%", height:"400px"}}
-        item
-        xs = { 12 }
-        google = {props.google }
-        zoom = { 14 }
-        initialCenter = {{ lat: 38.2496307, lng: -85.5769251 }} >
-          <Marker position = {{ lat: 38.2580403, lng: -85.6427234 }} />
-           <Marker position = {{ lat: 38.2352777, lng: -85.5723084 }}  />
+              <Map item  xs = { 12 } style={{width:"59%", height:"400px"}}
+                google = {props.google }
+                zoom = { 14 }
+                initialCenter = {{ lat: 38.2496307, lng: -85.5769251 }}
+                onClick = {onMapClick }
+                >
+                {googleMarker}                
           </Map>
-           </div> 
-            
+        </div> 
         </Grid>
+       <Grid item  lg={8} sm={8} xs={12} className={classes.mobileViewXS}>
+           <div className={classes.mapDiv} id="map">
+              <Map item  xs = { 12 } style={{width:"95%", height:"300px"}}
+                google = {props.google }
+                zoom = { 14 }
+                initialCenter = {{ lat: 38.2496307, lng: -85.5769251 }}
+                onClick = {onMapClick }
+                >
+                {googleMarker}                
+          </Map>
+        </div> 
+        </Grid>
+
+      <Grid item  lg={4} sm={4} xs={12} className={classes.mobileViewXS}>
+           {storeDetails}        
+       </Grid>
         </Grid>
         </div>
     </div>

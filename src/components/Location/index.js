@@ -1,21 +1,23 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
+import Link from "@material-ui/core/Link";
 
 const styles = theme => ({
   locationContainer: {
     margin: "0 40px 0 20px",
     display: "flex",
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    },
+    
       "&:hover": {
       cursor: "pointer"
     },
   },
   location: {
     flexDirection: "row",
-    fill: "#000"
+    fill: "#000",
+    [theme.breakpoints.down("xs")]: {
+      marginTop:"5px"
+    }, 
   },
   shopText: {
     color: "#0084CD",
@@ -23,8 +25,14 @@ const styles = theme => ({
   },
   shopLocation: {
     color: "#000",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+    paddingTop:"20px"
+  },
+    shopContent:{
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    },
+    }
 });
 
 const Location = props => {
@@ -49,8 +57,7 @@ const Location = props => {
         </svg>
       </i>
       <div className={classes.shopContent}>
-        <div className={classes.shopText}>You're shopping</div>
-        <div className={classes.shopLocation}>India-Bangalore</div>
+        <div style={{marginTop:"4px"}}><Link className={classes.shopLocation}>Find a store</Link></div>
       </div>
     </div>
   );

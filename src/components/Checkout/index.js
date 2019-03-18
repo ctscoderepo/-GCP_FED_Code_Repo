@@ -428,7 +428,10 @@ const AuthUserCheckout = props => {
       {years.year}
     </MenuItem>
   ));
-
+    
+  const userData = JSON.parse(localStorage.getItem("loggedInUserData"));
+  const userAddress=userData?userData.userDetails.address:"";    
+   
   return (
     <>
       <div style={{ padding: "10px" }}>
@@ -920,9 +923,11 @@ const AuthUserCheckout = props => {
                       />
                     </div>
                     <div className={classes.marginTop15}>
-                      <Typography>Address Line 1 </Typography>
-                      <Typography> Address Line 2 </Typography>
-                      <Typography> Address Line 3 </Typography>
+                      <Typography>{userAddress?userAddress.address1:""}</Typography>
+                      <Typography>{userAddress?userAddress.address2:""}</Typography>
+                      <Typography>{userAddress?userAddress.city:""}</Typography>
+                      <Typography>{userAddress?userAddress.country:""}</Typography>
+                      <Typography>{userAddress?userAddress.zipCode:""}</Typography>
                     </div>
                     <div className={classes.btnViewCart}>
                       <Button className={classes.btnStyle}>
