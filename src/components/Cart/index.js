@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -518,9 +518,29 @@ function CartComponent(props) {
     ))
   );
 
+  const [totalShippingCharge, setTotalShippingCharge] = useState();
+  const [salesTax, setSalesTax] = useState();
+  const [totalQuantity, setTotalQuantity] = useState();
+
+  useEffect(() => {
+    if (cartItems.orderItems) {
+      let count = 0;
+      let shippingCharge = 0;
+      let tax = 0;
+      cartItems.orderItems.forEach(item => {
+        shippingCharge = shippingCharge + item.shippingCharge;
+        tax = tax + item.tax;
+        count = count + item.quantity;
+      });
+      setTotalShippingCharge(shippingCharge);
+      setSalesTax(tax);
+      setTotalQuantity(count);
+    }
+  });
+
   const totalPrice = () => {
     return cartItems && cartItems.totalPrice
-      ? cartItems.totalPrice + cartItems.totalTax + cartItems.totalShipping
+      ? cartItems.totalPrice + salesTax + totalShippingCharge
       : 0;
   };
 
@@ -646,7 +666,7 @@ function CartComponent(props) {
                     <Grid container className={classes.marTop}>
                       <Grid item lg={6} sm={6} xs={6}>
                         <Typography className={classes.txtaln}>
-                          Items : <strong>3</strong>
+                          Items : <strong>{totalQuantity?totalQuantity:0}</strong>
                         </Typography>
                       </Grid>
                       <Grid item lg={6} sm={6} xs={6}>
@@ -779,9 +799,7 @@ function CartComponent(props) {
                         className={classes.txtaln}
                       >
                         $
-                        {cartItems && cartItems.totalShipping
-                          ? cartItems.totalShipping
-                          : 0}
+                        {totalShippingCharge?totalShippingCharge: 0}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -805,9 +823,7 @@ function CartComponent(props) {
                         className={classes.txtaln}
                       >
                         $
-                        {cartItems && cartItems.totalTax
-                          ? cartItems.totalTax
-                          : 0}
+                        {salesTax?salesTax: 0}
                       </Grid>
                     </Grid>
                   </Grid>

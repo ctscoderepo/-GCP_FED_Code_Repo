@@ -21,14 +21,17 @@ const styles = theme => ({
   FeaturedProducts: {
     boxSizing: "border-box",
     [theme.breakpoints.down("sm")]: {
-      marginBottom: "20px",
+      marginBottom: "20px"
     }
   },
   featurDiv: {
-    margin: "0px 3px 0px 3px",
+    margin: "0px 3px 0px 3px"
   },
   lghidden: {
     [theme.breakpoints.down("sm")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("xs")]: {
       display: "none"
     }
   },
@@ -39,12 +42,27 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       display: "block"
     },
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
   },
+  xshidden: {
+    [theme.breakpoints.down("lg")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "block"
+    }
+  }
 });
 
 const featuredProducts = [
   {
-    imageURL: "https://storage.googleapis.com/gcpimage/images/electronics/0000046_beats-pill-20-wireless-speaker_550.jpeg",
+    imageURL:
+      "https://storage.googleapis.com/gcpimage/images/electronics/0000046_beats-pill-20-wireless-speaker_550.jpeg",
     price: 39,
     name: "portable-sound-speakers",
     skuId: "PT_SPK_SN"
@@ -83,34 +101,53 @@ const featuredProducts = [
     price: 34,
     name: "Basket Ball",
     skuId: "304274307"
-  }]
+  }
+];
 
 const featuredProducts2 = featuredProducts.slice(0, 3);
 const featuredProducts1 = featuredProducts.slice(3, 6);
+const featuredProductsSM1 = featuredProducts.slice(0, 4);
+const featuredProductsSM2 = featuredProducts.slice(4, 6);
 
 const HomeComponent = props => {
   const { classes } = props;
 
-  const SampleNextArrow = (props) => {
+  const SampleNextArrow = props => {
     const { className, style, onClick } = props;
     return (
-      <div className={className} style={{
-        display: "block", background: "#bfbfbf", marginRight: "30px",
-        height: "30px", paddingTop: "10px", top: "40%"
-      }}
+      <div
+        className={className}
+        style={{
+          display: "block",
+          background: "#bfbfbf",
+          marginRight: "30px",
+          height: "30px",
+          paddingTop: "10px",
+          top: "40%"
+        }}
         onClick={onClick}
       />
     );
-  }
+  };
 
-  const SamplePrevArrow = (props) => {
+  const SamplePrevArrow = props => {
     const { className, style, onClick } = props;
     return (
-      <div className={className} style={{ display: "block", background: "#bfbfbf", marginLeft: "30px", height: "30px", paddingTop: "10px", zIndex: "2000", top: "40%" }}
+      <div
+        className={className}
+        style={{
+          display: "block",
+          background: "#bfbfbf",
+          marginLeft: "30px",
+          height: "30px",
+          paddingTop: "10px",
+          zIndex: "1000",
+          top: "40%"
+        }}
         onClick={onClick}
       />
     );
-  }
+  };
   const settings = {
     arrows: true,
     dots: true,
@@ -119,7 +156,7 @@ const HomeComponent = props => {
     slidesToShow: 1,
     slidesToScroll: 1,
     prevArrow: <SamplePrevArrow />,
-    nextArrow: <SampleNextArrow />,
+    nextArrow: <SampleNextArrow />
   };
 
   return (
@@ -132,10 +169,18 @@ const HomeComponent = props => {
       <h3 className="featuredProductsHeading">Featured products</h3>
       <div className={classes.lghidden}>
         <Slider {...settings}>
-          <div >
+          <div>
             <Grid container className={classes.FeaturedProducts} spacing={8}>
               {featuredProducts.map((item, i) => (
-                <Grid lg={2} md={2} sm={3} xs={4} item className={classes.itemContainer} key={item.name}>
+                <Grid
+                  lg={2}
+                  md={2}
+                  sm={3}
+                  xs={4}
+                  item
+                  className={classes.itemContainer}
+                  key={item.name}
+                >
                   <div className="imagewrapper">
                     <img src={item.imageURL} alt={item.name} />
                     <Link
@@ -145,16 +190,97 @@ const HomeComponent = props => {
                       <div className="featuredProductButton">
                         <Button variant="outlined" className={classes.button}>
                           view
-                      </Button>
-
+                        </Button>
                       </div>
                       <section className="featuredProductContent">
                         <div className="featuredContent">
-                          <div className="featuredContent_name">{item.name}</div>
-                          <div className="featuredContent_price">${item.price}</div>
+                          <div className="featuredContent_name">
+                            {item.name}
+                          </div>
+                          <div className="featuredContent_price">
+                            ${item.price}
+                          </div>
                         </div>
                       </section>
                     </Link>
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        </Slider>
+      </div>
+      <div className={classes.xshidden}>
+        <Slider {...settings}>
+          <div className={classes.featurDiv}>
+            <Grid container className={classes.FeaturedProducts} spacing={8}>
+              {featuredProducts1.map((item, i) => (
+                <Grid
+                  lg={2}
+                  md={2}
+                  sm={3}
+                  xs={4}
+                  item
+                  className={classes.itemContainer}
+                  key={item.name}
+                >
+                  <div className="imagewrapper">
+                    <img src={item.imageURL} alt={item.name} />
+                    <Link
+                      to={`/store/product/${item.skuId}`}
+                      className={classes.item}
+                    >
+                      <div className="featuredProductButton">
+                        <Button variant="outlined" className={classes.button}>
+                          view
+                        </Button>
+                      </div>
+                    </Link>
+                    <section className="featuredProductContent">
+                      <div className="featuredContent">
+                        <div className="featuredContent_name">{item.name}</div>
+                        <div className="featuredContent_price">
+                          ${item.price}
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+          <div>
+            <Grid container className={classes.FeaturedProducts} spacing={8}>
+              {featuredProducts2.map((item, i) => (
+                <Grid
+                  lg={2}
+                  md={2}
+                  sm={3}
+                  xs={4}
+                  item
+                  className={classes.itemContainer}
+                  key={item.name}
+                >
+                  <div className="imagewrapper">
+                    <img src={item.imageURL} alt={item.name} />
+                    <Link
+                      to={`/store/product/${item.skuId}`}
+                      className={classes.item}
+                    >
+                      <div className="featuredProductButton">
+                        <Button variant="outlined" className={classes.button}>
+                          view
+                        </Button>
+                      </div>
+                    </Link>
+                    <section className="featuredProductContent">
+                      <div className="featuredContent">
+                        <div className="featuredContent_name">{item.name}</div>
+                        <div className="featuredContent_price">
+                          ${item.price}
+                        </div>
+                      </div>
+                    </section>
                   </div>
                 </Grid>
               ))}
@@ -166,8 +292,16 @@ const HomeComponent = props => {
         <Slider {...settings}>
           <div className={classes.featurDiv}>
             <Grid container className={classes.FeaturedProducts} spacing={8}>
-              {featuredProducts1.map((item, i) => (
-                <Grid lg={2} md={2} sm={3} xs={4} item className={classes.itemContainer} key={item.name}>
+              {featuredProductsSM1.map((item, i) => (
+                <Grid
+                  lg={2}
+                  md={2}
+                  sm={3}
+                  xs={4}
+                  item
+                  className={classes.itemContainer}
+                  key={item.name}
+                >
                   <div className="imagewrapper">
                     <img src={item.imageURL} alt={item.name} />
                     <Link
@@ -178,13 +312,14 @@ const HomeComponent = props => {
                         <Button variant="outlined" className={classes.button}>
                           view
                         </Button>
-
                       </div>
                     </Link>
                     <section className="featuredProductContent">
                       <div className="featuredContent">
                         <div className="featuredContent_name">{item.name}</div>
-                        <div className="featuredContent_price">${item.price}</div>
+                        <div className="featuredContent_price">
+                          ${item.price}
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -192,10 +327,18 @@ const HomeComponent = props => {
               ))}
             </Grid>
           </div>
-          <div >
+          <div>
             <Grid container className={classes.FeaturedProducts} spacing={8}>
-              {featuredProducts2.map((item, i) => (
-                <Grid lg={2} md={2} sm={3} xs={4} item className={classes.itemContainer} key={item.name}>
+              {featuredProductsSM2.map((item, i) => (
+                <Grid
+                  lg={2}
+                  md={2}
+                  sm={3}
+                  xs={4}
+                  item
+                  className={classes.itemContainer}
+                  key={item.name}
+                >
                   <div className="imagewrapper">
                     <img src={item.imageURL} alt={item.name} />
                     <Link
@@ -211,7 +354,9 @@ const HomeComponent = props => {
                     <section className="featuredProductContent">
                       <div className="featuredContent">
                         <div className="featuredContent_name">{item.name}</div>
-                        <div className="featuredContent_price">${item.price}</div>
+                        <div className="featuredContent_price">
+                          ${item.price}
+                        </div>
                       </div>
                     </section>
                   </div>

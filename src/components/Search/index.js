@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import SideNav from "../SideNav";
+import Spinner from "../helpers/Spinner";
 import "./index.css";
 
 const styles = theme => ({
@@ -35,6 +36,13 @@ const styles = theme => ({
   gridHide: {
     [theme.breakpoints.down("md")]: {
       display: "none"
+    }
+  },
+  spinnerDiv: {
+    textAlign: "center",
+    marginTop: "5%",
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "130px"
     }
   }
 });
@@ -88,31 +96,39 @@ const rating = () => (
   </>
 );
 
-function Products({ searchResults, categoryDetails, classes }) {
+function Products({ searchResults, categoryDetails, classes, isLoading }) {
   const spinner =
     searchResults.length === 0 ? (
-      "No products found"
+      isLoading ? (
+        <div className={classes.spinnerDiv}>
+          <Spinner />
+        </div>
+      ) : (
+        <div className={classes.Spin}>
+          No Products to display at this moment.
+        </div>
+      )
     ) : (
       <Grid container spacing={16}>
         {searchResults.map(product => (
           <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
-          <div className="productWrapper">
-            <Link
-              to={`/store/product/${product.skuId}`}
-              className={classes.item}
-            >
-              <div className="imageWrapper">
-                <img src={product.images[0]} alt="mac book prop" />
-              </div>
-              <div className="productDetail">
-                <div className="title">{product.productName}</div>
-                  <span className="rated">{rating()}</span>
-                <div className="price">
-                  {product.currencyCode === "USD" && "$"}{" "}
-                  <span>{product.price}</span>
+            <div className="productWrapper">
+              <Link
+                to={`/store/product/${product.skuId}`}
+                className={classes.item}
+              >
+                <div className="imageWrapper">
+                  <img src={product.images[0]} alt="mac book prop" />
                 </div>
-              </div>
-            </Link>
+                <div className="productDetail">
+                  <div className="title">{product.productName}</div>
+                  <span className="rated">{rating()}</span>
+                  <div className="price">
+                    {product.currencyCode === "USD" && "$"}{" "}
+                    <span>{product.price}</span>
+                  </div>
+                </div>
+              </Link>
             </div>
           </Grid>
         ))}
@@ -122,7 +138,7 @@ function Products({ searchResults, categoryDetails, classes }) {
     <div className={classes.productsComponent}>
       <Grid container spacing={16}>
         <Grid item lg={2} md={3} sm={3} className={classes.sideNav}>
-          <SideNav  {...categoryDetails}/>
+          <SideNav {...categoryDetails} />
         </Grid>
         <Grid item lg={1} className={classes.gridHide} />
         <Grid item lg={9} md={9} sm={9}>

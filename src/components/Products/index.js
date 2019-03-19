@@ -46,10 +46,13 @@ const styles = theme => ({
       marginLeft: "130px"
     }
   },
-    spinnerDiv:{
-        textAlign:"center",
-        marginTop:"5%"
+  spinnerDiv: {
+    textAlign: "center",
+    marginTop: "5%",
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "130px"
     }
+  }
 });
 
 const rating = () => (
@@ -101,40 +104,46 @@ const rating = () => (
   </>
 );
 
-function Products({ products, catType, classes, isLoading}) {
-    
-    console.log(isLoading);
-    
+function Products({ products, catType, classes, isLoading }) {
+  console.log(isLoading);
+
   const spinner =
-    products.length === 0 ? (isLoading?<div className={classes.spinnerDiv}><Spinner /></div>:<div className={classes.Spin}>
-        No Products to display at this moment.
-      </div>
+    products.length === 0 ? (
+      isLoading ? (
+        <div className={classes.spinnerDiv}>
+          <Spinner />
+        </div>
+      ) : (
+        <div className={classes.Spin}>
+          No Products to display at this moment.
+        </div>
+      )
     ) : (
-        <Grid container spacing={16}>
-          {products.map(product => (
-            <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
-              <div className="productWrapper">
-                <Link
-                  to={`/store/product/${product.skuId}`}
-                  className={classes.item}
-                >
-                  <div className="imageWrapper">
-                    <img src={product.images[0]} alt="mac book prop" />
+      <Grid container spacing={16}>
+        {products.map(product => (
+          <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
+            <div className="productWrapper">
+              <Link
+                to={`/store/product/${product.skuId}`}
+                className={classes.item}
+              >
+                <div className="imageWrapper">
+                  <img src={product.images[0]} alt="mac book prop" />
+                </div>
+                <div className="productDetail">
+                  <div className="title">{product.productName}</div>
+                  <span className="rated">{rating()}</span>
+                  <div className="price">
+                    {product.currencyCode === "USD" && "$"}{" "}
+                    <span>{product.price}</span>
                   </div>
-                  <div className="productDetail">
-                    <div className="title">{product.productName}</div>
-                    <span className="rated">{rating()}</span>
-                    <div className="price">
-                      {product.currencyCode === "USD" && "$"}{" "}
-                      <span>{product.price}</span>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            </Grid>
-          ))}
-        </Grid>
-      );
+                </div>
+              </Link>
+            </div>
+          </Grid>
+        ))}
+      </Grid>
+    );
   return (
     <div className={classes.productsComponent}>
       <Grid container spacing={16}>
