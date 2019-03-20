@@ -39,11 +39,29 @@ const fromDollarToCent = amount => amount * 100;
 
 const successPayment = data => {
   console.info("Payment Successful", data);
+  //console.log("orderdetails:" , orderDetails)
   alert("Continue from here to order complete flow");
 };
 
 const errorPayment = data => {
   console.error("Payment Error", data);
+};
+
+const submitOrder = () => {
+  // if (memberId == 0) {
+  //   props.checkout({
+  //     orderId: orderId,
+  //     email: guestEmail,
+  //     addressId: addressId
+  //   });
+  // } else {
+  //   props.checkout({
+  //     orderId: orderId,
+  //     memberId: memberId,
+  //     addressId: addressId
+  //   });
+  // }
+  // history.push("/Confirmation");
 };
 axios.interceptors.request.use(request => {
   console.log("Starting Request", request);
@@ -55,7 +73,7 @@ axios.interceptors.response.use(response => {
   return response;
 });
 
-const onToken = (amount, description) => token =>
+const onToken = (amount, description, orderDetails) => token =>
   axios
     .post(
       PAYMENT_SERVER_URL,
@@ -63,7 +81,9 @@ const onToken = (amount, description) => token =>
         description,
         source: token.id,
         currency: CURRENCY,
-        amount: fromDollarToCent(amount)
+        amount: fromDollarToCent(amount),
+        //order:orderDetails,
+        receipt_email:token.email
       },
       {
         headers: {
@@ -76,20 +96,22 @@ const onToken = (amount, description) => token =>
     .catch(errorPayment);
 
 const Checkout = props => {
-  const { classes, name, description, amount, cartItems } = props;
+  const { classes, name, description, amount, cartItems, orderDetails } = props;
   return (
     <div>
       <StripeCheckout
         name={name}
         description={description}
         amount={fromDollarToCent(amount)}
-        token={onToken(amount, description)}
+        token={onToken(amount, description, orderDetails)}
         currency={CURRENCY}
         stripeKey={GoogleKeys.STRIPE_KEY}
         image="/assets/images/logo.png"
         shippingAddress
         billingAddress
+        orderDetails={orderDetails}
         allowRememberMe={false}
+        email={orderDetails.email}
       >
         <div className={classes.yourOrdTxt}>
           <Button className={classes.btnStyle}

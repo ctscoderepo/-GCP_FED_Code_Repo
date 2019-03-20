@@ -115,6 +115,7 @@ function LoginComponent(props) {
       const userFirstName=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.firstName:"";
       const userId=userData && userData.userDetails && userData.userDetails.id?userData.userDetails.id:""; 
       const userAddressId=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.id:"";
+      const email = userData && userData.userDetails && userData.userDetails.logonId?userData.userDetails.logonId:"";     
       
       let loggedInUserData=JSON.stringify(userData);
       localStorage.setItem("loggedInUserData",loggedInUserData);
@@ -122,7 +123,8 @@ function LoginComponent(props) {
       let userLogInfo = {
       userLogedId:userId,
       userFirstName:userFirstName,
-      addressId:userAddressId      
+      addressId:userAddressId,
+      email:email      
       }
           
       let objectSerialized = JSON.stringify(userLogInfo);

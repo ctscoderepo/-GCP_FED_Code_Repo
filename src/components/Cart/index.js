@@ -319,10 +319,13 @@ function CartComponent(props) {
   const orderId = cartItems && cartItems.orderId ? cartItems.orderId : "";
   const memberId = userInfo && userInfo.userLogedId ? userInfo.userLogedId : "";
   const addressId = userInfo && userInfo.addressId ? userInfo.addressId : "";
+  const email = userInfo && userInfo.email ? userInfo.email : "";
 
   let orderDetails = {
     orderId: orderId,
-    memberId: memberId
+    memberId: memberId,
+    addressId:addressId,
+    email: email
   };
 
   // if(!cartItems && memberId){
@@ -867,11 +870,8 @@ function CartComponent(props) {
                       name={"Demo store checkout"}
                       description={`DEMO store order - ${orderId}`}
                       cartItems={cartItems}
-                      amount={
-                        cartItems.totalPrice +
-                        cartItems.totalTax +
-                        cartItems.totalShipping
-                      }
+                      amount={totalPrice()}
+                      orderDetails={orderDetails}
                     />
                   </div>
 

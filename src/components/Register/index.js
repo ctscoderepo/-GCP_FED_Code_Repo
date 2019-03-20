@@ -194,10 +194,12 @@ function LoginComponent(props) {
         const userFirstName=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.firstName:"";
         const userId=userData && userData.userDetails && userData.userDetails.id?userData.userDetails.id:"";     
         const addressId=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.id:"";     
+        const email = userData && userData.userDetails && userData.userDetails.logonId?userData.userDetails.logonId:"";     
         let userLogInfo = {
         userLogedId:userId,
         userFirstName:userFirstName,
-        addressId:addressId
+        addressId:addressId,
+        email:email
         }
             
         let objectSerialized = JSON.stringify(userLogInfo);
