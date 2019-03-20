@@ -7,45 +7,47 @@ const styles = theme => ({
   locationContainer: {
     margin: "0 40px 0 20px",
     display: "flex",
-    
-      "&:hover": {
+    "&:hover": {
       cursor: "pointer"
     },
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: "0px"
+    }
   },
   location: {
     flexDirection: "row",
-    fill: "#000",
+    fill: "white",
     [theme.breakpoints.down("xs")]: {
-      marginTop:"5px"
-    }, 
+      marginTop: "5px"
+    }
   },
   shopText: {
     color: "#0084CD",
     fontSize: "12px"
   },
   shopLocation: {
-    color: "#000",
+    color: "white",
     fontWeight: "bold",
-    paddingTop:"20px"
+    paddingTop: "20px",
+    whiteSpace: "nowrap",
+    [theme.breakpoints.up("sm")]: {}
   },
-    shopContent:{
+  shopContent: {
     [theme.breakpoints.down("sm")]: {
       display: "none"
-    },
     }
+  }
 });
 
 const Location = props => {
-    
-    const { classes, history } = props;
-    
-    const clickhere=()=>{
-        history.push("/FindStore");
-    }
-    
-  
+  const { classes, history } = props;
+
+  const clickhere = () => {
+    history.push("/FindStore");
+  };
+
   return (
-    <div className={classes.locationContainer} onClick={()=>clickhere()}>
+    <div className={classes.locationContainer} onClick={() => clickhere()}>
       <i className={`material-icons ${classes.location}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +59,9 @@ const Location = props => {
         </svg>
       </i>
       <div className={classes.shopContent}>
-        <div style={{marginTop:"4px"}}><Link className={classes.shopLocation}>Find a store</Link></div>
+        <div style={{ marginTop: "4px" }}>
+          <Link className={classes.shopLocation}>Find a store</Link>
+        </div>
       </div>
     </div>
   );

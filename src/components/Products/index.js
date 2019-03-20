@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Spinner from "../helpers/Spinner";
 import Grid from "@material-ui/core/Grid";
 import SideNav from "../SideNav";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 import "./index.css";
 
 const styles = theme => ({
   productsComponent: {
-    margin: "180px 0 20px 0",
+    margin: "150px 0 20px 0",
     [theme.breakpoints.down("sm")]: {
       margin: "95px 20px 20px 20px"
     }
@@ -117,8 +119,21 @@ const rating = () => (
 );
 
 function Products({ products, catType, classes, isLoading }) {
-  console.log(isLoading);
+  console.log("ffffffff", products);
 
+  const [mainCategory, setmainCategory] = useState();
+
+  useEffect(() => {
+    if (products) {
+      let mainCat = "";
+      products.forEach(item => {
+        mainCat = item.categories[0];
+      });
+      setmainCategory(mainCat);
+    }
+  });
+
+  console.log(mainCategory);
   const spinner =
     products.length === 0 ? (
       isLoading ? (
@@ -162,6 +177,11 @@ function Products({ products, catType, classes, isLoading }) {
     );
   return (
     <div className={classes.productsComponent}>
+      <div style={{ marginBottom: "30px" }}>
+        <Typography style={{ fontSize: "20px" }}>
+          <strong>{mainCategory}</strong>
+        </Typography>
+      </div>
       <Grid container spacing={16}>
         <Grid item lg={2} md={3} sm={3} className={classes.sideNav}>
           <SideNav />

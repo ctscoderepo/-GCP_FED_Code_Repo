@@ -24,6 +24,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Camera from "../Camera";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 import "./index.css";
 
 const styles = theme => ({
@@ -53,7 +54,7 @@ const styles = theme => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25)
     },
-    marginLeft: 0,
+    marginLeft: "",
     marginRight: "5px",
     width: "100%",
     [theme.breakpoints.up("md")]: {
@@ -79,10 +80,10 @@ const styles = theme => ({
       backgroundColor: "transparent",
       borderRadius: 0,
       left: "0",
-      minWidth: "10px",
+      minWidth: "10px"
     },
-      [theme.breakpoints.down("xs")]: {
-      marginLeft:"-48px"    
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: "-48px"
     }
   },
   cameraIcon: {
@@ -116,12 +117,13 @@ const styles = theme => ({
     width: "100%",
     backgroundColor: "#fff",
     border: "1px solid rgba(0,0,0,0.1)",
-     
+
     [theme.breakpoints.up("md")]: {
       width: 500
     },
     [theme.breakpoints.up("lg")]: {
-      width: 600
+      marginLeft: "6%",
+      width: 800
     },
     [theme.breakpoints.down("md")]: {
       width: 450
@@ -132,8 +134,8 @@ const styles = theme => ({
       width: "100%"
     },
     [theme.breakpoints.down("xs")]: {
-       marginLeft:"-40px",
-        paddingLeft: theme.spacing.unit*3,
+      marginLeft: "-40px",
+      paddingLeft: theme.spacing.unit * 3
     }
   },
   appBar: {
@@ -149,9 +151,8 @@ const styles = theme => ({
     }
   },
   signin: {
-    position: "relative",
     top: "4px",
-    fill: "rgba(0, 0, 0, 0.54)",
+    fill: "white",
     display: "flex",
     "&:hover": {
       cursor: "pointer"
@@ -168,24 +169,24 @@ const styles = theme => ({
     }
   },
   logo: {
-    width: "60px",
-    height: "60px",
+    width: "150px",
+    height: "40px",
     position: "relative",
     top: "4px",
-    
+
     [theme.breakpoints.down("sm")]: {
-      width: "40px",
+      width: "100px",
       height: "40px"
     },
     [theme.breakpoints.down("xs")]: {
-      width: "40px",
+      width: "100px",
       height: "40px",
-      marginRight:"-35px",
-      marginLeft:"-10px",
-    },
+      marginRight: "30px",
+      marginLeft: "-10px"
+    }
   },
   toolBar: {
-    minHeight: "70px",
+    minHeight: "40px",
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
@@ -197,7 +198,7 @@ const styles = theme => ({
       borderBottom: "none"
     },
     [theme.breakpoints.up("sm")]: {
-      border: "1px solid lightgrey"
+      border: "0px solid lightgrey"
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%",
@@ -206,8 +207,9 @@ const styles = theme => ({
   },
   NavigationMenu: {
     padding: "0",
-    backgroundColor: "#fafafa",
+    backgroundColor: "#1a75ff",
     minHeight: "40px",
+    paddingBottom: "-20px",
     [theme.breakpoints.down("sm")]: {
       display: "none"
     }
@@ -230,26 +232,28 @@ const styles = theme => ({
   cameraIconMobile: {
     display: "none",
     [theme.breakpoints.down("xs")]: {
-      display: "flex",
+      display: "flex"
     }
   },
   iconStyles: {
-    margin: "0 20px",
+    margin: "0 0px",
     [theme.breakpoints.down("sm")]: {
       margin: 0
     }
   },
   signLabel: {
-    color: "black",
+    textTransform: "uppercase",
+    color: "white",
     fontSize: "12px",
-    margin: "-6px 5px 0px 0px",
-    textAlign:"center", 
+    marginTop: "3px",
+    textAlign: "center",
+    width: "auto",
+    float: "left",
     [theme.breakpoints.down("sm")]: {
       display: "block",
-      fontSize: "8px",
-      marginLeft: "5px",
-      marginTop: "-3px",
-      textAlign:"center"
+      fontSize: "10px",
+      textAlign: "center",
+      whiteSpace: "nowrap"
     }
   },
   svgArrowDown: {
@@ -264,6 +268,8 @@ const styles = theme => ({
     }
   },
   accIconDiv: {
+    paddingTop: "15px",
+    textAlign: "right",
     [theme.breakpoints.down("sm")]: {
       marginRight: ""
     }
@@ -271,6 +277,8 @@ const styles = theme => ({
 });
 
 function SearchAppBar(props) {
+  const welcome = "welcome";
+
   let [open, setOpen] = useState(false);
   const [cameraOpen, setCameraOpen] = useState(false);
   console.log(cameraOpen);
@@ -287,12 +295,11 @@ function SearchAppBar(props) {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    if(search){
+    if (search) {
       props.searchResults(search).then(() => {
         props.history.push("/search");
       });
     }
-    
   };
 
   let userInfo = JSON.parse(localStorage.getItem("userData1"));
@@ -350,162 +357,192 @@ function SearchAppBar(props) {
       <div className="Header">
         <AppBar position="fixed" className={classes.appBar}>
           {/* <Advertisement /> */}
-          <Toolbar className={classes.toolBar}>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={toggleDrawer}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography className={classes.title} variant="h6" color="inherit">
-              <Link to="/">
-                <img
-                  src="/assets/images/logo.png"
-                  alt="logo"
-                  className={classes.logo}
-                />
-              </Link>
-            </Typography>
-
-            <Location />
-            <div className={classes.search}>
-              {/* <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div> */}
-
-              <form onSubmit={handleSubmit}>
-                <Button type="submit" className={classes.searchIcon}>
-                  <SearchIcon />
-                </Button>
-                <InputBase
-                  placeholder="Search....."
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput
-                  }}
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                />
-              </form>
-            </div>
-            <div className={classes.grow} />
-            <div className={classes.cameraIconMobile}>
-              <i
-                className={`material-icons`}
-                onClick={() => setCameraOpen(true)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                >
-                  <circle cx="12" cy="12" r="3.2" />
-                  <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
-                </svg>
-                {cameraOpen && (
-                  <Camera
-                    open={cameraOpen}
-                    toggleDialog={() => setCameraOpen(false)}
-                  />
-                )}
-              </i>
-            </div>
-            <div className={classes.accIconDiv}>
-              <p className={classes.signLabel}>
-                {userInfo && userInfo.userFirstName
-                  ? userInfo.userFirstName
-                  : ""}
-              </p>
-              <i
-                className={`material-icons ${classes.signin}`}
-                onClick={handleClick}
-              >
-                <svg
-                  className={classes.svgMyAcc}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 18 18"
-                >
-                  <path d="M9 1C4.58 1 1 4.58 1 9s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 2.75c1.24 0 2.25 1.01 2.25 2.25S10.24 8.25 9 8.25 6.75 7.24 6.75 6 7.76 3.75 9 3.75zM9 14.5c-1.86 0-3.49-.92-4.49-2.33C4.62 10.72 7.53 10 9 10c1.47 0 4.38.72 4.49 2.17-1 1.41-2.63 2.33-4.49 2.33z" />
-                </svg>
-                <span>
-                  <svg
-                    className={classes.svgArrowDown}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />
-                  </svg>
-                </span>
-              </i>
-
-              {!(userInfo && userInfo.userFirstName) && (
-                <Menu
-                  id="simple-menu"
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem
-                    onClick={() => {
-                      handleClose();
-                      history.push("/login");
-                    }}
-                  >
-                    Login
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => {
-                      handleClose();
-                      history.push("/register");
-                    }}
-                  >
-                    Register
-                  </MenuItem>
-                </Menu>
-              )}
-              {userInfo && userInfo.userFirstName && (
-                <Menu
-                  id="simple-menu"
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={signOut}>Signout</MenuItem>
-                </Menu>
-              )}
-            </div>
-            <div className={classes.iconStyles}>
-              <Link to="/Cart">
-                <CartBadge items={totalQuantity} />{" "}
-              </Link>
-            </div>
-
-            <Drawer
-              open={open}
-              onClose={toggleDrawer}
-              classes={{ paper: classes.paper }}
-            >
-              <div
-                tabIndex={0}
-                role="button"
+          <div style={{ backgroundColor: "#e6e6e6" }}>
+            <Toolbar className={classes.toolBar}>
+              <IconButton
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="Open drawer"
                 onClick={toggleDrawer}
-                onKeyDown={toggleDrawer}
               >
-                {sideList}
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                className={classes.title}
+                variant="h6"
+                color="inherit"
+              >
+                <Link to="/">
+                  <img
+                    src="/assets/images/logo.png"
+                    alt="logo"
+                    className={classes.logo}
+                  />
+                </Link>
+              </Typography>
+              {/* <Typography
+                style={{
+                  fontSize: "20px",
+                  color: "black",
+                  paddingLeft: "20px"
+                }}
+              >
+                Demo Store
+              </Typography> */}
+              <div className={classes.search}>
+                <form onSubmit={handleSubmit}>
+                  <Button type="submit" className={classes.searchIcon}>
+                    <SearchIcon />
+                  </Button>
+                  <InputBase
+                    placeholder="Search....."
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput
+                    }}
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                  />
+                </form>
               </div>
-            </Drawer>
-          </Toolbar>
-          {showNavbar && (
-            <Toolbar className={classes.NavigationMenu}>
-              <NavigationMenu />
+              <div className={classes.grow} />
+              <div className={classes.cameraIconMobile}>
+                <i
+                  className={`material-icons`}
+                  onClick={() => setCameraOpen(true)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle cx="12" cy="12" r="3.2" />
+                    <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+                  </svg>
+                  {cameraOpen && (
+                    <Camera
+                      open={cameraOpen}
+                      toggleDialog={() => setCameraOpen(false)}
+                    />
+                  )}
+                </i>
+              </div>
+              <Drawer
+                open={open}
+                onClose={toggleDrawer}
+                classes={{ paper: classes.paper }}
+              >
+                <div
+                  tabIndex={0}
+                  role="button"
+                  onClick={toggleDrawer}
+                  onKeyDown={toggleDrawer}
+                >
+                  {sideList}
+                </div>
+              </Drawer>
             </Toolbar>
+          </div>
+          {showNavbar && (
+            <div style={{ backgroundColor: "green" }}>
+              <Toolbar className={classes.NavigationMenu}>
+                <Grid container className={classes.toolBar}>
+                  <Grid item lg={2} sm={1} xs={2}>
+                    <div style={{ padding: "10px" }}>
+                      <Location />
+                    </div>
+                  </Grid>
+                  <Grid item lg={7} sm={8} xs={7}>
+                    <NavigationMenu />
+                  </Grid>
+                  <Grid item lg={3} sm={3} xs={2}>
+                    <div
+                      className={classes.accIconDiv}
+                      style={{
+                        width: "60%",
+                        float: "left",
+                        textAlign: "right"
+                      }}
+                    >
+                      <div>
+                        <p className={classes.signLabel}>
+                          {userInfo && userInfo.userFirstName
+                            ? userInfo.userFirstName
+                            : ""}
+                        </p>
+                        <i
+                          className={`material-icons ${classes.signin}`}
+                          onClick={handleClick}
+                        >
+                          <svg
+                            className={classes.svgMyAcc}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 18 18"
+                          >
+                            <path d="M9 1C4.58 1 1 4.58 1 9s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 2.75c1.24 0 2.25 1.01 2.25 2.25S10.24 8.25 9 8.25 6.75 7.24 6.75 6 7.76 3.75 9 3.75zM9 14.5c-1.86 0-3.49-.92-4.49-2.33C4.62 10.72 7.53 10 9 10c1.47 0 4.38.72 4.49 2.17-1 1.41-2.63 2.33-4.49 2.33z" />
+                          </svg>
+                          <span>
+                            <svg
+                              className={classes.svgArrowDown}
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="20"
+                              height="20"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />
+                            </svg>
+                          </span>
+                        </i>
+
+                        {!(userInfo && userInfo.userFirstName) && (
+                          <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                          >
+                            <MenuItem
+                              onClick={() => {
+                                handleClose();
+                                history.push("/login");
+                              }}
+                            >
+                              Login
+                            </MenuItem>
+                            <MenuItem
+                              onClick={() => {
+                                handleClose();
+                                history.push("/register");
+                              }}
+                            >
+                              Register
+                            </MenuItem>
+                          </Menu>
+                        )}
+                        {userInfo && userInfo.userFirstName && (
+                          <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                          >
+                            <MenuItem onClick={signOut}>Signout</MenuItem>
+                          </Menu>
+                        )}
+                      </div>
+                    </div>
+                    <div className={classes.iconStyles}>
+                      <Link to="/Cart">
+                        <CartBadge items={totalQuantity} />{" "}
+                      </Link>
+                    </div>
+                  </Grid>
+                </Grid>
+              </Toolbar>
+            </div>
           )}
         </AppBar>
       </div>
