@@ -129,7 +129,8 @@ const styles = theme => ({
   },
   gridCartLabel: {
     width: "50%",
-    float: "left"
+    float: "left",
+    whiteSpace: "nowrap"
   },
   txtAlignRight: {
     textAlign: "right"
@@ -254,21 +255,19 @@ const AuthUserCheckout = props => {
   const orderItems = cartItems ? cartItems.orderItems : "";
 
   const [totalQuantity, setTotalQuantity] = useState();
-  const [totalPrice, setTotalTotalPrice] = useState();
-
   useEffect(() => {
     if (orderItems) {
       let count = 0;
-      let price = 0;
       orderItems.forEach(item => {
         count = count + item.quantity;
-        price = price + item.price;
       });
-
       setTotalQuantity(count);
-      setTotalTotalPrice(price);
     }
   });
+
+  const totalCheckOutValue = cartItems.totalPrice
+    ? cartItems.totalPrice + cartItems.totalShipping + cartItems.totalTax
+    : 0;
 
   const [guestEmail, setguestEmail] = useState("");
   const [errorGuestEmail, setErrorGuestEmail] = useState("");
@@ -354,6 +353,7 @@ const AuthUserCheckout = props => {
         addressId: addressId
       });
     }
+    history.push("/Confirmation");
   };
 
   const [monthExpir, setMonthExpir] = useState("");
@@ -428,20 +428,20 @@ const AuthUserCheckout = props => {
       {years.year}
     </MenuItem>
   ));
-    
+
   const userData = JSON.parse(localStorage.getItem("loggedInUserData"));
-  const userAddress=userData?userData.userDetails.address:"";    
-   
+  const userAddress = userData ? userData.userDetails.address : "";
+
   return (
     <>
       <div style={{ padding: "10px" }}>
         <div className={classes.checkoutContainer}>
-        <Link to="/">
-          <img
-            src="/assets/images/logo.png"
-            alt="logo"
-            className={classes.logo}
-          />
+          <Link to="/">
+            <img
+              src="/assets/images/logo.png"
+              alt="logo"
+              className={classes.logo}
+            />
           </Link>
           <Typography className={classes.securedCheckout}>
             Secure Checkout
@@ -865,11 +865,13 @@ const AuthUserCheckout = props => {
                     </div>
                     <div className={classes.marginTop15}>
                       <Typography className={classes.gridCartLabel}>
-                        Total Cart Value
+                        Subtotal
                       </Typography>
                       <Typography className={classes.txtAlignRight}>
                         {" "}
-                        <strong>${totalPrice ? totalPrice : 0}</strong>
+                        <strong>
+                          ${cartItems.totalPrice ? cartItems.totalPrice : 0}
+                        </strong>
                       </Typography>
                     </div>
                     <div className={classes.marginTop15}>
@@ -878,7 +880,32 @@ const AuthUserCheckout = props => {
                       </Typography>
                       <Typography className={classes.txtAlignRight}>
                         {" "}
-                        <strong>---</strong>
+                        <strong>${0}</strong>
+                      </Typography>
+                    </div>
+                    <div className={classes.marginTop15}>
+                      <Typography className={classes.gridCartLabel}>
+                        Estimated Shipping*{" "}
+                      </Typography>
+                      <Typography className={classes.txtAlignRight}>
+                        {" "}
+                        <strong>
+                          $
+                          {cartItems.totalShipping
+                            ? cartItems.totalShipping
+                            : 0}
+                        </strong>
+                      </Typography>
+                    </div>
+                    <div className={classes.marginTop15}>
+                      <Typography className={classes.gridCartLabel}>
+                        Sales Tax
+                      </Typography>
+                      <Typography className={classes.txtAlignRight}>
+                        {" "}
+                        <strong>
+                          ${cartItems.totalTax ? cartItems.totalTax : 0}
+                        </strong>
                       </Typography>
                     </div>
                     <div className={classes.marginTop10}>
@@ -889,11 +916,13 @@ const AuthUserCheckout = props => {
                     </div>
                     <div className={classes.marginTop15}>
                       <Typography className={classes.gridCartLabel}>
-                        <strong>Sub total</strong>{" "}
+                        <strong>Total</strong>{" "}
                       </Typography>
                       <Typography className={classes.txtAlignRight}>
                         {" "}
-                        <strong>${totalPrice ? totalPrice : 0}</strong>
+                        <strong>
+                          ${totalCheckOutValue ? totalCheckOutValue : 0}
+                        </strong>
                       </Typography>
                     </div>
                     <div className={classes.btnViewCart}>
@@ -923,11 +952,21 @@ const AuthUserCheckout = props => {
                       />
                     </div>
                     <div className={classes.marginTop15}>
-                      <Typography>{userAddress?userAddress.address1:""}</Typography>
-                      <Typography>{userAddress?userAddress.address2:""}</Typography>
-                      <Typography>{userAddress?userAddress.city:""}</Typography>
-                      <Typography>{userAddress?userAddress.country:""}</Typography>
-                      <Typography>{userAddress?userAddress.zipCode:""}</Typography>
+                      <Typography>
+                        {userAddress ? userAddress.address1 : ""}
+                      </Typography>
+                      <Typography>
+                        {userAddress ? userAddress.address2 : ""}
+                      </Typography>
+                      <Typography>
+                        {userAddress ? userAddress.city : ""}
+                      </Typography>
+                      <Typography>
+                        {userAddress ? userAddress.country : ""}
+                      </Typography>
+                      <Typography>
+                        {userAddress ? userAddress.zipCode : ""}
+                      </Typography>
                     </div>
                     <div className={classes.btnViewCart}>
                       <Button className={classes.btnStyle}>

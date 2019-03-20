@@ -48,9 +48,21 @@ const styles = theme => ({
   },
   spinnerDiv: {
     textAlign: "center",
-    marginTop: "5%",
+    marginTop: "5%"
+  },
+  imageWrapper: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "block",
+    height: "200px",
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      height: "150px",
+      width: "100%"
+    },
     [theme.breakpoints.down("xs")]: {
-      paddingLeft: "130px"
+      height: "150px",
+      width: "100%"
     }
   }
 });
@@ -127,8 +139,12 @@ function Products({ products, catType, classes, isLoading }) {
                 to={`/store/product/${product.skuId}`}
                 className={classes.item}
               >
-                <div className="imageWrapper">
-                  <img src={product.images[0]} alt="mac book prop" />
+                <div className="">
+                  <img
+                    className={classes.imageWrapper}
+                    src={product.images[0]}
+                    alt="mac book prop"
+                  />
                 </div>
                 <div className="productDetail">
                   <div className="title">{product.productName}</div>

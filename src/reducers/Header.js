@@ -5,7 +5,7 @@ export default (
     showNavbar: true,
     isLoading: false,
     cartItems: [],
-    userDetails:{}
+    userDetails: {}
   },
   action
 ) => {
@@ -20,7 +20,8 @@ export default (
       return { ...state, cartItems: action.payload };
     case "SET_USER_DETAILS":
       return { ...state, userDetails: action.payload };
-
+    case "CLEAR_CART_ITEMS":
+      return { ...state, cartItems: action.payload };
     // case "ISLOADING":
     //   return { ...state, isLoading: true };
     // case "CLEAR_LOADING":

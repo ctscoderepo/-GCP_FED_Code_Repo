@@ -8,6 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
+import {GoogleKeys} from "../../config/GoogleKeys";
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
 
 const styles = theme => ({
@@ -179,9 +180,7 @@ const styles = theme => ({
 });
 
 const StoreFinderComponent = props => {
-  const { classes, history, findStores, getStoresByLatLng, storeList } = props;
-
-  console.log("From store component: ", storeList);
+  const { classes, history, findStores, getStoresByLatLng, storeList } = props
 
   const [address, setAddress] = useState("");
   const getAddress = value => {
@@ -220,10 +219,10 @@ const StoreFinderComponent = props => {
   const [selectedPlace, setSelectedPlace] = useState({});
   const [activeMarker, setActiveMarker] = useState({});
   const [infoWindowMessage, setInfoWindowMessage] = useState("");
+  const [latitude, setLatitude] = useState();
 
   const onMarkerClick = (props, marker, e) => {
     const message = e ? e.wa.target.title : "";
-    console.log(e);
     setSelectedPlace(props);
     setActiveMarker(marker);
     setShowingInfoWindow(true);
@@ -254,15 +253,17 @@ const StoreFinderComponent = props => {
       ))
     : "";
 
-  const selectStore = (props, marker, e) => {};
+  const selectStore = (props, marker, e) => {
+    console.log("props: ", props, "marker :", marker);
+  };
 
   const storeDetails = sortedStoreList ? (
     sortedStoreList.map((item, index) => (
-      <div className={classes.storesDiv} key={item.name} onClick={selectStore}>
+      <div className={classes.storesDiv} key={item.id} onClick={selectStore}>
         <div>
           <Avatar className={classes.avatarStyle}>{item.id}</Avatar>
           <div style={{ marginLeft: "40px" }}>
-            <Typography>{item.name}</Typography>
+            <Typography>{item.id}</Typography>
           </div>
         </div>
         <div className={classes.locationDiv}>
@@ -449,5 +450,5 @@ const StoreFinderComponent = props => {
   );
 };
 export default GoogleApiWrapper({
-  api: process.env.AIzaSyBu0GUKiUnrc20TGT2I4WJxV25oqPOYf7g
+  apiKey: GoogleKeys.MAPS_KEY
 })(withRouter(withStyles(styles)(StoreFinderComponent)));

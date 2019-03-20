@@ -8,6 +8,7 @@ import Checkout from "../containers/Checkout";
 import Search from "../containers/Search";
 import SignIn from "../containers/SignIn";
 import StoreFinder from "../containers/StoreFinder";
+import Confirmation from "../containers/Confirmation";
 
 export default [
   { path: "/", component: Home, exact: true, id: 1 },
@@ -25,5 +26,6 @@ export default [
   { path: "/checkout", component: Checkout, id: 8 },
   { path: "/search", component: Search, id: 9 },
   { path: "/signIn", component: SignIn, id: 10 },
-  { path: "/findStore", component: StoreFinder, id: 11 }
+  { path: "/findStore", component: StoreFinder, id: 11 },
+  { path: "/Confirmation", component: Confirmation, id: 12 }
 ];

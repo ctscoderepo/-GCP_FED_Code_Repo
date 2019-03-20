@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
+import {GoogleKeys} from "../../config/GoogleKeys";
 import STRIPE_PUBLISHABLE from "../../config/stripe";
 import PAYMENT_SERVER_URL from "../../config/server";
 
@@ -84,7 +85,7 @@ const Checkout = props => {
         amount={fromDollarToCent(amount)}
         token={onToken(amount, description)}
         currency={CURRENCY}
-        stripeKey={STRIPE_PUBLISHABLE}
+        stripeKey={GoogleKeys.STRIPE_KEY}
         image="/assets/images/logo.png"
         shippingAddress
         billingAddress

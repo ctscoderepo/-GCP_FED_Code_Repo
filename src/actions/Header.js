@@ -17,3 +17,7 @@ export const setCartItemsOnHeader = items => {
 export const setUserDetails = userInfo => {
   return {type : "SET_USER_DETAILS", payload: userInfo}
 }
+
+export const clearCartItemsOnHeader = items => {
+  return {type : "CLEAR_CART_ITEMS", payload: items}
+}
