@@ -73,7 +73,7 @@ const styles = theme => ({
     justifyContent: "center",
     color: "#fff",
     right: "0",
-    backgroundColor: "#0084CD",
+    backgroundColor: "#003d99",
     borderRadius: "0 3px 3px 0px",
     [theme.breakpoints.down("sm")]: {
       color: "#000",
@@ -122,8 +122,8 @@ const styles = theme => ({
       width: 500
     },
     [theme.breakpoints.up("lg")]: {
-      marginLeft: "6%",
-      width: 800
+      marginLeft: "12%",
+      width: 740
     },
     [theme.breakpoints.down("md")]: {
       width: 450
@@ -153,7 +153,7 @@ const styles = theme => ({
   signin: {
     top: "4px",
     fill: "white",
-    display: "flex",
+    float: "left",
     "&:hover": {
       cursor: "pointer"
     },
@@ -207,10 +207,13 @@ const styles = theme => ({
   },
   NavigationMenu: {
     padding: "0",
-    backgroundColor: "#1a75ff",
+    backgroundColor: "#003d99",
     minHeight: "40px",
     paddingBottom: "-20px",
     [theme.breakpoints.down("sm")]: {
+      display: "block"
+    },
+    [theme.breakpoints.down("xs")]: {
       display: "none"
     }
   },
@@ -246,7 +249,7 @@ const styles = theme => ({
     color: "white",
     fontSize: "12px",
     marginTop: "3px",
-    textAlign: "center",
+    textAlign: "right",
     width: "auto",
     float: "left",
     [theme.breakpoints.down("sm")]: {
@@ -302,15 +305,23 @@ function SearchAppBar(props) {
     }
   };
 
-  let userInfo = JSON.parse(localStorage.getItem("userData1"));
+  let userInfo = JSON.parse(localStorage.getItem("loggedInUserData"));
+  const userData = userInfo ? userInfo.userDetails : "";
+  const userFirstName =
+    userData && userData.address ? userData.address.firstName : "";
 
-  const signOut = () => {
+  const { classes, history, showNavbar, cartItems, storeData } = props;
+  const [logoutData, setLogoutData] = useState("");
+
+  const signOut = value => {
+    setLogoutData(value);
+
     console.log("Signing Out");
-    localStorage.removeItem("userData1");
+    localStorage.removeItem("loggedInUserData");
     userInfo = "";
+    history.push("/");
   };
 
-  const { classes, history, showNavbar, cartItems } = props;
   const [totalQuantity, setTotalQuantity] = useState();
   useEffect(() => {
     if (cartItems) {
@@ -357,7 +368,13 @@ function SearchAppBar(props) {
       <div className="Header">
         <AppBar position="fixed" className={classes.appBar}>
           {/* <Advertisement /> */}
-          <div style={{ backgroundColor: "#e6e6e6" }}>
+          <div
+            style={{
+              backgroundColor: "#e6e6e6",
+              height: "60px",
+              paddingTop: "10px"
+            }}
+          >
             <Toolbar className={classes.toolBar}>
               <IconButton
                 className={classes.menuButton}
@@ -380,15 +397,6 @@ function SearchAppBar(props) {
                   />
                 </Link>
               </Typography>
-              {/* <Typography
-                style={{
-                  fontSize: "20px",
-                  color: "black",
-                  paddingLeft: "20px"
-                }}
-              >
-                Demo Store
-              </Typography> */}
               <div className={classes.search}>
                 <form onSubmit={handleSubmit}>
                   <Button type="submit" className={classes.searchIcon}>
@@ -445,18 +453,18 @@ function SearchAppBar(props) {
             </Toolbar>
           </div>
           {showNavbar && (
-            <div style={{ backgroundColor: "green" }}>
+            <div>
               <Toolbar className={classes.NavigationMenu}>
                 <Grid container className={classes.toolBar}>
-                  <Grid item lg={2} sm={1} xs={2}>
+                  <Grid item lg={3} sm={1} xs={2}>
                     <div style={{ padding: "10px" }}>
-                      <Location />
+                      <Location storeData={storeData} />
                     </div>
                   </Grid>
                   <Grid item lg={7} sm={8} xs={7}>
                     <NavigationMenu />
                   </Grid>
-                  <Grid item lg={3} sm={3} xs={2}>
+                  <Grid item lg={2} sm={3} xs={2}>
                     <div
                       className={classes.accIconDiv}
                       style={{
@@ -465,78 +473,70 @@ function SearchAppBar(props) {
                         textAlign: "right"
                       }}
                     >
-                      <div>
-                        <p className={classes.signLabel}>
-                          {userInfo && userInfo.userFirstName
-                            ? userInfo.userFirstName
-                            : ""}
-                        </p>
-                        <i
-                          className={`material-icons ${classes.signin}`}
-                          onClick={handleClick}
+                      <Typography
+                        className={classes.signLabel}
+                        style={{ textAlign: "center" }}
+                      >
+                        {userFirstName ? userFirstName : ""}
+                      </Typography>
+                      <i
+                        className={`material-icons ${classes.signin}`}
+                        onClick={handleClick}
+                      >
+                        <svg
+                          className={classes.svgMyAcc}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 18 18"
                         >
-                          <svg
-                            className={classes.svgMyAcc}
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 18 18"
-                          >
-                            <path d="M9 1C4.58 1 1 4.58 1 9s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 2.75c1.24 0 2.25 1.01 2.25 2.25S10.24 8.25 9 8.25 6.75 7.24 6.75 6 7.76 3.75 9 3.75zM9 14.5c-1.86 0-3.49-.92-4.49-2.33C4.62 10.72 7.53 10 9 10c1.47 0 4.38.72 4.49 2.17-1 1.41-2.63 2.33-4.49 2.33z" />
-                          </svg>
-                          <span>
-                            <svg
-                              className={classes.svgArrowDown}
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="20"
-                              height="20"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />
-                            </svg>
-                          </span>
-                        </i>
+                          <path d="M9 1C4.58 1 1 4.58 1 9s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 2.75c1.24 0 2.25 1.01 2.25 2.25S10.24 8.25 9 8.25 6.75 7.24 6.75 6 7.76 3.75 9 3.75zM9 14.5c-1.86 0-3.49-.92-4.49-2.33C4.62 10.72 7.53 10 9 10c1.47 0 4.38.72 4.49 2.17-1 1.41-2.63 2.33-4.49 2.33z" />
+                        </svg>
+                        <span />
+                      </i>
 
-                        {!(userInfo && userInfo.userFirstName) && (
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
+                      {!userFirstName && (
+                        <Menu
+                          id="simple-menu"
+                          anchorEl={anchorEl}
+                          open={Boolean(anchorEl)}
+                          onClose={handleClose}
+                        >
+                          <MenuItem
+                            onClick={() => {
+                              handleClose();
+                              history.push("/login");
+                            }}
                           >
-                            <MenuItem
-                              onClick={() => {
-                                handleClose();
-                                history.push("/login");
-                              }}
-                            >
-                              Login
-                            </MenuItem>
-                            <MenuItem
-                              onClick={() => {
-                                handleClose();
-                                history.push("/register");
-                              }}
-                            >
-                              Register
-                            </MenuItem>
-                          </Menu>
-                        )}
-                        {userInfo && userInfo.userFirstName && (
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
+                            Login
+                          </MenuItem>
+                          <MenuItem
+                            onClick={() => {
+                              handleClose();
+                              history.push("/register");
+                            }}
                           >
-                            <MenuItem onClick={signOut}>Signout</MenuItem>
-                          </Menu>
-                        )}
-                      </div>
+                            Register
+                          </MenuItem>
+                        </Menu>
+                      )}
+                      {userFirstName && (
+                        <Menu
+                          id="simple-menu"
+                          anchorEl={anchorEl}
+                          open={Boolean(anchorEl)}
+                          onClose={handleClose}
+                        >
+                          <MenuItem onClick={() => signOut("logout")}>
+                            Signout
+                          </MenuItem>
+                        </Menu>
+                      )}
                     </div>
+
                     <div className={classes.iconStyles}>
                       <Link to="/Cart">
-                        <CartBadge items={totalQuantity} />{" "}
+                        <CartBadge items={totalQuantity ? totalQuantity : ""} />{" "}
                       </Link>
                     </div>
                   </Grid>

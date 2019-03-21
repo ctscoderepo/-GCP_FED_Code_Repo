@@ -26,21 +26,34 @@ const styles = theme => ({
     fontSize: "12px"
   },
   shopLocation: {
+    textTransform: "uppercase",
     color: "white",
     fontWeight: "bold",
-    paddingTop: "20px",
-    whiteSpace: "nowrap",
+    fontSize: "12px",
     [theme.breakpoints.up("sm")]: {}
+  },
+  storeName: {
+    textTransform: "uppercase",
+    color: "green",
+    fontWeight: "bold",
+    fontSize: "10px",
+    whiteSpace: "nowrap"
   },
   shopContent: {
     [theme.breakpoints.down("sm")]: {
       display: "none"
     }
+  },
+  storeLoc: {
+    marginTop: "5px"
+  },
+  storeLoc1: {
+    marginTop: "2px"
   }
 });
 
 const Location = props => {
-  const { classes, history } = props;
+  const { classes, history, storeData } = props;
 
   const clickhere = () => {
     history.push("/FindStore");
@@ -59,8 +72,19 @@ const Location = props => {
         </svg>
       </i>
       <div className={classes.shopContent}>
-        <div style={{ marginTop: "4px" }}>
-          <Link className={classes.shopLocation}>Find a store</Link>
+        <div className={storeData ? classes.storeLoc : classes.storeLoc1}>
+          {storeData ? (
+            <div style={{ height: "10px", fontSize: "11px" }}>
+              You're Shopping
+            </div>
+          ) : (
+            ""
+          )}
+          <Link
+            className={storeData ? classes.storeName : classes.shopLocation}
+          >
+            {storeData ? storeData : "Find a store"}
+          </Link>
         </div>
       </div>
     </div>

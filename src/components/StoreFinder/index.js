@@ -8,7 +8,7 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
-import {GoogleKeys} from "../../config/GoogleKeys";
+import { GoogleKeys } from "../../config/GoogleKeys";
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
 
 const styles = theme => ({
@@ -32,7 +32,8 @@ const styles = theme => ({
     }
   },
   devider: {
-    backgroundColor: "#bfbfbf"
+    backgroundColor: "#bfbfbf",
+    marginTop: "15px"
   },
   nearMeBtn: {
     textTransform: "uppercase",
@@ -139,14 +140,13 @@ const styles = theme => ({
     border: "1px solid #bfbfbf",
     borderRadius: "5px",
     marginTop: "10px",
-    [theme.breakpoints.down("xs")]: {
-      margin: "10px"
-    },
+    margin: "10px",
     "&:hover": {
       backgroundColor: "#bfbfbf",
       cursor: "pointer"
     }
   },
+
   locationDiv: {
     marginTop: "20px",
     marginLeft: "40px"
@@ -176,11 +176,38 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       display: "block"
     }
+  },
+  btnStyle: {
+    textTransform: "uppercase",
+    backgroundColor: "#0084CD",
+    borderRadius: "5px",
+    width: "40%",
+    margin: "10px 0",
+    fontSize: "12px",
+    boxShadow: "none",
+    outline: "none",
+    color: "#fff",
+    border: "none",
+    fontWeight: "400",
+    fill: "#000",
+    "&:hover": {
+      backgroundColor: "#0084CD"
+    }
+  },
+  select: {
+    backgroundColor: "green"
   }
 });
 
 const StoreFinderComponent = props => {
-  const { classes, history, findStores, getStoresByLatLng, storeList } = props
+  const {
+    classes,
+    history,
+    findStores,
+    getStoresByLatLng,
+    storeList,
+    setStoreData
+  } = props;
 
   const [address, setAddress] = useState("");
   const getAddress = value => {
@@ -227,6 +254,8 @@ const StoreFinderComponent = props => {
     setActiveMarker(marker);
     setShowingInfoWindow(true);
     setInfoWindowMessage(message);
+    setStoreData(message);
+    history.push("/");
   };
 
   const onMapClick = props => {
@@ -253,13 +282,19 @@ const StoreFinderComponent = props => {
       ))
     : "";
 
-  const selectStore = (item, e) => {
-    console.log("item", item);
+  const [indexNum, setIndexNum] = useState();
+
+  const selectStore = item => {
+    const address = item ? item.address : "";
+    const storeId = item ? item.id : "";
+    setIndexNum(storeId);
+    props.setStoreData(address);
+    history.push("/");
   };
 
   const storeDetails = sortedStoreList ? (
     sortedStoreList.map((item, index) => (
-      <div className={classes.storesDiv} key={item.id} onClick={selectStore(item)}>
+      <div className={classes.storesDiv} key={item.id}>
         <div>
           <Avatar className={classes.avatarStyle}>{item.id}</Avatar>
           <div style={{ marginLeft: "40px" }}>
@@ -275,6 +310,15 @@ const StoreFinderComponent = props => {
           <Typography style={{ fontSize: "13px" }}>
             {item.store_info}
           </Typography>
+        </div>
+        <Divider className={classes.devider} />
+        <div style={{ textAlign: "right", marginBottom: "-10px" }}>
+          <Button
+            className={classes.btnStyle}
+            onClick={() => selectStore(item)}
+          >
+            Select Store
+          </Button>
         </div>
       </div>
     ))
@@ -323,10 +367,7 @@ const StoreFinderComponent = props => {
                     </Grid>
                   </Grid>
 
-                  <Divider
-                    className={classes.devider}
-                    style={{ marginTop: "15px" }}
-                  />
+                  <Divider className={classes.devider} />
                   <Grid container className={classes.marginTop15px}>
                     <Grid item lg={12} sm={12} xs={12}>
                       <Grid container>
@@ -416,7 +457,9 @@ const StoreFinderComponent = props => {
                 >
                   {googleMarker}
                   <InfoWindow marker={activeMarker} visible={showingInfoWindow}>
-                    <Typography>{infoWindowMessage}</Typography>
+                    <div style={{ height: "50px", paddingTop: "30px" }}>
+                      <Typography>{infoWindowMessage}</Typography>
+                    </div>
                   </InfoWindow>
                 </Map>
               </div>

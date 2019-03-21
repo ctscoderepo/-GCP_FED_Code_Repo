@@ -13,14 +13,14 @@ ul.NavigationMenu-nav-bar {
 }
 
 ul.NavigationMenu-nav-bar li {
-  font-size: 15px;
+  font-size: 13px;
   color: #040c13;
   padding: 0 20px;
   box-sizing: border-box;
   text-transform: capitalize;
   font-weight: 400;
   text-align: center;
-  border-right: 1px solid white;
+  border-right: 0px solid white;
 }
 ul.NavigationMenu-nav-bar li:last-of-type {
   border: none;
@@ -32,9 +32,10 @@ ul.NavigationMenu-nav-bar li a:hover {
   color: white;
 }
 ul.NavigationMenu-nav-bar li {
-  width: 20%;
+  width: auto;
   float: left;
   white-space: nowrap;
+    margin-left: 20px
 }
 
 a.nav-item {

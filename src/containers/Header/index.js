@@ -3,17 +3,24 @@ import HeaderComponent from "../../components/Header";
 import { connect } from "react-redux";
 import { searchResults } from "../../actions/Search";
 
-const Header = ({ showNavbar, cartItems, searchResults }) => {
+const Header = ({ showNavbar, cartItems, searchResults, storeData }) => {
   return (
     <div>
-      <HeaderComponent showNavbar={showNavbar} 
-                       searchResults={searchResults}
-                       cartItems= {cartItems} />
+      <HeaderComponent
+        showNavbar={showNavbar}
+        searchResults={searchResults}
+        cartItems={cartItems}
+        storeData={storeData}
+      />
     </div>
   );
 };
 
 export default connect(
-  ({ header }) => ({ showNavbar: header.showNavbar, cartItems: header.cartItems }),
+  ({ header }) => ({
+    showNavbar: header.showNavbar,
+    cartItems: header.cartItems,
+    storeData: header.storeData
+  }),
   { searchResults }
 )(Header);

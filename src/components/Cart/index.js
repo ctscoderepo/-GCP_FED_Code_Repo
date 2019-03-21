@@ -316,16 +316,18 @@ function CartComponent(props) {
 
   console.log(cartItems);
 
-  let userInfo = JSON.parse(localStorage.getItem("userData1"));
+  let userInfo1 = JSON.parse(localStorage.getItem("loggedInUserData"));
+  const userData = userInfo1 ? userInfo1.userDetails : "";
+
+  const memberId = userData ? userData.id : "";
+  const addressId = userData ? userData.address.id : "";
+  const email = userData ? userData.logonId : "";
   const orderId = cartItems && cartItems.orderId ? cartItems.orderId : "";
-  const memberId = userInfo && userInfo.userLogedId ? userInfo.userLogedId : "";
-  const addressId = userInfo && userInfo.addressId ? userInfo.addressId : "";
-  const email = userInfo && userInfo.email ? userInfo.email : "";
 
   let orderDetails = {
     orderId: orderId,
     memberId: memberId,
-    addressId:addressId,
+    addressId: addressId,
     email: email
   };
 
@@ -670,7 +672,8 @@ function CartComponent(props) {
                     <Grid container className={classes.marTop}>
                       <Grid item lg={6} sm={6} xs={6}>
                         <Typography className={classes.txtaln}>
-                          Items : <strong>{totalQuantity?totalQuantity:0}</strong>
+                          Items :{" "}
+                          <strong>{totalQuantity ? totalQuantity : 0}</strong>
                         </Typography>
                       </Grid>
                       <Grid item lg={6} sm={6} xs={6}>
@@ -802,8 +805,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        $
-                        {totalShippingCharge?totalShippingCharge: 0}
+                        ${totalShippingCharge ? totalShippingCharge : 0}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -826,8 +828,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        $
-                        {salesTax?salesTax: 0}
+                        ${salesTax ? salesTax : 0}
                       </Grid>
                     </Grid>
                   </Grid>

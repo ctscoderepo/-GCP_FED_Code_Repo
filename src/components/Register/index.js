@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
-import Paper from '@material-ui/core/Paper';
+import Paper from "@material-ui/core/Paper";
 import "./index.css";
 import { registerPartial } from "handlebars";
 import Spinner from "../helpers/Spinner";
@@ -95,353 +95,397 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: '#FF0000',
+    textAlign: "center",
+    color: "#FF0000"
   },
-    spinnerDiv:{
-        textAlign:"center",
-        marginTop:"20%"
-    }
+  spinnerDiv: {
+    textAlign: "center",
+    marginTop: "20%"
+  }
 });
 
 function LoginComponent(props) {
   const { classes, history, registration, user } = props;
 
-  const [errorRegister, setErrorRegister] = useState('');
+  const [errorRegister, setErrorRegister] = useState("");
 
-  const [firstName, setFirstName] = useState('');
-  const [errorFirstName, setErrorFirstName] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [errorFirstName, setErrorFirstName] = useState("");
 
-  const [lastName, setLastName] = useState('');
-  const [errorLastName, setErrorLastName] = useState('');
+  const [lastName, setLastName] = useState("");
+  const [errorLastName, setErrorLastName] = useState("");
 
-  const [email, setEmail] = useState('');
-  const [errorEmail, setErrorEmail] = useState('');
+  const [email, setEmail] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
 
-  const [password, setPassword] = useState('');
-  const [errorPassword, setErrorPassword] = useState('');
+  const [password, setPassword] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
 
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [errorPhoneNumber, setErrorPhoneNumber] = useState("");
 
-  const handleFirstName = (value) => {
+  const handleFirstName = value => {
     setFirstName(value);
-  }
-  const handleLastName = (value) => {
+  };
+  const handleLastName = value => {
     setLastName(value);
-  }
-  const handleEmail = (value) => {
+  };
+  const handleEmail = value => {
     setEmail(value);
-  }
-  const handlePassword = (value) => {
+  };
+  const handlePassword = value => {
     setPassword(value);
-  }
-  const handlePhoneNumber = (value) => {
+  };
+  const handlePhoneNumber = value => {
     setPhoneNumber(value);
-  }
-  const [isLoading, setIsLoading] = useState('');
-  const handleSubmit = (e) => {
-    
+  };
+  const [isLoading, setIsLoading] = useState("");
+  const handleSubmit = e => {
     e.preventDefault();
-    if (!firstName) { setErrorFirstName("Please enter first name"); }
-    else { setErrorFirstName(""); }
+    if (!firstName) {
+      setErrorFirstName("Please enter first name");
+    } else {
+      setErrorFirstName("");
+    }
 
-    if (!lastName) { setErrorLastName("Please enter last name"); }
-    else { setErrorLastName(""); }
+    if (!lastName) {
+      setErrorLastName("Please enter last name");
+    } else {
+      setErrorLastName("");
+    }
 
-    if (!email) { setErrorEmail("Please enter email address"); }
-    else { setErrorEmail(""); }
+    if (!email) {
+      setErrorEmail("Please enter email address");
+    } else {
+      setErrorEmail("");
+    }
 
-    if (!password) { setErrorPassword("Please enter password"); }
-    else { setErrorPassword(""); }
+    if (!password) {
+      setErrorPassword("Please enter password");
+    } else {
+      setErrorPassword("");
+    }
 
-    if (!phoneNumber) { setErrorPhoneNumber("Please enter phone number"); }
-    else { setErrorPhoneNumber(""); }
+    if (!phoneNumber) {
+      setErrorPhoneNumber("Please enter phone number");
+    } else {
+      setErrorPhoneNumber("");
+    }
 
-    if (!errorFirstName && !errorLastName && !errorEmail && !errorPassword && !errorPhoneNumber) {
-        setIsLoading(true);
+    if (
+      !errorFirstName &&
+      !errorLastName &&
+      !errorEmail &&
+      !errorPassword &&
+      !errorPhoneNumber
+    ) {
+      setIsLoading(true);
       registration({
-        "logonId": email,
-        "password": password,
-        "address": {
+        logonId: email,
+        password: password,
+        address: {
           firstName,
           lastName,
           email,
           phoneNumber,
-          "gender": "",
-          "dateOfBirth": "",
-          "address1": "",
-          "address2": "",
-          "city": "",
-          "state": "",
-          "country": "",
-          "zipCode": "",
-          "status": "1",
-          "addressType": "SB"
+          gender: "",
+          dateOfBirth: "",
+          address1: "",
+          address2: "",
+          city: "",
+          state: "",
+          country: "",
+          zipCode: "",
+          status: "1",
+          addressType: "SB"
         }
-      }).then((resp) => navigateToHome(resp));
+      }).then(resp => navigateToHome(resp));
     }
-  }
+  };
 
-  const navigateToHome = (data) => {
+  const navigateToHome = data => {
     console.log("resp register", data);
-    // return user ?
-    //   (user.errorMessage ? setErrorRegister(user.errorMessage): history.push("/")) :
-    //     setErrorRegister("Sorry!! There is some error with Registration service.");
 
-        const userData=data.payload;
-      
-        const userFirstName=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.firstName:"";
-        const userId=userData && userData.userDetails && userData.userDetails.id?userData.userDetails.id:"";     
-        const addressId=userData && userData.userDetails && userData.userDetails.address?userData.userDetails.address.id:"";     
-        const email = userData && userData.userDetails && userData.userDetails.logonId?userData.userDetails.logonId:"";     
-        let userLogInfo = {
-        userLogedId:userId,
-        userFirstName:userFirstName,
-        addressId:addressId,
-        email:email
-        }
-            
-        let objectSerialized = JSON.stringify(userLogInfo);
-        localStorage.setItem("userData1", objectSerialized);
-          
-          setIsLoading(false);
-           return userData ?
-          (userData.errorMessage?setErrorRegister(userData.errorMessage):history.push('/'))
-          : setErrorRegister("Sorry!! There is some error with Registration service.");
-  }
+    const userData = data.payload;
 
+    let loggedInUserData = JSON.stringify(userData);
+    localStorage.setItem("loggedInUserData", loggedInUserData);
+
+    setIsLoading(false);
+    return userData
+      ? userData.errorMessage
+        ? setErrorRegister(userData.errorMessage)
+        : history.push("/")
+      : setErrorRegister(
+          "Sorry!! There is some error with Registration service."
+        );
+  };
 
   return (
-    <div>{isLoading?<div className={classes.spinnerDiv}><Spinner /> </div>:<div className={classes.root}>
-      <div>
-        <Link to="/"><img
-          src="/assets/images/logo.png"
-          alt="logo"
-          className={classes.logo}
-        /></Link>
-        <p className={classes.registerHead}>Register to DemoStore</p>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <Grid container>
-          <Grid lg={4} sm={4} xs={12} item />
-          <Grid item lg={4} sm={4} xs={12}>
-            {errorRegister &&
-              <Paper className={classes.paper}>
-                {errorRegister}
-              </Paper>
-            }
+    <div>
+      {isLoading ? (
+        <div className={classes.spinnerDiv}>
+          <Spinner />{" "}
+        </div>
+      ) : (
+        <div className={classes.root}>
+          <div>
+            <Link to="/">
+              <img
+                src="/assets/images/logo.png"
+                alt="logo"
+                className={classes.logo}
+              />
+            </Link>
+            <p className={classes.registerHead}>Register to DemoStore</p>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <Grid container>
+              <Grid lg={4} sm={4} xs={12} item />
+              <Grid item lg={4} sm={4} xs={12}>
+                {errorRegister && (
+                  <Paper className={classes.paper}>{errorRegister}</Paper>
+                )}
 
-            <Card>
-              <CardContent>
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid
-                    item
-                    lg={10}
-                    sm={10}
-                    xs={12}
-                    className={classes.rowHeight30}
-                  >
-                    <Typography className={classes.lblStyle}>
-                      First Name :
-                  </Typography>
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                </Grid>
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid
-                    item
-                    lg={10}
-                    sm={10}
-                    xs={12}
-                    className={classes.rowHeight}
-                  >
-                    <TextField
-                      id="outlined-bare"
-                      placeholder="Enter First Name"
-                      margin="normal"
-                      variant="outlined"
-                      name="firstName"
-                      className={classes.txtStyle}
-                      value={firstName.firstName}
-                      onChange={(e) => handleFirstName(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                  {errorFirstName && (<div className="errorReg">{errorFirstName}</div>)}
-                </Grid>
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid
-                    item
-                    lg={10}
-                    sm={10}
-                    xs={12}
-                    className={classes.rowHeight30}
-                  >
-                    <Typography className={classes.lblStyle}>
-                      Last Name :
-                  </Typography>
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                </Grid>
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid
-                    item
-                    lg={10}
-                    sm={10}
-                    xs={12}
-                    className={classes.rowHeight}
-                  >
-                    <TextField
-                      id="outlined-bare"
-                      placeholder="Enter Last Name"
-                      margin="normal"
-                      variant="outlined"
-                      className={classes.txtStyle}
-                      value={lastName.lastName}
-                      onChange={(e) => handleLastName(e.target.value)}
+                <Card>
+                  <CardContent>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.rowHeight30}
+                      >
+                        <Typography className={classes.lblStyle}>
+                          First Name :
+                        </Typography>
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                    </Grid>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.rowHeight}
+                      >
+                        <TextField
+                          id="outlined-bare"
+                          placeholder="Enter First Name"
+                          margin="normal"
+                          variant="outlined"
+                          name="firstName"
+                          className={classes.txtStyle}
+                          value={firstName.firstName}
+                          onChange={e => handleFirstName(e.target.value)}
+                        />
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                      {errorFirstName && (
+                        <div className="errorReg">{errorFirstName}</div>
+                      )}
+                    </Grid>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.rowHeight30}
+                      >
+                        <Typography className={classes.lblStyle}>
+                          Last Name :
+                        </Typography>
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                    </Grid>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.rowHeight}
+                      >
+                        <TextField
+                          id="outlined-bare"
+                          placeholder="Enter Last Name"
+                          margin="normal"
+                          variant="outlined"
+                          className={classes.txtStyle}
+                          value={lastName.lastName}
+                          onChange={e => handleLastName(e.target.value)}
+                        />
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                      {errorLastName && (
+                        <div className="errorReg">{errorLastName}</div>
+                      )}
+                    </Grid>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.rowHeight30}
+                      >
+                        <Typography className={classes.lblStyle}>
+                          Email :
+                        </Typography>
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                    </Grid>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.rowHeight}
+                      >
+                        <TextField
+                          id="outlined-bare"
+                          placeholder="Enter E-mail"
+                          margin="normal"
+                          variant="outlined"
+                          className={classes.txtStyle}
+                          type="email"
+                          value={email.email}
+                          onChange={e => handleEmail(e.target.value)}
+                        />
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                      {errorEmail && (
+                        <div className="errorReg">{errorEmail}</div>
+                      )}
+                    </Grid>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.rowHeight30}
+                      >
+                        <Typography className={classes.lblStyle}>
+                          Password :
+                        </Typography>
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                    </Grid>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.rowHeight}
+                      >
+                        <TextField
+                          id="outlined-bare"
+                          placeholder="Enter Password"
+                          margin="normal"
+                          variant="outlined"
+                          className={classes.txtStyle}
+                          type="password"
+                          value={password.password}
+                          onChange={e => handlePassword(e.target.value)}
+                        />
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                      {errorPassword && (
+                        <div className="errorReg">{errorPassword}</div>
+                      )}
+                    </Grid>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.rowHeight30}
+                      >
+                        <Typography className={classes.lblStyle}>
+                          Phone :
+                        </Typography>
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                    </Grid>
 
-                    />
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                  {errorLastName && (<div className="errorReg">{errorLastName}</div>)}
-                </Grid>
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid
-                    item
-                    lg={10}
-                    sm={10}
-                    xs={12}
-                    className={classes.rowHeight30}
-                  >
-                    <Typography className={classes.lblStyle}>Email :</Typography>
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                </Grid>
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid
-                    item
-                    lg={10}
-                    sm={10}
-                    xs={12}
-                    className={classes.rowHeight}
-                  >
-                    <TextField
-                      id="outlined-bare"
-                      placeholder="Enter E-mail"
-                      margin="normal"
-                      variant="outlined"
-                      className={classes.txtStyle}
-                      type="email"
-                      value={email.email}
-                      onChange={(e) => handleEmail(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                  {errorEmail && (<div className="errorReg">{errorEmail}</div>)}
-                </Grid>
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid
-                    item
-                    lg={10}
-                    sm={10}
-                    xs={12}
-                    className={classes.rowHeight30}
-                  >
-                    <Typography className={classes.lblStyle}>
-                      Password :
-                  </Typography>
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                </Grid>
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid
-                    item
-                    lg={10}
-                    sm={10}
-                    xs={12}
-                    className={classes.rowHeight}
-                  >
-                    <TextField
-                      id="outlined-bare"
-                      placeholder="Enter Password"
-                      margin="normal"
-                      variant="outlined"
-                      className={classes.txtStyle}
-                      type="password"
-                      value={password.password}
-                      onChange={(e) => handlePassword(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                  {errorPassword && (<div className="errorReg">{errorPassword}</div>)}
-                </Grid>
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid
-                    item
-                    lg={10}
-                    sm={10}
-                    xs={12}
-                    className={classes.rowHeight30}
-                  >
-                    <Typography className={classes.lblStyle}>Phone :</Typography>
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                </Grid>
-
-                <Grid container>
-                  <Grid lg={1} sm={1} item />
-                  <Grid item lg={10} sm={10} xs={12} style={{ marginBottom: "-15px" }}>
-                    <TextField
-                      id="outlined-bare"
-                      placeholder="Enter Phone number"
-                      margin="normal"
-                      variant="outlined"
-                      type="tel"
-                      name="phone"
-                      className={classes.txtStyle}
-                      value={phoneNumber.phoneNumber}
-                      onChange={(e) => handlePhoneNumber(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                  {errorPhoneNumber && (<div className="errorReg">{errorPhoneNumber}</div>)}
-                </Grid>
-                <Grid container className={classes.marginTop30}>
-                  <Grid lg={1} sm={1} item />
-                  <Grid item lg={10} sm={10} xs={12} className={classes.txtaln}>
-                    <Button className={classes.btnStyle} type="submit">REGISTER</Button>
-                  </Grid>
-                  <Grid lg={1} sm={1} item />
-                </Grid>
-                <Grid container>
-                  <Grid item lg={1} sm={1} />
-                  <Grid item lg={10} sm={10} xs={12}>
-                    <p className={classes.login}>
-                      Already DemoStore?&nbsp;
-                    <Link to="/login" className="link">
-                        Login here
-                    </Link>
-                    </p>
-                  </Grid>
-                  <Grid item lg={1} sm={1} />
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid lg={4} sm={4} xs={12} item />
-        </Grid>
-      </form>
-    </div>}</div>
+                    <Grid container>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        style={{ marginBottom: "-15px" }}
+                      >
+                        <TextField
+                          id="outlined-bare"
+                          placeholder="Enter Phone number"
+                          margin="normal"
+                          variant="outlined"
+                          type="tel"
+                          name="phone"
+                          className={classes.txtStyle}
+                          value={phoneNumber.phoneNumber}
+                          onChange={e => handlePhoneNumber(e.target.value)}
+                        />
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                      {errorPhoneNumber && (
+                        <div className="errorReg">{errorPhoneNumber}</div>
+                      )}
+                    </Grid>
+                    <Grid container className={classes.marginTop30}>
+                      <Grid lg={1} sm={1} item />
+                      <Grid
+                        item
+                        lg={10}
+                        sm={10}
+                        xs={12}
+                        className={classes.txtaln}
+                      >
+                        <Button className={classes.btnStyle} type="submit">
+                          REGISTER
+                        </Button>
+                      </Grid>
+                      <Grid lg={1} sm={1} item />
+                    </Grid>
+                    <Grid container>
+                      <Grid item lg={1} sm={1} />
+                      <Grid item lg={10} sm={10} xs={12}>
+                        <p className={classes.login}>
+                          Already DemoStore?&nbsp;
+                          <Link to="/login" className="link">
+                            Login here
+                          </Link>
+                        </p>
+                      </Grid>
+                      <Grid item lg={1} sm={1} />
+                    </Grid>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid lg={4} sm={4} xs={12} item />
+            </Grid>
+          </form>
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -337,10 +337,18 @@ const AuthUserCheckout = props => {
     }
   };
 
-  let userInfo = JSON.parse(localStorage.getItem("userData1"));
-  const orderId = cartItems && cartItems.orderId ? cartItems.orderId : 0;
-  const memberId = userInfo && userInfo.userLogedId ? userInfo.userLogedId : 0;
-  const addressId = userInfo && userInfo.addressId ? userInfo.addressId : 0;
+  const orderId = cartItems && cartItems.orderId ? cartItems.orderId : 0; 
+
+  let userInfo1 = JSON.parse(localStorage.getItem("loggedInUserData"));
+  const userData=userInfo1?userInfo1.userDetails:"";
+  const memberId=userData?userData.id:"";
+  const addressId=userData?userData.address.id:"";
+  const email=userData?userData.logonId:"";
+  const userAddress =userData?userData.address : "";
+
+  if(email){
+    setguestEmail(email);
+  }
 
   const checkoutCart = () => {
     if (memberId == 0) {
@@ -431,9 +439,6 @@ const AuthUserCheckout = props => {
       {years.year}
     </MenuItem>
   ));
-
-  const userData = JSON.parse(localStorage.getItem("loggedInUserData"));
-  const userAddress = userData ? userData.userDetails.address : "";
 
   return (
     <>

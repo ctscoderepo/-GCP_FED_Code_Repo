@@ -11,6 +11,9 @@ const styles = theme => ({
     height: "400px",
     overflow: "hidden",
     [theme.breakpoints.down("sm")]: {
+      height: "300px"
+    },
+      [theme.breakpoints.down("xs")]: {
       height: "150px"
     }
   },
@@ -19,6 +22,10 @@ const styles = theme => ({
     borderRadius: "3px",
     height: "400px",
     [theme.breakpoints.down("sm")]: {
+      height: "300px"
+    }
+      ,
+      [theme.breakpoints.down("xs")]: {
       height: "150px"
     }
   },
@@ -27,6 +34,9 @@ const styles = theme => ({
     height: "400px",
     borderRadius: "3px",
     [theme.breakpoints.down("sm")]: {
+      height: "300px"
+    },
+      [theme.breakpoints.down("xs")]: {
       height: "150px"
     }
   },
@@ -35,6 +45,9 @@ const styles = theme => ({
     height: "400px",
     borderRadius: "3px",
     [theme.breakpoints.down("sm")]: {
+      height: "300px"
+    },
+      [theme.breakpoints.down("xs")]: {
       height: "150px"
     }
   }

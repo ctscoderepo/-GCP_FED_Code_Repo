@@ -11,13 +11,17 @@ export const setNavBarStatus = value => {
 };
 
 export const setCartItemsOnHeader = items => {
-  return {type : "SET_CART_ITEMS", payload: items}
-}
+  return { type: "SET_CART_ITEMS", payload: items };
+};
 
 export const setUserDetails = userInfo => {
-  return {type : "SET_USER_DETAILS", payload: userInfo}
-}
+  return { type: "SET_USER_DETAILS", payload: userInfo };
+};
 
 export const clearCartItemsOnHeader = items => {
-  return {type : "CLEAR_CART_ITEMS", payload: items}
-}
+  return { type: "CLEAR_CART_ITEMS", payload: items };
+};
+
+export const setStoreData = items => {
+  return { type: "SET_STORE_DATA", payload: items };
+};
