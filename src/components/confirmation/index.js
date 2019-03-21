@@ -30,8 +30,8 @@ const styles = theme => ({
   },
   
     logo: {
-    width: "100px",
-    height: "100px",
+    width: "200px",
+    height: "50px",
     display: "block",
   },
     confirmHeader:{
@@ -109,6 +109,7 @@ const ConfirmationComponent  = (props) => {
     }
     
   const userData = JSON.parse(localStorage.getItem("loggedInUserData"));
+  const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
   const userAddress=userData?userData.userDetails.address:""; 
   const totalOrderValue=checkoutData?checkoutData.totalPrice + checkoutData.totalShipping + checkoutData.totalTax:0;
     
@@ -125,7 +126,7 @@ const ConfirmationComponent  = (props) => {
         <div> <Typography className={classes.orderLabel}  ><strong>Order Number :</strong></Typography><span>{checkoutData?checkoutData.orderId:''}</span></div>
         </Grid>
         <Grid item lg={12} sm={12} xs={12} style={{marginTop:"10px"}}>
-        <div><Typography>Your order of <strong>${totalOrderValue?totalOrderValue:0}</strong> has been confirmed. You will receive an email cofirmation at <strong>{userAddress?userAddress.email:""}</strong></Typography></div>
+        <div><Typography>Your order of <strong>${totalOrderValue?totalOrderValue:0}</strong> has been confirmed. You will receive an email cofirmation at <strong>{orderDetails?orderDetails.email:""}</strong></Typography></div>
         </Grid>
         </Grid>
         </div>

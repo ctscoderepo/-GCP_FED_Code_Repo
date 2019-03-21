@@ -20,7 +20,8 @@ const Cart = ({
   updateCart,
   removeItemsFromCart,
   getCart,
-  isLoading
+  isLoading,
+  checkout
 }) => {
   useEffect(() => {
     setCartItemsOnHeader(cartItems.orderItems);

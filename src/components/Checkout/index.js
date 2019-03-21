@@ -255,6 +255,7 @@ const AuthUserCheckout = props => {
   const orderItems = cartItems ? cartItems.orderItems : "";
 
   const [totalQuantity, setTotalQuantity] = useState();
+  let orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
   useEffect(() => {
     if (orderItems) {
       let count = 0;
@@ -286,6 +287,8 @@ const AuthUserCheckout = props => {
 
   const handleguestEmail = value => {
     setguestEmail(value);
+    orderDetails.email = value;
+    localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
   };
   const handleFName = value => {
     setFName(value);
@@ -707,20 +710,6 @@ const AuthUserCheckout = props => {
                           control={<Radio color="default" />}
                           label="Debit Card"
                         />
-                        <FormControlLabel
-                          onChange={e => selectCardType(e.target.value)}
-                          className={classes.radioBtn}
-                          value="PayPal"
-                          control={<Radio color="default" />}
-                          label="PayPal"
-                        />
-                        <FormControlLabel
-                          onChange={e => selectCardType(e.target.value)}
-                          className={classes.radioBtn}
-                          value="Pay on delivery"
-                          control={<Radio color="default" />}
-                          label="Pay On Delivery"
-                        />
                       </RadioGroup>
                     </FormControl>
                   </div>
@@ -823,9 +812,8 @@ const AuthUserCheckout = props => {
                   <Grid item lg={12} sm={12} xs={12}>
                     <Button
                       type="submit"
-                      className={
-                        enabledBtn ? classes.PlaceOrderBtn : classes.btnDisabled
-                      }
+                      className={classes.btnStyle}
+                      disabled={enabledBtn?false:true}
                       onClick={enabledBtn ? () => checkoutCart() : null}
                     >
                       Place Order

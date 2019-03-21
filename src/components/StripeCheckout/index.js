@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import {GoogleKeys} from "../../config/GoogleKeys";
-import STRIPE_PUBLISHABLE from "../../config/stripe";
 import PAYMENT_SERVER_URL from "../../config/server";
 
 const styles = theme => ({
@@ -60,6 +59,9 @@ const Checkout = props => {
     console.info("Payment Successful", resp.data);
 
     let email = resp.data.receipt_email;
+    let lSOrder = localStorage.getItem("orderDetails");
+    lSOrder.email = email;
+    localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
     submitOrder(order, email);
     alert("Continue from here to order complete flow");
   }
@@ -86,7 +88,7 @@ const Checkout = props => {
   };
   
 
-  const onToken = (amount, description, orderDetails) => token =>
+  const onToken = (amount, description) => token =>
   axios
     .post(
       PAYMENT_SERVER_URL,
@@ -95,7 +97,6 @@ const Checkout = props => {
         source: token.id,
         currency: CURRENCY,
         amount: fromDollarToCent(amount),
-        //order:orderDetails,
         receipt_email:token.email
       },
       {
@@ -114,13 +115,12 @@ const Checkout = props => {
         name={name}
         description={description}
         amount={fromDollarToCent(amount)}
-        token={onToken(amount, description, orderDetails)}
+        token={onToken(amount, description)}
         currency={CURRENCY}
         stripeKey={GoogleKeys.STRIPE_KEY}
         image="/assets/images/logo.png"
         shippingAddress
         billingAddress
-        orderDetails={orderDetails}
         allowRememberMe={false}
         email={orderDetails.email}
       >

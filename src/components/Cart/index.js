@@ -10,7 +10,7 @@ import Link from "@material-ui/core/Link";
 import Divider from "@material-ui/core/Divider";
 import c1 from "../Home/images/f1.jpeg";
 import Spinner from "../helpers/Spinner";
-import Checkout from "../StripeCheckout";
+import ExpressCheckout from "../StripeCheckout";
 import "./index.css";
 
 const styles = theme => ({
@@ -867,7 +867,7 @@ function CartComponent(props) {
                   </div>
 
                   <div className={classes.yourOrdTxt}>
-                    <Checkout
+                    <ExpressCheckout
                       name={"Demo store checkout"}
                       description={`DEMO store order - ${orderId}`}
                       cartItems={cartItems}
