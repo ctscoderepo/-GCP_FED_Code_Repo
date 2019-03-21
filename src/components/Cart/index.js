@@ -310,7 +310,8 @@ function CartComponent(props) {
     updateCart,
     removeItemsFromCart,
     getCart,
-    isLoading
+    isLoading,
+    checkout
   } = props;
 
   console.log(cartItems);
@@ -872,6 +873,7 @@ function CartComponent(props) {
                       cartItems={cartItems}
                       amount={totalPrice()}
                       orderDetails={orderDetails}
+                      checkout={checkout}
                     />
                   </div>
 

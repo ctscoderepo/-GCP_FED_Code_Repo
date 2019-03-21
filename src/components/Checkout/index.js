@@ -451,7 +451,7 @@ const AuthUserCheckout = props => {
         <div className={classes.root}>
           <Grid container spacing={24}>
             <Grid item lg={8} sm={8} xs={12}>
-              <Grid cotainer>
+              <Grid container>
                 <form onSubmit={handleSubmit}>
                   {memberId == 0 ? (
                     <div>

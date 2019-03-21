@@ -253,13 +253,13 @@ const StoreFinderComponent = props => {
       ))
     : "";
 
-  const selectStore = (props, marker, e) => {
-    console.log("props: ", props, "marker :", marker);
+  const selectStore = (item, e) => {
+    console.log("item", item);
   };
 
   const storeDetails = sortedStoreList ? (
     sortedStoreList.map((item, index) => (
-      <div className={classes.storesDiv} key={item.id} onClick={selectStore}>
+      <div className={classes.storesDiv} key={item.id} onClick={selectStore(item)}>
         <div>
           <Avatar className={classes.avatarStyle}>{item.id}</Avatar>
           <div style={{ marginLeft: "40px" }}>

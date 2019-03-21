@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
@@ -37,32 +38,6 @@ const CURRENCY = "USD";
 
 const fromDollarToCent = amount => amount * 100;
 
-const successPayment = data => {
-  console.info("Payment Successful", data);
-  //console.log("orderdetails:" , orderDetails)
-  alert("Continue from here to order complete flow");
-};
-
-const errorPayment = data => {
-  console.error("Payment Error", data);
-};
-
-const submitOrder = () => {
-  // if (memberId == 0) {
-  //   props.checkout({
-  //     orderId: orderId,
-  //     email: guestEmail,
-  //     addressId: addressId
-  //   });
-  // } else {
-  //   props.checkout({
-  //     orderId: orderId,
-  //     memberId: memberId,
-  //     addressId: addressId
-  //   });
-  // }
-  // history.push("/Confirmation");
-};
 axios.interceptors.request.use(request => {
   console.log("Starting Request", request);
   return request;
@@ -73,7 +48,45 @@ axios.interceptors.response.use(response => {
   return response;
 });
 
-const onToken = (amount, description, orderDetails) => token =>
+const Checkout = props => {
+
+  const { classes, name, description, amount, cartItems, orderDetails, history } = props;
+  const [order, setOrder] = useState(orderDetails);
+  useEffect(() =>{
+    setOrder(orderDetails);
+  }, [orderDetails])
+
+  const successPayment = resp => {
+    console.info("Payment Successful", resp.data);
+
+    let email = resp.data.receipt_email;
+    submitOrder(order, email);
+    alert("Continue from here to order complete flow");
+  }
+  
+  const errorPayment = data => {
+    console.error("Payment Error", data);
+  };
+
+  const submitOrder = (order, email) =>  {
+    console.log("inside submitOrder ");
+    if (!order.memberId) {
+      props.checkout({
+        orderId: order.orderId,
+        email: email
+      }).then(history.push("/Confirmation"));
+    } else {
+      props.checkout({
+        orderId: order.orderId,
+        memberId: order.memberId,
+        addressId: order.addressId
+      }).then(history.push("/Confirmation"));
+    }
+    //history.push("/Confirmation");
+  };
+  
+
+  const onToken = (amount, description, orderDetails) => token =>
   axios
     .post(
       PAYMENT_SERVER_URL,
@@ -94,9 +107,7 @@ const onToken = (amount, description, orderDetails) => token =>
     )
     .then(successPayment)
     .catch(errorPayment);
-
-const Checkout = props => {
-  const { classes, name, description, amount, cartItems, orderDetails } = props;
+ 
   return (
     <div>
       <StripeCheckout
@@ -117,7 +128,7 @@ const Checkout = props => {
           <Button className={classes.btnStyle}
                   disabled={!cartItems.orderItems?true:false}
           >
-            <strong>Checkout with Stripe</strong>
+            <strong>Express Checkout</strong>
           </Button>
         </div>
       </StripeCheckout>
@@ -129,4 +140,4 @@ Checkout.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Checkout);
+export default withRouter(withStyles(styles)(Checkout));

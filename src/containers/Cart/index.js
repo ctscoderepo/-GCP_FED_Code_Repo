@@ -7,7 +7,7 @@ import {
   setNavBarStatus,
   setCartItemsOnHeader
 } from "../../actions/Header";
-import {setCartItemsOnCheckout} from "../../actions/Checkout"
+import {setCartItemsOnCheckout, checkout} from "../../actions/Checkout"
 import { updateCart, removeItemsFromCart, getCart } from "../../actions/Cart";
 
 const Cart = ({
@@ -42,6 +42,7 @@ const Cart = ({
         removeItemsFromCart={removeItemsFromCart}
         getCart={getCart}
         isLoading={isLoading}
+        checkout={checkout}
       />
     </div>
   );
@@ -57,6 +58,7 @@ export default connect(
     setCartItemsOnCheckout,
     updateCart,
     removeItemsFromCart,
-    getCart
+    getCart,
+    checkout
   }
 )(Cart);
