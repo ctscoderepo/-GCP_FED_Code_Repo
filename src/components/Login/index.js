@@ -10,6 +10,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import Spinner from "../helpers/Spinner";
 import "./index.css";
+import { light } from "@material-ui/core/styles/createPalette";
+import { gray } from "ansi-colors";
 
 const styles = theme => ({
   root: {
@@ -20,7 +22,8 @@ const styles = theme => ({
     transform: "translate(-50%, -50%)",
     height: "100%",
     width: "100%",
-    flexDirection: "column"
+    flexDirection: "column",
+    backgroundColor:"lightgray"
   },
   lblStyle: {
     margin: "20px 0px",
@@ -67,8 +70,8 @@ const styles = theme => ({
     fontSize: "24px"
   },
   logo: {
-    width: "60px",
-    height: "60px",
+    width: "100px",
+    height: "40px",
     display: "block",
     margin: "0 auto",
     padding: "50px 0 0 0"
@@ -159,7 +162,7 @@ function LoginComponent(props) {
                     </Grid>
                     <Grid item lg={1} sm={1} />
                   </Grid>
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit} >
                     <Grid container>
                       <Grid item lg={1} sm={1} />
                       <Grid

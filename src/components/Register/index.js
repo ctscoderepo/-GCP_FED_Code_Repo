@@ -23,7 +23,8 @@ const styles = theme => ({
     transform: "translate(-50%, -50%)",
     height: "100%",
     width: "100%",
-    flexDirection: "column"
+    flexDirection: "column",
+    backgroundColor:"lightgray"
   },
   wid50: {
     width: "200px",
@@ -77,8 +78,8 @@ const styles = theme => ({
     fontSize: "24px"
   },
   logo: {
-    width: "60px",
-    height: "60px",
+    width: "100px",
+    height: "40px",
     display: "block",
     margin: "0 auto",
     padding: "20px 0 0 0"
@@ -239,7 +240,7 @@ function LoginComponent(props) {
             </Link>
             <p className={classes.registerHead}>Register to DemoStore</p>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} style={{ backgroundColor: "lightgray" }}>
             <Grid container>
               <Grid lg={4} sm={4} xs={12} item />
               <Grid item lg={4} sm={4} xs={12}>

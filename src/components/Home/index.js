@@ -166,7 +166,7 @@ const HomeComponent = props => {
           <Featured />
         </Grid>
       </Grid>
-      <h3 className="featuredProductsHeading">Featured products</h3>
+      <h3 className="featuredProductsHeading">FEATURED PRODUCTS</h3>
       <div className={classes.lghidden}>
         <Slider {...settings}>
           <div>

@@ -3,6 +3,9 @@
   text-transform: capitalize;
   font-size: 14px;
   box-sizing: border-box;
+  color: #003d99;
+  font-stretch: extra-expanded;
+  font-size: x-large;
 }
 .imagewrapper {
   box-sizing: border-box;
