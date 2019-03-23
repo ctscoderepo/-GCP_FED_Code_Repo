@@ -12,7 +12,10 @@ const styles = theme => ({
   productsComponent: {
     margin: "150px 0 20px 0",
     [theme.breakpoints.down("sm")]: {
-      margin: "95px 20px 20px 20px"
+      margin: "140px 20px 20px 20px"
+    },
+      [theme.breakpoints.down("xs")]: {
+      margin: "100px 20px 20px 20px"
     }
   },
   categories: {
@@ -50,23 +53,60 @@ const styles = theme => ({
   },
   spinnerDiv: {
     textAlign: "center",
-    marginTop: "5%"
+    marginTop: "5%",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft:"120px"
+    }  
   },
   imageWrapper: {
     marginLeft: "auto",
     marginRight: "auto",
     display: "block",
-    height: "200px",
-    width: "100%",
+    height: "350px",
+    width: "95%",
+      border:"1px solid #d9d9d9",
+      borderRadius:"2px",
     [theme.breakpoints.down("sm")]: {
-      height: "150px",
-      width: "100%"
+      height: "250px",
+      width: "95%"
     },
     [theme.breakpoints.down("xs")]: {
-      height: "150px",
-      width: "100%"
+      height: "200px",
+      width: "95%"
     }
-  }
+  },
+    dividerStyle:{
+        backgroundColor:"#e6e6e6",
+        height:"2px", 
+        marginTop:"20px"
+    },
+    relevanceInput:{
+    padding:"10px",
+        border:"1px solid #cccccc",
+       [theme.breakpoints.down("xs")]: {
+          padding:"5px"  ,
+           marginLeft:"10px",
+           width:"30%"
+        } 
+    },
+    relevance:{
+       textAlign:"right",marginTop:"-20px",
+       [theme.breakpoints.down("xs")]: {
+          marginTop:"-25px",
+          fontSize:"13px",
+        } 
+    },
+    productLine:{
+        [theme.breakpoints.down("lg")]: {
+        fontSize:"20px"
+        },
+        [theme.breakpoints.down("sm")]: {
+        fontSize:"16px"
+        },
+        [theme.breakpoints.down("xs")]: {
+        fontSize:"14px",
+        }
+    },
 });
 
 const rating = () => (
@@ -148,8 +188,8 @@ function Products({ products, catType, classes, isLoading }) {
     ) : (
       <Grid container spacing={16}>
         {products.map(product => (
-          <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
-            <div className="productWrapper">
+          <Grid item lg={4} md={4} sm={4} xs={6} key={product.skuId}>
+            <div >
               <Link
                 to={`/store/product/${product.skuId}`}
                 className={classes.item}
@@ -163,11 +203,11 @@ function Products({ products, catType, classes, isLoading }) {
                 </div>
                 <div className="productDetail">
                   <div className="title">{product.productName}</div>
-                  <span className="rated">{rating()}</span>
-                  <div className="price">
+                  <span className="rated" >{rating()}</span>
+                  <div className="price"><strong>
                     {product.currencyCode === "USD" && "$"}{" "}
                     <span>{product.price}</span>
-                  </div>
+                  </strong></div>
                 </div>
               </Link>
             </div>
@@ -177,16 +217,23 @@ function Products({ products, catType, classes, isLoading }) {
     );
   return (
     <div className={classes.productsComponent}>
-      <div style={{ marginBottom: "30px" }}>
-        <Typography style={{ fontSize: "20px" }}>
+      <div style={{ marginBottom: "30px"}}>
+        <Typography className={classes.productLine}>
           <strong>{mainCategory}</strong>
         </Typography>
+{mainCategory?<div className={classes.relevance}>
+            Sort by <input type="text" value="Relevance" className={classes.relevanceInput}/></div>:""}
+        <div>{mainCategory?<Divider className={classes.dividerStyle}/>:""}</div>
       </div>
+     
       <Grid container spacing={16}>
-        <Grid item lg={2} md={3} sm={3} className={classes.sideNav}>
+        <Grid item lg={3} md={3} sm={3} className={classes.sideNav}>
+          <div style={{height:"40px", paddingTop:"10px"}}>
+            <Typography>FILTERS</Typography>
+     </div>
           <SideNav />
         </Grid>
-        <Grid item lg={1} className={classes.gridHide} />
+       
         <Grid item lg={9} md={9} sm={9}>
           {spinner}
         </Grid>

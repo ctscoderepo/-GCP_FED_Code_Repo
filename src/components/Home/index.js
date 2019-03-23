@@ -12,7 +12,11 @@ const styles = theme => ({
     boxSizing: "border-box",
     [theme.breakpoints.down("sm")]: {
       padding: "0",
-      marginTop: "80px"
+      marginTop: "150px"
+    },
+       [theme.breakpoints.down("xs")]: {
+      padding: "0",
+      marginTop: "100px"
     }
   },
   itemContainer: {

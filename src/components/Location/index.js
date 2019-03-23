@@ -11,7 +11,7 @@ const styles = theme => ({
       cursor: "pointer"
     },
     [theme.breakpoints.up("sm")]: {
-      marginLeft: "0px"
+      marginLeft: "10px"
     }
   },
   location: {
@@ -30,18 +30,22 @@ const styles = theme => ({
     color: "white",
     fontWeight: "bold",
     fontSize: "12px",
-    [theme.breakpoints.up("sm")]: {}
+    [theme.breakpoints.up("sm")]: {
+        fontSize: "10px",
+        whiteSpace:"nowrap"
+    }
   },
   storeName: {
     textTransform: "uppercase",
     color: "green",
     fontWeight: "bold",
     fontSize: "10px",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
+      
   },
   shopContent: {
     [theme.breakpoints.down("sm")]: {
-      display: "none"
+      display: "block",
     }
   },
   storeLoc: {

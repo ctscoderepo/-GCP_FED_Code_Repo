@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Grid, Button } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import { addToCart } from "../../actions/Cart";
 import Spinner from "../helpers/Spinner";
 import { Markup } from 'interweave';
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 import "./index.css";
 
 const styles = theme => ({
@@ -22,7 +24,7 @@ const styles = theme => ({
   addToCart: {
     textTransform: "uppercase",
     backgroundColor: "#fff",
-    borderRadius: "10px",
+    borderRadius: "5px",
     width: "100%",
     margin: "10px 0",
     fontSize: "12px",
@@ -37,12 +39,17 @@ const styles = theme => ({
       backgroundColor: "#0084CD",
       fill: "#fff",
       border: "1px solid #fff"
+    },
+      [theme.breakpoints.down("sm")]: {
+      whiteSpace:"nowrap"
     }
   },
   producttitle: {
-    padding: "0 10% 0 0",
-    fontWeight: "400",
-    color: "cornflowerblue"
+    fontWeight: "bold",
+      marginTop:"50px",
+      [theme.breakpoints.down("xs")]: {
+      fontSize:"13px"
+    } 
   },
   Spinner: {
     textAlign: "center",
@@ -51,7 +58,80 @@ const styles = theme => ({
       marginBottom: "30px",
 
     }
-  }
+  },
+    dividerStyle:{
+        backgroundColor:"#e6e6e6",
+        height:"2px", 
+        marginTop:"20px"
+    },
+    qtyBtnPlus:{
+        background:"#e6e6e6",
+        border:"1px solid gray",
+        fontSize:"20px",
+        padding:"8px 10px 8px 10px",
+        borderRadius:"2px",
+        "&:hover": {
+      cursor: "pointer"
+    },
+    },
+     qtyBtnMinus:{
+        background:"#e6e6e6",
+        border:"1px solid gray",
+        fontSize:"20px",
+        padding:"8px 14px 8px 14px",
+        borderRadius:"2px",
+         "&:hover": {
+      cursor: "pointer"
+    },
+         [theme.breakpoints.down("xs")]: {
+         padding:"8px 12px 8px 12px",
+        }
+    },
+    productLine:{
+        [theme.breakpoints.down("lg")]: {
+        fontSize:"20px"
+        },
+        [theme.breakpoints.down("sm")]: {
+        fontSize:"16px"
+        },
+        [theme.breakpoints.down("xs")]: {
+        fontSize:"12px",
+        }
+    },
+    relevance:{
+       textAlign:"right",marginTop:"-20px",
+       [theme.breakpoints.down("xs")]: {
+          marginTop:"10px",
+          fontSize:"13px"   
+        } 
+    },
+    relevanceInput:{
+    padding:"10px",
+        border:"1px solid #cccccc",
+       [theme.breakpoints.down("xs")]: {
+          padding:"5px"  ,
+           marginLeft:"10px"
+        } 
+    },
+    priceDiv:{
+        marginTop:"20px",
+        [theme.breakpoints.down("xs")]: {
+         fontSize:"13px"
+        } 
+    },
+    productdesc:{
+        fontSize:"14px",
+         [theme.breakpoints.down("xs")]: {
+         fontSize:"13px"
+        }
+    },
+    stockQnty:{
+        marginTop:"10px",
+        textTransform: "uppercase",
+        [theme.breakpoints.down("xs")]: {
+         fontSize:"12px"
+        }
+    } 
 });
 
 
@@ -70,6 +150,7 @@ const ProductDetailComponent = props => {
       original: a,
       thumbnail: a
     }
+      
   ];
 
   let orderInfo = JSON.parse(localStorage.getItem("orderDetails"));
@@ -78,6 +159,19 @@ const ProductDetailComponent = props => {
   const memberId = userInfo && userInfo.id ? userInfo.id : "";
   const orderId = orderInfo && orderInfo.orderId ? orderInfo.orderId : "";
 
+    const [quantity, setQuantity]=useState(1);
+    const addQuantity=()=>{
+        const totalCount=quantity +1;
+    setQuantity(totalCount);
+    }
+    
+    const removeQuantity=()=>{
+        if(quantity>1)
+        {
+        const totalCount=quantity - 1;
+        setQuantity(totalCount);    
+        }
+    }
 
   const addToCartClick = (e) => {
     e.preventDefault();
@@ -87,34 +181,52 @@ const ProductDetailComponent = props => {
       "memberId": memberId,
       "productId": product.id,
       "price": product.price,
-      "quantity": 1
+      "quantity": quantity
     });
     history.push("/Cart")
   }
+ console.log(product);
 
-
+    
+    
   return (
     <div className="productDetailComponent">
       {product ? (
         <Grid container>
+         <Grid item lg={12} sm={12} xs={12}>
+           <Typography className={classes.productLine}><strong>{product.categories[0] + " > " + product.categories[1] + " > "+ product.productName}</strong></Typography>
+           <div className={classes.relevance} >
+                    Sort by <input type="text" value="Relevance"  className={classes.relevanceInput}/></div>
+            <div>{product?<Divider className={classes.dividerStyle}/>:""}</div>
+          </Grid>
           <Grid lg={7} sm={6} xs={12} item>
-            <h3 className={classes.producttitle}>{product.productName}</h3>
-            <p className={classes.productIdName}>
-
-            </p>
-            <div className="productSku">
-              <div>
-                <strong>Model :</strong><span className={classes.productid}>
-                  <Markup content={product.shortDescription} />
-                </span>
-              </div>
-              <div>
-                <strong>SKU :</strong>
-                <span className={classes.productid}>{product.skuId}</span>
-              </div>
+           <div style={{marginTop:"30px",height:"300px", marginRight:"20px"}}>
+            <ImageGallery 
+              items={images(product.images[0])}
+              autoPlay={false}
+              thumbnailPosition="left"
+              showPlayButton={false}
+              showNav={false}
+              showFullscreenButton={false}
+            />
             </div>
+            
+          </Grid>
+          <Grid lg={5} sm={6} xs={12} item>
+              <div  className={classes.producttitle}><strong>{product.productName}</strong></div>
+                  
+              <div className={classes.priceDiv} ><strong>{product.currencyCode === 'USD' && "$"} {product.price}</strong>
+            <div style={{textAlign:"right", marginTop:"-40px",}}>
             <p>
               <span className="rated">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -148,25 +260,27 @@ const ProductDetailComponent = props => {
               >
                 <path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z" />
               </svg>
+              4.0 of 5
             </p>
-            <ImageGallery
-              items={images(product.images[0])}
-              autoPlay={false}
-              thumbnailPosition="left"
-              showPlayButton={false}
-              showNav={false}
-              showFullscreenButton={false}
-            />
-            <div className="productdesc"> <Markup content={product.longDescription}/> </div>
-          </Grid>
-          <Grid lg={5} sm={6} xs={12} item>
-            <h1>
-              {product.currencyCode === 'USD' && "$"}
-              {product.price}
-            </h1>
-            <div className='stockQnty'>Stock Quantity : <span>{product.stockQuantity}</span></div>
+            </div>
+            </div>
+            <Divider className={classes.dividerStyle}/>
+            <div style={{marginTop:"10px"}}>
+            <Typography><strong>Description</strong></Typography>
+                <div className={classes.productdesc}><Markup content={product.longDescription}/> </div>
+            </div>
+           <Divider className={classes.dividerStyle}/>
+            <div className={classes.stockQnty}><strong>Stock Quantity : <span>{product.stockQuantity}</span></strong></div>
+            <Divider className={classes.dividerStyle}/>
+            <div className={classes.stockQnty} ><strong>Quantity</strong></div>    
             <Grid container spacing={8}>
-              <Grid item lg={6} sm={6} xs={12}>
+                <Grid item lg={4} sm={4} xs={12}>
+                    <div style={{marginTop:"10px"}}>
+                    <button className={classes.qtyBtnMinus} onClick={removeQuantity}>-</button>
+                        <span className="qty">{quantity}</span>
+                    <button className={classes.qtyBtnPlus} onClick={addQuantity}>+</button></div>
+              </Grid>
+              <Grid item lg={4} sm={4} xs={12}>
                 <Button
                   variant="contained"
                   color="secondary"
@@ -184,7 +298,7 @@ const ProductDetailComponent = props => {
                   &nbsp;&nbsp;&nbsp;Add to cart
                 </Button>
               </Grid>
-              <Grid item lg={6} sm={6} xs={12}>
+              {/* <Grid item lg={4} sm={4} xs={12}>
                 <Button
                   variant="outlined"
                   color="primary"
@@ -207,8 +321,10 @@ const ProductDetailComponent = props => {
                   </svg>
                   &nbsp;&nbsp;&nbsp; Save for later
                 </Button>
-              </Grid>
+              </Grid> */}
+                
             </Grid>
+            <Divider className={classes.dividerStyle}/>
             <div className='expansionContainer'>
               <Grid container >
                 <Grid lg={12} sm={12} xs={12} item>

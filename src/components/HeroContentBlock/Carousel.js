@@ -11,10 +11,10 @@ const styles = theme => ({
     height: "400px",
     overflow: "hidden",
     [theme.breakpoints.down("sm")]: {
-      height: "300px"
+      height: "350px"
     },
       [theme.breakpoints.down("xs")]: {
-      height: "150px"
+      height: "200px"
     }
   },
   slide_01: {
@@ -22,11 +22,11 @@ const styles = theme => ({
     borderRadius: "3px",
     height: "400px",
     [theme.breakpoints.down("sm")]: {
-      height: "300px"
+      height: "350px"
     }
       ,
       [theme.breakpoints.down("xs")]: {
-      height: "150px"
+      height: "200px"
     }
   },
   slide_02: {
@@ -34,10 +34,10 @@ const styles = theme => ({
     height: "400px",
     borderRadius: "3px",
     [theme.breakpoints.down("sm")]: {
-      height: "300px"
+      height: "350px"
     },
       [theme.breakpoints.down("xs")]: {
-      height: "150px"
+      height: "200px"
     }
   },
   slide_03: {
@@ -45,10 +45,10 @@ const styles = theme => ({
     height: "400px",
     borderRadius: "3px",
     [theme.breakpoints.down("sm")]: {
-      height: "300px"
+      height: "350px"
     },
       [theme.breakpoints.down("xs")]: {
-      height: "150px"
+      height: "200px"
     }
   }
 });
