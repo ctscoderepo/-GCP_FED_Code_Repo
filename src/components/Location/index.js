@@ -36,8 +36,7 @@ const styles = theme => ({
     }
   },
   storeName: {
-    textTransform: "uppercase",
-    color: "green",
+    color: "lawngreen",
     fontWeight: "bold",
     fontSize: "10px",
     whiteSpace: "nowrap",
