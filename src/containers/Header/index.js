@@ -1,12 +1,16 @@
 import React from "react";
 import HeaderComponent from "../../components/Header";
 import { connect } from "react-redux";
-import { searchResults } from "../../actions/Search";
+import { searchResults, visionApi } from "../../actions/Search";
 
 const Header = ({ showNavbar, searchResults }) => {
   return (
     <div>
-      <HeaderComponent showNavbar={showNavbar} searchResults={searchResults} />
+      <HeaderComponent
+        showNavbar={showNavbar}
+        searchResults={searchResults}
+        visionApi={visionApi}
+      />
     </div>
   );
 };
