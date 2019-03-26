@@ -59,7 +59,7 @@ const Checkout = props => {
     console.info("Payment Successful", resp.data);
 
     let email = resp.data.receipt_email;
-    let lSOrder = localStorage.getItem("orderDetails");
+    let lSOrder = JSON.parse(localStorage.getItem("orderDetails"));
     lSOrder.email = email;
     localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
     submitOrder(order, email);
