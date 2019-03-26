@@ -63,7 +63,7 @@ const Checkout = props => {
     lSOrder.email = email;
     localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
     submitOrder(order, email);
-    alert("Continue from here to order complete flow");
+    //alert("Continue from here to order complete flow");
   }
   
   const errorPayment = data => {

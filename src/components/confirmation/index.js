@@ -109,7 +109,9 @@ const ConfirmationComponent  = (props) => {
     }
     
   const userData = JSON.parse(localStorage.getItem("loggedInUserData"));
-  const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+  const lsOrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+  const[orderDetails, setOrderDetails] = useState(lsOrderDetails);
+  localStorage.removeItem("orderDetails");
   const userAddress=userData?userData.userDetails.address:""; 
   const totalOrderValue=checkoutData?checkoutData.totalPrice + checkoutData.totalShipping + checkoutData.totalTax:0;
     

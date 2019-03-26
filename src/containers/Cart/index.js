@@ -28,7 +28,7 @@ const Cart = ({
     setCartItemsOnCheckout(cartItems)
     setHeaderStatus(true);
     setFooterStatus(true);
-    setNavBarStatus(false);
+    setNavBarStatus(true);
     //console.log("from Cart", userDetails);
     return () => {
       setNavBarStatus(true);

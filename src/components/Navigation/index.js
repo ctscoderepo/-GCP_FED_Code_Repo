@@ -8,30 +8,46 @@ const styles = theme => ({
   svgArrowDown: {
     fill: "white"
   },
-    navCategory:{
-       display:"flex",
-        padding:"0px 10px 0px 10px", 
-        fontSize:"12px", 
-        width:"18%", 
-        whiteSpace:"nowrap",
-        paddingTop:"18px",
-        [theme.breakpoints.up("lg")]: {
-         fontSize:"14px"    
+  navCategory: {
+    display: "inline-block",
+    padding: "0px 10px 0px 10px",
+    fontSize: "12px",
+    width: "15%",
+    whiteSpace: "nowrap",
+    paddingTop: "15px",
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "14px"
     },
-        [theme.breakpoints.down("sm")]: {
-         fontSize:"11px",
-        fontWeight:"bold"
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "11px",
+      fontWeight: "bold"
     }
+  },
+  navCategoryToys: {
+    display: "inline-block",
+    textAlign: "-webkit-center",
+    padding: "0px 10px 0px 10px",
+    fontSize: "12px",
+    width: "15%",
+    whiteSpace: "nowrap",
+    paddingTop: "15px",
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "14px"
     },
-    navList:{
-    marginLeft:"20px"
-    },
-    navDownArrow:{
-        marginTop:"-3px",
-        [theme.breakpoints.up("sm")]: {
-        marginTop:"-5px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "11px",
+      fontWeight: "bold"
     }
+  },
+  navList: {
+    marginLeft: "20px"
+  },
+  navDownArrow: {
+    marginTop: "-3px",
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "-5px"
     }
+  }
 });
 
 function NavigationMenu(props) {
@@ -43,29 +59,32 @@ function NavigationMenu(props) {
     { category: "Home Decor", url: "/shopping/Home-Decor" },
     { category: "Gift Cards", url: "/shopping/Gift-Cards" }
   ].map(item => (
-    
-      <div  className={classes.navCategory}>
-        <Link to={item.url} className="nav-item">
-          {item.category}
-        </Link>
+    <div
+      key={item.url}
+      className={
+        item.category === "Toys" ? classes.navCategoryToys : classes.navCategory
+      }
+    >
+      <Link to={item.url} className="nav-item">
+        {item.category}
+      </Link>
       <Link to={item.url} className={classes.navDownArrow}>
-          <svg
-            className={classes.svgArrowDown}
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 20 20"
-          >
-            <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />
-          </svg>
-        </Link>
-      </div>
-    
+        <svg
+          className={classes.svgArrowDown}
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 20 20"
+        >
+          <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />
+        </svg>
+      </Link>
+    </div>
   ));
   return (
     <div className="navigationMenu">
       <div className="customContainer">
-        <div style={{display:"flex", marginLeft:"-20px"}}>{NavBar}</div>
+        <div style={{ display: "flex", marginLeft: "-20px" }}>{NavBar}</div>
       </div>
     </div>
   );

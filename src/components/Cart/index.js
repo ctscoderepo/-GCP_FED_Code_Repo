@@ -16,7 +16,7 @@ import "./index.css";
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: "100px"
+    marginTop: "150px"
   },
   paper: {
     padding: theme.spacing.unit * 2,

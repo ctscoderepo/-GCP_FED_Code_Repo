@@ -2,6 +2,9 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   locationContainer: {
@@ -31,20 +34,19 @@ const styles = theme => ({
     fontWeight: "bold",
     fontSize: "12px",
     [theme.breakpoints.up("sm")]: {
-        fontSize: "10px",
-        whiteSpace:"nowrap"
+      fontSize: "10px",
+      whiteSpace: "nowrap"
     }
   },
   storeName: {
     color: "lawngreen",
     fontWeight: "bold",
     fontSize: "10px",
-    whiteSpace: "nowrap",
-      
+    whiteSpace: "nowrap"
   },
   shopContent: {
     [theme.breakpoints.down("sm")]: {
-      display: "block",
+      display: "block"
     }
   },
   storeLoc: {
@@ -52,6 +54,12 @@ const styles = theme => ({
   },
   storeLoc1: {
     marginTop: "2px"
+  },
+  lightTooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: "rgba(0, 0, 0, 0.87)",
+    boxShadow: theme.shadows[1],
+    fontSize: 11
   }
 });
 
@@ -83,11 +91,16 @@ const Location = props => {
           ) : (
             ""
           )}
-          <Link
-            className={storeData ? classes.storeName : classes.shopLocation}
+          <Tooltip
+            title={storeData ? storeData : "Find a store"}
+            classes={{ tooltip: classes.lightTooltip }}
           >
-            {storeData ? storeData : "Find a store"}
-          </Link>
+            <Link
+              className={storeData ? classes.storeName : classes.shopLocation}
+            >
+              {storeData ? (storeData.length>30?(storeData.substr(0,30)+"..."):storeData) : "Find a store"}
+            </Link>
+          </Tooltip>
         </div>
       </div>
     </div>
