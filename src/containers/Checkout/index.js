@@ -6,8 +6,8 @@ import { checkout } from "../../actions/Checkout";
 
 const Checkout = ({ setHeaderStatus, setFooterStatus, checkout,cartItems }) => {
   useEffect(() => {
-    setHeaderStatus(false);
-    setFooterStatus(false);
+    setHeaderStatus(true);
+    setFooterStatus(true);
   }, []);
   return <CheckoutPage checkout={checkout} cartItems= {cartItems} />;
 };

@@ -246,12 +246,211 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       marginTop: "30px"
     }
+  },
+
+  mainDiv: {
+    marginTop: "150px",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "80px"
+    }
+  },
+  dividerClass: {
+    backgroundColor: "#d9d9d9",
+    marginTop: "30px",
+    marginBottom: "30px",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "10px",
+      marginBottom: "10px"
+    }
+  },
+  checkoutCount: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: "20px"
+  },
+  checkoutCont: {
+    marginTop: "30px",
+    [theme.breakpoints.down("xs")]: {
+      margin: "10px"
+    }
+  },
+  shippingAddress: {
+    fontWeight: "bold"
+  },
+  shippingItemId: {
+    fontWeight: "bold",
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "10px"
+    }
+  },
+  addressChangeBtn: {
+    backgroundColor: "gray",
+    borderRadius: "5px",
+    width: "50%",
+    fontSize: "12px",
+    boxShadow: "none",
+    outline: "none",
+    color: "#fff",
+    border: "none",
+    fontWeight: "400",
+    fill: "#000",
+    "&:hover": {
+      backgroundColor: "#0084CD"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
+  },
+  orderTotalDiv: {
+    fontSize: "20px",
+    color: "#ff5500"
+  },
+  placeOrderBtnNew: {
+    backgroundColor: "gray",
+    borderRadius: "5px",
+    width: "80%",
+    fontSize: "12px",
+    boxShadow: "none",
+    outline: "none",
+    color: "#fff",
+    border: "none",
+    fontWeight: "400",
+    fill: "#000",
+    height: "40px",
+    "&:hover": {
+      backgroundColor: "#0084CD"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
+  },
+
+  saveAddressBtn: {
+    backgroundColor: "gray",
+    borderRadius: "5px",
+    width: "50%",
+    fontSize: "12px",
+    boxShadow: "none",
+    outline: "none",
+    color: "#fff",
+    border: "none",
+    fontWeight: "400",
+    fill: "#000",
+    height: "40px",
+    "&:hover": {
+      backgroundColor: "#0084CD"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
+  },
+
+  placeorderDiv: {
+    border: "1px solid #cccccc",
+    marginTop: "50px",
+    padding: "10px",
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
+  },
+  orderSummary: {
+    fontSize: "20px",
+    fontWeight: "bold",
+    marginTop: "20px",
+    marginBottom: "20px",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "18px"
+    }
+  },
+  orderSummarySection: {
+    border: "1px solid #cccccc",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "10px"
+    }
+  },
+  orderSummarySection1: {
+    margin: "30px",
+    [theme.breakpoints.down("sm")]: {
+      margin: "10px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      margin: "10px"
+    }
+  },
+  placeOrderBtnOrdSummary: {
+    backgroundColor: "gray",
+    borderRadius: "5px",
+    width: "100%",
+    fontSize: "12px",
+    boxShadow: "none",
+    outline: "none",
+    color: "#fff",
+    border: "none",
+    fontWeight: "400",
+    fill: "#000",
+    height: "40px",
+    "&:hover": {
+      backgroundColor: "#0084CD"
+    }
+  },
+  xsClass: {
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "10px"
+    }
+  },
+  changeAddress: {
+    display: "none"
+  },
+  changeAddress1: {
+    display: "block"
+  },
+  addressLines: {
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "20px"
+    }
+  },
+  shippingCalc: {
+    padding: "10px 30px 20px 30px",
+    backgroundColor: "#f2f2f2",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "10px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: "10px",
+      marginTop: "20px",
+      paddingTop: "10px"
+    }
+  },
+  addressGrid: {
+    marginRight: "20px",
+    [theme.breakpoints.down("xs")]: {
+      marginRight: "00px"
+    }
+  },
+  checkoutImgs: {
+    width: "130px",
+    height: "150px",
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      height: "100%"
+    }
+  },
+  itemDescripiton: {
+    marginTop: "10px",
+    height: "10px",
+    width: "90%",
+    textOverflow: "ellipsis",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "12px",
+      paddingLeft: "10px"
+    }
   }
 });
 
 const AuthUserCheckout = props => {
   const { classes, history, cartItems } = props;
 
+  console.log("From checkout ", cartItems);
   const orderItems = cartItems ? cartItems.orderItems : "";
 
   const [totalQuantity, setTotalQuantity] = useState();
@@ -270,7 +469,7 @@ const AuthUserCheckout = props => {
     ? cartItems.totalPrice + cartItems.totalShipping + cartItems.totalTax
     : 0;
 
-  const [guestEmail, setguestEmail] = useState("");
+  //const [guestEmail, setguestEmail] = useState("");
   const [errorGuestEmail, setErrorGuestEmail] = useState("");
 
   const [fName, setFName] = useState("");
@@ -286,7 +485,7 @@ const AuthUserCheckout = props => {
   const [errorShipping, setErrorShipping] = useState("");
 
   const handleguestEmail = value => {
-    setguestEmail(value);
+    setEmail(value);
     orderDetails.email = value;
     localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
   };
@@ -306,22 +505,10 @@ const AuthUserCheckout = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (guestEmail.length === 0) {
-      setErrorGuestEmail("Please enter your email address");
-    } else {
-      setErrorGuestEmail("");
-    }
-
     if (fName.length === 0) {
-      setErrorFName("Please enter your first name");
+      setErrorFName("Please enter your full name");
     } else {
       setErrorFName("");
-    }
-
-    if (lName.length === 0) {
-      setErrorLName("Please enter your last name");
-    } else {
-      setErrorLName("");
     }
 
     if (phone.length === 0) {
@@ -337,24 +524,22 @@ const AuthUserCheckout = props => {
     }
   };
 
-  const orderId = cartItems && cartItems.orderId ? cartItems.orderId : 0; 
+  const orderId = cartItems && cartItems.orderId ? cartItems.orderId : 0;
 
   let userInfo1 = JSON.parse(localStorage.getItem("loggedInUserData"));
-  const userData=userInfo1?userInfo1.userDetails:"";
-  const memberId=userData?userData.id:"";
-  const addressId=userData?userData.address.id:"";
-  const email=userData?userData.logonId:"";
-  const userAddress =userData?userData.address : "";
+  const userData = userInfo1 ? userInfo1.userDetails : "";
+  const memberId = userData ? userData.id : "";
+  const addressId = userData ? userData.address.id : "";
+  //const email=userData?userData.logonId:"";
+  const userAddress = userData ? userData.address : "";
 
-  if(email){
-    setguestEmail(email);
-  }
+  const [email, setEmail] = useState(userData ? userData.logonId : "");
 
   const checkoutCart = () => {
     if (memberId == 0) {
       props.checkout({
         orderId: orderId,
-        email: guestEmail,
+        email: email,
         addressId: addressId
       });
     } else {
@@ -380,7 +565,7 @@ const AuthUserCheckout = props => {
     setCvvNum(value);
   };
 
-  const [cardType, setCardType] = useState("");
+  const [cardType, setCardType] = useState("Debit card");
   const selectCardType = value => {
     setCardType(value);
   };
@@ -440,205 +625,137 @@ const AuthUserCheckout = props => {
     </MenuItem>
   ));
 
+  const orderItemsList = cartItems ? cartItems.orderItems : "";
+
+  const reviewItemsList = orderItemsList ? (
+    orderItemsList.map(item => (
+      <div style={{ marginTop: "10px" }}>
+        <Grid container key={item.id}>
+          <Grid item lg={3} sm={3} xs={3}>
+            <div>
+              <img className={classes.checkoutImgs} src={item.imageUrl} />
+            </div>
+          </Grid>
+          <Grid item lg={9} sm={9} xs={9}>
+            <div>
+              <Typography className={classes.shippingItemId}>
+                {item.productId}
+              </Typography>
+            </div>
+            <div className={classes.itemDescripiton}>
+              {item.productDesciption}
+            </div>
+          </Grid>
+        </Grid>
+      </div>
+    ))
+  ) : (
+    <div>No items in cart</div>
+  );
+
+  const [isAddressSection, setIsAddressSection] = useState(
+    addressId ? false : true
+  );
+
+  const changeAddress = () => {
+    setIsAddressSection(true);
+  };
+
+  const saveAddress = () => {
+    setIsAddressSection(false);
+  };
+
   return (
     <>
-      <div style={{ padding: "10px" }}>
-        <div className={classes.checkoutContainer}>
-          <Link to="/">
-            <img
-              src="/assets/images/logo.png"
-              alt="logo"
-              className={classes.logo}
-            />
-          </Link>
-          <Typography className={classes.securedCheckout}>
-            Secure Checkout
-          </Typography>
-        </div>
-
-        <div className={classes.root}>
+      <div className={classes.mainDiv}>
+        <div className={classes.checkoutCount}>Checkout ({orderItemsList? orderItemsList.length: "0"} Items)</div>
+        <Divider variant="left" className={classes.dividerClass} />
+        <div className={classes.checkoutCont}>
           <Grid container spacing={24}>
-            <Grid item lg={8} sm={8} xs={12}>
+            <Grid item lg={12} sm={12} xs={12}>
               <Grid container>
-                <form onSubmit={handleSubmit}>
-                  {memberId == 0 ? (
-                    <div>
-                      <div className={classes.shippingHead}>
-                        <Typography className={classes.checkoutHeader}>
-                          Shipping
-                        </Typography>
-                        <Divider
-                          variant="left"
-                          style={{ backgroundColor: "#bfbfbf" }}
-                        />
-                      </div>
-                      <div
-                        className={classes.paddingTop30}
-                        style={{ width: "95%" }}
-                      >
-                        <Grid item lg={12} sm={12} xs={12}>
-                          <Grid container>
-                            <Grid
-                              item
-                              lg={6}
-                              sm={6}
-                              xs={12}
-                              className={classes.FirstNamePad}
+                <Grid item lg={8} sm={8} xs={12}>
+                  <div className={classes.addressGrid}>
+                    <Grid container>
+                      <Grid item lg={12} sm={12} xs={12}>
+                        <Grid container>
+                          <Grid item lg={4} sm={4} xs={12}>
+                            <div>
+                              <Typography className={classes.shippingAddress}>
+                                1. Shipping address{" "}
+                              </Typography>
+                            </div>
+                          </Grid>
+                          <Grid
+                            item
+                            lg={4}
+                            sm={5}
+                            xs={8}
+                            className={
+                              isAddressSection
+                                ? classes.changeAddress
+                                : classes.changeAddress1
+                            }
+                          >
+                            <div className={classes.addressLines}>
+                              <div>
+                                <Typography>
+                                  {fName ? fName : "Address line 1"}
+                                </Typography>
+                              </div>
+                              <div>
+                                <Typography>
+                                  {phone ? phone : "Address line 2"}
+                                </Typography>
+                              </div>
+                              <div>
+                                <Typography>
+                                  {shipping ? shipping : "Address line 3"}
+                                </Typography>
+                              </div>
+                              <div>
+                                <Typography>
+                                  {email ? email : "Enter Email"}
+                                </Typography>
+                              </div>
+                            </div>
+                          </Grid>
+                          <Grid
+                            item
+                            lg={4}
+                            sm={3}
+                            xs={4}
+                            className={classes.xsClass}
+                            className={
+                              isAddressSection
+                                ? classes.changeAddress
+                                : classes.changeAddress1
+                            }
+                          >
+                            <Button
+                              className={classes.addressChangeBtn}
+                              onClick={changeAddress}
                             >
-                              <div>
-                                <Typography>First Name :</Typography>
-                              </div>
-                              <div className="marginTop10">
-                                <TextField
-                                  id="outlined-name"
-                                  label=""
-                                  className={classes.InputFirstLastName}
-                                  margin="normal"
-                                  variant="outlined"
-                                  placeholder="Enter First Name"
-                                  value={fName.fName}
-                                  onChange={e => handleFName(e.target.value)}
-                                />
-                              </div>
-                              <div>
-                                {errorFName && (
-                                  <div className="errorCheckout">
-                                    {errorFName}
-                                  </div>
-                                )}
-                              </div>
-                            </Grid>
-                            <Grid item lg={6} sm={6} xs={12}>
-                              <div>
-                                <Typography>Last Name :</Typography>
-                              </div>
-                              <div className="marginTop10">
-                                <TextField
-                                  id="outlined-name"
-                                  label=""
-                                  className={classes.InputText}
-                                  margin="normal"
-                                  variant="outlined"
-                                  placeholder="Enter Last Name"
-                                  value={lName.lName}
-                                  onChange={e => handleLName(e.target.value)}
-                                />
-                              </div>
-                              <div>
-                                {errorLName && (
-                                  <div className="errorCheckout">
-                                    {errorLName}
-                                  </div>
-                                )}
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              lg={12}
-                              sm={12}
-                              xs={12}
-                              className={classes.marginTop15}
-                            >
-                              <div>
-                                <Typography>Email Address :</Typography>
-                              </div>
-                              <div className="marginTop10">
-                                <TextField
-                                  id="outlined-name"
-                                  label=""
-                                  className={classes.InputText}
-                                  margin="normal"
-                                  variant="outlined"
-                                  type="email"
-                                  placeholder="Enter Email Address"
-                                  value={guestEmail.guestEmail}
-                                  onChange={e =>
-                                    handleguestEmail(e.target.value)
-                                  }
-                                />
-                              </div>
-                              <div>
-                                {errorGuestEmail && (
-                                  <div className="errorCheckout">
-                                    {errorGuestEmail}
-                                  </div>
-                                )}
-                              </div>
-                            </Grid>
-                            <Grid
-                              item
-                              lg={12}
-                              sm={12}
-                              xs={12}
-                              className={classes.marginTop15}
-                            >
-                              <div>
-                                <Typography>Phone Number :</Typography>
-                              </div>
-                              <div className="marginTop10">
-                                <TextField
-                                  id="outlined-name"
-                                  label=""
-                                  className={classes.InputText}
-                                  margin="normal"
-                                  variant="outlined"
-                                  type="number"
-                                  placeholder="Enter Phone Number"
-                                  value={phone.phone}
-                                  onChange={e => handlePhone(e.target.value)}
-                                />
-                              </div>
-                              <div>
-                                {errorPhone && (
-                                  <div className="errorCheckout">
-                                    {errorPhone}
-                                  </div>
-                                )}
-                              </div>
-                            </Grid>
+                              Change
+                            </Button>
+                          </Grid>
 
-                            <Grid
-                              item
-                              lg={12}
-                              sm={12}
-                              xs={12}
-                              className={classes.marginTop15}
-                            >
-                              <div>
-                                <Typography>Shipping Address :</Typography>
-                              </div>
-                              <div className="marginTop10">
-                                <TextField
-                                  id="outlined-name"
-                                  label=""
-                                  className={classes.InputText}
-                                  margin="normal"
-                                  variant="outlined"
-                                  placeholder="Enter Shipping Address"
-                                  value={shipping.shipping}
-                                  onChange={e => handleShipping(e.target.value)}
-                                />
-                              </div>
-                              <div>
-                                {errorShipping && (
-                                  <div className="errorCheckout">
-                                    {errorShipping}
-                                  </div>
-                                )}
-                              </div>
-                            </Grid>
-
-                            <Grid
-                              item
-                              lg={12}
-                              sm={12}
-                              xs={12}
-                              className={classes.marginTop15}
-                            >
-                              <Grid container>
-                                <Grid item lg={4} sm={4} xs={6}>
-                                  <div>
-                                    <Typography>ZIP Code:</Typography>
+                          <Grid
+                            item
+                            lg={8}
+                            sm={8}
+                            xs={12}
+                            className={
+                              isAddressSection
+                                ? classes.changeAddress1
+                                : classes.changeAddress
+                            }
+                          >
+                            <div>
+                              <form onSubmit={handleSubmit}>
+                                <div>
+                                <div>
+                                    <Typography>Email :</Typography>
                                   </div>
                                   <div className="marginTop10">
                                     <TextField
@@ -647,356 +764,488 @@ const AuthUserCheckout = props => {
                                       className={classes.InputText}
                                       margin="normal"
                                       variant="outlined"
-                                      placeholder=""
+                                      placeholder="Please enter Email"
+                                      value={email}
+                                      onChange={e =>
+                                        handleguestEmail(e.target.value)
+                                      }
                                     />
                                   </div>
-                                  <div
-                                    style={{
-                                      marginLeft: "-15px",
-                                      whiteSpace: "nowrap"
-                                    }}
+                                  <div>
+                                    {errorGuestEmail && (
+                                      <div className="errorCheckout">
+                                        {errorGuestEmail}
+                                      </div>
+                                    )}
+                                  </div>
+                                  <div>
+                                    <Typography>Full Name :</Typography>
+                                  </div>
+                                  <div className="marginTop10">
+                                    <TextField
+                                      id="outlined-name"
+                                      label=""
+                                      className={classes.InputFirstLastName}
+                                      margin="normal"
+                                      variant="outlined"
+                                      placeholder="Enter full name"
+                                      value={fName.fName}
+                                      onChange={e =>
+                                        handleFName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                  <div>
+                                    {errorFName && (
+                                      <div className="errorCheckout">
+                                        {errorFName}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <Typography>Phone Number :</Typography>
+                                  </div>
+                                  <div className="marginTop10">
+                                    <TextField
+                                      id="outlined-name"
+                                      label=""
+                                      className={classes.InputText}
+                                      margin="normal"
+                                      variant="outlined"
+                                      type="number"
+                                      placeholder="Enter Phone Number"
+                                      value={phone.phone}
+                                      onChange={e =>
+                                        handlePhone(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                  <div>
+                                    {errorPhone && (
+                                      <div className="errorCheckout">
+                                        {errorPhone}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                <div>
+                                  <div>
+                                    <Typography>Shipping Address :</Typography>
+                                  </div>
+                                  <div className="marginTop10">
+                                    <TextField
+                                      id="outlined-name"
+                                      label=""
+                                      className={classes.InputText}
+                                      margin="normal"
+                                      variant="outlined"
+                                      placeholder="Enter Street, City, State, Country"
+                                      value={shipping.shipping}
+                                      onChange={e =>
+                                        handleShipping(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                  <div>
+                                    {errorShipping && (
+                                      <div className="errorCheckout">
+                                        {errorShipping}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                <div
+                                  style={{
+                                    textAlign: "right",
+                                    marginTop: "50px"
+                                  }}
+                                >
+                                  <Button
+                                    className={classes.saveAddressBtn}
+                                    type="submit"
+                                    onClick={saveAddress}
                                   >
-                                    <Checkbox
-                                      checked
-                                      value="checkedB"
-                                      color="primary"
-                                    />
-                                    Use as Billing Address
-                                  </div>
+                                    Save Address
+                                  </Button>
+                                </div>
+                              </form>
+                            </div>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+
+                      <Grid item lg={12} sm={12} xs={12}>
+                        <Divider
+                          variant="left"
+                          className={classes.dividerClass}
+                        />
+                        <Grid container>
+                          <Grid item lg={4} sm={4} xs={12}>
+                            <div>
+                              <Typography className={classes.shippingAddress}>
+                                2. Payment method{" "}
+                              </Typography>
+                            </div>
+                          </Grid>
+                          <Grid
+                            item
+                            lg={8}
+                            sm={8}
+                            xs={12}
+                            className={classes.xsClass}
+                          >
+                            <div className={classes.addressLines}>
+                              <FormControl component="fieldset">
+                                <RadioGroup aria-label="payment" name="payment">
+                                  <FormControlLabel
+                                    onChange={e =>
+                                      selectCardType(e.target.value)
+                                    }
+                                    className={classes.radioBtn}
+                                    value="Credit card"
+                                    control={
+                                      <Radio
+                                        color="default"
+                                        fontSize="small"
+                                        checked={cardType === "Credit card"}
+                                      />
+                                    }
+                                    label="Credit Card"
+                                  />
+                                  <FormControlLabel
+                                    onChange={e =>
+                                      selectCardType(e.target.value)
+                                    }
+                                    className={classes.radioBtn}
+                                    value="Debit card"
+                                    control={
+                                      <Radio
+                                        color="default"
+                                        checked={cardType === "Debit card"}
+                                      />
+                                    }
+                                    label="Debit Card"
+                                  />
+                                </RadioGroup>
+                              </FormControl>
+                            </div>
+                            <div style={{ marginTop: "10px", width: "95%" }}>
+                              <TextField
+                                id="cardNumber"
+                                label=""
+                                className={classes.InputText}
+                                type="number"
+                                margin="normal"
+                                variant="outlined"
+                                placeholder="Enter card number"
+                                onChange={e => handleCardNum(e.target.value)}
+                              />
+                            </div>
+                            <div>
+                              <Grid container>
+                                <Grid item lg={4} sm={4} xs={4}>
+                                  <Typography>Expiration</Typography>
+                                  <FormControl
+                                    variant="outlined"
+                                    className={classes.selectDropDown}
+                                  >
+                                    <Select
+                                      value={monthExpir}
+                                      onChange={handleMonthChange}
+                                      input={
+                                        <OutlinedInput
+                                          name="month"
+                                          id="month"
+                                        />
+                                      }
+                                    >
+                                      <MenuItem value="">
+                                        <em>None</em>
+                                      </MenuItem>
+                                      {Months}
+                                    </Select>
+                                  </FormControl>
                                 </Grid>
                                 <Grid
                                   item
-                                  lg={8}
-                                  sm={8}
-                                  xs={6}
-                                  style={{ height: "100px" }}
+                                  lg={4}
+                                  sm={4}
+                                  xs={4}
+                                  className={classes.yearSelect}
                                 >
-                                  <div className={classes.zipCode1}>
-                                    <Typography
-                                      className={classes.marginLeft10}
+                                  <Typography />
+                                  <FormControl
+                                    variant="outlined"
+                                    className={classes.selectDropDown}
+                                  >
+                                    <Select
+                                      value={yearExpir}
+                                      onChange={handleYearChange}
+                                      input={
+                                        <OutlinedInput name="year" id="year" />
+                                      }
                                     >
-                                      Enter ZIP code to see products
-                                      availability
-                                    </Typography>
-                                  </div>
+                                      <MenuItem value="">
+                                        <em>None</em>
+                                      </MenuItem>
+                                      {Years}
+                                    </Select>
+                                  </FormControl>
+                                </Grid>
+                                <Grid
+                                  item
+                                  lg={3}
+                                  sm={3}
+                                  xs={3}
+                                  className={classes.marginLeft10}
+                                >
+                                  <Typography>CVV</Typography>
+                                  <TextField
+                                    id="cvv"
+                                    label=""
+                                    type="number"
+                                    className={classes.InputText}
+                                    margin="normal"
+                                    variant="outlined"
+                                    placeholder="CVV"
+                                    onChange={e => handleCVV(e.target.value)}
+                                  />
                                 </Grid>
                               </Grid>
+                            </div>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+
+                      <Grid item lg={12} sm={12} xs={12}>
+                        <Divider
+                          variant="left"
+                          className={classes.dividerClass}
+                        />
+                        <div>
+                          <Typography className={classes.shippingAddress}>
+                            3. Review items and shipping
+                          </Typography>
+                        </div>
+                        <div style={{ marginTop: "30px" }}>
+                          {reviewItemsList}
+                        </div>
+                      </Grid>
+
+                      <Grid item lg={12} sm={12} xs={12}>
+                        <div className={classes.placeorderDiv}>
+                          <Grid container>
+                            <Grid item lg={8} sm={7} xs={8}>
+                              <div className={classes.orderTotalDiv}>
+                                Order Total $
+                                {cartItems.totalPrice
+                                  ? cartItems.totalPrice +
+                                    cartItems.totalShipping +
+                                    cartItems.totalTax
+                                  : 0}
+                              </div>
+                              <div>
+                                Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                              </div>
+                            </Grid>
+                            <Grid item lg={4} sm={5} xs={4}>
+                              <Button className={classes.placeOrderBtnNew} onClick={checkoutCart}>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="white"
+                                >
+                                  <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+                                </svg>
+                                <Typography
+                                  style={{
+                                    marginLeft: "20px",
+                                    color: "white",
+                                    fontSize: "12px"
+                                  }}
+                                >
+                                  {" "}
+                                  Place Your Order{" "}
+                                </Typography>
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </div>
+                </Grid>
+
+                <Grid item lg={4} sm={4} xs={12}>
+                  <div className={classes.orderSummarySection}>
+                    <div className={classes.orderSummarySection1}>
+                      <div>
+                        {" "}
+                        <Typography className={classes.orderSummary}>
+                          Order Summary
+                        </Typography>
+                      </div>
+                      <Divider
+                        variant="left"
+                        style={{ marginTop: "5px", marginBottom: "20px" }}
+                      />
+
+                      <Grid container>
+                        <Grid item lg={12} sm={12} xs={12}>
+                          <Grid container>
+                            <Grid item lg={8} sm={8} xs={8}>
+                              <div>
+                                <Typography>
+                                  <strong>Items (1) :</strong>
+                                </Typography>
+                              </div>
+                              <div style={{ marginTop: "15px" }}>
+                                <Typography>
+                                  <strong>Shipping & handling</strong>
+                                </Typography>
+                              </div>
+                              <div style={{ marginTop: "15px" }}>
+                                <Typography>
+                                  <strong>Total before tax :</strong>
+                                </Typography>
+                              </div>
+                              <div style={{ marginTop: "15px" }}>
+                                <Typography>
+                                  <strong>
+                                    Estimated tax to be collected :
+                                  </strong>
+                                </Typography>
+                              </div>
+                            </Grid>
+
+                            <Grid item lg={4} sm={4} xs={4}>
+                              <div style={{ textAlign: "right" }}>
+                                $
+                                {cartItems.totalPrice
+                                  ? cartItems.totalPrice
+                                  : 0}
+                              </div>
+                              <div
+                                style={{
+                                  marginTop: "15px",
+                                  textAlign: "right"
+                                }}
+                              >
+                                $
+                                {cartItems.totalShipping
+                                  ? cartItems.totalShipping
+                                  : 0}
+                              </div>
+                              <Divider
+                                variant="left"
+                                style={{
+                                  marginTop: "20px",
+                                  marginBottom: "20px"
+                                }}
+                              />
+                              <div
+                                style={{
+                                  marginTop: "15px",
+                                  textAlign: "right"
+                                }}
+                              >
+                                $
+                                {cartItems.totalPrice
+                                  ? cartItems.totalPrice +
+                                    cartItems.totalShipping
+                                  : 0}
+                              </div>
+                              <div
+                                style={{
+                                  marginTop: "15px",
+                                  textAlign: "right"
+                                }}
+                              >
+                                {" "}
+                                ${cartItems.totalTax ? cartItems.totalTax : 0}
+                              </div>
                             </Grid>
                           </Grid>
                         </Grid>
+
+                        <Grid
+                          item
+                          lg={12}
+                          sm={12}
+                          xs={12}
+                          style={{ marginTop: "20px" }}
+                        >
+                          <Grid container>
+                            <Grid item lg={8} sm={8} xs={8}>
+                              <div className={classes.orderTotalDiv}>
+                                Order Total
+                              </div>
+                            </Grid>
+                            <Grid item lg={4} sm={4} xs={4}>
+                              <div
+                                className={classes.orderTotalDiv}
+                                style={{ textAlign: "right" }}
+                              >
+                                $
+                                {cartItems.totalPrice
+                                  ? cartItems.totalPrice +
+                                    cartItems.totalShipping +
+                                    cartItems.totalTax
+                                  : 0}
+                              </div>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+
+                      <div>
+                        <Divider
+                          variant="left"
+                          style={{ marginTop: "20px", marginBottom: "20px" }}
+                        />
+                        <div>
+                          <Button className={classes.placeOrderBtnOrdSummary} onClick={checkoutCart}>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="white"
+                            >
+                              <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+                            </svg>
+                            <Typography
+                              style={{
+                                marginLeft: "20px",
+                                color: "white",
+                                fontSize: "12px"
+                              }}
+                            >
+                              {" "}
+                              Place Your Order{" "}
+                            </Typography>
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                  ) : (
-                    ""
-                  )}
-                  <div className={classes.paddingTop30}>
-                    <Typography className={classes.paymentHeader}>
-                      Payment
-                    </Typography>
-                    <Divider
-                      variant="left"
-                      style={{ backgroundColor: "#bfbfbf" }}
-                    />
+                    <div className={classes.shippingCalc}>
+                      <div>
+                        <Typography style={{ color: "#1aa3ff" }}>
+                          {" "}
+                          How are shipping costs calculated?{" "}
+                        </Typography>{" "}
+                      </div>
+                      <div style={{ marginTop: "10px" }}>
+                        Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                      </div>
+                    </div>
                   </div>
-                  <div className={classes.marginTop15}>
-                    <FormControl component="fieldset">
-                      <RadioGroup aria-label="payment" name="payment">
-                        <FormControlLabel
-                          onChange={e => selectCardType(e.target.value)}
-                          className={classes.radioBtn}
-                          value="Credit card"
-                          control={<Radio color="default" fontSize="small" />}
-                          label="Credit Card"
-                        />
-                        <FormControlLabel
-                          onChange={e => selectCardType(e.target.value)}
-                          className={classes.radioBtn}
-                          value="Debit card"
-                          control={<Radio color="default" />}
-                          label="Debit Card"
-                        />
-                      </RadioGroup>
-                    </FormControl>
-                  </div>
-
-                  <Grid
-                    item
-                    lg={8}
-                    sm={8}
-                    xs={12}
-                    className={classes.marginTop15}
-                  >
-                    <TextField
-                      id="cardNumber"
-                      label=""
-                      className={classes.InputText}
-                      margin="normal"
-                      variant="outlined"
-                      placeholder="Enter card number"
-                      onChange={e => handleCardNum(e.target.value)}
-                    />
-                  </Grid>
-                  <Grid item lg={12} sm={12} xs={12}>
-                    <Grid container>
-                      <Grid item lg={4} sm={4} xs={4}>
-                        <Typography>Expiration</Typography>
-                        <FormControl
-                          variant="outlined"
-                          className={classes.selectDropDown}
-                        >
-                          <Select
-                            value={monthExpir}
-                            onChange={handleMonthChange}
-                            input={<OutlinedInput name="month" id="month" />}
-                          >
-                            <MenuItem value="">
-                              <em>None</em>
-                            </MenuItem>
-                            {Months}
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                      <Grid
-                        item
-                        lg={4}
-                        sm={4}
-                        xs={4}
-                        className={classes.yearSelect}
-                      >
-                        <Typography />
-                        <FormControl
-                          variant="outlined"
-                          className={classes.selectDropDown}
-                        >
-                          <Select
-                            value={yearExpir}
-                            onChange={handleYearChange}
-                            input={<OutlinedInput name="year" id="year" />}
-                          >
-                            <MenuItem value="">
-                              <em>None</em>
-                            </MenuItem>
-                            {Years}
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                      <Grid
-                        item
-                        lg={3}
-                        sm={3}
-                        xs={3}
-                        className={classes.marginLeft10}
-                      >
-                        <Typography>CVV</Typography>
-                        <TextField
-                          id="cvv"
-                          label=""
-                          className={classes.InputText}
-                          margin="normal"
-                          variant="outlined"
-                          placeholder="CVV"
-                          onChange={e => handleCVV(e.target.value)}
-                        />
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item lg={12} sm={12} xs={12}>
-                    <Checkbox
-                      defaultChecked
-                      color="default"
-                      value="checkedG"
-                      style={{ paddingLeft: "0px" }}
-                    />
-                    Yes, I'd like sign up
-                  </Grid>
-                  <Grid item lg={12} sm={12} xs={12}>
-                    <Link className={classes.LinkColor}>
-                      Gift Card, Promotional Code or Voucher
-                    </Link>
-                  </Grid>
-                  <Grid item lg={12} sm={12} xs={12}>
-                    <Button
-                      type="submit"
-                      className={classes.btnStyle}
-                      disabled={enabledBtn?false:true}
-                      onClick={enabledBtn ? () => checkoutCart() : null}
-                    >
-                      Place Order
-                    </Button>
-                  </Grid>
-                </form>
-              </Grid>
-            </Grid>
-
-            <Grid item lg={4} sm={4} xs={12}>
-              <div className={classes.rightNav}>
-                <Grid container>
-                  <Grid
-                    item
-                    lg={12}
-                    sm={12}
-                    xs={12}
-                    className={classes.gridCartItem}
-                  >
-                    <div>
-                      <Typography className={classes.gridCartHeat}>
-                        <strong>Your Cart Items </strong>
-                      </Typography>
-                      <Divider
-                        variant="left"
-                        style={{ backgroundColor: "#bfbfbf" }}
-                      />
-                    </div>
-                    <div className={classes.marginTop15}>
-                      <Typography className={classes.gridCartLabel}>
-                        Total Items in your cart
-                      </Typography>
-                      <Typography className={classes.txtAlignRight}>
-                        {" "}
-                        <strong>{totalQuantity ? totalQuantity : 0}</strong>
-                      </Typography>
-                    </div>
-                    <div className={classes.marginTop15}>
-                      <Typography className={classes.gridCartLabel}>
-                        Subtotal
-                      </Typography>
-                      <Typography className={classes.txtAlignRight}>
-                        {" "}
-                        <strong>
-                          ${cartItems.totalPrice ? cartItems.totalPrice : 0}
-                        </strong>
-                      </Typography>
-                    </div>
-                    <div className={classes.marginTop15}>
-                      <Typography className={classes.gridCartLabel}>
-                        Discount{" "}
-                      </Typography>
-                      <Typography className={classes.txtAlignRight}>
-                        {" "}
-                        <strong>${0}</strong>
-                      </Typography>
-                    </div>
-                    <div className={classes.marginTop15}>
-                      <Typography className={classes.gridCartLabel}>
-                        Estimated Shipping*{" "}
-                      </Typography>
-                      <Typography className={classes.txtAlignRight}>
-                        {" "}
-                        <strong>
-                          $
-                          {cartItems.totalShipping
-                            ? cartItems.totalShipping
-                            : 0}
-                        </strong>
-                      </Typography>
-                    </div>
-                    <div className={classes.marginTop15}>
-                      <Typography className={classes.gridCartLabel}>
-                        Sales Tax
-                      </Typography>
-                      <Typography className={classes.txtAlignRight}>
-                        {" "}
-                        <strong>
-                          ${cartItems.totalTax ? cartItems.totalTax : 0}
-                        </strong>
-                      </Typography>
-                    </div>
-                    <div className={classes.marginTop10}>
-                      <Divider
-                        variant="left"
-                        style={{ backgroundColor: "#bfbfbf" }}
-                      />
-                    </div>
-                    <div className={classes.marginTop15}>
-                      <Typography className={classes.gridCartLabel}>
-                        <strong>Total</strong>{" "}
-                      </Typography>
-                      <Typography className={classes.txtAlignRight}>
-                        {" "}
-                        <strong>
-                          ${totalCheckOutValue ? totalCheckOutValue : 0}
-                        </strong>
-                      </Typography>
-                    </div>
-                    <div className={classes.btnViewCart}>
-                      <Button
-                        className={classes.btnStyle}
-                        onClick={() => history.push("/Cart")}
-                      >
-                        View Cart
-                      </Button>
-                    </div>
-                  </Grid>
-
-                  <Grid
-                    item
-                    lg={12}
-                    sm={12}
-                    xs={12}
-                    className={classes.gridShipping}
-                  >
-                    <div>
-                      <Typography className={classes.gridCartHeat}>
-                        <strong>Shipping Address </strong>
-                      </Typography>
-                      <Divider
-                        variant="left"
-                        style={{ backgroundColor: "#bfbfbf" }}
-                      />
-                    </div>
-                    <div className={classes.marginTop15}>
-                      <Typography>
-                        {userAddress ? userAddress.address1 : ""}
-                      </Typography>
-                      <Typography>
-                        {userAddress ? userAddress.address2 : ""}
-                      </Typography>
-                      <Typography>
-                        {userAddress ? userAddress.city : ""}
-                      </Typography>
-                      <Typography>
-                        {userAddress ? userAddress.country : ""}
-                      </Typography>
-                      <Typography>
-                        {userAddress ? userAddress.zipCode : ""}
-                      </Typography>
-                    </div>
-                    <div className={classes.btnViewCart}>
-                      <Button className={classes.btnStyle}>
-                        Edit Shipping Address
-                      </Button>
-                    </div>
-                  </Grid>
-                  <Grid
-                    item
-                    lg={12}
-                    sm={12}
-                    xs={12}
-                    className={classes.gridShipping}
-                  >
-                    <div>
-                      <Typography className={classes.gridCartHeat}>
-                        <strong>Need Help? </strong>
-                      </Typography>
-                      <Divider
-                        variant="left"
-                        style={{ backgroundColor: "#bfbfbf" }}
-                      />
-                    </div>
-                    <div className={classes.marginTop15}>
-                      <Typography> See ouronline FAQs or phone us:</Typography>
-                      <Typography>
-                        Online Customer Support:1-800-000-0000
-                      </Typography>
-                      <Typography>Major Appliances:1-000-000-0000 </Typography>
-                      <Typography>Custom Blinds:1-800-000-0000 </Typography>
-                      <Typography>
-                        Call 7 days a week - 6 a.m. to 2 a.m. EST
-                      </Typography>
-                    </div>
-                  </Grid>
                 </Grid>
-              </div>
+              </Grid>
             </Grid>
           </Grid>
         </div>
