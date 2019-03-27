@@ -444,7 +444,13 @@ const styles = theme => ({
       fontSize: "12px",
       paddingLeft: "10px"
     }
-  }
+  },
+    errorMessage:{
+        color:"red",
+        marginTop:"-5px",
+        textAlign:"right",
+        fontSize:"12px"
+    }
 });
 
 const AuthUserCheckout = props => {
@@ -489,6 +495,11 @@ const AuthUserCheckout = props => {
     orderDetails.email = value;
     localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
   };
+    
+const handleEmail = value => {
+    setErrorGuestEmail(value);
+  };
+    
   const handleFName = value => {
     setFName(value);
   };
@@ -521,6 +532,11 @@ const AuthUserCheckout = props => {
       setErrorShipping("Please enter shipping address");
     } else {
       setErrorShipping("");
+    }
+      if (errorGuestEmail.length === 0) {
+      setErrorGuestEmail("Please enter email address");
+    } else {
+      setErrorGuestEmail("");
     }
   };
 
@@ -662,7 +678,12 @@ const AuthUserCheckout = props => {
   };
 
   const saveAddress = () => {
-    setIsAddressSection(false);
+      
+    if(fName && phone && shipping)
+        {
+            setIsAddressSection(false);
+        }
+    
   };
 
   return (
@@ -698,22 +719,22 @@ const AuthUserCheckout = props => {
                             }
                           >
                             <div className={classes.addressLines}>
-                              <div>
+                              <div style={{height:"30px"}}>
                                 <Typography>
                                   {fName ? fName : "Address line 1"}
                                 </Typography>
                               </div>
-                              <div>
+                              <div style={{height:"30px"}}>
                                 <Typography>
                                   {phone ? phone : "Address line 2"}
                                 </Typography>
                               </div>
-                              <div>
+                              <div style={{height:"30px"}}>
                                 <Typography>
                                   {shipping ? shipping : "Address line 3"}
                                 </Typography>
                               </div>
-                              <div>
+                              <div style={{height:"30px"}}>
                                 <Typography>
                                   {email ? email : "Enter Email"}
                                 </Typography>
@@ -773,7 +794,7 @@ const AuthUserCheckout = props => {
                                   </div>
                                   <div>
                                     {errorGuestEmail && (
-                                      <div className="errorCheckout">
+                                      <div className={classes.errorMessage}>
                                         {errorGuestEmail}
                                       </div>
                                     )}
@@ -797,7 +818,7 @@ const AuthUserCheckout = props => {
                                   </div>
                                   <div>
                                     {errorFName && (
-                                      <div className="errorCheckout">
+                                      <div className={classes.errorMessage}>
                                         {errorFName}
                                       </div>
                                     )}
@@ -824,7 +845,7 @@ const AuthUserCheckout = props => {
                                   </div>
                                   <div>
                                     {errorPhone && (
-                                      <div className="errorCheckout">
+                                      <div className={classes.errorMessage}>
                                         {errorPhone}
                                       </div>
                                     )}
@@ -850,7 +871,7 @@ const AuthUserCheckout = props => {
                                   </div>
                                   <div>
                                     {errorShipping && (
-                                      <div className="errorCheckout">
+                                      <div className={classes.errorMessage}>
                                         {errorShipping}
                                       </div>
                                     )}
@@ -859,11 +880,10 @@ const AuthUserCheckout = props => {
                                 <div
                                   style={{
                                     textAlign: "right",
-                                    marginTop: "50px"
+                                    marginTop: "30px"
                                   }}
                                 >
-                                  <Button
-                                    className={classes.saveAddressBtn}
+                                  <Button                                    className={classes.saveAddressBtn}
                                     type="submit"
                                     onClick={saveAddress}
                                   >

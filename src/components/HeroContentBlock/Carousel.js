@@ -13,7 +13,7 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       height: "350px"
     },
-      [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("xs")]: {
       height: "200px"
     }
   },
@@ -23,9 +23,8 @@ const styles = theme => ({
     height: "400px",
     [theme.breakpoints.down("sm")]: {
       height: "350px"
-    }
-      ,
-      [theme.breakpoints.down("xs")]: {
+    },
+    [theme.breakpoints.down("xs")]: {
       height: "200px"
     }
   },
@@ -36,7 +35,7 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       height: "350px"
     },
-      [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("xs")]: {
       height: "200px"
     }
   },
@@ -47,19 +46,56 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       height: "350px"
     },
-      [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("xs")]: {
       height: "200px"
     }
   }
 });
+const SampleNextArrow = props => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        display: "block",
+        background: "#bfbfbf",
+        marginRight: "30px",
+        padding: "7px",
+        borderRadius: "17px",
+        top: "50%"
+      }}
+      onClick={onClick}
+    />
+  );
+};
 
+const SamplePrevArrow = props => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        display: "block",
+        background: "#bfbfbf",
+        marginLeft: "30px",
+        padding: "7px",
+        borderRadius: "17px",
+        zIndex: "1000",
+        top: "50%"
+      }}
+      onClick={onClick}
+    />
+  );
+};
 class Carousel extends React.Component {
   render() {
     let settings = {
       dots: false,
       infinite: true,
       autoplay: true,
-      speed: 200
+      speed: 200,
+      prevArrow: <SamplePrevArrow />,
+      nextArrow: <SampleNextArrow />
     };
     const { classes } = this.props;
     return (

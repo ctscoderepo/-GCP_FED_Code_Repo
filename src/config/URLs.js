@@ -10,6 +10,7 @@ export const URLList = {
     LoginAndRegistration_IP_New: "104.197.18.180",
     StoreFinder_IP_Old:"104.154.36.71",
     StoreFinder_IP_New:"35.202.79.142",
+    StoreFinder_IP_SSL:"35.244.194.33",
     ShoppingCartAPI:"/api/shoppingcart/",
     SearchAPI:"/keywordsearch?keyword=",
     ProdcutDetailsAPI:"/products/",
@@ -22,6 +23,12 @@ export const URLList = {
       },
     getStoreFinderUsingAddress:function(zip, radius){
         return this.HTTP + this.StoreFinder_IP_New + "/storelocator/getstoredetails?address=" + zip + "&radius=" + radius;
+    },
+    getHttpsStoreFinderUsingLatLng:function(lat,lng){
+        return this.HTTPS + this.StoreFinder_IP_SSL + "/storelocator/getstoresforlatlong?lat="+ lat + "&lng=" + lng;
+      },
+    getHttpsStoreFinderUsingAddress:function(zip, radius){
+        return this.HTTPS + this.StoreFinder_IP_SSL + "/storelocator/getstoredetails?address=" + zip + "&radius=" + radius;
     },
     getSearchURL: function(){
         return this.HTTP + this.Search_IP + this.SearchAPI;

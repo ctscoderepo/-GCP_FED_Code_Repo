@@ -32,12 +32,16 @@ const styles = theme => ({
   grow: {
     flexGrow: 1
   },
-  menuButton: {
+   menuButton: {
     display: "none",
     color: "#000",
-    marginLeft: "-20px",
+    marginLeft:"-20px",  
     [theme.breakpoints.down("sm")]: {
-      display: "block"
+      display: "block",
+      padding:"0px"    
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding:"10px"    
     }
   },
   title: {
@@ -307,11 +311,17 @@ const styles = theme => ({
       marginTop: "-3px"
     }
   },
-  accIconDiv: {
+ accIconDiv: {  
     paddingTop: "15px",
     textAlign: "right",
     [theme.breakpoints.down("lg")]: {
-      display: "flex"
+      display:"flex",  
+    },
+      [theme.breakpoints.down("sm")]: {
+      float:"right"
+    },
+      [theme.breakpoints.down("xs")]: {
+      float:"left"
     }
   },
   menuListItems: {
@@ -668,12 +678,12 @@ function SearchAppBar(props) {
                 <Grid container className={classes.toolBar}>
                   <Grid item lg={12} sm={12} xs={12}>
                     <Grid container>
-                      <Grid item lg={2} sm={2}>
+                      <Grid item lg={3} sm={3} >
                         <div style={{ padding: "10px 0px 0px 0px" }}>
                           <Location storeData={storeData} />
                         </div>
                       </Grid>
-                      <Grid item lg={8} sm={8}>
+                      <Grid item lg={7} sm={7}>
                         <NavigationMenu />
                       </Grid>
                       <Grid item lg={2} sm={2}>

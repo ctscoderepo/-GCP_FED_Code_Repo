@@ -10,13 +10,14 @@ import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
 import { GoogleKeys } from "../../config/GoogleKeys";
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
+import Spinner from "../helpers/Spinner";
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     marginTop: "130px",
     [theme.breakpoints.down("sm")]: {
-      marginTop: "60px"
+      marginTop: "130px"
     },
     [theme.breakpoints.down("xs")]: {
       marginTop: "60px"
@@ -192,11 +193,18 @@ const styles = theme => ({
     fill: "#000",
     "&:hover": {
       backgroundColor: "#0084CD"
+    },
+      [theme.breakpoints.down("sm")]: {
+       width: "50%"
     }
   },
   select: {
     backgroundColor: "green"
-  }
+  },
+    spinnerDiv:{
+        marginTop:"20%", 
+        textAlign:"center"
+    }
 });
 
 const StoreFinderComponent = props => {
@@ -206,7 +214,8 @@ const StoreFinderComponent = props => {
     findStores,
     getStoresByLatLng,
     storeList,
-    setStoreData
+    setStoreData,
+      isLoading
   } = props;
 
   const [address, setAddress] = useState("");
@@ -264,12 +273,16 @@ const StoreFinderComponent = props => {
       setShowingInfoWindow(false);
     }
   };
+    
+     console.log("isLoading",isLoading);
+
 
   const sortedStoreList = storeList
     ? storeList.sort((a, b) => {
         return a.id - b.id;
       })
     : "";
+    
 
   const googleMarker = sortedStoreList
     ? sortedStoreList.map(item => (
@@ -291,8 +304,9 @@ const StoreFinderComponent = props => {
     props.setStoreData(address);
     history.push("/");
   };
-
-  const storeDetails = sortedStoreList ? (
+    
+   
+  const storeDetails = isLoading? (<div className={classes.spinnerDiv}><Spinner /></div>):(sortedStoreList.length?(
     sortedStoreList.map((item, index) => (
       <div className={classes.storesDiv} key={item.id}>
         <div>
@@ -322,9 +336,7 @@ const StoreFinderComponent = props => {
         </div>
       </div>
     ))
-  ) : (
-    <div>No stores for this address</div>
-  );
+  ):<div className={classes.spinnerDiv}><strong>No Stores Found</strong></div>); 
 
   return (
     <>
@@ -388,6 +400,7 @@ const StoreFinderComponent = props => {
                             margin="normal"
                             variant="outlined"
                             placeholder=""
+                            type="number"
                             onChange={e => getAddress(e.target.value)}
                           />
                         </Grid>

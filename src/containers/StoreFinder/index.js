@@ -16,7 +16,8 @@ const StoreFinder = ({
   storeFinder,
   getStoresByLatLng,
   storeList,
-  setStoreData
+  setStoreData,
+    isLoading
 }) => {
   useEffect(() => {
     setHeaderStatus(true);
@@ -38,12 +39,13 @@ const StoreFinder = ({
       storeList={storeList}
       getStoresByLatLng={getStoresByLatLng}
       setStoreData={setStoreData}
+      isLoading={isLoading}
     />
   );
 };
 
 export default connect(
-  ({ storeFinder }) => ({ storeList: storeFinder.storeList }),
+  ({ storeFinder }) => ({ storeList: storeFinder.storeList, isLoading: storeFinder.isLoading }),
   {
     setHeaderStatus,
     setFooterStatus,
