@@ -218,11 +218,11 @@ const StoreFinderComponent = props => {
       isLoading
   } = props;
 
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState("40222");
   const getAddress = value => {
     setAddress(value);
   };
-  const [radius, setRadius] = useState("");
+  const [radius, setRadius] = useState("5");
   const getRadius = value => {
     setRadius(value);
   };
@@ -401,6 +401,7 @@ const StoreFinderComponent = props => {
                             variant="outlined"
                             placeholder=""
                             type="number"
+                            value={address}
                             onChange={e => getAddress(e.target.value)}
                           />
                         </Grid>
@@ -430,6 +431,7 @@ const StoreFinderComponent = props => {
                             className={classes.InputText}
                             margin="normal"
                             variant="outlined"
+                            value={radius}
                             placeholder=""
                             onChange={e => getRadius(e.target.value)}
                           />
