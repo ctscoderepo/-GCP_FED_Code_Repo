@@ -7,6 +7,7 @@ import {
   setNavBarStatus,
   setStoreData
 } from "../../actions/Header";
+import { setStoreDataOnProducts } from "../../actions/Products";
 import { connect } from "react-redux";
 import { storeFinder, getStoresByLatLng } from "../../actions/StoreFinder";
 
@@ -17,7 +18,8 @@ const StoreFinder = ({
   getStoresByLatLng,
   storeList,
   setStoreData,
-    isLoading
+  setStoreDataOnProducts,
+  isLoading
 }) => {
   useEffect(() => {
     setHeaderStatus(true);
@@ -39,18 +41,23 @@ const StoreFinder = ({
       storeList={storeList}
       getStoresByLatLng={getStoresByLatLng}
       setStoreData={setStoreData}
+      setStoreDataOnProducts={setStoreDataOnProducts}
       isLoading={isLoading}
     />
   );
 };
 
 export default connect(
-  ({ storeFinder }) => ({ storeList: storeFinder.storeList, isLoading: storeFinder.isLoading }),
+  ({ storeFinder }) => ({
+    storeList: storeFinder.storeList,
+    isLoading: storeFinder.isLoading
+  }),
   {
     setHeaderStatus,
     setFooterStatus,
     storeFinder,
     getStoresByLatLng,
-    setStoreData
+    setStoreData,
+    setStoreDataOnProducts
   }
 )(withRouter(StoreFinder));

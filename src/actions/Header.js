@@ -25,3 +25,7 @@ export const clearCartItemsOnHeader = items => {
 export const setStoreData = items => {
   return { type: "SET_STORE_DATA", payload: items };
 };
+
+export const getStoreData = () => {
+  return { type: "GET_STORE_DATA", payload: {} };
+};

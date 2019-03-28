@@ -65,7 +65,7 @@ const styles = theme => ({
        marginTop:"20px"
   },
     returnToHomeBtn: {
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "80%",
     margin: "0px 0px 0px 0px",
@@ -77,7 +77,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#00cc00"
+      backgroundColor: "#009900"
     },
           [theme.breakpoints.down("xs")]: {
            width:"100%",
@@ -99,16 +99,17 @@ const styles = theme => ({
 });
 
 const ConfirmationComponent  = (props) => { 
-    const { classes, history,clearCartItemsOnHeader, checkoutData,isLoading} = props;
+    const { classes, history,clearCartItemsOnHeader, checkoutData,isLoading,storeProductInfo} = props;
     
-    console.log("isLoading",isLoading)
+    
     
     const checkOutLength=Object.keys(checkoutData).length == 0?false:true;
-
+    
     const goToHomePage=()=>{
         clearCartItemsOnHeader(); 
         history.push("/")
     }
+    
     
   const userData = JSON.parse(localStorage.getItem("loggedInUserData"));
   const lsOrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
@@ -118,8 +119,49 @@ const ConfirmationComponent  = (props) => {
   const totalOrderValue=checkoutData?checkoutData.totalPrice + checkoutData.totalShipping + checkoutData.totalTax:0;
     
     
+   const shippingStoreDetails=(storeProductInfo ?<div className={classes.root}>
+       <div className={classes.confirmContainer}>
+        <div><Link to="/"><img src="/assets/images/logo.png"  alt="logo" className={classes.logo} /></Link></div>
+        <div className={classes.confirmHeader}>Your product is shipped to store successfully</div>
+        <div className={classes.orderInfo}>
+        
+        <Grid container>        
+        <Grid item lg={12} sm={12} xs={12}>
+        <div> <Typography className={classes.orderLabel}  ><strong>Product Name :</strong></Typography><span>{storeProductInfo && storeProductInfo.product ?storeProductInfo.product.productName:''}</span></div>
+        </Grid>
+        <Grid item lg={12} sm={12} xs={12} style={{marginTop:"10px"}}>
+        <div><Typography><strong>Store Details :</strong> <strong>{storeProductInfo && storeProductInfo.storeName?storeProductInfo.storeName:""}</strong></Typography></div>
+        </Grid>
+        </Grid>
+        </div>
+        <Divider className={classes.devider} />
+        
+        <Grid container>
+         <Grid item lg={6} sm={6} xs={12} style={{marginTop:"20px"}}>
+        <div>
+        <Button className={classes.returnToHomeBtn} onClick={() =>goToHomePage()}>Return to Home Page</Button>
+        </div>
+        </Grid>
+        <Grid item lg={6} sm={6} xs={12} style={{marginTop:"15px"}}>
+        <div className={classes.needHelp}>
+         <Typography><strong>Need Help or Questions?</strong> </Typography>
+         <Typography><strong>Call :</strong> 1-800-000-0000</Typography>
+        </div>
+        </Grid>
+        </Grid>
+            
+        <Grid container>
+         <Grid item lg={12} sm={12} xs={12} >
+        <div className={classes.confirmFooter} ><Typography>©2019 Demo Store.All Rights Reserved. Use of this site is
+                subject to certain Terms Of Use.</Typography></div>
+        </Grid>
+        </Grid>
+        </div>
+      </div>:"");
+    
+    
     return (
-      <div>{isLoading?(<div className={classes.spinnerDiv}><Spinner /></div>):(checkOutLength?<div className={classes.root}>
+      <div>{isLoading?(<div className={classes.spinnerDiv}><Spinner /></div>):(storeProductInfo?<div>{shippingStoreDetails}</div>:(checkOutLength?<div className={classes.root}>
        <div className={classes.confirmContainer}>
         <div><Link to="/"><img src="/assets/images/logo.png"  alt="logo" className={classes.logo} /></Link></div>
         <div className={classes.confirmHeader}>Your order is placed Successfully</div>
@@ -157,7 +199,7 @@ const ConfirmationComponent  = (props) => {
         </Grid>
         </Grid>
         </div>
-      </div>:"No Data")}</div>
+      </div>:"No Data"))}</div>
 
     );
   }

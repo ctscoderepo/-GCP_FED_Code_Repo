@@ -4,43 +4,47 @@ import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import "./index.css";
 
 const styles = theme => ({
   linkColor: {
-    color: "#333",
+    color: "#fff",
     fontSize: "14px",
-      "&:hover": {
+    "&:hover": {
       cursor: "pointer"
     },
+    [theme.breakpoints.down("xs")]: {
+      color: "black"
+    }
   },
   footerBottomLinks: {
-    color: "#0086b3",
+    color: "#fff",
     fontSize: "12px",
     margin: "0px 15px 0px 0px",
-      borderRight:"1px solid gray",
-      paddingRight:"12px",
-      "&:hover": {
+    borderRight: "2px solid #fff",
+    paddingRight: "12px",
+    "&:hover": {
       cursor: "pointer"
-    },
+    }
   },
-    footerLastTab: {
-    color: "#0086b3",
+  footerLastTab: {
+    color: "#fff",
     fontSize: "12px",
     margin: "0px 15px 0px 0px",
-      "&:hover": {
+    "&:hover": {
       cursor: "pointer"
-    },
+    }
   },
-  margin15: {
-    background: "#f2f2f2",
+  footerComponentContainer: {
+    background: "#4d4d4d",
     padding: "20px",
-      [theme.breakpoints.down("xs")]: {
-      padding:"25px 3px 0px 3px",
-          
+    [theme.breakpoints.down("xs")]: {
+      padding: "25px 3px 0px 3px"
     }
   },
   footerHeader: {
@@ -50,6 +54,8 @@ const styles = theme => ({
   fhead: {
     height: "25px",
     marginBottom: "10px",
+    color: "white",
+    fontWeight: "bold",
     [theme.breakpoints.down("sm")]: {
       marginTop: "10px"
     }
@@ -61,22 +67,22 @@ const styles = theme => ({
       float: "left",
       fontSize: "8px",
       marginRight: "15px",
-      height: "28px",
+      height: "28px"
     }
   },
   footerLabel: {
-    padding:"0px 10px 0px 10px", 
-      fontSize:"14px", 
-      textAlign:"center", 
-      marginTop:"25px",
-      
+    padding: "0px 10px 0px 10px",
+    fontSize: "14px",
+    textAlign: "center",
+    marginTop: "25px",
+    color: "#fff",
     [theme.breakpoints.down("xs")]: {
       marginTop: "20px",
-    fontSize:"12px", 
+      fontSize: "12px"
     }
   },
   footerNav: {
-    textAlign: "center",
+    textAlign: "center"
   },
   mobView: {
     [theme.breakpoints.down("xs")]: {
@@ -88,9 +94,9 @@ const styles = theme => ({
     width: "20px",
     height: "20px",
     marginRight: "10px",
-      "&:hover": {
+    "&:hover": {
       cursor: "pointer"
-    },
+    }
   },
   socialLinks: {
     color: "#333",
@@ -100,181 +106,300 @@ const styles = theme => ({
       display: "none"
     }
   },
-    demoStore:{
-        padding:"5px 5px 5px 10px", background: "#f2f2f2"
-    },
-     stayCon:{
-       padding:"10px", paddingTop:"20px", background: "#f2f2f2"
-     },
-    demoView:{
-        [theme.breakpoints.down("xs")]: {
+  demoStore: {
+    padding: "5px 5px 5px 10px",
+    background: "#f2f2f2"
+  },
+  stayCon: {
+    paddingTop: "20px",
+    width: "300px",
+    [theme.breakpoints.down("xs")]: {
+      padding: "10px",
+      backgroundColor: "white",
+      width: "94.2%"
+    }
+  },
+  demoView: {
+    [theme.breakpoints.down("xs")]: {
       display: "none"
     }
-    },
-    demoMobView:{
+  },
+  demoMobView: {
+    marginTop: "5px",
     [theme.breakpoints.down("lg")]: {
       display: "none"
     },
     [theme.breakpoints.down("sm")]: {
       display: "none"
     },
-        [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "block"
     }
+  },
+  heading: {
+    color: "gray",
+    fontSize: "14px"
+  },
+  InputText: {
+    width: "200px",
+    height: "35px",
+    marginTop: "0px",
+    margin: "0px 0px 10px 0px",
+    border: "1px solid #fff",
+    color: "#fff",
+    "&:hover": {
+      cursor: "pointer",
+      border: "1px solid #fff",
+      borderRadius: "0px",
+      color: "white"
     },
-    heading:{
-        color:"gray", fontSize:"14px"
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: "5px",
+      fontSize: "12px"
     }
+  },
+  subscribeBtn: {
+    backgroundColor: "#fff",
+    width: "120px",
+    marginLeft: "20px",
+    borderRadius: "0px",
+    fontSize: "12px",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: "#008000",
+      color: "#fff"
+    }
+  }
 });
 
 const FooterComoponent = props => {
   const { classes, history } = props;
-    
-    const demostoreList = [
-    { name: "Features"},
-    { name: "Your Order"},
-    { name: "Returns"},
-    { name: "Shipping & Delivery"},
-    { name: "Help & FAQs"}
+
+  const demostoreList = [
+    { name: "Features" },
+    { name: "Your Order" },
+    { name: "Returns" },
+    { name: "Shipping & Delivery" },
+    { name: "Help & FAQs" }
   ];
-    
-    const stayConnected=[
-        {img:"/assets/images/facebook.png"},
-        {img:"/assets/images/twitter.png"},
-        {img:"/assets/images/pintrest1.png"},
-        {img:"/assets/images/instagram1.png"},
-        {img:"/assets/images/blog1.png"},
-    ];
-    
-    const supportServices= [
-    { name: "Customer Services"},
-    { name: "Documentations"},
-    { name: "Help"},
-    { name: "Premium Support"},
-    { name: "Solution Partners"}
+
+  const stayConnected = [
+    { img: "/assets/images/facebook.png" },
+    { img: "/assets/images/twitter.png" },
+    { img: "/assets/images/pintrest1.png" },
+    { img: "/assets/images/instagram1.png" },
+    { img: "/assets/images/blog1.png" }
+  ];
+
+  const supportServices = [
+    { name: "Customer Services" },
+    { name: "Documentations" },
+    { name: "Help" },
+    { name: "Premium Support" },
+    { name: "Solution Partners" }
   ];
 
   return (
     <>
-      <Grid container className={classes.margin15}>
-        <Grid item lg={4} sm={4} xs={12}>
-          
-       <div className={classes.demoView}><div className={classes.fhead}>
-            <Typography>
-              <strong>Demostore</strong>
-            </Typography>
-          </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}>Features</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}>Your Order</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}>Returns</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}>Shipping & Delivery</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}>Help & FAQs</Link>
-          </div></div>
-      
-         <div className={classes.demoMobView}>
-         <ExpansionPanel style={{borderRadius:"0px"}}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon /> } style={{paddingLeft:"10px"}}>
-          <div className={classes.heading}><strong>Demostore</strong></div>
-           </ExpansionPanelSummary>
-          {demostoreList.map(y=>(<div className={classes.demoStore}  key={y.name}><Link className={classes.linkColor}>{y.name}</Link></div>))}
-         </ExpansionPanel>
-          </div>
-      
-        </Grid>
-        <Grid item lg={4} sm={4} xs={12} className={classes.mobView}>
-          
-            <div className={classes.demoView}><div className={classes.fhead}>
-            <Typography>
-              <strong>Stay Connected</strong>
-            </Typography>
-          </div>
-          <div className={classes.footerLink}>
-            <img src="/assets/images/facebook.png" alt="facebook" className={classes.footerImage} />
-            <Link className={classes.linkColor}>Facebook</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <img src="/assets/images/twitter.png" alt="twitter" className={classes.footerImage} />
-            <Link className={classes.linkColor}>Twitter</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <img src="/assets/images/pintrest1.png" alt="pintrest" className={classes.footerImage} />
-            <Link className={classes.linkColor}> Pintrest</Link>
-          </div>
-
-          <div className={classes.footerLink}>
-            <img src="/assets/images/instagram1.png" alt="instagram" className={classes.footerImage} />
-            <Link className={classes.linkColor}>Instagram</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <img src="/assets/images/blog1.png" alt="pintrest" className={classes.footerImage} />
-            <Link className={classes.linkColor}>Blog</Link>
-          </div>
-            </div>
-
+      <Grid container className={classes.footerComponentContainer}>
+        <Grid item lg={3} sm={3} xs={12}>
+          <div className={classes.demoView}>
             <div>
-             <div className={classes.demoMobView}>
-         <ExpansionPanel style={{borderRadius:"0px"}}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon /> } style={{paddingLeft:"10px"}}>
-          <div className={classes.heading}><strong>Stay Connected</strong></div>
-           </ExpansionPanelSummary>
-          <div className={classes.stayCon}>{stayConnected.map(y=>(
-            <img key={y.img} src={y.img} alt="pintrest" className={classes.footerImage} style={{paddingRight:"30px"}} />))}</div>
-         </ExpansionPanel>
-          </div>    
+              <Typography className={classes.fhead}>
+                <strong>Demostore</strong>
+              </Typography>
             </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}>Features</Link>
+            </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}>Your Order</Link>
+            </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}>Returns</Link>
+            </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}>Shipping & Delivery</Link>
+            </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}>Help & FAQs</Link>
+            </div>
+          </div>
 
+          <div className={classes.demoMobView}>
+            <ExpansionPanel
+              style={{
+                borderRadius: "0px",
+                backgroundColor: "#4d4d4d",
+                color: "white",
+                border: "1px solid #fff"
+              }}
+            >
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon style={{ color: "white" }} />}
+                style={{ paddingLeft: "10px" }}
+              >
+                <div className={classes.heading}>
+                  <strong>Demostore</strong>
+                </div>
+              </ExpansionPanelSummary>
+              {demostoreList.map(y => (
+                <div className={classes.demoStore} key={y.name}>
+                  <Link className={classes.linkColor}>{y.name}</Link>
+                </div>
+              ))}
+            </ExpansionPanel>
+          </div>
+        </Grid>
+        <Grid item lg={3} sm={3} xs={12} className={classes.mobView}>
+          <div className={classes.demoView}>
+            <div>
+              <Typography className={classes.fhead}>
+                <strong>Support & Services</strong>
+              </Typography>
+            </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}>Customer Services</Link>
+            </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}> Documentations</Link>
+            </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}> Help</Link>
+            </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}>Premium Support</Link>
+            </div>
+            <div className={classes.footerLink}>
+              <Link className={classes.linkColor}>Solution Partners</Link>
+            </div>
+          </div>
+
+          <div>
+            <div className={classes.demoMobView}>
+              <ExpansionPanel
+                style={{
+                  borderRadius: "0px",
+                  backgroundColor: "#4d4d4d",
+                  color: "white",
+                  border: "1px solid #fff"
+                }}
+              >
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon style={{ color: "white" }} />}
+                  style={{ paddingLeft: "10px" }}
+                >
+                  <div className={classes.heading}>
+                    <strong>Support & Services</strong>
+                  </div>
+                </ExpansionPanelSummary>
+                {supportServices.map(y => (
+                  <div className={classes.demoStore} key={y.name}>
+                    <Link className={classes.linkColor}>{y.name}</Link>
+                  </div>
+                ))}
+              </ExpansionPanel>
+            </div>
+          </div>
         </Grid>
 
         <Grid item lg={4} sm={4} xs={12} className={classes.mobView}>
-          <div className={classes.demoView}><div className={classes.fhead}>
-            <Typography>
-              <strong>Support & Services</strong>
-            </Typography>
+          <div className={classes.demoView}>
+            <div>
+              <Typography className={classes.fhead}>
+                <strong>Subscrive to newsletter</strong>
+              </Typography>
+            </div>
+            <div style={{ display: "flex" }}>
+              <div>
+                <TextField
+                  id="outlined-name"
+                  label=""
+                  className={classes.InputText}
+                  margin="normal"
+                  variant="outlined"
+                  placeholder="ENTER YOUR EMAIL"
+                  value=""
+                />
+              </div>
+              <div>
+                <Button className={classes.subscribeBtn}>Subscribe</Button>
+              </div>
+            </div>
+            <div className={classes.stayCon}>
+              {stayConnected.map(y => (
+                <img
+                  key={y.img}
+                  src={y.img}
+                  alt="pintrest"
+                  className={classes.footerImage}
+                  style={{ paddingRight: "30px" }}
+                />
+              ))}
+            </div>
           </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}>Customer Services</Link>
+          <div className={classes.demoMobView}>
+            <ExpansionPanel
+              style={{
+                borderRadius: "0px",
+                backgroundColor: "#4d4d4d",
+                color: "white",
+                border: "1px solid #fff"
+              }}
+            >
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon style={{ color: "white" }} />}
+                style={{ paddingLeft: "10px" }}
+              >
+                <div className={classes.heading}>
+                  <strong>Stay Connected</strong>
+                </div>
+              </ExpansionPanelSummary>
+
+              <div style={{ display: "flex" }}>
+                <div>
+                  <TextField
+                    id="outlined-name"
+                    label=""
+                    className={classes.InputText}
+                    margin="normal"
+                    variant="outlined"
+                    placeholder="ENTER YOUR EMAIL"
+                    value=""
+                  />
+                </div>
+                <div>
+                  <Button className={classes.subscribeBtn}>Subscribe</Button>
+                </div>
+              </div>
+              <div className={classes.stayCon}>
+                {stayConnected.map(y => (
+                  <img
+                    key={y.img}
+                    src={y.img}
+                    alt="pintrest"
+                    className={classes.footerImage}
+                    style={{ paddingRight: "30px" }}
+                  />
+                ))}
+              </div>
+            </ExpansionPanel>
           </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}> Documentations</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}> Help</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}>Premium Support</Link>
-          </div>
-          <div className={classes.footerLink}>
-            <Link className={classes.linkColor}>Solution Partners</Link>
-          </div>
-        </div>
-        <div className={classes.demoMobView}>
-        <ExpansionPanel style={{borderRadius:"0px"}}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon /> } style={{paddingLeft:"10px"}}>
-          <div className={classes.heading}><strong >Support & Services</strong></div>
-           </ExpansionPanelSummary>
-          {supportServices.map(y=>(<div className={classes.demoStore}  key={y.name}><Link className={classes.linkColor}>{y.name}</Link></div>))}
-         </ExpansionPanel>
-                
-        </div>
         </Grid>
 
-        <Grid item lg={12} sm={12} xs={12} style={{paddingBottom:"20px"}}>
+        <Grid item lg={12} sm={12} xs={12} style={{ paddingBottom: "20px" }}>
           <Grid container spacing={24}>
             <Grid item lg={12} sm={12} xs={12}>
               <div className={classes.footerLabel}>
                 ©2019 Demo Store.All Rights Reserved. Use of this site is
                 subject to certain Terms Of Use.
               </div>
-              <div className={classes.footerLabel} style={{marginTop:"10px"}}><strong>Need Help?</strong>, please call ....... or text .......</div>
+              <div
+                className={classes.footerLabel}
+                style={{ marginTop: "10px" }}
+              >
+                <strong>Need Help?</strong>, please call or text{" "}
+              </div>
             </Grid>
 
             <Grid item lg={12} sm={12} xs={12} className={classes.footerNav}>

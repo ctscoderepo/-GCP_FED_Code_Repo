@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import SideNav from "../SideNav";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 import "./index.css";
 
 const styles = theme => ({
@@ -14,7 +16,7 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       margin: "140px 20px 20px 20px"
     },
-      [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("xs")]: {
       margin: "130px 20px 20px 20px"
     }
   },
@@ -55,8 +57,8 @@ const styles = theme => ({
     textAlign: "center",
     marginTop: "5%",
     [theme.breakpoints.down("xs")]: {
-      marginLeft:"120px"
-    }  
+      marginLeft: "120px"
+    }
   },
   imageWrapper: {
     marginLeft: "auto",
@@ -64,8 +66,8 @@ const styles = theme => ({
     display: "block",
     height: "350px",
     width: "95%",
-      border:"1px solid #d9d9d9",
-      borderRadius:"2px",
+    border: "1px solid #d9d9d9",
+    borderRadius: "2px",
     [theme.breakpoints.down("sm")]: {
       height: "250px",
       width: "95%"
@@ -75,38 +77,39 @@ const styles = theme => ({
       width: "95%"
     }
   },
-    dividerStyle:{
-        backgroundColor:"#e6e6e6",
-        height:"2px", 
-        marginTop:"20px"
+  dividerStyle: {
+    backgroundColor: "#e6e6e6",
+    height: "2px",
+    marginTop: "20px"
+  },
+  relevanceInput: {
+    padding: "10px",
+    border: "1px solid #cccccc",
+    [theme.breakpoints.down("xs")]: {
+      padding: "5px",
+      marginLeft: "10px",
+      width: "30%"
+    }
+  },
+  relevance: {
+    textAlign: "right",
+    marginTop: "-20px",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "-25px",
+      fontSize: "13px"
+    }
+  },
+  productLine: {
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "20px"
     },
-    relevanceInput:{
-    padding:"10px",
-        border:"1px solid #cccccc",
-       [theme.breakpoints.down("xs")]: {
-          padding:"5px"  ,
-           marginLeft:"10px",
-           width:"30%"
-        } 
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "16px"
     },
-    relevance:{
-       textAlign:"right",marginTop:"-20px",
-       [theme.breakpoints.down("xs")]: {
-          marginTop:"-25px",
-          fontSize:"13px",
-        } 
-    },
-    productLine:{
-        [theme.breakpoints.down("lg")]: {
-        fontSize:"20px"
-        },
-        [theme.breakpoints.down("sm")]: {
-        fontSize:"16px"
-        },
-        [theme.breakpoints.down("xs")]: {
-        fontSize:"14px",
-        }
-    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "14px"
+    }
+  }
 });
 
 const rating = () => (
@@ -158,11 +161,16 @@ const rating = () => (
   </>
 );
 
-function Products({ products, catType, classes, isLoading }) {
-  console.log("ffffffff", products);
-
+function Products({
+  products,
+  catType,
+  classes,
+  isLoading,
+  shipToStore,
+  storeData,
+  setStoreDataToPDP
+}) {
   const [mainCategory, setmainCategory] = useState();
-
   useEffect(() => {
     if (products) {
       let mainCat = "";
@@ -173,7 +181,22 @@ function Products({ products, catType, classes, isLoading }) {
     }
   });
 
-  console.log(mainCategory);
+  const [selectStore, setSelectStore] = useState(false);
+
+  const selectStoreChange = value => {
+    //const storeValue = selectStore ? "" : value;
+    setSelectStore(!selectStore);
+  };
+
+  useEffect(() => {
+    if (selectStore) {
+      shipToStore("ship to store");
+      setStoreDataToPDP(storeData);
+    }else{
+      shipToStore("");
+    }
+  }, [selectStore]);
+
   const spinner =
     products.length === 0 ? (
       isLoading ? (
@@ -189,7 +212,7 @@ function Products({ products, catType, classes, isLoading }) {
       <Grid container spacing={16}>
         {products.map(product => (
           <Grid item lg={4} md={4} sm={4} xs={6} key={product.skuId}>
-            <div >
+            <div>
               <Link
                 to={`/store/product/${product.skuId}`}
                 className={classes.item}
@@ -203,11 +226,13 @@ function Products({ products, catType, classes, isLoading }) {
                 </div>
                 <div className="productDetail">
                   <div className="title">{product.productName}</div>
-                  <span className="rated" >{rating()}</span>
-                  <div className="price"><strong>
-                    {product.currencyCode === "USD" && "$"}{" "}
-                    <span>{product.price}</span>
-                  </strong></div>
+                  <span className="rated">{rating()}</span>
+                  <div className="price">
+                    <strong>
+                      {product.currencyCode === "USD" && "$"}{" "}
+                      <span>{product.price}</span>
+                    </strong>
+                  </div>
                 </div>
               </Link>
             </div>
@@ -217,23 +242,65 @@ function Products({ products, catType, classes, isLoading }) {
     );
   return (
     <div className={classes.productsComponent}>
-      <div style={{ marginBottom: "30px"}}>
+      <div style={{ marginBottom: "30px" }}>
         <Typography className={classes.productLine}>
           <strong>{mainCategory}</strong>
         </Typography>
-{mainCategory?<div className={classes.relevance}>
-            Sort by <input type="text" value="Relevance" className={classes.relevanceInput}/></div>:""}
-        <div>{mainCategory?<Divider className={classes.dividerStyle}/>:""}</div>
+        {mainCategory ? (
+          <div className={classes.relevance}>
+            Sort by{" "}
+            <input
+              type="text"
+              value="Relevance"
+              className={classes.relevanceInput}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+        <div>
+          {mainCategory ? <Divider className={classes.dividerStyle} /> : ""}
+        </div>
       </div>
-     
+
       <Grid container spacing={16}>
         <Grid item lg={3} md={3} sm={3} className={classes.sideNav}>
-          <div style={{height:"40px", paddingTop:"10px"}}>
+          {storeData ? (
+            <div>
+              <Typography style={{ fontSize: "20px", fontWeight: "bold" }}>
+                Get It Fast
+              </Typography>
+              <Divider
+                style={{
+                  backgroundColor: "#003d99",
+                  height: "2px",
+                  marginTop: "5px",
+                  marginBottom: "10px"
+                }}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={selectStore}
+                    onChange={() => selectStoreChange("ship to store")}
+                    value="selectedStore"
+                    color="primary"
+                  />
+                }
+                label="In Stock at Store Today"
+              />
+              <Typography>{storeData ? storeData : ""}</Typography>
+              <Divider className={classes.dividerStyle} />
+            </div>
+          ) : (
+            ""
+          )}
+          <div style={{ height: "40px", paddingTop: "10px" }}>
             <Typography>FILTERS</Typography>
-     </div>
+          </div>
           <SideNav />
         </Grid>
-       
+
         <Grid item lg={9} md={9} sm={9}>
           {spinner}
         </Grid>

@@ -194,17 +194,17 @@ const styles = theme => ({
     "&:hover": {
       backgroundColor: "#00cc00"
     },
-      [theme.breakpoints.down("sm")]: {
-       width: "50%"
+    [theme.breakpoints.down("sm")]: {
+      width: "50%"
     }
   },
   select: {
     backgroundColor: "green"
   },
-    spinnerDiv:{
-        marginTop:"20%", 
-        textAlign:"center"
-    }
+  spinnerDiv: {
+    marginTop: "20%",
+    textAlign: "center"
+  }
 });
 
 const StoreFinderComponent = props => {
@@ -215,7 +215,9 @@ const StoreFinderComponent = props => {
     getStoresByLatLng,
     storeList,
     setStoreData,
-      isLoading
+    setStoreDataOnProducts,
+    setStoreInfo,
+    isLoading
   } = props;
 
   const [address, setAddress] = useState("40222");
@@ -264,6 +266,10 @@ const StoreFinderComponent = props => {
     setShowingInfoWindow(true);
     setInfoWindowMessage(message);
     setStoreData(message);
+    setStoreDataOnProducts(message)
+
+    let loggedInUserData = JSON.stringify(message);
+
     history.push("/");
   };
 
@@ -273,16 +279,14 @@ const StoreFinderComponent = props => {
       setShowingInfoWindow(false);
     }
   };
-    
-     console.log("isLoading",isLoading);
 
+  console.log("isLoading", isLoading);
 
   const sortedStoreList = storeList
     ? storeList.sort((a, b) => {
         return a.id - b.id;
       })
     : "";
-    
 
   const googleMarker = sortedStoreList
     ? sortedStoreList.map(item => (
@@ -302,11 +306,18 @@ const StoreFinderComponent = props => {
     const storeId = item ? item.id : "";
     setIndexNum(storeId);
     props.setStoreData(address);
+    props.setStoreDataOnProducts(address)
+
+    let loggedInUserData = JSON.stringify(address);
+
     history.push("/");
   };
-    
-   
-  const storeDetails = isLoading? (<div className={classes.spinnerDiv}><Spinner /></div>):(sortedStoreList.length?(
+
+  const storeDetails = isLoading ? (
+    <div className={classes.spinnerDiv}>
+      <Spinner />
+    </div>
+  ) : sortedStoreList.length ? (
     sortedStoreList.map((item, index) => (
       <div className={classes.storesDiv} key={item.id}>
         <div>
@@ -336,7 +347,11 @@ const StoreFinderComponent = props => {
         </div>
       </div>
     ))
-  ):<div className={classes.spinnerDiv}><strong>No Stores Found</strong></div>); 
+  ) : (
+    <div className={classes.spinnerDiv}>
+      <strong>No Stores Found</strong>
+    </div>
+  );
 
   return (
     <>

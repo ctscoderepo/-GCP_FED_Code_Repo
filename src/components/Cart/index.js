@@ -51,7 +51,7 @@ const styles = theme => ({
   },
   btnStyle: {
     textTransform: "uppercase",
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "100%",
     margin: "10px 0",
@@ -64,12 +64,12 @@ const styles = theme => ({
     fill: "#000",
     "&:hover": {
       color: "#fff",
-      backgroundColor: "#00cc00",
+      backgroundColor: "#009900",
     }
   },
   btnGuestCheckout: {
     textTransform: "uppercase",
-    backgroundColor: "white",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "100%",
     margin: "10px 0",
@@ -81,7 +81,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#0084CD",
+      backgroundColor: "#009900",
       color: "white"
     }
   },
@@ -392,7 +392,7 @@ function CartComponent(props) {
           </button>
         </Grid>
         <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
-          ${item.price}
+          ${item.price}.00
         </Grid>
         <Grid
           item
@@ -488,7 +488,7 @@ function CartComponent(props) {
                   paddingRight: "10px"
                 }}
               >
-                ${item.price}
+                ${item.price}.00
               </div>
             </Grid>
           </Grid>
@@ -682,7 +682,7 @@ function CartComponent(props) {
                             $
                             {cartItems && cartItems.totalPrice
                               ? cartItems.totalPrice
-                              : 0}
+                              : 0.00}.00
                           </strong>
                         </Typography>
                       </Grid>
@@ -762,7 +762,7 @@ function CartComponent(props) {
                         $
                         {cartItems && cartItems.totalPrice
                           ? cartItems.totalPrice
-                          : 0}
+                          : 0.00}.00
                       </Grid>
                     </Grid>
                   </Grid>
@@ -804,7 +804,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        ${totalShippingCharge ? totalShippingCharge : 0}
+                        ${totalShippingCharge ? totalShippingCharge : 0.00}.00
                       </Grid>
                     </Grid>
                   </Grid>
@@ -827,7 +827,7 @@ function CartComponent(props) {
                         xs={6}
                         className={classes.txtaln}
                       >
-                        ${salesTax ? salesTax : 0}
+                        ${salesTax ? salesTax : 0.00}.00
                       </Grid>
                     </Grid>
                   </Grid>
@@ -847,7 +847,7 @@ function CartComponent(props) {
                       </Typography>
                     </Grid>
                     <Grid item lg={6} sm={6} xs={6} className={classes.txtaln}>
-                      ${totalPrice()}
+                      ${totalPrice()}.00
                     </Grid>
                   </Grid>
                 </Grid>

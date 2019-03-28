@@ -4,11 +4,12 @@ import { withStyles } from "@material-ui/core/styles";
 import slide_one from "./images/slide_one.jpg";
 import slide_two from "./images/slide_two.jpg";
 import slide_three from "./images/slide_three.jpg";
+import slide_four from "./images/slide_four.jpg";
 import "./Carousel.css";
 
 const styles = theme => ({
   CarouselHeight: {
-    height: "400px",
+    height: "450px",
     overflow: "hidden",
     [theme.breakpoints.down("sm")]: {
       height: "350px"
@@ -20,7 +21,7 @@ const styles = theme => ({
   slide_01: {
     backgroundImage: `url(${slide_one})`,
     borderRadius: "3px",
-    height: "400px",
+    height: "450px",
     [theme.breakpoints.down("sm")]: {
       height: "350px"
     },
@@ -30,7 +31,7 @@ const styles = theme => ({
   },
   slide_02: {
     backgroundImage: `url(${slide_two})`,
-    height: "400px",
+    height: "450px",
     borderRadius: "3px",
     [theme.breakpoints.down("sm")]: {
       height: "350px"
@@ -41,7 +42,18 @@ const styles = theme => ({
   },
   slide_03: {
     backgroundImage: `url(${slide_three})`,
-    height: "400px",
+    height: "450px",
+    borderRadius: "3px",
+    [theme.breakpoints.down("sm")]: {
+      height: "350px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "200px"
+    }
+  },
+  slide_04: {
+    backgroundImage: `url(${slide_four})`,
+    height: "450px",
     borderRadius: "3px",
     [theme.breakpoints.down("sm")]: {
       height: "350px"
@@ -61,7 +73,7 @@ const SampleNextArrow = props => {
         background: "#bfbfbf",
         marginRight: "30px",
         padding: "7px",
-        borderRadius: "17px",
+        borderRadius: "20px",
         top: "50%"
       }}
       onClick={onClick}
@@ -105,10 +117,13 @@ class Carousel extends React.Component {
             <div className={`carousel_image ${classes.slide_01}`} />
           </div>
           <div>
-            <div className={`carousel_image ${classes.slide_03}`} />
+            <div className={`carousel_image ${classes.slide_02}`} />
           </div>
           <div>
             <div className={`carousel_image ${classes.slide_03}`} />
+          </div>
+          <div>
+            <div className={`carousel_image ${classes.slide_04}`} />
           </div>
         </Slider>
       </div>

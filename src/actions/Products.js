@@ -46,6 +46,10 @@ export const getProducts = type => async dispatch => {
 
 export const clearProducts=()=>({type:"CLEARPRODUCTS"})
 
+export const setStoreDataOnProducts = items => {
+  return { type: "SET_STORE_DATA_ON_PRODUCTS", payload: items };
+};
+
 
 
 

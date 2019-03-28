@@ -65,17 +65,23 @@ const styles = theme => ({
   },
   InputText: {
     width: "100%",
+    height: "35px",
+    marginTop: "0px",
+    margin: "0px 0px 10px 0px"
+  },
+    InputTextCVV: {
+    width: "100%",
     height: "45px",
     marginTop: "0px",
     margin: "0px 0px 10px 0px"
   },
   InputFirstLastName: {
     width: "100%",
-    height: "45px",
+    height: "35px",
     marginTop: "0px",
     margin: "0px 0px 10px 0px",
     [theme.breakpoints.down("sm")]: {
-      width: "98%"
+      width: "100"
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%"
@@ -207,7 +213,7 @@ const styles = theme => ({
     opacity: "0.65",
     cursor: "not-allowed",
     textTransform: "uppercase",
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "68%",
     margin: "30px 0px 0px 0px",
@@ -284,7 +290,7 @@ const styles = theme => ({
     }
   },
   addressChangeBtn: {
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "50%",
     fontSize: "12px",
@@ -295,7 +301,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#00cc00"
+      backgroundColor: "#009900"
     },
     [theme.breakpoints.down("sm")]: {
       width: "100%"
@@ -306,7 +312,7 @@ const styles = theme => ({
     color: "#ff5500"
   },
   placeOrderBtnNew: {
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "80%",
     fontSize: "12px",
@@ -318,7 +324,7 @@ const styles = theme => ({
     fill: "#000",
     height: "40px",
     "&:hover": {
-      backgroundColor: "#00cc00"
+      backgroundColor: "#009900"
     },
     [theme.breakpoints.down("sm")]: {
       width: "100%"
@@ -326,7 +332,7 @@ const styles = theme => ({
   },
 
   saveAddressBtn: {
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "50%",
     fontSize: "12px",
@@ -337,8 +343,9 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     height: "40px",
+    marginTop:"-10px"  ,
     "&:hover": {
-      backgroundColor: "#00cc00"
+      backgroundColor: "#009900"
     },
     [theme.breakpoints.down("sm")]: {
       width: "100%"
@@ -969,7 +976,7 @@ const handleEmail = value => {
                                       value={monthExpir}
                                       onChange={handleMonthChange}
                                       input={
-                                        <OutlinedInput
+                                        <OutlinedInput 
                                           name="month"
                                           id="month"
                                         />
@@ -1020,7 +1027,7 @@ const handleEmail = value => {
                                     id="cvv"
                                     label=""
                                     type="number"
-                                    className={classes.InputText}
+                                    className={classes.InputTextCVV}
                                     margin="normal"
                                     variant="outlined"
                                     placeholder="CVV"
@@ -1142,7 +1149,7 @@ const handleEmail = value => {
                                 $
                                 {cartItems.totalPrice
                                   ? cartItems.totalPrice
-                                  : 0}
+                                  : 0}.00
                               </div>
                               <div
                                 style={{
@@ -1153,7 +1160,7 @@ const handleEmail = value => {
                                 $
                                 {cartItems.totalShipping
                                   ? cartItems.totalShipping
-                                  : 0}
+                                  : 0}.00
                               </div>
                               <Divider
                                 variant="left"
@@ -1172,7 +1179,7 @@ const handleEmail = value => {
                                 {cartItems.totalPrice
                                   ? cartItems.totalPrice +
                                     cartItems.totalShipping
-                                  : 0}
+                                  : 0}.00
                               </div>
                               <div
                                 style={{
@@ -1181,7 +1188,7 @@ const handleEmail = value => {
                                 }}
                               >
                                 {" "}
-                                ${cartItems.totalTax ? cartItems.totalTax : 0}
+                                ${cartItems.totalTax ? cartItems.totalTax : 0}.00
                               </div>
                             </Grid>
                           </Grid>
@@ -1210,7 +1217,7 @@ const handleEmail = value => {
                                   ? cartItems.totalPrice +
                                     cartItems.totalShipping +
                                     cartItems.totalTax
-                                  : 0}
+                                  : 0}.00
                               </div>
                             </Grid>
                           </Grid>

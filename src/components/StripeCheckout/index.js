@@ -6,13 +6,13 @@ import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
-import {GoogleKeys} from "../../config/GoogleKeys";
+import { GoogleKeys } from "../../config/GoogleKeys";
 import PAYMENT_SERVER_URL from "../../config/server";
 
 const styles = theme => ({
   btnStyle: {
     textTransform: "uppercase",
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "100%",
     margin: "10px 0",
@@ -25,7 +25,7 @@ const styles = theme => ({
     fill: "#000",
     "&:hover": {
       color: "#fff",
-      backgroundColor: "#00cc00",
+      backgroundColor: "#009900"
     }
   },
   yourOrdTxt: {
@@ -49,12 +49,19 @@ axios.interceptors.response.use(response => {
 });
 
 const Checkout = props => {
-
-  const { classes, name, description, amount, cartItems, orderDetails, history } = props;
+  const {
+    classes,
+    name,
+    description,
+    amount,
+    cartItems,
+    orderDetails,
+    history
+  } = props;
   const [order, setOrder] = useState(orderDetails);
-  useEffect(() =>{
+  useEffect(() => {
     setOrder(orderDetails);
-  }, [orderDetails])
+  }, [orderDetails]);
 
   const successPayment = resp => {
     console.info("Payment Successful", resp.data);
@@ -65,51 +72,54 @@ const Checkout = props => {
     localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
     submitOrder(order, email);
     //alert("Continue from here to order complete flow");
-  }
-  
+  };
+
   const errorPayment = data => {
     console.error("Payment Error", data);
   };
 
-  const submitOrder = (order, email) =>  {
+  const submitOrder = (order, email) => {
     console.log("inside submitOrder ");
     if (!order.memberId) {
-      props.checkout({
-        orderId: order.orderId,
-        email: email
-      }).then(history.push("/Confirmation"));
+      props
+        .checkout({
+          orderId: order.orderId,
+          email: email
+        })
+        .then(history.push("/Confirmation"));
     } else {
-      props.checkout({
-        orderId: order.orderId,
-        memberId: order.memberId,
-        addressId: order.addressId
-      }).then(history.push("/Confirmation"));
+      props
+        .checkout({
+          orderId: order.orderId,
+          memberId: order.memberId,
+          addressId: order.addressId
+        })
+        .then(history.push("/Confirmation"));
     }
     //history.push("/Confirmation");
   };
-  
 
   const onToken = (amount, description) => token =>
-  axios
-    .post(
-      PAYMENT_SERVER_URL,
-      {
-        description,
-        source: token.id,
-        currency: CURRENCY,
-        amount: fromDollarToCent(amount),
-        receipt_email:token.email
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
+    axios
+      .post(
+        PAYMENT_SERVER_URL,
+        {
+          description,
+          source: token.id,
+          currency: CURRENCY,
+          amount: fromDollarToCent(amount),
+          receipt_email: token.email
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
         }
-      }
-    )
-    .then(successPayment)
-    .catch(errorPayment);
- 
+      )
+      .then(successPayment)
+      .catch(errorPayment);
+
   return (
     <div>
       <StripeCheckout
@@ -126,8 +136,9 @@ const Checkout = props => {
         email={orderDetails.email}
       >
         <div className={classes.yourOrdTxt}>
-          <Button className={classes.btnStyle}
-                  disabled={!cartItems.orderItems?true:false}
+          <Button
+            className={classes.btnStyle}
+            disabled={!cartItems.orderItems ? true : false}
           >
             <strong>Express Checkout</strong>
           </Button>
