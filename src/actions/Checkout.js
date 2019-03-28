@@ -2,6 +2,7 @@ import { post, get } from "./BaseApi";
 import {URLList} from "../config/URLs";
 
 export const checkout = checkoutDetails => dispatch => {
+dispatch({type:"ISLOADING"});    
   let url = URLList.getCheckoutURL();
   return post(
     url,

@@ -16,7 +16,7 @@ const styles = theme => ({
     },
        [theme.breakpoints.down("xs")]: {
       padding: "0",
-      marginTop: "100px"
+      marginTop: "120px"
     }
   },
   itemContainer: {
@@ -232,8 +232,8 @@ const HomeComponent = props => {
                   className={classes.itemContainer}
                   key={item.name}
                 >
-                  <div className="imagewrapper">
-                    <img src={item.imageURL} alt={item.name} />
+                  <div className="imagewrapper" >
+                    <img src={item.imageURL} alt={item.name} style={{height:"250px"}}/>
                     <Link
                       to={`/store/product/${item.skuId}`}
                       className={classes.item}
@@ -276,7 +276,7 @@ const HomeComponent = props => {
                   key={item.name}
                 >
                   <div className="imagewrapper">
-                    <img src={item.imageURL} alt={item.name} />
+                    <img src={item.imageURL} alt={item.name} style={{height:"170px"}} />
                     <Link
                       to={`/store/product/${item.skuId}`}
                       className={classes.item}
@@ -313,7 +313,7 @@ const HomeComponent = props => {
                   key={item.name}
                 >
                   <div className="imagewrapper">
-                    <img src={item.imageURL} alt={item.name} />
+                    <img src={item.imageURL} alt={item.name} style={{height:"170px"}} />
                     <Link
                       to={`/store/product/${item.skuId}`}
                       className={classes.item}
@@ -350,7 +350,7 @@ const HomeComponent = props => {
                   key={item.name}
                 >
                   <div className="imagewrapper">
-                    <img src={item.imageURL} alt={item.name} />
+                    <img src={item.imageURL} alt={item.name} style={{height:"170px"}} />
                     <Link
                       to={`/store/product/${item.skuId}`}
                       className={classes.item}
@@ -387,7 +387,7 @@ const HomeComponent = props => {
                   key={item.name}
                 >
                   <div className="imagewrapper">
-                    <img src={item.imageURL} alt={item.name} />
+                    <img src={item.imageURL} alt={item.name} style={{height:"170px"}} />
                     <Link
                       to={`/store/product/${item.skuId}`}
                       className={classes.item}
@@ -428,7 +428,7 @@ const HomeComponent = props => {
                   key={item.name}
                 >
                   <div className="imagewrapper">
-                    <img src={item.imageURL} alt={item.name} />
+                    <img src={item.imageURL} alt={item.name} style={{height:"250px"}} />
                     <Link
                       to={`/store/product/${item.skuId}`}
                       className={classes.item}
@@ -465,7 +465,7 @@ const HomeComponent = props => {
                   key={item.name}
                 >
                   <div className="imagewrapper">
-                    <img src={item.imageURL} alt={item.name} />
+                    <img src={item.imageURL} alt={item.name} style={{height:"250px"}} />
                     <Link
                       to={`/store/product/${item.skuId}`}
                       className={classes.item}
@@ -502,7 +502,7 @@ const HomeComponent = props => {
                   key={item.name}
                 >
                   <div className="imagewrapper">
-                    <img src={item.imageURL} alt={item.name} />
+                    <img src={item.imageURL} alt={item.name} style={{height:"250px"}} />
                     <Link
                       to={`/store/product/${item.skuId}`}
                       className={classes.item}

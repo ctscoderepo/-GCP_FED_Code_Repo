@@ -65,7 +65,7 @@ const styles = theme => ({
        marginTop:"20px"
   },
     returnToHomeBtn: {
-    backgroundColor: "#0084CD",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "80%",
     margin: "0px 0px 0px 0px",
@@ -77,7 +77,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#0084CD"
+      backgroundColor: "#00cc00"
     },
           [theme.breakpoints.down("xs")]: {
            width:"100%",
@@ -99,7 +99,9 @@ const styles = theme => ({
 });
 
 const ConfirmationComponent  = (props) => { 
-    const { classes, history,clearCartItemsOnHeader, checkoutData} = props;
+    const { classes, history,clearCartItemsOnHeader, checkoutData,isLoading} = props;
+    
+    console.log("isLoading",isLoading)
     
     const checkOutLength=Object.keys(checkoutData).length == 0?false:true;
 
@@ -112,12 +114,12 @@ const ConfirmationComponent  = (props) => {
   const lsOrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
   const[orderDetails, setOrderDetails] = useState(lsOrderDetails);
   localStorage.removeItem("orderDetails");
-  const userAddress=userData?userData.userDetails.address:""; 
+  const userAddress=userData && userData.userDetails?userData.userDetails.address:""; 
   const totalOrderValue=checkoutData?checkoutData.totalPrice + checkoutData.totalShipping + checkoutData.totalTax:0;
     
     
     return (
-      <div>{checkOutLength?<div className={classes.root}>
+      <div>{isLoading?(<div className={classes.spinnerDiv}><Spinner /></div>):(checkOutLength?<div className={classes.root}>
        <div className={classes.confirmContainer}>
         <div><Link to="/"><img src="/assets/images/logo.png"  alt="logo" className={classes.logo} /></Link></div>
         <div className={classes.confirmHeader}>Your order is placed Successfully</div>
@@ -147,7 +149,7 @@ const ConfirmationComponent  = (props) => {
         </div>
         </Grid>
         </Grid>
-        
+            
         <Grid container>
          <Grid item lg={12} sm={12} xs={12} >
         <div className={classes.confirmFooter} ><Typography>©2019 Demo Store.All Rights Reserved. Use of this site is
@@ -155,7 +157,7 @@ const ConfirmationComponent  = (props) => {
         </Grid>
         </Grid>
         </div>
-      </div>:<div className={classes.spinnerDiv}><Spinner /></div>}</div>
+      </div>:"No Data")}</div>
 
     );
   }

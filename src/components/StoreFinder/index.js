@@ -38,7 +38,7 @@ const styles = theme => ({
   },
   nearMeBtn: {
     textTransform: "uppercase",
-    backgroundColor: "#0084CD",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "100%",
     margin: "0px 0px 0px 0px",
@@ -50,7 +50,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#0084CD"
+      backgroundColor: "#00cc00"
     },
     [theme.breakpoints.down("sm")]: {
       marginLeft: "0px",
@@ -63,7 +63,7 @@ const styles = theme => ({
   },
   findStoreBtn: {
     textTransform: "uppercase",
-    backgroundColor: "#0084CD",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "100%",
     margin: "1px 0px 0px 0px",
@@ -75,7 +75,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#0084CD"
+      backgroundColor: "#00cc00"
     },
     [theme.breakpoints.down("sm")]: {
       marginLeft: "25px"
@@ -180,7 +180,7 @@ const styles = theme => ({
   },
   btnStyle: {
     textTransform: "uppercase",
-    backgroundColor: "#0084CD",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "40%",
     margin: "10px 0",
@@ -192,7 +192,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#0084CD"
+      backgroundColor: "#00cc00"
     },
       [theme.breakpoints.down("sm")]: {
        width: "50%"
@@ -431,8 +431,8 @@ const StoreFinderComponent = props => {
                             className={classes.InputText}
                             margin="normal"
                             variant="outlined"
-                            value={radius}
                             placeholder=""
+                            value={radius}
                             onChange={e => getRadius(e.target.value)}
                           />
                         </Grid>

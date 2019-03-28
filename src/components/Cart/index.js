@@ -16,7 +16,10 @@ import "./index.css";
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: "150px"
+    marginTop: "150px",
+      [theme.breakpoints.down("xs")]: {
+     marginTop: "110px",
+    }
   },
   paper: {
     padding: theme.spacing.unit * 2,
@@ -48,7 +51,7 @@ const styles = theme => ({
   },
   btnStyle: {
     textTransform: "uppercase",
-    backgroundColor: "#0084CD",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "100%",
     margin: "10px 0",
@@ -60,7 +63,8 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#0084CD"
+      color: "#fff",
+      backgroundColor: "#00cc00",
     }
   },
   btnGuestCheckout: {
@@ -397,7 +401,7 @@ function CartComponent(props) {
           xs={12}
           style={{ textAlign: "right", marginBottom: "10px" }}
         >
-          <Link className={classes.removeItem}>Save for later</Link>
+          
           <Link
             onClick={() => removeItems(item.id)}
             className={classes.removeItem}
@@ -499,12 +503,7 @@ function CartComponent(props) {
             marginBottom: "10px"
           }}
         >
-          <Link
-            className={classes.removeItem}
-            style={{ borderRight: "2px solid #bfbfbf" }}
-          >
-            Save for later
-          </Link>
+         
           <Link
             onClick={() => removeItems(item.id)}
             className={classes.removeItem}

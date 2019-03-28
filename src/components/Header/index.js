@@ -44,6 +44,16 @@ const styles = theme => ({
       padding:"10px"    
     }
   },
+    menuButtonForXS: {
+    display: "none",
+    color: "#000",
+    [theme.breakpoints.down("sm")]: {
+      display: "block",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding:"10px"    
+    }
+  },
   title: {
     display: "block",
     color: "#000",
@@ -85,10 +95,21 @@ const styles = theme => ({
       borderRadius: 0,
       left: "0",
       minWidth: "10px"
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginLeft: "-48px"
     }
+    
+  },
+    searchIconForXS: {
+    height: "28px",
+    width: "20px",
+    pointerEvents: "auto",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#fff",
+    right: "0",
+    backgroundColor: "green",
+    borderRadius: "0 3px 3px 0px",
+    padding:"3px",
+    border:"2px solid white",
   },
   cameraIcon: {
     height: "100%",
@@ -114,6 +135,10 @@ const styles = theme => ({
     color: "#000",
     width: "100%"
   },
+    inputRootForXS:{
+    color: "#000",
+    width: "70%"
+    },
   inputInput: {
     paddingRight: theme.spacing.unit,
     paddingLeft: theme.spacing.unit,
@@ -138,9 +163,19 @@ const styles = theme => ({
       width: "100%"
     },
     [theme.breakpoints.down("xs")]: {
-      marginLeft: "-40px",
       paddingLeft: theme.spacing.unit * 3
     }
+  },
+    inputInputForXS: {
+    paddingRight: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit,
+    transition: theme.transitions.create("width"),
+    height:"12px",    
+    width: "100%",
+    float:"left",
+    backgroundColor: "#fff",
+    border: "1px solid white",
+    borderBottom: "2px solid white",
   },
   appBar: {
     backgroundColor: "#fafafa",
@@ -222,6 +257,26 @@ const styles = theme => ({
       borderBottom: "1px solid lightgrey"
     }
   },
+    toolBarForXS: {
+    minHeight: "40px",
+    width: "89%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    border: "none",
+    borderTop: 0,
+    boxSizing: "border-box",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: "45px",
+      borderBottom: "none"
+    },
+    [theme.breakpoints.up("sm")]: {
+      border: "0px solid lightgrey"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      borderBottom: "1px solid lightgrey"
+    }
+  },
 
   NavigationMenu: {
     padding: "0",
@@ -235,7 +290,16 @@ const styles = theme => ({
       display: "none"
     }
   },
-
+    
+NavigationMenuForXS: {
+    padding: "0",
+    backgroundColor: "#003d99",
+    minHeight: "40px",
+    paddingBottom: "-20px",
+    [theme.breakpoints.down("xs")]: {
+      display: "block"
+    }
+  },
   storeLocation: {
     padding: "5px",
     width: "150px",
@@ -367,7 +431,64 @@ const styles = theme => ({
     color: 'rgba(0, 0, 0, 0.87)',
     boxShadow: theme.shadows[1],
     fontSize: 11,
-  }
+  },
+    headerForXS:{
+        backgroundColor: "#e6e6e6",
+        height: "60px",
+        paddingTop: "10px",
+        [theme.breakpoints.down("lg")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "block"
+    }
+    },
+    headerForLGSM :{
+        backgroundColor: "#e6e6e6",
+        height: "60px",
+        paddingTop: "10px",
+    [theme.breakpoints.down("lg")]: {
+      display: "block"
+    },
+    [theme.breakpoints.down("sm")]: {
+      display: "block"
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
+    },
+    xsMenuDiv:{
+        width:"85px",
+        float:"left" 
+    },
+    xsLogoDiv:{
+       width:"55%",
+        textAlign:"center", 
+        float:"left",  
+        position: "relative",
+        top: "4px",
+    },
+    xsCartDiv:{
+       width:"85px", 
+        textAlign:"right", 
+        marginRight:"-10px"
+    },
+    
+    navBarForXS:{
+    [theme.breakpoints.down("lg")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "block"
+    }
+    }
+    
 });
 
 function SearchAppBar(props) {
@@ -461,17 +582,35 @@ function SearchAppBar(props) {
   };
   return (
     <div className="customContainer">
+      
       <div className="Header">
+      
         <AppBar position="fixed" className={classes.appBar}>
           {/* <Advertisement /> */}
-          <div
-            style={{
-              backgroundColor: "#e6e6e6",
-              height: "60px",
-              paddingTop: "10px"
-            }}
-          >
-            <Toolbar className={classes.toolBar}>
+      
+      <div className={classes.headerForXS}  >
+       <Toolbar className={classes.toolBarForXS}>
+      <div className={classes.xsMenuDiv} >
+      <IconButton
+                className={classes.menuButtonForXS}
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={toggleDrawer}
+              >
+                <MenuIcon />
+              </IconButton></div>
+            <div className={classes.xsLogoDiv}><Link to="/">
+                  <img src="/assets/images/logo.png"  alt="logo" style={{width:"150px", height:"40px"}} />
+                </Link></div>
+               <div className={classes.xsCartDiv}> 
+                    <Link to="/Cart">
+                  <CartBadge items={totalQuantity ? totalQuantity : ""} />{" "}
+                </Link></div>   
+      </Toolbar>
+      </div>
+      
+      <div className={classes.headerForLGSM}>
+      <Toolbar className={classes.toolBar}>
               <IconButton
                 className={classes.menuButton}
                 color="inherit"
@@ -674,6 +813,48 @@ function SearchAppBar(props) {
           </div>
           {showNavbar && (
             <div>
+            <div className={classes.navBarForXS}>
+            <Toolbar    className={classes.NavigationMenuForXS}>
+                <div style={{ marginTop:"-10px", padding:"10px",marginLeft:"20px", display:"flex"}}>
+                <form onSubmit={handleSubmit}>
+                  
+                  <InputBase
+                    placeholder="Search....."
+                    classes={{
+                      root: classes.inputRootForXS,
+                      input: classes.inputInputForXS
+                    }}
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                  />
+                    <Button type="submit" className={classes.searchIconForXS}>
+                    <SearchIcon />
+                  </Button>
+                </form> 
+                <div style={{paddingTop:"3px",}}><i
+                  className={`material-icons`}
+                  onClick={() => setCameraOpen(true)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 22 22"
+                    fill="white"
+                  >
+                    <circle cx="12" cy="12" r="3.2" />
+                    <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+                  </svg>
+                  {cameraOpen && (
+                    <Camera
+                      open={cameraOpen}
+                      toggleDialog={() => setCameraOpen(false)}
+                    />
+                  )}
+                </i></div>
+                </div>
+                </Toolbar>
+            </div>
               <Toolbar className={classes.NavigationMenu}>
                 <Grid container className={classes.toolBar}>
                   <Grid item lg={12} sm={12} xs={12}>

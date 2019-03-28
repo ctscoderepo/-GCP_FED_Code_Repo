@@ -207,7 +207,7 @@ const styles = theme => ({
     opacity: "0.65",
     cursor: "not-allowed",
     textTransform: "uppercase",
-    backgroundColor: "gray",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "68%",
     margin: "30px 0px 0px 0px",
@@ -251,7 +251,7 @@ const styles = theme => ({
   mainDiv: {
     marginTop: "150px",
     [theme.breakpoints.down("xs")]: {
-      marginTop: "80px"
+      marginTop: "120px"
     }
   },
   dividerClass: {
@@ -284,7 +284,7 @@ const styles = theme => ({
     }
   },
   addressChangeBtn: {
-    backgroundColor: "gray",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "50%",
     fontSize: "12px",
@@ -295,7 +295,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#0084CD"
+      backgroundColor: "#00cc00"
     },
     [theme.breakpoints.down("sm")]: {
       width: "100%"
@@ -306,7 +306,7 @@ const styles = theme => ({
     color: "#ff5500"
   },
   placeOrderBtnNew: {
-    backgroundColor: "gray",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "80%",
     fontSize: "12px",
@@ -318,7 +318,7 @@ const styles = theme => ({
     fill: "#000",
     height: "40px",
     "&:hover": {
-      backgroundColor: "#0084CD"
+      backgroundColor: "#00cc00"
     },
     [theme.breakpoints.down("sm")]: {
       width: "100%"
@@ -326,7 +326,7 @@ const styles = theme => ({
   },
 
   saveAddressBtn: {
-    backgroundColor: "gray",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "50%",
     fontSize: "12px",
@@ -338,7 +338,7 @@ const styles = theme => ({
     fill: "#000",
     height: "40px",
     "&:hover": {
-      backgroundColor: "#0084CD"
+      backgroundColor: "#00cc00"
     },
     [theme.breakpoints.down("sm")]: {
       width: "100%"
@@ -349,6 +349,7 @@ const styles = theme => ({
     border: "1px solid #cccccc",
     marginTop: "50px",
     padding: "10px",
+    marginBottom:"30px",  
     [theme.breakpoints.down("xs")]: {
       display: "none"
     }
@@ -594,14 +595,7 @@ const handleEmail = value => {
     setYearExpir(val);
   };
 
-  const enabledBtn =
-    cardNum != "" &&
-    monthExpir != "" &&
-    yearExpir != "" &&
-    cvvNum != "" &&
-    cardType != ""
-      ? true
-      : false;
+  const enabledBtn = cardNum != "" &&   monthExpir != "" &&  yearExpir != "" &&    cvvNum != "" &&  cardType != "" ? true: false;
 
   const Months = [
     { month: "01 - January", Value: "1" },
@@ -1071,7 +1065,8 @@ const handleEmail = value => {
                               </div>
                             </Grid>
                             <Grid item lg={4} sm={5} xs={4}>
-                              <Button className={classes.placeOrderBtnNew} onClick={checkoutCart}>
+                              <Button  className={enabledBtn ? classes.placeOrderBtnNew : classes.btnDisabled} 
+                                onClick={checkoutCart}>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="24"
@@ -1228,7 +1223,7 @@ const handleEmail = value => {
                           style={{ marginTop: "20px", marginBottom: "20px" }}
                         />
                         <div>
-                          <Button className={classes.placeOrderBtnOrdSummary} onClick={checkoutCart}>
+                          <Button className={enabledBtn ? classes.placeOrderBtnNew : classes.btnDisabled} onClick={checkoutCart}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"

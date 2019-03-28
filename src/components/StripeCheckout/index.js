@@ -12,7 +12,7 @@ import PAYMENT_SERVER_URL from "../../config/server";
 const styles = theme => ({
   btnStyle: {
     textTransform: "uppercase",
-    backgroundColor: "#0084CD",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "100%",
     margin: "10px 0",
@@ -24,7 +24,8 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#0084CD"
+      color: "#fff",
+      backgroundColor: "#00cc00",
     }
   },
   yourOrdTxt: {

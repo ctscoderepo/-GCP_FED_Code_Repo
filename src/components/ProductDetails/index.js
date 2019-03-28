@@ -15,6 +15,9 @@ import Divider from "@material-ui/core/Divider";
 import "./index.css";
 
 const styles = theme => ({
+    root:{
+        marginTop:"200px"
+    },
   productid: {
     fontSize: "12px",
     paddingLeft: "5px",
@@ -23,22 +26,22 @@ const styles = theme => ({
   },
   addToCart: {
     textTransform: "uppercase",
-    backgroundColor: "#fff",
+    backgroundColor: "#00b300",
     borderRadius: "5px",
     width: "100%",
     margin: "10px 0",
     fontSize: "12px",
     boxShadow: "none",
     outline: "none",
-    color: "#202121",
-    border: "1px solid #202121",
+    color: "    white",
+    border: "1px solid #00b300",
     fontWeight: "500",
     fill: "#000",
     "&:hover": {
       color: "#fff",
-      backgroundColor: "#0084CD",
+      backgroundColor: "#00cc00",
       fill: "#fff",
-      border: "1px solid #fff"
+      border: "1px solid #00cc00"
     },
       [theme.breakpoints.down("sm")]: {
       whiteSpace:"nowrap"
@@ -192,7 +195,7 @@ const ProductDetailComponent = props => {
   return (
     <div className="productDetailComponent">
       {product ? (
-        <Grid container>
+        <Grid container style={{marginTop:"130px"}}>
          <Grid item lg={12} sm={12} xs={12}>
            <Typography className={classes.productLine}><strong>{product.categories[0] + " > " + product.categories[1] + " > "+ product.productName}</strong></Typography>
            <div className={classes.relevance} >
@@ -207,7 +210,7 @@ const ProductDetailComponent = props => {
               thumbnailPosition="left"
               showPlayButton={false}
               showNav={false}
-              showFullscreenButton={false}
+              showFullscreenButton={true}
             />
             </div>
             
@@ -217,7 +220,7 @@ const ProductDetailComponent = props => {
                   
               <div className={classes.priceDiv} ><strong>{product.currencyCode === 'USD' && "$"} {product.price}</strong>
             <div style={{textAlign:"right", marginTop:"-40px",}}>
-            <p>
+            <p style={{marginRight:"70px"}}>
               <span className="rated">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -260,9 +263,10 @@ const ProductDetailComponent = props => {
               >
                 <path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z" />
               </svg>
-              4.0 of 5
             </p>
+            <Typography style={{marginTop:"-38px"}}> 4.0 of 5</Typography>
             </div>
+            
             </div>
             <Divider className={classes.dividerStyle}/>
             <div style={{marginTop:"10px"}}>
@@ -292,6 +296,7 @@ const ProductDetailComponent = props => {
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
+                    fill="white"
                   >
                     <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
                   </svg>
@@ -324,21 +329,7 @@ const ProductDetailComponent = props => {
               </Grid> */}
                 
             </Grid>
-            <Divider className={classes.dividerStyle}/>
-            <div className='expansionContainer'>
-              <Grid container >
-                <Grid lg={12} sm={12} xs={12} item>
-                  <ExanpsionPanel
-                    heading="Specifications"
-                    content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."
-                  />
-                  <ExanpsionPanel
-                    heading="Warrenty"
-                    content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi enim, odio, cumque cum totam ex omnis quod neque est adipisci nobis necessitatibus animi iure magnam tempore minus. Deleniti, et."
-                  />
-                </Grid>
-              </Grid>
-            </div>
+            
           </Grid>
         </Grid>
       ) : (<div className={classes.Spinner}>	<Spinner /> </div>)}
