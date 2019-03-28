@@ -307,7 +307,7 @@ const FooterComoponent = props => {
           <div className={classes.demoView}>
             <div>
               <Typography className={classes.fhead}>
-                <strong>Subscrive to newsletter</strong>
+                <strong>Subscribe to newsletter</strong>
               </Typography>
             </div>
             <div style={{ display: "flex" }}>
