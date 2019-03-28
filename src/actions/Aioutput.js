@@ -17,7 +17,7 @@ export default (encodedImageSrc) => async (dispatch) => {
 		]
 	};
 	try {
-		const res = await axios.post(`http://35.193.72.20/searchImage`, requestBody);
+		const res = await axios.post('https://35.244.225.58/visionapi/searchImage', requestBody);
 		dispatch({ type: 'AIRESULTS', payload: res.data });
 		return Promise.resolve();
 	} catch (err) {
