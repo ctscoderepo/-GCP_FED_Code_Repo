@@ -1,57 +1,36 @@
-import React, { useState, useRef } from "react";
-import Dialog from "@material-ui/core/Dialog";
+import React from 'react';
+import Dialog from '@material-ui/core/Dialog';
+import CameraThirdParty from 'react-html5-camera-photo';
+import { withRouter } from 'react-router-dom';
+import visionApi from '../../actions/Aioutput';
+import './index.css';
 
-function initializeMedia({ player }) {
-  if (!("mediaDevices" in navigator)) {
-    navigator.mediaDevices = {};
-  }
-
-  if (!("getUserMedia" in navigator.mediaDevices)) {
-    navigator.mediaDevices.getUserMedia = function(constraints) {
-      var getUserMedia =
-        navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
-      if (!getUserMedia) {
-        return Promise.reject(new Error("getUserMedia is not implemented!"));
-      }
-
-      return new Promise(function(resolve, reject) {
-        getUserMedia.call(navigator, constraints, resolve, reject);
-      });
-    };
-  }
-
-  navigator.mediaDevices
-    .getUserMedia({ video: true })
-    .then(function(stream) {
-      player.srcObject = stream;
-    })
-    .catch(function(err) {
-      // console.log("camera off");
-    });
+class CameraComponent extends React.Component {
+	state = {
+		open: this.props.open
+	};
+	onTakePhoto = (image) => {
+		visionApi(image).then(() => this.props.history.push('/searchOutput'));
+	};
+	handleClose = () => {
+		this.setState({ open: false });
+	};
+	render() {
+		return (
+			<div>
+				<Dialog open={this.state.open}>
+					<CameraThirdParty
+						onTakePhoto={(dataUri) => {
+							this.onTakePhoto(dataUri);
+						}}
+					/>
+					<button onClick={this.handleClose} className="close-btn">
+						close camera
+					</button>
+				</Dialog>
+			</div>
+		);
+	}
 }
 
-function Camera({ open, toggleDialog }) {
-  const player = useRef();
-  const canvas = useRef();
-  const [openDialog, setOpenDialog] = useState(open);
-  return (
-    <div>
-      <Dialog fullScreen open={openDialog} onClose={() => setOpenDialog(false)}>
-        {initializeMedia(player)}
-        <video ref={player} autoPlay />
-        <canvas red={canvas} width="320px" height="240px" />
-        <button
-          onClick={() => {
-            toggleDialog();
-            setOpenDialog(false);
-          }}
-        >
-          close
-        </button>
-      </Dialog>
-    </div>
-  );
-}
-
-export default Camera;
+export default withRouter(CameraComponent);
