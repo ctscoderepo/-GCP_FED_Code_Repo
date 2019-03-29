@@ -12,7 +12,8 @@ const Products = ({
   storeData,
   clearProducts,
   isLoading,
-  shipToStore
+  shipToStore,
+  setStoreDataToPDP
 }) => {
   useEffect(() => {
     getProducts(match.params);
