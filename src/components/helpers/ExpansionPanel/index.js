@@ -15,7 +15,8 @@ const styles = theme => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
+    fontWeight: theme.typography.fontWeightRegular,
+      fontWeight:"bold"
   },
   expansionPanel: {
     borderRadius: "0 !important"
@@ -23,6 +24,16 @@ const styles = theme => ({
   expansionDetails: {
     padding: "0 0 10px 40px"
   },
+    svgRightArrow:{
+        width:"auto",
+        float:"left",
+        paddingTop:"6px",
+        paddingRight:"5px"
+    },
+    sideNavMainDiv:{
+        marginLeft:"-10px",
+        width:"100%",
+    },
 });
 
 
@@ -61,15 +72,24 @@ function SimpleExpansionPanel(props) {
           <Typography className={classes.heading} onClick={() => { history.push(`/shopping/${heading}`) }}>{heading}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.expansionDetails}>
-          <ul className="expansionPanel">
+          <div className={classes.sideNavMainDiv}>
             {typeof content === 'string' ? (content) : content.map(item => (
               <Link to={`/shopping/${item.path}/${item.cat}`} key={item.id} >
-                <li className={item.id === itemValue ? "active" : null}
+                <svg className={classes.svgRightArrow} 
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                    fill="gray"
+                >
+                  <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z" />
+                </svg>
+                <div style={{padding:"10px", fontSize:"14px"}} className={item.id === itemValue ? "active" : null}
                   onClick={() => handleActive(item.id)}
-                >{item.cat}</li>
+                >{item.cat}</div>
               </Link>
             ))}
-          </ul>
+          </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>

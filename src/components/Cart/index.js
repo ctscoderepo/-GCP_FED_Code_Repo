@@ -37,8 +37,16 @@ const styles = theme => ({
   },
 
   prilst: {
-    padding: "15px"
+    padding: "15px",
+      [theme.breakpoints.down("xs")]: {
+      marginTop:"-30px"
+    }
+      
   },
+    prilst1:{
+        padding: "15px",
+    },
+    
   txtaln: {
     textAlign: "right"
   },
@@ -342,22 +350,14 @@ function CartComponent(props) {
   let objectSerialized = JSON.stringify(orderDetails);
   localStorage.setItem("orderDetails", objectSerialized);
 
-  const cartList = !cartItems.orderItems ? (
-    isLoading ? (
-      <div className={classes.spinnerDiv}>
-        <Spinner />
-      </div>
-    ) : (
-      <div className={classes.spinnerDiv}>Your cart is empty</div>
-    )
-  ) : (
-    cartItems.orderItems.map(item => (
+  const cartList = isLoading ? (<div className={classes.spinnerDiv}><Spinner /></div>):
+    (cartItems.orderItems ?cartItems.orderItems.map(item => (
       <Grid container className="cartContainer" key={item.id}>
         <Grid item lg={3} sm={3} xs={5}>
           <Grid container spacing={8}>
             <Grid item lg={12} sm={12} xs={12}>
               <div className="imageWrapper1">
-                <img src={item.imageUrl} alt="mac book prop" />
+                <img src={item.imageUrl} alt="mac book prop"   />
               </div>
               <div className="productDes">{item.productDesciption}</div>
             </Grid>
@@ -408,22 +408,20 @@ function CartComponent(props) {
           >
             Remove
           </Link>
+        <Divider   variant="left"
+            style={{
+              backgroundColor: "#bfbfbf", height:"2px",
+              width: "100%",
+              marginTop: "10px"
+            }}
+          />
         </Grid>
-        <Divider variant="middle" style={{ backgroundColor: "#bfbfbf" }} />
-      </Grid>
-    ))
-  );
+         
+      </Grid>)):(<div className={classes.spinnerDiv}>Your cart is empty</div>)
+       );
 
-  const cartListMobile = !cartItems.orderItems ? (
-    isLoading ? (
-      <div className={classes.spinnerDiv}>
-        <Spinner />
-      </div>
-    ) : (
-      <div className={classes.spinnerDiv}>Your cart is empty</div>
-    )
-  ) : (
-    cartItems.orderItems.map(item => (
+  const cartListMobile =  isLoading ? (<div className={classes.spinnerDiv}><Spinner /></div>)
+   : (cartItems.orderItems ?cartItems.orderItems.map(item => (
       <Grid container className="cartContainer" key={item.id}>
         <Grid item lg={12} sm={12} xs={12}>
           <Grid container>
@@ -503,15 +501,13 @@ function CartComponent(props) {
             marginBottom: "10px"
           }}
         >
-         
           <Link
             onClick={() => removeItems(item.id)}
             className={classes.removeItem}
           >
             Remove
           </Link>
-          <Divider
-            variant="left"
+          <Divider   variant="left"
             style={{
               backgroundColor: "#bfbfbf",
               width: "100%",
@@ -520,7 +516,7 @@ function CartComponent(props) {
           />
         </Grid>
       </Grid>
-    ))
+    )):(<div className={classes.spinnerDiv}>Your cart is empty</div>)
   );
 
   const [totalShippingCharge, setTotalShippingCharge] = useState();
@@ -840,7 +836,7 @@ function CartComponent(props) {
                   xs={12}
                   className={classes.setMargin}
                 >
-                  <Grid container className={classes.prilst}>
+                  <Grid container className={classes.prilst1}>
                     <Grid item lg={6} sm={6} xs={6}>
                       <Typography>
                         <strong>Total</strong>

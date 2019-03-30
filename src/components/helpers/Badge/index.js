@@ -13,14 +13,17 @@ const styles = theme => ({
       theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[900]
     }`,
   },
+    cartBadge:{
+        fill:"#fff"
+    }
 });
 
 function CustomizedBadge(props) {
-  const { classes, items } = props;
+  const { classes, items, badgeColor } = props;
   return (
     <IconButton aria-label="Cart">
       <Badge badgeContent={items} color="primary" classes={{ badge: classes.badge }}>
-        <ShoppingCartIcon />
+        <ShoppingCartIcon className={badgeColor?classes.cartBadge:null} />
       </Badge>
     </IconButton>
   );

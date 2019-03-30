@@ -94,7 +94,6 @@ const styles = theme => ({
       backgroundColor: "transparent",
       borderRadius: 0,
       left: "0",
-      minWidth: "10px"
     }
     
   },
@@ -151,11 +150,12 @@ const styles = theme => ({
       width: 500
     },
     [theme.breakpoints.up("lg")]: {
-      marginLeft: "150px",
+      marginLeft: "180px",
       width: 760
     },
     [theme.breakpoints.down("md")]: {
-      width: 450
+      width: 600,
+      marginLeft: "10px",
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: "12px",
@@ -334,14 +334,20 @@ NavigationMenuForXS: {
   },
   iconStyles: {
     marginTop: "-12px",
-    paddingLeft: "20px",
+      [theme.breakpoints.down("md")]: {
+      display: "block"
+    },
     [theme.breakpoints.down("sm")]: {
       display: "none"
-    }
+    },
+      
   },
   cartBadgeIconForSM: {
     marginRight: "-20px",
     [theme.breakpoints.up("lg")]: {
+      display: "none"
+    },
+    [theme.breakpoints.up("md")]: {
       display: "none"
     }
   },
@@ -380,6 +386,9 @@ NavigationMenuForXS: {
     textAlign: "right",
     [theme.breakpoints.down("lg")]: {
       display:"flex",  
+    },
+     [theme.breakpoints.down("md")]: {
+      float:"right"
     },
       [theme.breakpoints.down("sm")]: {
       float:"right"
@@ -467,6 +476,7 @@ NavigationMenuForXS: {
     xsLogoDiv:{
        width:"55%",
         textAlign:"center", 
+        paddingRight:"10px",
         float:"left",  
         position: "relative",
         top: "4px",
@@ -474,7 +484,6 @@ NavigationMenuForXS: {
     xsCartDiv:{
        width:"85px", 
         textAlign:"right", 
-        marginRight:"-10px"
     },
     
     navBarForXS:{
@@ -487,6 +496,19 @@ NavigationMenuForXS: {
     [theme.breakpoints.down("xs")]: {
       display: "block"
     }
+    },
+    dividerDiv:{
+        borderRight:"1px solid white",
+        paddingLeft:"15px",
+        marginBottom:"10px",
+        height:"22px",
+         [theme.breakpoints.down("md")]: {
+      display: "block"
+    },
+        [theme.breakpoints.down("sm")]: {
+      display: "none"
+    },
+         
     }
     
 });
@@ -690,12 +712,12 @@ function SearchAppBar(props) {
                     height: "50px"
                   }}
                 >
-                  <div className={classes.accIconDiv}>
+                  <div className={classes.accIconDiv} >
                     <i
                       className={`material-icons ${classes.signinForXS}`}
                       onClick={handleClick}
                     >
-                      <svg
+                      <svg  
                         className={classes.svgMyAcc}
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -779,9 +801,7 @@ function SearchAppBar(props) {
                     </i>
                     <div className={classes.storeLocation}>
                       <Link to="">
-                        {storeData ? (
-                          storeData
-                        ) : (
+                        {storeData ? (storeData) : (
                           <Typography style={{ fontSize: "1rem" }}>
                             Find a store
                           </Typography>
@@ -859,15 +879,15 @@ function SearchAppBar(props) {
                 <Grid container className={classes.toolBar}>
                   <Grid item lg={12} sm={12} xs={12}>
                     <Grid container>
-                      <Grid item lg={3} sm={3} >
+                      <Grid item lg={3} md={2} sm={3} >
                         <div style={{ padding: "10px 0px 0px 0px" }}>
                           <Location storeData={storeData} />
                         </div>
                       </Grid>
-                      <Grid item lg={7} sm={7}>
+                      <Grid item lg={7} md={8} sm={7}>
                         <NavigationMenu />
                       </Grid>
-                      <Grid item lg={2} sm={2}>
+                      <Grid item lg={2} md={2} sm={2}>
                         <div className={classes.accIconDiv}>
                           <Typography
                             className={classes.signLabel}
@@ -928,8 +948,9 @@ function SearchAppBar(props) {
                               </MenuItem>
                             </Menu>
                           )}
-                          <Link to="/Cart" className={classes.iconStyles}>
-                            <CartBadge
+                            <div className={classes.dividerDiv} ></div>
+                          <Link to="/Cart" className={classes.iconStyles} >
+                            <CartBadge badgeColor="true"
                               items={totalQuantity ? totalQuantity : ""}
                             />{" "}
                           </Link>

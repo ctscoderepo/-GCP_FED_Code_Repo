@@ -5,17 +5,21 @@ import slide_one from "./images/slide_one.jpg";
 import slide_two from "./images/slide_two.jpg";
 import slide_three from "./images/slide_three.jpg";
 import slide_four from "./images/slide_four.jpg";
+import slide_five from "./images/slide_five.jpg";
+import slide_six from "./images/slide_six.jpg";
 import "./Carousel.css";
 
 const styles = theme => ({
   CarouselHeight: {
     height: "450px",
+    width:"100%",  
     overflow: "hidden",
     [theme.breakpoints.down("sm")]: {
       height: "350px"
     },
     [theme.breakpoints.down("xs")]: {
-      height: "200px"
+      height: "200px",
+      width:"99%"    
     }
   },
   slide_01: {
@@ -53,6 +57,28 @@ const styles = theme => ({
   },
   slide_04: {
     backgroundImage: `url(${slide_four})`,
+    height: "450px",
+    borderRadius: "3px",
+    [theme.breakpoints.down("sm")]: {
+      height: "350px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "200px"
+    }
+  },
+    slide_05: {
+    backgroundImage: `url(${slide_five})`,
+    height: "450px",
+    borderRadius: "3px",
+    [theme.breakpoints.down("sm")]: {
+      height: "350px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "200px"
+    }
+  },
+    slide_06: {
+    backgroundImage: `url(${slide_six})`,
     height: "450px",
     borderRadius: "3px",
     [theme.breakpoints.down("sm")]: {
@@ -124,6 +150,12 @@ class Carousel extends React.Component {
           </div>
           <div>
             <div className={`carousel_image ${classes.slide_04}`} />
+          </div>
+            <div>
+            <div className={`carousel_image ${classes.slide_05}`} />
+          </div>
+            <div>
+            <div className={`carousel_image ${classes.slide_06}`} />
           </div>
         </Slider>
       </div>
