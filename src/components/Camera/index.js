@@ -39,7 +39,8 @@ class CameraComponent extends React.Component {
 
 		let dataUri = this.cameraPhoto.getDataUri(config);
 		this.setState({ dataUri }, () => {
-			this.props.visionApi(this.state.dataUri).then(() => {
+			this.props.visionApi(this.state.dataUri).then((res) => {
+				alert(res);
 				this.props.history.push('/searchOutput');
 			});
 		});
