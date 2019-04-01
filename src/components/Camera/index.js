@@ -1,37 +1,79 @@
-import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import CameraThirdParty from 'react-html5-camera-photo';
-import {connect} from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import visionApi from '../../actions/Aioutput';
-import './index.css';
+import React from "react";
+import CameraPhoto, { FACING_MODES } from "jslib-html5-camera-photo";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import visionApi from "../../actions/Aioutput";
 
 class CameraComponent extends React.Component {
-	state = {
-		open: this.props.open
-	};
-	onTakePhoto = (image) => {
-		this.props.visionApi(image).then(() => this.props.history.push('/searchOutput'));
-	};
-	handleClose = () => {
-		this.setState({ open: false });
-	};
+	constructor(props, context) {
+		super(props, context);
+		this.cameraPhoto = null;
+		this.videoRef = React.createRef();
+		this.state = {
+			dataUri: ""
+		};
+	}
+
+	componentDidMount() {
+		this.cameraPhoto = new CameraPhoto(this.videoRef.current);
+		let facingMode = FACING_MODES.ENVIRONMENT;
+		let idealResolution = { width: 640, height: 480 };
+		this.startCamera(facingMode, idealResolution);
+	}
+
+	startCamera(idealFacingMode, idealResolution) {
+		this.cameraPhoto.startCamera(idealFacingMode, idealResolution);
+	}
+
+	startCameraMaxResolution(idealFacingMode) {
+		this.cameraPhoto.startCameraMaxResolution(idealFacingMode);
+	}
+
+	takePhoto() {
+		const config = {
+			sizeFactor: 1
+		};
+
+		let dataUri = this.cameraPhoto.getDataUri(config);
+		this.setState({ dataUri }, () => {
+			this.props.visionApi(this.state.dataUri).then(() => {
+				this.props.history.push("/searchOutput");
+				this.stopCamera();
+			});
+		});
+	}
+
+	stopCamera() {
+		this.cameraPhoto.stopCamera();
+	}
+
 	render() {
 		return (
 			<div>
-				<Dialog open={this.state.open}>
-					<CameraThirdParty
-						onTakePhoto={(dataUri) => {
-							this.onTakePhoto(dataUri);
-						}}
-					/>
-					<button onClick={this.handleClose} className="close-btn">
-						close camera
-					</button>
-				</Dialog>
+				<button
+					onClick={() => {
+						this.takePhoto();
+					}}
+				>
+					Take photo
+				</button>
+
+				<button
+					onClick={() => {
+						this.stopCamera();
+					}}
+				>
+					Stop
+				</button>
+
+				<video ref={this.videoRef} autoPlay={true} />
+				<img alt="imgCamera" src={this.state.dataUri} />
 			</div>
 		);
 	}
 }
 
-export default connect(null, {visionApi})(withRouter(CameraComponent));
+export default connect(
+	null,
+	{ visionApi }
+)(withRouter(CameraComponent));
