@@ -3,6 +3,7 @@ import CameraPhoto, { FACING_MODES } from 'jslib-html5-camera-photo';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import visionApi from '../../actions/Aioutput';
+import './index.css';
 
 class CameraComponent extends React.Component {
 	constructor(props, context) {
@@ -40,8 +41,7 @@ class CameraComponent extends React.Component {
 		let dataUri = this.cameraPhoto.getDataUri(config);
 		this.setState({ dataUri }, () => {
 			this.props.visionApi(this.state.dataUri).then((res) => {
-				console.log(this.state.dataUri);
-				alert(res);
+				this.stopCamera();
 				this.props.history.push('/searchOutput');
 			});
 		});
@@ -54,23 +54,26 @@ class CameraComponent extends React.Component {
 	render() {
 		return (
 			<div>
-				<button
-					onClick={() => {
-						this.takePhoto();
-					}}
-					
-				>
-					Take photo
-				</button>
-
-				<button
-					onClick={() => {
-						this.stopCamera();
-					}}
-				>
-					Stop
-				</button>
-
+				<div className="camera-icon">
+					<div className="take-photo">
+						<button
+							onClick={() => {
+								this.takePhoto();
+							}}
+						>
+							Take photo
+						</button>
+					</div>
+					<div className="close-photo">
+						<button
+							onClick={() => {
+								this.stopCamera();
+							}}
+						>
+							x
+						</button>
+					</div>
+				</div>
 				<video ref={this.videoRef} autoPlay={true} />
 				<img alt="imgCamera" src={this.state.dataUri} />
 			</div>
