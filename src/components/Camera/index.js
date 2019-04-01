@@ -48,7 +48,16 @@ class CameraComponent extends React.Component {
 	}
 
 	stopCamera() {
-		this.cameraPhoto.stopCamera().then(()=> this.props.history.push('/')).catch(err=> this.props.history.push('/'));
+		this.cameraPhoto
+			.stopCamera()
+			.then(() => {
+				this.props.history.push('/');
+				this.props.toggleDialog();
+			})
+			.catch((err) => {
+				this.props.history.push('/');
+				this.props.toggleDialog();
+			});
 	}
 
 	render() {
