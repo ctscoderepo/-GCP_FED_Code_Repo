@@ -19,6 +19,7 @@ export default encodedImageSrc => async dispatch => {
       "https://35.227.204.18/visionapi/searchImage",
       requestBody
     );
+    alert(res.data.products);
     dispatch({ type: "SEARCHRESULTSAI", payload: res.data.products });
     return Promise.resolve();
   } catch (err) {
