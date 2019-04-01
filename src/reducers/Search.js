@@ -8,6 +8,7 @@ export default (state = { products: [] }, action) => {
         searchProducts: { ...action.payload },
         isLoading: false
       };
+   case "SEARCHRESULTSAI":return {...state, products:action.payload}   
     case "CLEARSEARCH":
       return { ...state, searchProducts: {}, isLoading: false };
     default:

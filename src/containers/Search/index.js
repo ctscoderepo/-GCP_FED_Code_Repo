@@ -39,6 +39,6 @@ function getCategory(categoryDetails) {
 }
 
 export default connect(({ search }) => ({
-  searchResults: search.searchProducts,
+  searchResults: search.searchProducts || search.products,
   isLoading: search.isLoading
 }))(Search);

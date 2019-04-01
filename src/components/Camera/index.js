@@ -1,8 +1,8 @@
-import React from "react";
-import CameraPhoto, { FACING_MODES } from "jslib-html5-camera-photo";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import visionApi from "../../actions/Aioutput";
+import React from 'react';
+import CameraPhoto, { FACING_MODES } from 'jslib-html5-camera-photo';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import visionApi from '../../actions/Aioutput';
 
 class CameraComponent extends React.Component {
 	constructor(props, context) {
@@ -10,7 +10,7 @@ class CameraComponent extends React.Component {
 		this.cameraPhoto = null;
 		this.videoRef = React.createRef();
 		this.state = {
-			dataUri: ""
+			dataUri: ''
 		};
 	}
 
@@ -22,7 +22,10 @@ class CameraComponent extends React.Component {
 	}
 
 	startCamera(idealFacingMode, idealResolution) {
-		this.cameraPhoto.startCamera(idealFacingMode, idealResolution);
+		this.cameraPhoto.startCamera(idealFacingMode, idealResolution).catch((err) => {
+			alert('camera not available for the device');
+			this.props.history.push('/');
+		});
 	}
 
 	startCameraMaxResolution(idealFacingMode) {
@@ -36,9 +39,9 @@ class CameraComponent extends React.Component {
 
 		let dataUri = this.cameraPhoto.getDataUri(config);
 		this.setState({ dataUri }, () => {
+			alert(dataUri);
 			this.props.visionApi(this.state.dataUri).then(() => {
-				this.props.history.push("/searchOutput");
-				this.stopCamera();
+				this.props.history.push('/search');
 			});
 		});
 	}
@@ -73,7 +76,4 @@ class CameraComponent extends React.Component {
 	}
 }
 
-export default connect(
-	null,
-	{ visionApi }
-)(withRouter(CameraComponent));
+export default connect(null, { visionApi })(withRouter(CameraComponent));
