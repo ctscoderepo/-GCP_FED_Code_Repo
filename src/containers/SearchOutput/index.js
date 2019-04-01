@@ -4,7 +4,7 @@ import SearchOutputComponent from '../../components/SearchOutput';
 
 function SearchOutput({airesults}){
     return(
-        <SearchOutputComponent data={airesults} />
+        <SearchOutputComponent airesults={airesults} />
     ) 
 }
 
