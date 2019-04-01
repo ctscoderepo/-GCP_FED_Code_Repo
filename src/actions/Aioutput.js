@@ -21,7 +21,7 @@ export default encodedImageSrc => async dispatch => {
     );
     // alert(res.data.products);
     dispatch({ type: "SEARCHRESULTSAI", payload: res.data.products });
-    return Promise.resolve(res.data.products);
+    return Promise.resolve(res);
   } catch (err) {
     return Promise.resolve();
   }
