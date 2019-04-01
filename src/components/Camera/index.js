@@ -58,6 +58,7 @@ class CameraComponent extends React.Component {
 					onClick={() => {
 						this.takePhoto();
 					}}
+					
 				>
 					Take photo
 				</button>
