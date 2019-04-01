@@ -6,6 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from '@material-ui/core/Tooltip';
+import Dialog from '@material-ui/core/Dialog';
 import InputBase from "@material-ui/core/InputBase";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
@@ -687,10 +688,12 @@ function SearchAppBar(props) {
                     <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
                   </svg>
                   {cameraOpen && (
+                    <Dialog fullScreen open={cameraOpen}>
                     <Camera
                       open={cameraOpen}
                       toggleDialog={() => setCameraOpen(false)}
                     />
+                    </Dialog>
                   )}
                 </i>
               </div>
