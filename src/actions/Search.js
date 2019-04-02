@@ -7,3 +7,6 @@ export const searchResults = type => async dispatch => {
   const res = await get(url);
   dispatch({ type: "SEARCHRESULTS", payload: res.data });
 };
+export const setStoreDataOnSearch = items => {
+  return { type: "SET_STORE_DATA_ON_SEARCH", payload: items };
+};

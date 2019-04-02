@@ -17,7 +17,7 @@ const styles = theme => ({
       margin: "140px 20px 20px 20px"
     },
     [theme.breakpoints.down("xs")]: {
-      margin: "130px 20px 20px 20px"
+      margin: "130px 10px 20px 10px"
     }
   },
   categories: {
@@ -199,7 +199,6 @@ function Products({
   });
 
   const [selectStore, setSelectStore] = useState(false);
-
   const selectStoreChange = value => {
     //const storeValue = selectStore ? "" : value;
     setSelectStore(!selectStore);

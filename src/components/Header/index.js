@@ -137,7 +137,7 @@ const styles = theme => ({
   },
     inputRootForXS:{
     color: "#000",
-    width: "70%"
+    width: "75%"
     },
   inputInput: {
     paddingRight: theme.spacing.unit,
@@ -177,6 +177,7 @@ const styles = theme => ({
     backgroundColor: "#fff",
     border: "1px solid white",
     borderBottom: "2px solid white",
+       
   },
   appBar: {
     backgroundColor: "#fafafa",
@@ -275,7 +276,8 @@ const styles = theme => ({
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%",
-      borderBottom: "1px solid lightgrey"
+      borderBottom: "1px solid lightgrey",
+      paddingLeft:"0px"    
     }
   },
 
@@ -475,7 +477,7 @@ NavigationMenuForXS: {
         float:"left" 
     },
     xsLogoDiv:{
-       width:"55%",
+       width:"60%",
         textAlign:"center", 
         paddingRight:"10px",
         float:"left",  
@@ -510,6 +512,17 @@ NavigationMenuForXS: {
       display: "none"
     },
          
+    },
+    searchBarForXS:{
+        marginTop:"-10px",
+        padding:"10px",
+        marginLeft:"0px", 
+        display:"flex"
+    },
+    cameraDivForXS:{
+        paddingTop:"3px",
+        marginLeft:"38px",
+        width:"auto"
     }
     
 });
@@ -838,7 +851,7 @@ function SearchAppBar(props) {
             <div>
             <div className={classes.navBarForXS}>
             <Toolbar    className={classes.NavigationMenuForXS}>
-                <div style={{ marginTop:"-10px", padding:"10px",marginLeft:"20px", display:"flex"}}>
+                <div className={classes.searchBarForXS} >
                 <form onSubmit={handleSubmit}>
                   
                   <InputBase
@@ -854,7 +867,7 @@ function SearchAppBar(props) {
                     <SearchIcon />
                   </Button>
                 </form> 
-                <div style={{paddingTop:"3px",}}><i
+                <div className={classes.cameraDivForXS} ><i
                   className={`material-icons`}
                   onClick={() => setCameraOpen(true)}
                 >

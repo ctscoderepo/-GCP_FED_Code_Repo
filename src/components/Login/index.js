@@ -124,6 +124,7 @@ function LoginComponent(props) {
       : setError("Login failed.Please check credentials");
   };
 
+     const inputStyle = { WebkitBoxShadow: "0 0 0 1000px white inset" };
   return (
     <div>
       {isLoading ? (
@@ -178,6 +179,7 @@ function LoginComponent(props) {
                           variant="outlined"
                           className={classes.txtStyle}
                           value={logonId}
+                            inputProps={{ style: inputStyle }}
                           onChange={e => setLogonId(e.target.value)}
                         />
                       </Grid>
@@ -228,6 +230,7 @@ function LoginComponent(props) {
                           className={classes.txtStyle}
                           type="password"
                           value={password}
+                                inputProps={{ style: inputStyle }}
                           onChange={e => setPassword(e.target.value)}
                         />
                       </Grid>

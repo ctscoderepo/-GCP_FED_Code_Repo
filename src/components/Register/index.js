@@ -13,6 +13,7 @@ import "./index.css";
 import { registerPartial } from "handlebars";
 import Spinner from "../helpers/Spinner";
 import { red } from "ansi-colors";
+import NumberFormat from "react-number-format";
 
 const styles = theme => ({
   root: {
@@ -37,7 +38,7 @@ const styles = theme => ({
   },
   txtStyle: {
     width: "100%",
-    height: "30px"
+    height: "40px"
   },
   btnStyle: {
     textTransform: "uppercase",
@@ -221,6 +222,7 @@ function LoginComponent(props) {
           "Sorry!! There is some error with Registration service."
         );
   };
+    const inputStyle = { WebkitBoxShadow: "0 0 0 1000px white inset" };
 
   return (
     <div>
@@ -282,6 +284,7 @@ function LoginComponent(props) {
                           name="firstName"
                           className={classes.txtStyle}
                           value={firstName.firstName}
+                          inputProps={{ style: inputStyle }}
                           onChange={e => handleFirstName(e.target.value)}
                         />
                       </Grid>
@@ -322,6 +325,7 @@ function LoginComponent(props) {
                           className={classes.txtStyle}
                           value={lastName.lastName}
                           onChange={e => handleLastName(e.target.value)}
+                            inputProps={{ style: inputStyle }}
                         />
                       </Grid>
                       <Grid lg={1} sm={1} item />
@@ -361,6 +365,7 @@ function LoginComponent(props) {
                           className={classes.txtStyle}
                           type="email"
                           value={email.email}
+                            inputProps={{ style: inputStyle }}
                           onChange={e => handleEmail(e.target.value)}
                         />
                       </Grid>
@@ -401,6 +406,7 @@ function LoginComponent(props) {
                           className={classes.txtStyle}
                           type="password"
                           value={password.password}
+                            inputProps={{ style: inputStyle }}
                           onChange={e => handlePassword(e.target.value)}
                         />
                       </Grid>
@@ -432,19 +438,19 @@ function LoginComponent(props) {
                         lg={10}
                         sm={10}
                         xs={12}
-                        style={{ marginBottom: "-15px" }}
+                        style={{ marginBottom: "50px" }}
                       >
-                        <TextField
-                          id="outlined-bare"
-                          placeholder="Enter Phone number"
-                          margin="normal"
-                          variant="outlined"
-                          type="tel"
-                          name="phone"
-                          className={classes.txtStyle}
-                          value={phoneNumber.phoneNumber}
-                          onChange={e => handlePhoneNumber(e.target.value)}
-                        />
+                       
+                         <NumberFormat style={{marginTop:"15px", width:"100%", height:"40px"}}
+                                     placeholder="Enter Phone number"
+                                      onChange={e => handlePhoneNumber(e.target.value)}
+                                      
+                                        value={phoneNumber.phoneNumber}
+                                      variant="outlined"
+                                      customInput={TextField}
+                                      format="(+1) ###-###-####"
+                                      mask="_"
+                                    />
                       </Grid>
                       <Grid lg={1} sm={1} item />
                       {errorPhoneNumber && (

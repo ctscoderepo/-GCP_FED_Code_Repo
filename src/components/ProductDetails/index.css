@@ -40,7 +40,13 @@
     padding: 0;
   }
 }
-
+@media screen and (max-width: 479px) {
+    .image-gallery-image {
+         padding: 0;
+         width: 100%;
+       margin-top: 30px;
+    }
+}
 .image-gallery-image img {
   width: 100%;
   height: 100%;

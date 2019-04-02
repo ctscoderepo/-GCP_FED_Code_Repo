@@ -1,8 +1,9 @@
 import React from "react";
 import SearchComponent from "../../components/Search";
 import { connect } from "react-redux";
+import { shipToStore, setStoreDataToPDP } from "../../actions/ProductDetails";
 
-function Search({ searchResults, isLoading }) {
+function Search({ searchResults, isLoading, storeData,shipToStore,  setStoreDataToPDP }) {
   //console.log("searchResults : ", searchResults);
   let categoryDetails = searchResults ? getCategory(searchResults.facets) : "";
   let products = searchResults ? searchResults.products : [];
@@ -12,6 +13,9 @@ function Search({ searchResults, isLoading }) {
       searchResults={products}
       categoryDetails={categoryDetails}
       isLoading={isLoading}
+       shipToStore={shipToStore}
+        storeData={storeData}
+        setStoreDataToPDP={setStoreDataToPDP}
     />
   );
 }
@@ -38,7 +42,6 @@ function getCategory(categoryDetails) {
   return formattedCategory;
 }
 
-export default connect(({ search }) => ({
-  searchResults: search.searchProducts,
-  isLoading: search.isLoading
-}))(Search);
+export default connect(({ search }) => ({searchResults: search.searchProducts, isLoading: search.isLoading,
+ storeData: search.storeData
+}),{shipToStore, setStoreDataToPDP})(Search);

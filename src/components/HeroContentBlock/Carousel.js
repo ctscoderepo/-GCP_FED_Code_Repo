@@ -19,7 +19,7 @@ const styles = theme => ({
     },
     [theme.breakpoints.down("xs")]: {
       height: "200px",
-      width:"99%"    
+      width:"99%",
     }
   },
   slide_01: {
@@ -118,7 +118,7 @@ const SamplePrevArrow = props => {
         marginLeft: "30px",
         padding: "7px",
         borderRadius: "17px",
-        zIndex: "1000",
+        zIndex: "100",
         top: "50%"
       }}
       onClick={onClick}

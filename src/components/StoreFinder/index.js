@@ -20,7 +20,8 @@ const styles = theme => ({
       marginTop: "130px"
     },
     [theme.breakpoints.down("xs")]: {
-      marginTop: "60px"
+      marginTop: "60px",
+      marginBottom:"50px"    
     }
   },
   heading: {
@@ -28,6 +29,11 @@ const styles = theme => ({
     fontSize: "25px",
     textAlign: "center",
     marginTop: "80px",
+    [theme.breakpoints.down("sm")]: {
+     fontSize: "22px",
+     padding:"10px",
+     marginTop: "50px",
+    }  ,
     [theme.breakpoints.down("xs")]: {
       marginTop: "0px"
     }
@@ -101,7 +107,9 @@ const styles = theme => ({
   },
   searchStoreGrid: {
     padding: "10px",
-    marginTop: "10px"
+    marginTop: "10px",
+      boxSizing:"border-box", 
+      
   },
   searchStoreLblGrid: {
     borderRight: "2px Solid gray",
@@ -122,7 +130,8 @@ const styles = theme => ({
       width: "75%"
     },
     [theme.breakpoints.down("xs")]: {
-      width: "87%"
+      width: "87%",
+      marginLeft:"25px"    
     }
   },
   avatarStyle: {
@@ -160,7 +169,10 @@ const styles = theme => ({
     width: "98%",
     height: "300px",
     margin: "10px",
-    border: "1px solid #bfbfbf"
+    border: "1px solid #bfbfbf",
+      [theme.breakpoints.down("xs")]: {
+      width: "95%",
+    }
   },
   deskTopTabView: {
     [theme.breakpoints.down("xs")]: {
@@ -216,6 +228,7 @@ const StoreFinderComponent = props => {
     storeList,
     setStoreData,
     setStoreDataOnProducts,
+      setStoreDataOnSearch,
     setStoreInfo,
     isLoading
   } = props;
@@ -267,6 +280,7 @@ const StoreFinderComponent = props => {
     setInfoWindowMessage(message);
     setStoreData(message);
     setStoreDataOnProducts(message);
+      setStoreDataOnSearch(message);
 
     let loggedInUserData = JSON.stringify(message);
 
@@ -307,6 +321,7 @@ const StoreFinderComponent = props => {
     setIndexNum(storeId);
     props.setStoreData(address);
     props.setStoreDataOnProducts(address);
+    props.setStoreDataOnSearch(address);  
 
     let loggedInUserData = JSON.stringify(address);
 
@@ -363,24 +378,24 @@ const StoreFinderComponent = props => {
                 <Grid
                   item
                   lg={4}
-                  sm={4}
+                  sm={5}
                   xs={12}
                   className={classes.searchStoreLblGrid}
                 >
                   <div className={classes.heading}>
-                    Search Stores around you
+                    Search stores around you
                   </div>
                 </Grid>
                 <Grid
                   item
                   lg={8}
-                  sm={8}
+                  sm={7}
                   xs={12}
                   className={classes.searchStoreGrid}
                 >
                   <Grid container>
-                    <Grid item lg={3} sm={3} xs={4}>
-                      <div style={{ fontSize: "14px" }}> Find a store</div>
+                    <Grid item lg={3} sm={4} xs={5}>
+                      <div style={{ fontSize: "14px", paddingTop:"6px" }}> Find a store</div>
                     </Grid>
                     <Grid item lg={3} sm={5} xs={7}>
                       <div>
@@ -398,16 +413,15 @@ const StoreFinderComponent = props => {
                   <Grid container className={classes.marginTop15px}>
                     <Grid item lg={12} sm={12} xs={12}>
                       <Grid container>
-                        <Grid item lg={3} sm={3} xs={4}>
-                          <div
-                            className={classes.marginTop5px}
-                            style={{ fontSize: "14px" }}
+                        <Grid item lg={3} sm={4} xs={5}>
+                          <div   className={classes.marginTop5px}
+                            style={{ fontSize: "14px", marginRight:"10px" }}
                           >
                             Enter Zipcode or City & State
                           </div>
                         </Grid>
 
-                        <Grid item lg={8} sm={6} xs={8}>
+                        <Grid item lg={8} sm={6} xs={7}>
                           <TextField
                             id="outlined-name"
                             label=""
@@ -430,7 +444,7 @@ const StoreFinderComponent = props => {
                       className={classes.marginTop5px}
                     >
                       <Grid container>
-                        <Grid item lg={3} sm={3} xs={4}>
+                        <Grid item lg={3} sm={4} xs={5}>
                           <div
                             className={classes.marginTop5px}
                             style={{ fontSize: "14px" }}
@@ -438,9 +452,9 @@ const StoreFinderComponent = props => {
                             Within miles
                           </div>
                         </Grid>
-                        <Grid item lg={1} sm={1} xs={2}>
+                        <Grid item lg={1} sm={1} xs={3}>
                           <TextField
-                            style={{ width: "50px" }}
+                            style={{ width: "40px" }}
                             id="outlined-name"
                             label=""
                             className={classes.InputText}
@@ -451,7 +465,7 @@ const StoreFinderComponent = props => {
                             onChange={e => getRadius(e.target.value)}
                           />
                         </Grid>
-                        <Grid item lg={2} sm={3} xs={5}>
+                        <Grid item lg={2} sm={3} xs={4}>
                           <Button
                             className={classes.findStoreBtn}
                             onClick={getStoresByAddressRadius}

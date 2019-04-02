@@ -8,6 +8,7 @@ import {
   setStoreData
 } from "../../actions/Header";
 import { setStoreDataOnProducts } from "../../actions/Products";
+import { setStoreDataOnSearch } from "../../actions/Search";
 import { connect } from "react-redux";
 import { storeFinder, getStoresByLatLng } from "../../actions/StoreFinder";
 
@@ -19,6 +20,7 @@ const StoreFinder = ({
   storeList,
   setStoreData,
   setStoreDataOnProducts,
+    setStoreDataOnSearch,
   isLoading
 }) => {
   useEffect(() => {
@@ -42,6 +44,7 @@ const StoreFinder = ({
       getStoresByLatLng={getStoresByLatLng}
       setStoreData={setStoreData}
       setStoreDataOnProducts={setStoreDataOnProducts}
+      setStoreDataOnSearch={setStoreDataOnSearch}
       isLoading={isLoading}
     />
   );
@@ -58,6 +61,7 @@ export default connect(
     storeFinder,
     getStoresByLatLng,
     setStoreData,
-    setStoreDataOnProducts
+    setStoreDataOnProducts,
+      setStoreDataOnSearch
   }
 )(withRouter(StoreFinder));

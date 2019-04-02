@@ -51,7 +51,8 @@ const styles = theme => ({
     fontWeight: "bold",
     marginTop: "50px",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "13px"
+      fontSize: "13px",
+      marginTop:"20px"    
     }
   },
   Spinner: {
@@ -227,12 +228,10 @@ const ProductDetailComponent = props => {
               {product ? <Divider className={classes.dividerStyle} /> : ""}
             </div>
           </Grid>
-          <Grid lg={7} sm={6} xs={12} item>
+          <Grid lg={7} sm={7} xs={12} item>
             <div
               style={{
-                marginTop: "30px",
-                height: "300px",
-                marginRight: "20px"
+                marginRight: "5px", 
               }}
             >
               <ImageGallery
@@ -245,7 +244,7 @@ const ProductDetailComponent = props => {
               />
             </div>
           </Grid>
-          <Grid lg={5} sm={6} xs={12} item>
+          <Grid lg={5} sm={5} xs={12} item>
             <div className={classes.producttitle}>
               <strong>{product.productName}</strong>
             </div>
@@ -340,7 +339,7 @@ const ProductDetailComponent = props => {
                   </button>
                 </div>
               </Grid>
-              <Grid item lg={4} sm={5} xs={12}>
+              <Grid item lg={4} sm={8} xs={12}>
                 {shipToStoreData ? (
                   <Button
                     variant="contained"
