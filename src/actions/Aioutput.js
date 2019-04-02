@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URLList } from "../config/URLs";
 export default encodedImageSrc => async dispatch => {
   const requestBody = {
     requests: [
@@ -15,11 +16,8 @@ export default encodedImageSrc => async dispatch => {
     ]
   };
   try {
-    const res = await axios.post(
-      "https://35.227.204.18/visionapi/searchImage",
-      requestBody
-    );
-    // alert(res.data.products);
+    const res = await axios.post(URLList.getVisionApiURL(), requestBody);
+    alert(res.data.products);
     dispatch({ type: "SEARCHRESULTSAI", payload: res.data.products });
     return Promise.resolve(res);
   } catch (err) {
