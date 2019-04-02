@@ -1,6 +1,7 @@
 import axios from "axios";
 import { URLList } from "../config/URLs";
 export default encodedImageSrc => async dispatch => {
+  alert("HI");
   const requestBody = {
     requests: [
       {
