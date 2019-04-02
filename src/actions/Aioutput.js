@@ -1,7 +1,6 @@
 import axios from "axios";
 import { URLList } from "../config/URLs";
 export default encodedImageSrc => async dispatch => {
-  alert("HI");
   const requestBody = {
     requests: [
       {
@@ -17,7 +16,7 @@ export default encodedImageSrc => async dispatch => {
     ]
   };
   try {
-    console.log(URLList.getVisionApiURL());
+    alert(URLList.getVisionApiURL());
     const res = await axios.post(URLList.getVisionApiURL(), requestBody);
     alert("data: ", res.data.products);
     dispatch({ type: "SEARCHRESULTSAI", payload: res.data.products });
