@@ -16,7 +16,8 @@ export default encodedImageSrc => async dispatch => {
     ]
   };
   try {
-    alert(URLList.getVisionApiURL());
+    alert("encodedImageSrc: ", encodedImageSrc);
+    alert(URLList.getVisionApiURL() + "    " + requestBody);
     const res = await axios.post(URLList.getVisionApiURL(), requestBody);
     alert("data: ", res.data.products);
     dispatch({ type: "SEARCHRESULTSAI", payload: res.data.products });
