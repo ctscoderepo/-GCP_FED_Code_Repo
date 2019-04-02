@@ -18,7 +18,7 @@ export const URLList = {
   OrderAPI: "/cart/order/",
   LoginAPI: "/register/login-service/",
   RegistrationAPI: "/register/register-user/user",
-  VisionApi: "visionapi/searchImage",
+  VisionApi: "/visionapi/searchImage",
   getStoreFinderUsingLatLng: function(lat, lng) {
     return (
       this.HTTP +
