@@ -80,7 +80,10 @@ const styles = theme => ({
   dividerStyle: {
     backgroundColor: "#e6e6e6",
     height: "2px",
-    marginTop: "20px"
+    marginTop: "20px",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "10px"
+    }
   },
   relevanceInput: {
     padding: "10px",
@@ -108,6 +111,20 @@ const styles = theme => ({
     },
     [theme.breakpoints.down("xs")]: {
       fontSize: "14px"
+    }
+  },
+  getFastForXS: {
+    [theme.breakpoints.down("lg")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("md")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "block"
     }
   }
 });
@@ -192,7 +209,7 @@ function Products({
     if (selectStore) {
       shipToStore("ship to store");
       setStoreDataToPDP(storeData);
-    }else{
+    } else {
       shipToStore("");
     }
   }, [selectStore]);
@@ -260,6 +277,48 @@ function Products({
         )}
         <div>
           {mainCategory ? <Divider className={classes.dividerStyle} /> : ""}
+        </div>
+        <div className={classes.getFastForXS}>
+          {storeData && mainCategory ? (
+            <div>
+              <div style={{ display: "flex" }}>
+                <Typography
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                    marginTop: "10px",
+                    marginRight: "8px"
+                  }}
+                >
+                  {" "}
+                  Get It Fast :
+                </Typography>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={selectStore}
+                      onChange={() => selectStoreChange("ship to store")}
+                      value="selectedStore"
+                      color="primary"
+                    />
+                  }
+                  label={
+                    <Typography style={{ fontSize: "12px" }}>
+                      In Stock at Store Today
+                    </Typography>
+                  }
+                  style={{ marginTop: "-5px", fontSize: "12px" }}
+                />
+              </div>
+              <Typography style={{ fontSize: "12px", marginTop: "-3px" }}>
+                <strong>Store Name :</strong>
+                {storeData ? " " + storeData : ""}
+              </Typography>
+              <Divider className={classes.dividerStyle} />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
 

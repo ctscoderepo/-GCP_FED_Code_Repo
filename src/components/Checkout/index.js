@@ -15,6 +15,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Checkbox from "@material-ui/core/Checkbox";
+import NumberFormat from "react-number-format";
 //import "./index.css";
 
 const styles = theme => ({
@@ -69,7 +70,7 @@ const styles = theme => ({
     marginTop: "0px",
     margin: "0px 0px 10px 0px"
   },
-    InputTextCVV: {
+  InputTextCVV: {
     width: "100%",
     height: "45px",
     marginTop: "0px",
@@ -343,7 +344,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     height: "40px",
-    marginTop:"-10px"  ,
+    marginTop: "-10px",
     "&:hover": {
       backgroundColor: "#009900"
     },
@@ -356,7 +357,7 @@ const styles = theme => ({
     border: "1px solid #cccccc",
     marginTop: "50px",
     padding: "10px",
-    marginBottom:"30px",  
+    marginBottom: "30px",
     [theme.breakpoints.down("xs")]: {
       display: "none"
     }
@@ -453,12 +454,11 @@ const styles = theme => ({
       paddingLeft: "10px"
     }
   },
-    errorMessage:{
-        color:"red",
-        marginTop:"-5px",
-        textAlign:"right",
-        fontSize:"12px"
-    }
+  errorMessage: {
+    color: "red",
+    textAlign: "right",
+    fontSize: "12px"
+  }
 });
 
 const AuthUserCheckout = props => {
@@ -469,6 +469,7 @@ const AuthUserCheckout = props => {
 
   const [totalQuantity, setTotalQuantity] = useState();
   let orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+
   useEffect(() => {
     if (orderItems) {
       let count = 0;
@@ -503,11 +504,11 @@ const AuthUserCheckout = props => {
     orderDetails.email = value;
     localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
   };
-    
-const handleEmail = value => {
+
+  const handleEmail = value => {
     setErrorGuestEmail(value);
   };
-    
+
   const handleFName = value => {
     setFName(value);
   };
@@ -541,7 +542,7 @@ const handleEmail = value => {
     } else {
       setErrorShipping("");
     }
-      if (errorGuestEmail.length === 0) {
+    if (errorGuestEmail.length === 0) {
       setErrorGuestEmail("Please enter email address");
     } else {
       setErrorGuestEmail("");
@@ -602,7 +603,14 @@ const handleEmail = value => {
     setYearExpir(val);
   };
 
-  const enabledBtn = cardNum != "" &&   monthExpir != "" &&  yearExpir != "" &&    cvvNum != "" &&  cardType != "" ? true: false;
+  const enabledBtn =
+    cardNum != "" &&
+    monthExpir != "" &&
+    yearExpir != "" &&
+    cvvNum != "" &&
+    cardType != ""
+      ? true
+      : false;
 
   const Months = [
     { month: "01 - January", Value: "1" },
@@ -679,18 +687,17 @@ const handleEmail = value => {
   };
 
   const saveAddress = () => {
-      
-    if(fName && phone && shipping)
-        {
-            setIsAddressSection(false);
-        }
-    
+    if (fName && phone && shipping) {
+      setIsAddressSection(false);
+    }
   };
-
+  const inputStyle = { WebkitBoxShadow: "0 0 0 1000px white inset" };
   return (
     <>
       <div className={classes.mainDiv}>
-        <div className={classes.checkoutCount}>Checkout ({orderItemsList? orderItemsList.length: "0"} Items)</div>
+        <div className={classes.checkoutCount}>
+          Checkout ({orderItemsList ? orderItemsList.length : "0"} Items)
+        </div>
         <Divider variant="left" className={classes.dividerClass} />
         <div className={classes.checkoutCont}>
           <Grid container spacing={24}>
@@ -720,22 +727,22 @@ const handleEmail = value => {
                             }
                           >
                             <div className={classes.addressLines}>
-                              <div style={{height:"30px"}}>
+                              <div style={{ height: "30px" }}>
                                 <Typography>
                                   {fName ? fName : "Address line 1"}
                                 </Typography>
                               </div>
-                              <div style={{height:"30px"}}>
+                              <div style={{ height: "30px" }}>
                                 <Typography>
                                   {phone ? phone : "Address line 2"}
                                 </Typography>
                               </div>
-                              <div style={{height:"30px"}}>
+                              <div style={{ height: "30px" }}>
                                 <Typography>
                                   {shipping ? shipping : "Address line 3"}
                                 </Typography>
                               </div>
-                              <div style={{height:"30px"}}>
+                              <div style={{ height: "30px" }}>
                                 <Typography>
                                   {email ? email : "Enter Email"}
                                 </Typography>
@@ -776,7 +783,7 @@ const handleEmail = value => {
                             <div>
                               <form onSubmit={handleSubmit}>
                                 <div>
-                                <div>
+                                  <div>
                                     <Typography>Email :</Typography>
                                   </div>
                                   <div className="marginTop10">
@@ -788,6 +795,7 @@ const handleEmail = value => {
                                       variant="outlined"
                                       placeholder="Please enter Email"
                                       value={email}
+                                      inputProps={{ style: inputStyle }}
                                       onChange={e =>
                                         handleguestEmail(e.target.value)
                                       }
@@ -812,6 +820,7 @@ const handleEmail = value => {
                                       variant="outlined"
                                       placeholder="Enter full name"
                                       value={fName.fName}
+                                      inputProps={{ style: inputStyle }}
                                       onChange={e =>
                                         handleFName(e.target.value)
                                       }
@@ -830,20 +839,19 @@ const handleEmail = value => {
                                     <Typography>Phone Number :</Typography>
                                   </div>
                                   <div className="marginTop10">
-                                    <TextField
-                                      id="outlined-name"
-                                      label=""
-                                      className={classes.InputText}
-                                      margin="normal"
-                                      variant="outlined"
-                                      type="number"
+                                    <NumberFormat
                                       placeholder="Enter Phone Number"
-                                      value={phone.phone}
                                       onChange={e =>
                                         handlePhone(e.target.value)
                                       }
+                                      className={classes.InputText}
+                                      variant="outlined"
+                                      customInput={TextField}
+                                      format="(+1) ###-###-####"
+                                      mask="_"
                                     />
                                   </div>
+
                                   <div>
                                     {errorPhone && (
                                       <div className={classes.errorMessage}>
@@ -865,6 +873,7 @@ const handleEmail = value => {
                                       variant="outlined"
                                       placeholder="Enter Street, City, State, Country"
                                       value={shipping.shipping}
+                                      inputProps={{ style: inputStyle }}
                                       onChange={e =>
                                         handleShipping(e.target.value)
                                       }
@@ -884,7 +893,8 @@ const handleEmail = value => {
                                     marginTop: "30px"
                                   }}
                                 >
-                                  <Button                                    className={classes.saveAddressBtn}
+                                  <Button
+                                    className={classes.saveAddressBtn}
                                     type="submit"
                                     onClick={saveAddress}
                                   >
@@ -953,15 +963,14 @@ const handleEmail = value => {
                               </FormControl>
                             </div>
                             <div style={{ marginTop: "10px", width: "95%" }}>
-                              <TextField
-                                id="cardNumber"
-                                label=""
-                                className={classes.InputText}
-                                type="number"
-                                margin="normal"
-                                variant="outlined"
-                                placeholder="Enter card number"
+                              <NumberFormat
+                                placeholder="Enter Card Number"
                                 onChange={e => handleCardNum(e.target.value)}
+                                className={classes.InputText}
+                                variant="outlined"
+                                customInput={TextField}
+                                format="#### #### #### ####"
+                                mask="_"
                               />
                             </div>
                             <div>
@@ -976,7 +985,7 @@ const handleEmail = value => {
                                       value={monthExpir}
                                       onChange={handleMonthChange}
                                       input={
-                                        <OutlinedInput 
+                                        <OutlinedInput
                                           name="month"
                                           id="month"
                                         />
@@ -1023,15 +1032,15 @@ const handleEmail = value => {
                                   className={classes.marginLeft10}
                                 >
                                   <Typography>CVV</Typography>
-                                  <TextField
-                                    id="cvv"
-                                    label=""
-                                    type="number"
-                                    className={classes.InputTextCVV}
-                                    margin="normal"
-                                    variant="outlined"
+
+                                  <NumberFormat
                                     placeholder="CVV"
                                     onChange={e => handleCVV(e.target.value)}
+                                    className={classes.InputTextCVV}
+                                    variant="outlined"
+                                    customInput={TextField}
+                                    format="###"
+                                    mask="_"
                                   />
                                 </Grid>
                               </Grid>
@@ -1072,8 +1081,14 @@ const handleEmail = value => {
                               </div>
                             </Grid>
                             <Grid item lg={4} sm={5} xs={4}>
-                              <Button  className={enabledBtn ? classes.placeOrderBtnNew : classes.btnDisabled} 
-                                onClick={checkoutCart}>
+                              <Button
+                                className={
+                                  enabledBtn
+                                    ? classes.placeOrderBtnNew
+                                    : classes.btnDisabled
+                                }
+                                onClick={checkoutCart}
+                              >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="24"
@@ -1130,7 +1145,7 @@ const handleEmail = value => {
                                   <strong>Shipping & handling</strong>
                                 </Typography>
                               </div>
-                              <div style={{ marginTop: "15px" }}>
+                              <div style={{ marginTop: "30px" }}>
                                 <Typography>
                                   <strong>Total before tax :</strong>
                                 </Typography>
@@ -1149,7 +1164,8 @@ const handleEmail = value => {
                                 $
                                 {cartItems.totalPrice
                                   ? cartItems.totalPrice
-                                  : 0}.00
+                                  : 0}
+                                .00
                               </div>
                               <div
                                 style={{
@@ -1160,7 +1176,8 @@ const handleEmail = value => {
                                 $
                                 {cartItems.totalShipping
                                   ? cartItems.totalShipping
-                                  : 0}.00
+                                  : 0}
+                                .00
                               </div>
                               <Divider
                                 variant="left"
@@ -1179,7 +1196,8 @@ const handleEmail = value => {
                                 {cartItems.totalPrice
                                   ? cartItems.totalPrice +
                                     cartItems.totalShipping
-                                  : 0}.00
+                                  : 0}
+                                .00
                               </div>
                               <div
                                 style={{
@@ -1188,7 +1206,8 @@ const handleEmail = value => {
                                 }}
                               >
                                 {" "}
-                                ${cartItems.totalTax ? cartItems.totalTax : 0}.00
+                                ${cartItems.totalTax ? cartItems.totalTax : 0}
+                                .00
                               </div>
                             </Grid>
                           </Grid>
@@ -1217,7 +1236,8 @@ const handleEmail = value => {
                                   ? cartItems.totalPrice +
                                     cartItems.totalShipping +
                                     cartItems.totalTax
-                                  : 0}.00
+                                  : 0}
+                                .00
                               </div>
                             </Grid>
                           </Grid>
@@ -1230,7 +1250,14 @@ const handleEmail = value => {
                           style={{ marginTop: "20px", marginBottom: "20px" }}
                         />
                         <div>
-                          <Button className={enabledBtn ? classes.placeOrderBtnNew : classes.btnDisabled} onClick={checkoutCart}>
+                          <Button
+                            className={
+                              enabledBtn
+                                ? classes.placeOrderBtnNew
+                                : classes.btnDisabled
+                            }
+                            onClick={checkoutCart}
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"

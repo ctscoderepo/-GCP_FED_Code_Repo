@@ -38,7 +38,7 @@ const styles = theme => ({
   },
   nearMeBtn: {
     textTransform: "uppercase",
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "100%",
     margin: "0px 0px 0px 0px",
@@ -50,7 +50,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#00cc00"
+      backgroundColor: "#009900"
     },
     [theme.breakpoints.down("sm")]: {
       marginLeft: "0px",
@@ -63,7 +63,7 @@ const styles = theme => ({
   },
   findStoreBtn: {
     textTransform: "uppercase",
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "100%",
     margin: "1px 0px 0px 0px",
@@ -75,7 +75,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#00cc00"
+      backgroundColor: "#009900"
     },
     [theme.breakpoints.down("sm")]: {
       marginLeft: "25px"
@@ -180,7 +180,7 @@ const styles = theme => ({
   },
   btnStyle: {
     textTransform: "uppercase",
-    backgroundColor: "#00b300",
+    backgroundColor: "#008000",
     borderRadius: "5px",
     width: "40%",
     margin: "10px 0",
@@ -192,7 +192,7 @@ const styles = theme => ({
     fontWeight: "400",
     fill: "#000",
     "&:hover": {
-      backgroundColor: "#00cc00"
+      backgroundColor: "#009900"
     },
     [theme.breakpoints.down("sm")]: {
       width: "50%"
@@ -266,7 +266,7 @@ const StoreFinderComponent = props => {
     setShowingInfoWindow(true);
     setInfoWindowMessage(message);
     setStoreData(message);
-    setStoreDataOnProducts(message)
+    setStoreDataOnProducts(message);
 
     let loggedInUserData = JSON.stringify(message);
 
@@ -306,7 +306,7 @@ const StoreFinderComponent = props => {
     const storeId = item ? item.id : "";
     setIndexNum(storeId);
     props.setStoreData(address);
-    props.setStoreDataOnProducts(address)
+    props.setStoreDataOnProducts(address);
 
     let loggedInUserData = JSON.stringify(address);
 

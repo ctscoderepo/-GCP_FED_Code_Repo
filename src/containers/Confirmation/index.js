@@ -10,7 +10,8 @@ const Confirmation = ({
   clearCartItemsOnHeader,
   checkoutData,
   isLoading,
-  storeProductInfo
+  storeProductInfo,
+  shipToStoreData
 }) => {
   useEffect(() => {
     setHeaderStatus(false);
@@ -22,6 +23,7 @@ const Confirmation = ({
       checkoutData={checkoutData}
       isLoading={isLoading}
       storeProductInfo={storeProductInfo}
+      shipToStoreData={shipToStoreData}
     />
   );
 };
@@ -30,7 +32,8 @@ export default connect(
   ({ confirmation }) => ({
     checkoutData: confirmation.checkoutData,
     isLoading: confirmation.isLoading,
-    storeProductInfo: confirmation.storeProductInfo
+    storeProductInfo: confirmation.storeProductInfo,
+    shipToStoreData: confirmation.shipToStoreData
   }),
   { setHeaderStatus, setFooterStatus, clearCartItemsOnHeader }
 )(Confirmation);

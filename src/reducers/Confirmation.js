@@ -1,4 +1,4 @@
-export default (state = { checkoutData: {}, storeProductInfo: "" }, action) => {
+export default (state = { checkoutData: {}, storeProductInfo: "",shipToStoreData:"" }, action) => {
   switch (action.type) {
     case "ISLOADING":
       return { ...state, isLoading: true };
@@ -14,6 +14,8 @@ export default (state = { checkoutData: {}, storeProductInfo: "" }, action) => {
         storeProductInfo: { ...state.storeProductInfo, ...action.payload },
         isLoading: false
       };
+    case "SHIP_TO_STORE":
+      return { ...state, shipToStoreData: action.payload };      
     default:
       return state;
   }
