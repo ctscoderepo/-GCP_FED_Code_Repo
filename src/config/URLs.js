@@ -16,7 +16,7 @@ export const URLList = {
   ProdcutDetailsAPI: "/products/",
   ProdcutsAPI: "/search?category1=",
   OrderAPI: "/cart/order/",
-  LoginAPI: "/login/login-service/",
+  LoginAPI: "/register/login-service/",
   RegistrationAPI: "/register/register-user/user",
   VisionApi: "visionapi/searchImage",
   getStoreFinderUsingLatLng: function(lat, lng) {
