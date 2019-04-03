@@ -29,5 +29,5 @@ export default [
   { path: "/signIn", component: SignIn, id: 10 },
   { path: "/findStore", component: StoreFinder, id: 11 },
   { path: "/Confirmation", component: Confirmation, id: 12 },
-  { path: "/searchOutput", component: searchOutput, id: 12 },
+  { path: "/searchOutput", component: searchOutput, exact: true, id: 12 }
 ];

@@ -41,23 +41,24 @@ class CameraComponent extends React.Component {
     };
 
     let dataUri = this.cameraPhoto.getDataUri(config);
-    alert("dataUri: ", dataUri);
-    this.props.visionApi(dataUri).then(res => {
-      this.props.history.push("/searchOutput");
-      this.stopCamera();
+    this.setState({ dataUri }, () => {
+      this.props
+        .visionApi(this.state.dataUri)
+        .then(res => {
+          this.props.history.push("/searchOutput");
+          this.stopCamera();
+        })
+        .catch(() => this.props.history.push("/searchOutput"));
     });
-    this.setState({ dataUri });
   }
 
   stopCamera() {
     this.cameraPhoto
       .stopCamera()
       .then(() => {
-        this.props.history.push("/");
         this.props.toggleDialog();
       })
       .catch(err => {
-        this.props.history.push("/");
         this.props.toggleDialog();
       });
   }

@@ -61,9 +61,8 @@ function SearchOutput({ airesults, classes }) {
               </div>
               <div className="productDetail">
                 <div className="title">{product.productName}</div>
-                {/*<span className="rated">{rating()}</span>*/}
                 <div className="price">
-                  {product.currencyCode === "USD" && "$"}{" "}
+                  {product.currencyCode === "USD" && "$"}
                   <span>{product.price}</span>
                 </div>
               </div>
@@ -75,11 +74,7 @@ function SearchOutput({ airesults, classes }) {
   return (
     <div className={classes.productsComponent}>
       <Grid container spacing={16}>
-        <Grid item lg={2} md={3} sm={3} className={classes.sideNav}>
-          {/*<SideNav {...categoryDetails} />*/}
-        </Grid>
-        <Grid item lg={1} className={classes.gridHide} />
-        <Grid item lg={9} md={9} sm={9}>
+        <Grid item lg={12} md={12} sm={12}>
           {spinner}
         </Grid>
       </Grid>
