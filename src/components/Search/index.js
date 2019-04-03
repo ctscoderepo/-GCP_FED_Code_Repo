@@ -180,7 +180,7 @@ function Products({
   setStoreDataToPDP,
   shipToStore
 }) {
-  alert("searchResults: ", searchResults);
+  alert("searchResults: ", searchResults.Products);
   console.log("storeData from fsdklfjsl", storeData);
 
   const [mainCategory, setmainCategory] = useState();
