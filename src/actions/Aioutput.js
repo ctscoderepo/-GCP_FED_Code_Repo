@@ -23,6 +23,7 @@ export default encodedImageSrc => async dispatch => {
       type: "SEARCHRESULTS",
       payload: res.data.products
     });
+    alert("res.data.products", res.data.products);
     return Promise.resolve(res);
   } catch (err) {
     return Promise.resolve();
