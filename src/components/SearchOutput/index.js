@@ -1,7 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Spinner from "../helpers/Spinner";
 
 const styles = theme => ({
   productsComponent: {
@@ -45,32 +44,30 @@ const styles = theme => ({
 });
 
 function SearchOutput({ airesults, classes }) {
-  console.log("airesults", airesults);
-  const spinner =
-    airesults.length === 0 ? (
-      <div className={classes.spinnerDiv}>
-        <Spinner />
-      </div>
-    ) : (
-      <Grid container spacing={16}>
-        {airesults.map(product => (
-          <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
-            <div className="productWrapper">
-              <div className="imageWrapper">
-                <img src={product.images[0]} alt="mac book prop" />
-              </div>
-              <div className="productDetail">
-                <div className="title">{product.productName}</div>
-                <div className="price">
-                  {product.currencyCode === "USD" && "$"}
-                  <span>{product.price}</span>
-                </div>
+  const spinner = !airesults ? (
+    <div className={classes.spinnerDiv}>
+      <h1>No products found</h1>
+    </div>
+  ) : (
+    <Grid container spacing={16}>
+      {airesults.map(product => (
+        <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
+          <div className="productWrapper">
+            <div className="imageWrapper">
+              <img src={product.images[0]} alt="mac book prop" />
+            </div>
+            <div className="productDetail">
+              <div className="title">{product.productName}</div>
+              <div className="price">
+                {product.currencyCode === "USD" && "$"}
+                <span>{product.price}</span>
               </div>
             </div>
-          </Grid>
-        ))}
-      </Grid>
-    );
+          </div>
+        </Grid>
+      ))}
+    </Grid>
+  );
   return (
     <div className={classes.productsComponent}>
       <Grid container spacing={16}>
