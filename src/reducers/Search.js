@@ -1,5 +1,4 @@
 export default (state = { products: [], storeData: "" }, action) => {
-  alert("products: ", products);
   switch (action.type) {
     case "ISLOADING":
       return { ...state, isLoading: true };
