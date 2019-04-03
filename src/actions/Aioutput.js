@@ -20,8 +20,8 @@ export default encodedImageSrc => async dispatch => {
       }
     );
     dispatch({
-      type: "SEARCHRESULTSAI",
-      payload: res.data.products.products
+      type: "SEARCHRESULTS",
+      payload: res.data.products
     });
     return Promise.resolve(res);
   } catch (err) {
