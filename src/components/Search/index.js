@@ -180,9 +180,7 @@ function Products({
   setStoreDataToPDP,
   shipToStore
 }) {
-  alert("searchResults: ", searchResults.Products);
   console.log("storeData from fsdklfjsl", storeData);
-
   const [mainCategory, setmainCategory] = useState();
   useEffect(() => {
     if (searchResults) {

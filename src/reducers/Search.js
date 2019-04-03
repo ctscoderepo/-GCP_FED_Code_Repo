@@ -1,15 +1,8 @@
 export default (state = { products: [], storeData: "" }, action) => {
-  alert("search reducer: ", action.payload);
   switch (action.type) {
     case "ISLOADING":
       return { ...state, isLoading: true };
     case "SEARCHRESULTS":
-      return {
-        ...state,
-        searchProducts: { ...action.payload },
-        isLoading: false
-      };
-    case "SEARCHRESULTS1":
       return {
         ...state,
         searchProducts: { ...action.payload },
