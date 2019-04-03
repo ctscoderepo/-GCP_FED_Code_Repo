@@ -19,11 +19,8 @@ export default encodedImageSrc => async dispatch => {
         ]
       }
     );
-    dispatch({
-      type: "SEARCHRESULTS",
-      payload: res.data.products
-    });
-    alert("res.data.products", res.data.products);
+    alert("AIoutput: ", res.data.products);
+    dispatch({ type: "SEARCHRESULTS1", payload: res.data.products });
     return Promise.resolve(res);
   } catch (err) {
     return Promise.resolve();
