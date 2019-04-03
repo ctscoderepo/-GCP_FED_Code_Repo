@@ -40,7 +40,7 @@ function NavigationMenu(props) {
   const { classes } = props;
   const NavBar = [
     { category: "Electronics", url: "/shopping/Electronics" },
-    { category: "Toys", url: "/shopping/Toys" },
+    { category: "Toys For Kids", url: "/shopping/Toys" },
     { category: "Apparel", url: "/shopping/Apparel" },
     { category: "Home Decor", url: "/shopping/Home-Decor" },
     { category: "Gift Cards", url: "/shopping/Gift-Cards" }
