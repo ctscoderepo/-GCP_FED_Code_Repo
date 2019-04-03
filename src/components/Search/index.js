@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -16,7 +16,7 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       margin: "95px 20px 20px 20px"
     },
-      [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("sm")]: {
       margin: "130px 10px 20px 10px"
     }
   },
@@ -52,8 +52,8 @@ const styles = theme => ({
       paddingLeft: "130px"
     }
   },
-    
-imageWrapper: {
+
+  imageWrapper: {
     marginLeft: "auto",
     marginRight: "auto",
     display: "block",
@@ -70,7 +70,7 @@ imageWrapper: {
       width: "95%"
     }
   },
-    relevanceInput: {
+  relevanceInput: {
     padding: "10px",
     border: "1px solid #cccccc",
     [theme.breakpoints.down("xs")]: {
@@ -87,7 +87,7 @@ imageWrapper: {
       fontSize: "13px"
     }
   },
-    productLine: {
+  productLine: {
     [theme.breakpoints.down("lg")]: {
       fontSize: "20px"
     },
@@ -98,7 +98,7 @@ imageWrapper: {
       fontSize: "14px"
     }
   },
-     dividerStyle: {
+  dividerStyle: {
     backgroundColor: "#e6e6e6",
     height: "2px",
     marginTop: "20px",
@@ -106,7 +106,7 @@ imageWrapper: {
       marginTop: "10px"
     }
   },
-    getFastForXS: {
+  getFastForXS: {
     [theme.breakpoints.down("lg")]: {
       display: "none"
     },
@@ -171,11 +171,19 @@ const rating = () => (
   </>
 );
 
-function Products({ searchResults, categoryDetails, classes, isLoading, storeData, setStoreDataToPDP, shipToStore}) {
-    
-    console.log("storeData from fsdklfjsl",storeData)
-    
-    const [mainCategory, setmainCategory] = useState();
+function Products({
+  searchResults,
+  categoryDetails,
+  classes,
+  isLoading,
+  storeData,
+  setStoreDataToPDP,
+  shipToStore
+}) {
+  alert("searchResults: ", searchResults);
+  console.log("storeData from fsdklfjsl", storeData);
+
+  const [mainCategory, setmainCategory] = useState();
   useEffect(() => {
     if (searchResults) {
       let mainCat = "";
@@ -185,14 +193,14 @@ function Products({ searchResults, categoryDetails, classes, isLoading, storeDat
       setmainCategory(mainCat);
     }
   });
-    
-    const [selectStore, setSelectStore] = useState(false);
+
+  const [selectStore, setSelectStore] = useState(false);
   const selectStoreChange = value => {
     //const storeValue = selectStore ? "" : value;
     setSelectStore(!selectStore);
   };
-    
-    useEffect(() => {
+
+  useEffect(() => {
     if (selectStore) {
       shipToStore("ship to store");
       setStoreDataToPDP(storeData);
@@ -200,7 +208,7 @@ function Products({ searchResults, categoryDetails, classes, isLoading, storeDat
       shipToStore("");
     }
   }, [selectStore]);
-    
+
   const spinner =
     searchResults.length === 0 ? (
       isLoading ? (
@@ -216,14 +224,17 @@ function Products({ searchResults, categoryDetails, classes, isLoading, storeDat
       <Grid container spacing={16}>
         {searchResults.map(product => (
           <Grid item lg={4} md={4} sm={4} xs={6} key={product.skuId}>
-            <div >
+            <div>
               <Link
                 to={`/store/product/${product.skuId}`}
                 className={classes.item}
               >
-                <div className="">  
-                  <img  className={classes.imageWrapper}
-                    src={product.images[0]} alt="mac book prop" />
+                <div className="">
+                  <img
+                    className={classes.imageWrapper}
+                    src={product.images[0]}
+                    alt="mac book prop"
+                  />
                 </div>
                 <div className="productDetail">
                   <div className="title">{product.productName}</div>
@@ -241,7 +252,7 @@ function Products({ searchResults, categoryDetails, classes, isLoading, storeDat
     );
   return (
     <div className={classes.productsComponent}>
-<div style={{ marginBottom: "30px" }}>
+      <div style={{ marginBottom: "30px" }}>
         <Typography className={classes.productLine}>
           <strong>{mainCategory}</strong>
         </Typography>
@@ -304,10 +315,9 @@ function Products({ searchResults, categoryDetails, classes, isLoading, storeDat
         </div>
       </div>
 
-
       <Grid container spacing={16}>
         <Grid item lg={3} md={3} sm={3} className={classes.sideNav}>
-{storeData ? (
+          {storeData ? (
             <div>
               <Typography style={{ fontSize: "20px", fontWeight: "bold" }}>
                 Get It Fast
@@ -341,10 +351,9 @@ function Products({ searchResults, categoryDetails, classes, isLoading, storeDat
             <Typography>FILTERS</Typography>
           </div>
 
-
           <SideNav {...categoryDetails} />
         </Grid>
-        
+
         <Grid item lg={9} md={9} sm={9}>
           {spinner}
         </Grid>
