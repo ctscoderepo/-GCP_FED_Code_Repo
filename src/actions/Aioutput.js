@@ -19,7 +19,7 @@ export default encodedImageSrc => async dispatch => {
         ]
       }
     );
-    dispatch({ type: "SEARCHRESULTSAI", payload: res.data.products });
+    dispatch({ type: "SEARCHRESULTSAI", payload: res.data.products.products });
     return Promise.resolve(res);
   } catch (err) {
     return Promise.resolve();
