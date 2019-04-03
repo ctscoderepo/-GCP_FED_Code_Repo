@@ -58,7 +58,6 @@ function SearchOutput({ airesults, classes }) {
               to={`/store/product/${product.skuId}`}
               className={classes.item}
             >
-              {" "}
               <div className="productWrapper">
                 <div className="imageWrapper">
                   <img src={product.images[0]} alt="mac book prop" />
