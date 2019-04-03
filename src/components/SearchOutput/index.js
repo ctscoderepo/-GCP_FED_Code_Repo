@@ -44,6 +44,7 @@ const styles = theme => ({
 });
 
 function SearchOutput({ airesults, classes }) {
+  alert("airesults: ", airesults);
   const spinner = !airesults ? (
     <div className={classes.spinnerDiv}>
       <h1>No products found</h1>
