@@ -52,7 +52,7 @@ const styles = theme => ({
       display: "block",
     },
     [theme.breakpoints.down("xs")]: {
-      padding:"10px"    
+      padding:"15px"    
     }
   },
   title: {
@@ -137,7 +137,7 @@ const styles = theme => ({
   },
     inputRootForXS:{
     color: "#000",
-    width: "75%"
+    width: "90%"
     },
   inputInput: {
     paddingRight: theme.spacing.unit,
@@ -477,7 +477,7 @@ NavigationMenuForXS: {
         float:"left" 
     },
     xsLogoDiv:{
-       width:"60%",
+        width:"60%",
         textAlign:"center", 
         paddingRight:"10px",
         float:"left",  
@@ -486,7 +486,10 @@ NavigationMenuForXS: {
     },
     xsCartDiv:{
        width:"85px", 
-        textAlign:"right", 
+      textAlign:"right", 
+        [theme.breakpoints.down("xs")]: {
+      marginLeft:"10px"
+    }
     },
     
     navBarForXS:{
@@ -521,7 +524,7 @@ NavigationMenuForXS: {
     },
     cameraDivForXS:{
         paddingTop:"3px",
-        marginLeft:"38px",
+        marginLeft:"30px",
         width:"auto"
     }
     
@@ -636,7 +639,7 @@ function SearchAppBar(props) {
                 <MenuIcon />
               </IconButton></div>
             <div className={classes.xsLogoDiv}><Link to="/">
-                  <img src="/assets/images/logo.png"  alt="logo" style={{width:"150px", height:"40px"}} />
+                  <img src="/assets/images/logo.png"  alt="logo" style={{width:"150px", height:"40px", marginLeft:"10px"}} />
                 </Link></div>
                <div className={classes.xsCartDiv}> 
                     <Link to="/Cart">
@@ -853,7 +856,7 @@ function SearchAppBar(props) {
             <Toolbar    className={classes.NavigationMenuForXS}>
                 <div className={classes.searchBarForXS} >
                 <form onSubmit={handleSubmit}>
-                  
+                  <div style={{display:"flex"}}>
                   <InputBase
                     placeholder="Search....."
                     classes={{
@@ -866,6 +869,7 @@ function SearchAppBar(props) {
                     <Button type="submit" className={classes.searchIconForXS}>
                     <SearchIcon />
                   </Button>
+                </div>
                 </form> 
                 <div className={classes.cameraDivForXS} ><i
                   className={`material-icons`}

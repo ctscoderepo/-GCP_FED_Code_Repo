@@ -11,10 +11,13 @@ import Divider from "@material-ui/core/Divider";
 import c1 from "../Home/images/f1.jpeg";
 import Spinner from "../helpers/Spinner";
 import ExpressCheckout from "../StripeCheckout";
+import DeleteIcon from '@material-ui/icons/Delete';
+import Tooltip from "@material-ui/core/Tooltip";
 import "./index.css";
 
 const styles = theme => ({
   root: {
+      width:"100%",
     flexGrow: 1,
     marginTop: "150px",
       [theme.breakpoints.down("xs")]: {
@@ -68,13 +71,31 @@ const styles = theme => ({
     outline: "none",
     color: "#fff",
     border: "none",
-    fontWeight: "400",
+    fontWeight: "bold",
     fill: "#000",
     "&:hover": {
       color: "#fff",
       backgroundColor: "#009900",
     }
   },
+  removeItemsBtn: {
+    textTransform: "uppercase",
+    backgroundColor: "#008000",
+    borderRadius: "5px",
+    width: "100px",
+    margin: "10px 0",
+    fontSize: "12px",
+    boxShadow: "none",
+    outline: "none",
+    color: "#fff",
+    border: "none",
+    fontWeight: "bold",
+    fill: "#000",
+    "&:hover": {
+      color: "#fff",
+      backgroundColor: "#009900",
+    }
+  },    
   btnGuestCheckout: {
     textTransform: "uppercase",
     backgroundColor: "#008000",
@@ -311,7 +332,69 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       display: "none"
     }
-  }
+  },
+    qtyBtnPlus: {
+    background: "#e6e6e6",
+    border: "1px solid gray",
+    fontSize: "20px",
+        height:"30px",
+    padding: "0px 10px 0px 10px",
+    borderRadius: "2px",
+    "&:hover": {
+      cursor: "pointer"
+    },
+    [theme.breakpoints.down("xs")]: {
+      height:"25px",
+    }
+  },
+  qtyBtnMinus: {
+    background: "#e6e6e6",
+    border: "1px solid gray",
+    fontSize: "20px",
+    padding: "0px 13px 0px 13px",
+        height:"30px",
+    borderRadius: "2px",
+    "&:hover": {
+      cursor: "pointer"
+    },
+    [theme.breakpoints.down("lg")]: {
+      marginLeft:"35px"
+    },
+      [theme.breakpoints.down("sm")]: {
+      marginLeft:"0px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "0px 12px 8px 12px",
+         height:"25px",
+    }
+  },
+    cartImages:{
+        width:"90%",
+        height:"200px",
+        [theme.breakpoints.down("lg")]: {
+          height:"200px",
+    },
+        [theme.breakpoints.down("sm")]: {
+         height:"170px",
+    },
+    },
+     removeBtnDiv:{
+         textAlign:"right",
+         marginTop:"10px",
+         [theme.breakpoints.down("sm")]: {
+      marginTop:"10px",
+    },
+     },
+    lightTooltip: {
+    backgroundColor:"#4d4d4d",
+    color: '#FFF',
+    boxShadow: theme.shadows[0],
+    fontSize:13,
+    border:"1px solid black",
+   maxWidth: 400,
+  },
+    
+    
 });
 
 function CartComponent(props) {
@@ -356,63 +439,74 @@ function CartComponent(props) {
         <Grid item lg={3} sm={3} xs={5}>
           <Grid container spacing={8}>
             <Grid item lg={12} sm={12} xs={12}>
-              <div className="imageWrapper1">
-                <img src={item.imageUrl} alt="mac book prop"   />
+              <div>
+                <img src={item.imageUrl} alt="mac book prop" className={classes.cartImages}  />
               </div>
-              <div className="productDes">{item.productDesciption}</div>
+             
             </Grid>
           </Grid>
         </Grid>
-        <Grid item lg={4} sm={4} xs={3}>
+        <Grid lg={9} sm={9} xs={5} >    
+        <Grid container>
+        <Grid item lg={12} sm={12}> 
+        <Grid container>                        
+        <Grid item lg={6} sm={6}>
           <div className={classes.shipping}>
             Ship to Home FREE Estimated Arrival: <br />
             {item.fullfillmentType}
           </div>
         </Grid>
-        <Grid
-          item
-          lg={3}
-          sm={3}
-          xs={2}
+        <Grid   item lg={4} sm={3}  xs={2}
           display="flex"
           className={classes.qtyCol}
         >
-          <button
-            className="qtyBtn"
-            onClick={() => removeQuantity([item.id, item.quantity])}
-          >
-            -
-          </button>
-          <span className="qty">{item.quantity}</span>
-          <button
-            className="qtyBtn"
-            onClick={() => addQuantity([item.id, item.quantity])}
-          >
-            +
-          </button>
+                                
+         <div style={{ marginTop: "10px", display:"flex" }}>
+                  <button
+                    className={classes.qtyBtnMinus}
+                   onClick={() => removeQuantity([item.id, item.quantity])}
+                  >
+                    -
+                  </button>
+                  <span style={{padding:"10px"}}>{item.quantity}</span>
+                  <button className={classes.qtyBtnPlus}  onClick={() => addQuantity([item.id, item.quantity])}>
+                    +
+                  </button>
+                </div>                        
+                                
+         
         </Grid>
-        <Grid item lg={2} sm={2} xs={2} style={{ textAlign: "right" }}>
-          ${item.price}.00
+        <Grid item lg={2} sm={3}  style={{ textAlign: "right" }}>
+           <div style={{marginTop:"10px"}}> ${item.price}.00</div>
         </Grid>
-        <Grid
-          item
-          lg={12}
-          sm={12}
-          xs={12}
-          style={{ textAlign: "right", marginBottom: "10px" }}
-        >
-          
-          <Link
-            onClick={() => removeItems(item.id)}
-            className={classes.removeItem}
-          >
-            Remove
-          </Link>
+         </Grid>
+          <Grid item lg={12} sm={12}>              
+               <div style={{marginLeft:"10px", fontSize:"14px", marginTop:"10px"}}>
+                   <strong>Description :</strong>
+                   <div style={{marginTop:"5px"}}>                       
+                    <Tooltip title={item.productDesciption} classes={{ tooltip: classes.lightTooltip }}>
+                       <div>{item.productDesciption ? (item.productDesciption.length>150?(item.productDesciption.substr(0,150)+"... see more"):item.productDesciption) : ""}</div>
+                    </Tooltip>
+
+            </div>
+                </div>
+              </Grid> 
+            <Grid item lg={12} sm={12}> 
+            <div className={classes.removeBtnDiv}>
+            <Button className={classes.removeItemsBtn}
+             onClick={() => removeItems(item.id)}
+            ><DeleteIcon style={{fill:"white", height:"20px"}} />Remove</Button>
+            </div>
+            </Grid>
+            </Grid>
+        </Grid>
+     </Grid>
+        <Grid  item lg={12} sm={12} xs={12}style={{ textAlign: "right",marginBottom:"5px"}} >
         <Divider   variant="left"
             style={{
               backgroundColor: "#bfbfbf", height:"2px",
               width: "100%",
-              marginTop: "10px"
+              marginTop: "0px"
             }}
           />
         </Grid>
@@ -446,28 +540,21 @@ function CartComponent(props) {
               <div style={{ fontSize: "13px" }}>{item.fullfillmentType}</div>
             </Grid>
             <Grid item xs={4}>
-              <Typography style={{ marginTop: "10px", textAlign: "center" }}>
+              <Typography style={{ marginTop: "10px", marginLeft:"20px" }}>
                 <strong>Quantity</strong>
               </Typography>
-              <div style={{ textAlign: "center", paddingTop: "5px" }}>
-                <button
-                  className="qtyBtn"
-                  onClick={
-                    item.quantity > 1
-                      ? () => removeQuantity([item.id, item.quantity])
-                      : null
-                  }
-                >
-                  -
-                </button>
-                <span className="qty">{item.quantity}</span>
-                <button
-                  className="qtyBtn"
-                  onClick={() => addQuantity([item.id, item.quantity])}
-                >
-                  +
-                </button>
-              </div>
+             <div style={{ marginTop: "10px", display:"flex" }}>
+                  <button
+                    className={classes.qtyBtnMinus}
+                   onClick={() => removeQuantity([item.id, item.quantity])}
+                  >
+                    -
+                  </button>
+                  <span style={{padding:"5px 10px 5px 10px"}}>{item.quantity}</span>
+                  <button className={classes.qtyBtnPlus}  onClick={() => addQuantity([item.id, item.quantity])}>
+                    +
+                  </button>
+                </div>
             </Grid>
             <Grid item xs={3}>
               <Typography
@@ -497,21 +584,17 @@ function CartComponent(props) {
           xs={12}
           style={{
             textAlign: "right",
-            marginTop: "15px",
-            marginBottom: "10px"
+            marginTop: "5px",
+            marginBottom: "3px"
           }}
         >
-          <Link
-            onClick={() => removeItems(item.id)}
-            className={classes.removeItem}
-          >
-            Remove
-          </Link>
+          <Button className={classes.removeItemsBtn}
+             onClick={() => removeItems(item.id)}
+            ><DeleteIcon style={{fill:"white", height:"20px"}} />Remove</Button>
           <Divider   variant="left"
             style={{
               backgroundColor: "#bfbfbf",
               width: "100%",
-              marginTop: "10px"
             }}
           />
         </Grid>
@@ -630,7 +713,7 @@ function CartComponent(props) {
                 </Grid>
                 <Divider
                   className={classes.dividerDisplay}
-                  style={{ backgroundColor: "#bfbfbf", marginTop: "10px" }}
+                  style={{ backgroundColor: "#bfbfbf", marginTop: "10px", height:"2px" }}
                 />
               </Grid>
               <Grid

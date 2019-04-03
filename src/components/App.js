@@ -7,10 +7,10 @@ import routes from "../routes";
 
 function App(props) {
   return (
-    <div className="customContainer">
       <BrowserRouter>
         <>
           {props.header.showHeader && <Header />}
+    <div className="customContainer">
           <Switch>
             {routes.map(route => (
               <Route
@@ -21,10 +21,10 @@ function App(props) {
               />
             ))}
           </Switch>
+    </div>
           {props.header.showFooter && <Footer />}
         </>
       </BrowserRouter>
-    </div>
   );
 }
 

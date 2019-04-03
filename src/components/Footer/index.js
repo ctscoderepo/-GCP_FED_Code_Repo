@@ -41,7 +41,8 @@ const styles = theme => ({
     }
   },
   footerComponentContainer: {
-    background: "#4d4d4d",
+   width:"92%",
+      margin:"0 auto",
     padding: "20px",
     [theme.breakpoints.down("xs")]: {
       padding: "25px 3px 0px 3px"
@@ -169,7 +170,11 @@ const styles = theme => ({
       backgroundColor: "#008000",
       color: "#fff"
     }
-  }
+  },
+    footerMainDiv:{
+         background: "#4d4d4d",
+        width:"100%",
+    }
 });
 
 const FooterComoponent = props => {
@@ -201,6 +206,7 @@ const FooterComoponent = props => {
 
   return (
     <>
+      <div className={classes.footerMainDiv}>
       <Grid container className={classes.footerComponentContainer}>
         <Grid item lg={3} sm={3} xs={12}>
           <div className={classes.demoView}>
@@ -417,6 +423,7 @@ const FooterComoponent = props => {
           </Grid>
         </Grid>
       </Grid>
+</div>
     </>
   );
 };

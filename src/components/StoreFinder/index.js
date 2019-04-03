@@ -14,14 +14,12 @@ import Spinner from "../helpers/Spinner";
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
     marginTop: "130px",
     [theme.breakpoints.down("sm")]: {
       marginTop: "130px"
     },
     [theme.breakpoints.down("xs")]: {
-      marginTop: "60px",
-      marginBottom:"50px"    
+      margin: "130px 0px 50px 0px"
     }
   },
   heading: {
@@ -151,9 +149,14 @@ const styles = theme => ({
     borderRadius: "5px",
     marginTop: "10px",
     margin: "10px",
+    boxSizing:"border-box",  
     "&:hover": {
       backgroundColor: "#bfbfbf",
       cursor: "pointer"
+    },
+      
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "10px",
     }
   },
 
@@ -166,12 +169,12 @@ const styles = theme => ({
     marginLeft: "40px"
   },
   mapDiv: {
-    width: "98%",
-    height: "300px",
-    margin: "10px",
+    width: "99%",
+    height: "400px",
     border: "1px solid #bfbfbf",
       [theme.breakpoints.down("xs")]: {
-      width: "95%",
+      width: "100%",
+          height: "300px",
     }
   },
   deskTopTabView: {
@@ -207,7 +210,7 @@ const styles = theme => ({
       backgroundColor: "#009900"
     },
     [theme.breakpoints.down("sm")]: {
-      width: "50%"
+      width: "70%"
     }
   },
   select: {
