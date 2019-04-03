@@ -19,6 +19,7 @@ export default encodedImageSrc => async dispatch => {
         ]
       }
     );
+    alert("res: ", res.data.payload);
     dispatch({
       type: "SEARCHRESULTSAI",
       payload: res.data.products.products
