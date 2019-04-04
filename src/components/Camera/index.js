@@ -68,13 +68,27 @@ class CameraComponent extends React.Component {
       <div>
         <div>
           <div className="takePhotoBtnDiv">
-                <button className="takePhotoBtn"  onClick={() => {this.takePhoto();}}>Take Photo</button>
+            <button
+              className="takePhotoBtn"
+              onClick={() => {
+                this.takePhoto();
+              }}
+            >
+              Take Photo
+            </button>
           </div>
-          <div style={{textAlign:"right", padding:"5px"}}>
-            <button className="closeCameraBtn" onClick={() => {this.stopCamera();}}>x</button>
+          <div style={{ textAlign: "right", padding: "5px" }}>
+            <button
+              className="closeCameraBtn"
+              onClick={() => {
+                this.stopCamera();
+              }}
+            >
+              x
+            </button>
           </div>
         </div>
-        <video ref={this.videoRef} autoPlay={false} />
+        <video ref={this.videoRef} autoPlay={true} />
         <img alt="imgCamera" src={this.state.dataUri} />
       </div>
     );
