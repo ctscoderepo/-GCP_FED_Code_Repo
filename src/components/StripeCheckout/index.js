@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { post } from "../../actions/BaseApi";
 import { withRouter } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
 import Button from "@material-ui/core/Button";
@@ -38,15 +39,15 @@ const CURRENCY = "USD";
 
 const fromDollarToCent = amount => amount * 100;
 
-axios.interceptors.request.use(request => {
-  console.log("Starting Request", request);
-  return request;
-});
+// axios.interceptors.request.use(request => {
+//   console.log("Starting Request", request);
+//   return request;
+// });
 
-axios.interceptors.response.use(response => {
-  console.log("Received Response:", response);
-  return response;
-});
+// axios.interceptors.response.use(response => {
+//   console.log("Received Response:", response);
+//   return response;
+// });
 
 const Checkout = props => {
   const {
@@ -100,23 +101,22 @@ const Checkout = props => {
   };
 
   const onToken = (amount, description) => token =>
-    axios
-      .post(
-        PAYMENT_SERVER_URL,
-        {
-          description,
-          source: token.id,
-          currency: CURRENCY,
-          amount: fromDollarToCent(amount),
-          receipt_email: token.email
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-          }
-        }
-      )
+    post(
+      PAYMENT_SERVER_URL,
+      {
+        description,
+        source: token.id,
+        currency: CURRENCY,
+        amount: fromDollarToCent(amount),
+        receipt_email: token.email
+      } //,
+      // {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "Access-Control-Allow-Origin": "*"
+      //   }
+      // }
+    )
       .then(successPayment)
       .catch(errorPayment);
 
