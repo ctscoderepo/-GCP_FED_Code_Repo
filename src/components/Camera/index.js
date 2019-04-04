@@ -132,6 +132,7 @@ class CameraComponent extends Component {
 
   onCameraStop() {
     console.log("onCameraStop");
+    this.props.toggleDialog();
   }
 
   render() {
