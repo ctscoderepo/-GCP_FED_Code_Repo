@@ -383,7 +383,7 @@ const styles = theme => ({
       margin: "10px"
     },
     [theme.breakpoints.down("xs")]: {
-      margin: "10px"
+      margin: "0px"
     }
   },
   placeOrderBtnOrdSummary: {
@@ -433,7 +433,7 @@ const styles = theme => ({
   addressGrid: {
     marginRight: "20px",
     [theme.breakpoints.down("xs")]: {
-      marginRight: "00px"
+      marginRight: "0px"
     }
   },
   checkoutImgs: {

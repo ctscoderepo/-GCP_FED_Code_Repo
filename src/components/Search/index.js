@@ -16,8 +16,8 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       margin: "95px 20px 20px 20px"
     },
-    [theme.breakpoints.down("sm")]: {
-      margin: "130px 10px 20px 10px"
+    [theme.breakpoints.down("xs")]: {
+      margin: "130px 0px 20px 0px"
     }
   },
   categories: {

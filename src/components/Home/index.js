@@ -162,7 +162,7 @@ const HomeComponent = props => {
           marginLeft: "30px",
           height: "30px",
           paddingTop: "10px",
-          zIndex: "1000",
+          zIndex: "100",
           top: "40%"
         }}
         onClick={onClick}

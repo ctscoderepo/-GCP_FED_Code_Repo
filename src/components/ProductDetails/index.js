@@ -65,29 +65,32 @@ const styles = theme => ({
   dividerStyle: {
     backgroundColor: "#e6e6e6",
     height: "2px",
-    marginTop: "20px"
+    marginTop: "10px"
   },
   qtyBtnPlus: {
     background: "#e6e6e6",
     border: "1px solid gray",
     fontSize: "20px",
-    padding: "8px 10px 8px 10px",
+    padding: "6px 11px 6px 11px",
     borderRadius: "2px",
     "&:hover": {
       cursor: "pointer"
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "6px 12px 6px 12px"
     }
   },
   qtyBtnMinus: {
     background: "#e6e6e6",
     border: "1px solid gray",
     fontSize: "20px",
-    padding: "8px 14px 8px 14px",
+    padding: "6px 14px 6px 14px",
     borderRadius: "2px",
     "&:hover": {
       cursor: "pointer"
     },
     [theme.breakpoints.down("xs")]: {
-      padding: "8px 12px 8px 12px"
+     padding: "6px 13px 6px 13px"
     }
   },
   productLine: {
@@ -135,7 +138,16 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       fontSize: "12px"
     }
-  }
+  },
+    productsDetailsComponent: {
+    margin: "150px 0 0px 0",
+    [theme.breakpoints.down("sm")]: {
+      margin: "95px 20px 20px 20px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      margin: "130px 0px 0px 0px"
+    }
+  },
 });
 
 const ProductDetailComponent = props => {
@@ -210,7 +222,7 @@ const ProductDetailComponent = props => {
   console.log(product);
 
   return (
-    <div className="productDetailComponent">
+    <div className={classes.productsDetailsComponent}>
       {product ? (
         <Grid container style={{ marginTop: "130px" }}>
           <Grid item lg={12} sm={12} xs={12}>
@@ -324,8 +336,8 @@ const ProductDetailComponent = props => {
             <div className={classes.stockQnty}>
               <strong>Quantity</strong>
             </div>
-            <Grid container spacing={8} style={{ marginBottom: "50px" }}>
-              <Grid item lg={4} sm={4} xs={12}>
+            <Grid container spacing={8} style={{ marginBottom: "10px" }}>
+              <Grid item lg={4} sm={4} xs={4}>
                 <div style={{ marginTop: "10px" }}>
                   <button
                     className={classes.qtyBtnMinus}
@@ -339,7 +351,7 @@ const ProductDetailComponent = props => {
                   </button>
                 </div>
               </Grid>
-              <Grid item lg={4} sm={8} xs={12}>
+              <Grid item lg={5} sm={8} xs={8}>
                 {shipToStoreData ? (
                   <Button
                     variant="contained"
