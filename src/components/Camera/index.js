@@ -86,7 +86,7 @@ class CameraComponent extends React.Component {
             </button>
           </div>
         </div>
-        <video ref={this.videoRef} autoPlay={true} />
+        <video ref={this.videoRef} autoPlay={false} />
         <img alt="imgCamera" src={this.state.dataUri} />
       </div>
     );
