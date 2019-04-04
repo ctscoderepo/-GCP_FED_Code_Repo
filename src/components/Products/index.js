@@ -14,10 +14,10 @@ const styles = theme => ({
   productsComponent: {
     margin: "150px 0 20px 0",
     [theme.breakpoints.down("sm")]: {
-      margin: "140px 20px 20px 20px"
+      margin: "140px 0px 20px 0px"
     },
     [theme.breakpoints.down("xs")]: {
-      margin: "130px 10px 20px 10px"
+      margin: "130px 0px 20px 0px"
     }
   },
   categories: {
@@ -56,8 +56,9 @@ const styles = theme => ({
   spinnerDiv: {
     textAlign: "center",
     marginTop: "5%",
+     
     [theme.breakpoints.down("xs")]: {
-      marginLeft: "120px"
+      marginLeft: "145px"
     }
   },
   imageWrapper: {

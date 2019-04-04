@@ -330,13 +330,16 @@ NavigationMenuForXS: {
     padding: "0 10px"
   },
   cameraIconMobile: {
-    display: "none",
+    display: "block",
+      [theme.breakpoints.down("sm")]: {
+    display: "block",
+    },
     [theme.breakpoints.down("xs")]: {
       display: "flex"
     }
   },
   iconStyles: {
-    marginTop: "-12px",
+    marginTop: "0px",
       [theme.breakpoints.down("md")]: {
       display: "block"
     },
@@ -358,7 +361,7 @@ NavigationMenuForXS: {
     textTransform: "uppercase",
     color: "white",
     fontSize: "12px",
-    marginTop: "3px",
+    marginTop: "15px",
     textAlign: "right",
     width: "auto",
     float: "left",
@@ -370,7 +373,8 @@ NavigationMenuForXS: {
     },
     [theme.breakpoints.down("xs")]: {
       color: "#003d99",
-      fontWeight: "bold"
+      fontWeight: "bold",
+         marginTop: "0px",
     }
   },
   svgArrowDown: {
@@ -386,9 +390,8 @@ NavigationMenuForXS: {
   },
  accIconDiv: {  
     paddingTop: "15px",
-    textAlign: "right",
     [theme.breakpoints.down("lg")]: {
-      display:"flex",  
+        
     },
      [theme.breakpoints.down("md")]: {
       float:"right"
@@ -487,8 +490,8 @@ NavigationMenuForXS: {
     xsCartDiv:{
        width:"85px", 
       textAlign:"right", 
-        [theme.breakpoints.down("xs")]: {
-      marginLeft:"10px"
+    [theme.breakpoints.down("xs")]: {
+      marginRight:"-8px"
     }
     },
     
@@ -504,10 +507,9 @@ NavigationMenuForXS: {
     }
     },
     dividerDiv:{
-        borderRight:"1px solid white",
-        paddingLeft:"15px",
-        marginBottom:"10px",
-        height:"22px",
+        borderRight:"2px solid white", 
+        height:"20px", 
+        marginTop:"12px" ,
          [theme.breakpoints.down("md")]: {
       display: "block"
     },
@@ -696,19 +698,17 @@ function SearchAppBar(props) {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
+                    width="28   "
+                    height="22"
+                    viewBox="0 0 20 20"
+                    fill="#000099"
                   >
                     <circle cx="12" cy="12" r="3.2" />
                     <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
                   </svg>
                   {cameraOpen && (
                     <Dialog fullScreen open={cameraOpen}>
-                    <Camera
-                      open={cameraOpen}
-                      toggleDialog={() => setCameraOpen(false)}
-                    />
+                    <Camera open={cameraOpen} toggleDialog={() => setCameraOpen(false)} />
                     </Dialog>
                   )}
                 </i>
@@ -732,7 +732,7 @@ function SearchAppBar(props) {
                   }}
                 >
                   <div className={classes.accIconDiv} >
-                    <i
+                    <i style={{width:"auto", float:"left"}}
                       className={`material-icons ${classes.signinForXS}`}
                       onClick={handleClick}
                     >
@@ -871,9 +871,8 @@ function SearchAppBar(props) {
                   </Button>
                 </div>
                 </form> 
-                <div className={classes.cameraDivForXS} ><i
-                  className={`material-icons`}
-                  onClick={() => setCameraOpen(true)}
+              <div className={classes.cameraDivForXS} >
+                <i className={`material-icons`}  onClick={() => setCameraOpen(true)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -885,11 +884,10 @@ function SearchAppBar(props) {
                     <circle cx="12" cy="12" r="3.2" />
                     <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
                   </svg>
-                  {cameraOpen && (
-                    <Camera
-                      open={cameraOpen}
-                      toggleDialog={() => setCameraOpen(false)}
-                    />
+                    {cameraOpen && (
+                    <Dialog fullScreen open={cameraOpen}>
+                    <Camera open={cameraOpen} toggleDialog={() => setCameraOpen(false)} />
+                    </Dialog>
                   )}
                 </i></div>
                 </div>
@@ -898,24 +896,25 @@ function SearchAppBar(props) {
               <Toolbar className={classes.NavigationMenu}>
                 <Grid container className={classes.toolBar}>
                   <Grid item lg={12} sm={12} xs={12}>
-                    <Grid container>
-                      <Grid item lg={3} md={2} sm={3} >
+                    <Grid container spacing={24}>
+                      <Grid item lg={3} md={2} sm={2} >
                         <div style={{ padding: "10px 0px 0px 0px" }}>
                           <Location storeData={storeData} />
                         </div>
                       </Grid>
-                      <Grid item lg={7} md={8} sm={7}>
+                      <Grid item lg={7} md={8} sm={8}>
                         <NavigationMenu />
                       </Grid>
                       <Grid item lg={2} md={2} sm={2}>
-                        <div className={classes.accIconDiv}>
+                        <div style={{float:"right"}}>
+                          <div style={{width:"auto", margin:"0px", display:"flex"}}  >
                           <Typography
                             className={classes.signLabel}
                             style={{ textAlign: "center" }}
                           >
                             {userFirstName ? userFirstName : ""}
                           </Typography>
-                          <i
+                          <i style={{marginTop:"10px",padding:"2px 10px 0px 0px", }}
                             className={`material-icons ${classes.signin}`}
                             onClick={handleClick}
                           >
@@ -968,12 +967,13 @@ function SearchAppBar(props) {
                               </MenuItem>
                             </Menu>
                           )}
-                            <div className={classes.dividerDiv} ></div>
-                          <Link to="/Cart" className={classes.iconStyles} >
+                            <div className={classes.dividerDiv} />
+                            <Link to="/Cart" className={classes.iconStyles} >
                             <CartBadge badgeColor="true"
                               items={totalQuantity ? totalQuantity : ""}
                             />{" "}
                           </Link>
+                        </div>
                         </div>
                       </Grid>
                     </Grid>

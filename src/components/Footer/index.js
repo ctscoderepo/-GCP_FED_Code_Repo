@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -142,21 +142,27 @@ const styles = theme => ({
     fontSize: "14px"
   },
   InputText: {
-    width: "200px",
-    height: "35px",
+    width: "188px",
+    height: "20px",
     marginTop: "0px",
     margin: "0px 0px 10px 0px",
-    border: "1px solid #fff",
+    borderColor:"#fff",
+    backgroundColor:"#4d4d4d",
+    padding:"5px",  
     color: "#fff",
+    fontSize:"14px",
+      fontWeight:"bold",
+      border:"1px solid white", 
     "&:hover": {
       cursor: "pointer",
-      border: "1px solid #fff",
       borderRadius: "0px",
-      color: "white"
+      color: "white",
+      border:"1px solid white",     
     },
     [theme.breakpoints.down("xs")]: {
       marginLeft: "5px",
-      fontSize: "12px"
+      fontSize: "12px",
+      width: "164px",    
     }
   },
   subscribeBtn: {
@@ -169,12 +175,18 @@ const styles = theme => ({
     "&:hover": {
       backgroundColor: "#008000",
       color: "#fff"
+    },
+      [theme.breakpoints.down("xs")]: {
+      width: "100px",    
     }
   },
     footerMainDiv:{
          background: "#4d4d4d",
         width:"100%",
-    }
+    },
+     fieldInput:{
+    borderColor:"white"
+}
 });
 
 const FooterComoponent = props => {
@@ -204,6 +216,13 @@ const FooterComoponent = props => {
     { name: "Solution Partners" }
   ];
 
+    const [subscribe, setSubscribe]=useState("");
+    const handleSubscribe=(value)=>{
+        setSubscribe(subscribe);
+    }
+    
+    const inputStyle = { WebkitBoxShadow: "0 0 0 1000px #4d4d4d inset"};
+    
   return (
     <>
       <div className={classes.footerMainDiv}>
@@ -318,14 +337,11 @@ const FooterComoponent = props => {
             </div>
             <div style={{ display: "flex" }}>
               <div>
-                <TextField
-                  id="outlined-name"
-                  label=""
-                  className={classes.InputText}
-                  margin="normal"
-                  variant="outlined"
-                  placeholder="ENTER YOUR EMAIL"
-                  value=""
+               <input type="text" 
+                className={classes.InputText}
+                value={subscribe.subscribe}
+                onChange={e =>handleSubscribe(e.target.value)}
+                placeholder="ENTER YOUR EMAIL"
                 />
               </div>
               <div>
@@ -364,15 +380,12 @@ const FooterComoponent = props => {
 
               <div style={{ display: "flex" }}>
                 <div>
-                  <TextField
-                    id="outlined-name"
-                    label=""
-                    className={classes.InputText}
-                    margin="normal"
-                    variant="outlined"
-                    placeholder="ENTER YOUR EMAIL"
-                    value=""
-                  />
+                  <input type="text" 
+                className={classes.InputText}
+                value={subscribe.subscribe}
+                onChange={e =>handleSubscribe(e.target.value)}
+                placeholder="ENTER YOUR EMAIL"
+                />
                 </div>
                 <div>
                   <Button className={classes.subscribeBtn}>Subscribe</Button>
