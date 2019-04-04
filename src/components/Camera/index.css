@@ -1,27 +1,36 @@
 .takePhotoBtnDiv{
     width:50%;
     float:left;
-}
+    padding:5px;
+},
 .closeCamBtnDiv{
-    text-align:right;
+    float: right;
+    padding: 50px;
 }
-.closeCameraBtn:{
+.closeCameraBtn{
     padding: 3px;
     background-color:#fff;
-    border-radius: 2px;
-    border:3px solid red;
+    border-radius: 3px;
+    border:2px solid red;
     color: red;
     font-weight: bold;
     width:30px;
-    font-size: 18px
+    font-size: 14px,
+        
 }
 .takePhotoBtn{
     padding: 3px;
     background-color:#fff;
-    border-radius: 2px;
-    border:3px solid #008000;
+    border-radius: 3px;
+    border:2px solid #008000;
     color: #008000;
     font-weight: bold;
-    width:30px;
-    font-size: 16px
+    font-size: 14px,
+}
+.camera-icon{
+    display:flex;
+}
+.close-photo{
+    flex-grow:1;
+    flex-flow: wrap-reverse;
 }

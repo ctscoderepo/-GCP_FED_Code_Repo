@@ -1,5 +1,4 @@
 export default (state = { storeList: [] }, action) => {
-  console.log("Store reducer",action.payload);
 switch (action.type) {
     case "ISLOADING":
     return{...state, isLoading:true}

@@ -66,11 +66,11 @@ class CameraComponent extends React.Component {
   render() {
     return (
       <div>
-        <div className="">
+        <div>
           <div className="takePhotoBtnDiv">
                 <button className="takePhotoBtn"  onClick={() => {this.takePhoto();}}>Take Photo</button>
           </div>
-          <div className="closeCamBtnDiv">
+          <div style={{textAlign:"right", padding:"5px"}}>
             <button className="closeCameraBtn" onClick={() => {this.stopCamera();}}>x</button>
           </div>
         </div>
