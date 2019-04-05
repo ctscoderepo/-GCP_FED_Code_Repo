@@ -2,6 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Spinner from "../helpers/Spinner";
 
 const styles = theme => ({
   productsComponent: {
@@ -44,38 +45,47 @@ const styles = theme => ({
   }
 });
 
-function SearchOutput({ airesults, classes }) {
-  const spinner = !airesults ? (
-    <div className={classes.spinnerDiv}>
-      <h1>No products found</h1>
-    </div>
-  ) : (
-    <Grid container spacing={16}>
-      {airesults.map(product => (
-        <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
-          <div>
-            <Link
-              to={`/store/product/${product.skuId}`}
-              className={classes.item}
-            >
-              <div className="productWrapper">
-                <div className="imageWrapper">
-                  <img src={product.images[0]} alt="mac book prop" />
-                </div>
-                <div className="productDetail">
-                  <div className="title">{product.productName}</div>
-                  <div className="price">
-                    {product.currencyCode === "USD" && "$"}
-                    <span>{product.price}</span>
+function SearchOutput({ airesults, classes, isLoading }) {
+  // console.log("airesults",airesults);
+
+  const spinner =
+    (!airesults || (airesults && airesults.length === 0)) ? (
+      isLoading ? (
+        <div className={classes.spinnerDiv}>
+          <Spinner />
+        </div>
+      ) : (
+        <div className={classes.spinnerDiv}>
+          <h1>No products found</h1>
+        </div>
+      )
+    ) : (
+      <Grid container spacing={16}>
+        {airesults.map(product => (
+          <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
+            <div>
+              <Link
+                to={`/store/product/${product.skuId}`}
+                className={classes.item}
+              >
+                <div className="productWrapper">
+                  <div className="imageWrapper">
+                    <img src={product.images[0]} alt="mac book prop" />
+                  </div>
+                  <div className="productDetail">
+                    <div className="title">{product.productName}</div>
+                    <div className="price">
+                      {product.currencyCode === "USD" && "$"}
+                      <span>{product.price}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          </div>
-        </Grid>
-      ))}
-    </Grid>
-  );
+              </Link>
+            </div>
+          </Grid>
+        ))}
+      </Grid>
+    );
   return (
     <div className={classes.productsComponent}>
       <Grid container spacing={16}>

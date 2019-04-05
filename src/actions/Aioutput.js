@@ -1,5 +1,6 @@
 import axios from "axios";
 export default encodedImageSrc => async dispatch => {
+     dispatch({type:"ISLOADING"});
   const imgSrc = encodedImageSrc.replace("data:image/png;base64,", "");
   try {
     const res = await axios.post(

@@ -137,7 +137,7 @@ const styles = theme => ({
   },
     inputRootForXS:{
     color: "#000",
-    width: "90%"
+    width: "100%"
     },
   inputInput: {
     paddingRight: theme.spacing.unit,
@@ -521,13 +521,13 @@ NavigationMenuForXS: {
     searchBarForXS:{
         marginTop:"-10px",
         padding:"10px",
-        marginLeft:"0px", 
+        marginLeft:"0px",
         display:"flex"
     },
     cameraDivForXS:{
         paddingTop:"3px",
-        marginLeft:"30px",
-        width:"auto"
+        marginLeft:"10px",
+        width:"auto",
     }
     
 });
@@ -855,7 +855,7 @@ function SearchAppBar(props) {
             <div className={classes.navBarForXS}>
             <Toolbar    className={classes.NavigationMenuForXS}>
                 <div className={classes.searchBarForXS} >
-                <form onSubmit={handleSubmit}>
+                <div style={{width:"90%"}}><form onSubmit={handleSubmit}>
                   <div style={{display:"flex"}}>
                   <InputBase
                     placeholder="Search....."
@@ -870,7 +870,7 @@ function SearchAppBar(props) {
                     <SearchIcon />
                   </Button>
                 </div>
-                </form> 
+                </form> </div>
               <div className={classes.cameraDivForXS} >
                 <i className={`material-icons`}  onClick={() => setCameraOpen(true)}
                 >

@@ -1,11 +1,12 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import SearchOutputComponent from '../../components/SearchOutput';
+import React from "react";
+import { connect } from "react-redux";
+import SearchOutputComponent from "../../components/SearchOutput";
 
-function SearchOutput({airesults}){
-    return(
-        <SearchOutputComponent airesults={airesults} />
-    ) 
+function SearchOutput({ airesults, isLoading }) {
+  return <SearchOutputComponent airesults={airesults} isLoading={isLoading} />;
 }
 
-export default connect(({airesults})=> ({airesults}))(SearchOutput)
+export default connect(({ searchOutput }) => ({
+  airesults: searchOutput.airesults,
+  isLoading: searchOutput.isLoading
+}))(SearchOutput);

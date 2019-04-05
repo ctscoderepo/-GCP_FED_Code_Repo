@@ -379,6 +379,7 @@ const styles = theme => ({
   },
   orderSummarySection1: {
     margin: "30px",
+    padding:"5px",
     [theme.breakpoints.down("sm")]: {
       margin: "10px"
     },
@@ -962,7 +963,7 @@ const AuthUserCheckout = props => {
                                 </RadioGroup>
                               </FormControl>
                             </div>
-                            <div style={{ marginTop: "10px", width: "95%" }}>
+                            <div style={{ marginTop: "10px", width: "98%" }}>
                               <NumberFormat
                                 placeholder="Enter Card Number"
                                 onChange={e => handleCardNum(e.target.value)}
