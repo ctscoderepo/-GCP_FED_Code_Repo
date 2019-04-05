@@ -14,12 +14,13 @@ import Spinner from "../helpers/Spinner";
 
 const styles = theme => ({
   root: {
-    marginTop: "130px",
+    marginTop: "130px 0px 0px 0px",
     [theme.breakpoints.down("sm")]: {
       marginTop: "130px"
     },
     [theme.breakpoints.down("xs")]: {
-      margin: "130px 0px 50px 0px"
+      margin: "130px 0px 50px 0px",
+      padding:"0px"    
     }
   },
   heading: {
@@ -148,7 +149,6 @@ const styles = theme => ({
     border: "1px solid #bfbfbf",
     borderRadius: "5px",
     marginTop: "10px",
-    margin: "10px",
     boxSizing:"border-box",  
     "&:hover": {
       backgroundColor: "#bfbfbf",
@@ -169,12 +169,14 @@ const styles = theme => ({
     marginLeft: "40px"
   },
   mapDiv: {
-    width: "99%",
+    width: "98%",
     height: "400px",
     border: "1px solid #bfbfbf",
-      [theme.breakpoints.down("xs")]: {
+      boxSizing:"border-box",
+    [theme.breakpoints.down("xs")]: {
       width: "100%",
-          height: "300px",
+      height: "300px",
+        boxSizing:"border-box",
     }
   },
   deskTopTabView: {
@@ -374,7 +376,7 @@ const StoreFinderComponent = props => {
   return (
     <>
       <div className={classes.root}>
-        <div>
+     
           <Grid container>
             <Grid item lg={12} sm={12} xs={12}>
               <Grid container className={classes.storecontainer}>
@@ -484,10 +486,7 @@ const StoreFinderComponent = props => {
             </Grid>
           </Grid>
           <Divider className={classes.devider} />
-        </div>
-
-        <div>
-          <Grid container style={{ paddingTop: "10px" }}>
+          <Grid container >
             <Grid item lg={4} sm={4} xs={12} className={classes.deskTopTabView}>
               {storeDetails}
             </Grid>
@@ -511,12 +510,12 @@ const StoreFinderComponent = props => {
                 </Map>
               </div>
             </Grid>
-            <Grid item lg={8} sm={8} xs={12} className={classes.mobileViewXS}>
+            <Grid item lg={8} sm={8} xs={12}  className={classes.mobileViewXS}>
               <div className={classes.mapDiv} id="map">
                 <Map
                   item
                   xs={12}
-                  style={{ width: "95%", height: "300px" }}
+                  style={{position:"absolute", left:"0px", top:"0px", overflow:"hidden", width:"94%", height:"300px", zIndex:"0"}}
                   google={props.google}
                   zoom={14}
                   initialCenter={{ lat: 38.2496307, lng: -85.5769251 }}
@@ -534,7 +533,7 @@ const StoreFinderComponent = props => {
               {storeDetails}
             </Grid>
           </Grid>
-        </div>
+    
       </div>
     </>
   );

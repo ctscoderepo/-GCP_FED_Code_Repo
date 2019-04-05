@@ -9,6 +9,9 @@ const styles = theme => ({
     margin: "180px 0 20px 0",
     [theme.breakpoints.down("sm")]: {
       margin: "95px 20px 20px 20px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      margin: "130px 0px 20px 0px"
     }
   },
   categories: {

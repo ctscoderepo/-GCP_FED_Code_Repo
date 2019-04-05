@@ -9,6 +9,8 @@ import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Divider from "@material-ui/core/Divider";
 import c1 from "../Home/images/f1.jpeg";
+import c3 from "../HeroContentBlock/images/slide_two.jpg";
+import c2 from "../HeroContentBlock/images/slide_three.jpg";
 import Spinner from "../helpers/Spinner";
 import ExpressCheckout from "../StripeCheckout";
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -200,8 +202,14 @@ const styles = theme => ({
     fontSize: "30px",
     fontStyle: "italic",
     padding: "10px 0px 20px 0px",
+      fontWeight:"bold",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "22px"
+     fontSize: "22px",
+        fontWeight:"bold"
+    },
+      [theme.breakpoints.down("xs")]: {
+     fontSize: "18px",
+          fontWeight:"bold"
     }
   },
   shopMoreBtn: {
@@ -209,15 +217,19 @@ const styles = theme => ({
     Height: "auto",
     marginTop: "20px",
     border: "1px solid gray",
+      fontWeight:"bold",
     "&:hover": {
       backgroundColor: "transparent"
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize: "10px",
+      fontSize: "12px",
       marginTop: "10px",
       marginBottom: "10px",
-      padding: "3px",
+      padding: "5px",
       whiteSpace: "nowrap"
+    },
+      [theme.breakpoints.down("xs")]: {
+     marginTop:"0px"
     }
   },
   cartLabel: {
@@ -275,6 +287,9 @@ const styles = theme => ({
   },
   recentlyViewCont: {
     [theme.breakpoints.down("sm")]: {
+      display: "block"
+    },
+      [theme.breakpoints.down("xs")]: {
       display: "none"
     }
   },
@@ -375,7 +390,12 @@ const styles = theme => ({
           height:"200px",
     },
         [theme.breakpoints.down("sm")]: {
-         height:"170px",
+         height:"150px",
+             width:"100%",
+    },
+        [theme.breakpoints.down("xs")]: {
+         height:"100px",
+             width:"100%",
     },
     },
      removeBtnDiv:{
@@ -520,8 +540,8 @@ function CartComponent(props) {
         <Grid item lg={12} sm={12} xs={12}>
           <Grid container>
             <Grid item xs={4}>
-              <div className="imageWrapper1">
-                <img src={item.imageUrl} alt="mac book prop" />
+              <div>
+                <img src={item.imageUrl} alt="mac book prop" className={classes.cartImages} />
               </div>
             </Grid>
             <Grid item xs={8}>
@@ -662,10 +682,10 @@ function CartComponent(props) {
         <Grid container spacing={8}>
           <Grid item lg={8} sm={8} xs={12} className={classes.padding}>
             <Grid container className={classes.cartDiv1}>
-              <Grid item lg={8} sm={8} xs={8}>
+              <Grid item lg={8} sm={8} xs={7}>
                 <div className={classes.dsCartHead}>Your Shopping Cart</div>
               </Grid>
-              <Grid item lg={4} sm={4} xs={4}>
+              <Grid item lg={4} sm={4} xs={5}>
                 <Typography>Shop More</Typography>
                 <Button
                   className={classes.shopMoreBtn}
@@ -780,20 +800,25 @@ function CartComponent(props) {
                 </div>
                 <Grid item lg={12} sm={12} xs={12}>
                   <Grid container className={classes.padding15}>
-                    <Grid item lg={3} sm={3} xs={3} className={classes.margin5}>
-                      <div className="imageWrapper1">
+                    <Grid item lg={3} sm={3} xs={3} >
+                      <div className="imageWrapper1" style={{width:"90%"}}>
                         <img src={c1} alt="mac book prop" />
                       </div>
                     </Grid>
-                    <Grid item lg={3} sm={3} xs={3} className={classes.margin5}>
-                      <div className="imageWrapper1">
-                        <img src={c1} alt="mac book prop" />
+                    <Grid item lg={3} sm={3} xs={3} >
+                      <div className="imageWrapper1"  style={{width:"90%"}}>
+                        <img src="https://storage.googleapis.com/gcpimage/images/appreals/0000059_custom-t-shirt_550.jpeg" alt="mac book prop" />
                       </div>
                     </Grid>
 
-                    <Grid item lg={3} sm={3} xs={3} className={classes.margin5}>
-                      <div className="imageWrapper1">
-                        <img src={c1} alt="mac book prop" />
+                    <Grid item lg={3} sm={3} xs={3} >
+                      <div className="imageWrapper1"  style={{width:"90%"}}>
+                        <img src={c3} alt="mac book prop" />
+                      </div>
+                    </Grid>
+                    <Grid item lg={3} sm={3} xs={3} >
+                      <div className="imageWrapper1"  style={{width:"90%"}}>
+                        <img src="https://storage.googleapis.com/gcpimage/images/electronics/0000042_htc-one-mini-blue_550.jpeg" alt="mac book prop" />
                       </div>
                     </Grid>
                   </Grid>

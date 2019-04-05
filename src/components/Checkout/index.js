@@ -459,7 +459,17 @@ const styles = theme => ({
     color: "red",
     textAlign: "right",
     fontSize: "12px"
-  }
+  },
+    cardNumDiv:{
+        marginTop: "10px",
+        width: "95%",
+          [theme.breakpoints.down("sm")]: {
+        width: "98%",
+    },
+        [theme.breakpoints.down("xs")]: {
+        width: "98%",
+    }
+    },
 });
 
 const AuthUserCheckout = props => {
@@ -543,7 +553,7 @@ const AuthUserCheckout = props => {
     } else {
       setErrorShipping("");
     }
-    if (errorGuestEmail.length === 0) {
+    if (email.length === 0) {
       setErrorGuestEmail("Please enter email address");
     } else {
       setErrorGuestEmail("");
@@ -963,7 +973,7 @@ const AuthUserCheckout = props => {
                                 </RadioGroup>
                               </FormControl>
                             </div>
-                            <div style={{ marginTop: "10px", width: "98%" }}>
+                            <div className={classes.cardNumDiv} >
                               <NumberFormat
                                 placeholder="Enter Card Number"
                                 onChange={e => handleCardNum(e.target.value)}
