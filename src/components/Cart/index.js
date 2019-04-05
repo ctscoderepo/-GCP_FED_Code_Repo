@@ -229,7 +229,8 @@ const styles = theme => ({
       whiteSpace: "nowrap"
     },
       [theme.breakpoints.down("xs")]: {
-     marginTop:"0px"
+     marginTop:"0px",
+          fontSize:"10px",
     }
   },
   cartLabel: {
