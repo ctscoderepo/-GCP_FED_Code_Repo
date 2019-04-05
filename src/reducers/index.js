@@ -9,7 +9,7 @@ import cart from './Cart';
 import checkout from './Checkout';
 import storeFinder from './StoreFinder';
 import confirmation from './Confirmation';
-import airesults from "./Airesults";
+//import airesults from "./Airesults";
 
 const appReducer = combineReducers({
   header,
@@ -21,8 +21,7 @@ const appReducer = combineReducers({
   cart,
   checkout,
   storeFinder,
-  confirmation,
-  airesults   
+  confirmation
 });
 
 const rootReducer = (state, action) => {

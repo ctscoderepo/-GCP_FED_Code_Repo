@@ -40,7 +40,15 @@ const styles = theme => ({
     textAlign: "center",
     marginTop: "5%",
     [theme.breakpoints.down("xs")]: {
-      paddingLeft: "130px"
+      paddingLeft: "10px"
+    }
+  },
+  marginSet: {
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "30px"
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "30px"
     }
   }
 });
@@ -49,7 +57,7 @@ function SearchOutput({ airesults, classes, isLoading }) {
   // console.log("airesults",airesults);
 
   const spinner =
-    (!airesults || (airesults && airesults.length === 0)) ? (
+    !airesults || (airesults && airesults.length === 0) ? (
       isLoading ? (
         <div className={classes.spinnerDiv}>
           <Spinner />
@@ -60,7 +68,7 @@ function SearchOutput({ airesults, classes, isLoading }) {
         </div>
       )
     ) : (
-      <Grid container spacing={16}>
+      <Grid container spacing={16} className={classes.marginSet}>
         {airesults.map(product => (
           <Grid item lg={3} md={4} sm={4} xs={6} key={product.skuId}>
             <div>

@@ -9,7 +9,7 @@ import Search from "../containers/Search";
 import SignIn from "../containers/SignIn";
 import StoreFinder from "../containers/StoreFinder";
 import Confirmation from "../containers/Confirmation";
-import searchOutput from "../containers/SearchOutput";
+import SearchOutput from "../containers/SearchOutput";
 
 export default [
   { path: "/", component: Home, exact: true, id: 1 },
@@ -29,5 +29,5 @@ export default [
   { path: "/signIn", component: SignIn, id: 10 },
   { path: "/findStore", component: StoreFinder, id: 11 },
   { path: "/Confirmation", component: Confirmation, id: 12 },
-  { path: "/searchOutput", component: searchOutput, exact: true, id: 12 }
+  { path: "/searchOutput", component: SearchOutput, exact: true, id: 12 }
 ];

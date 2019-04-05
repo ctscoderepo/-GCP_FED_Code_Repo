@@ -1,4 +1,7 @@
-export default (state = { products: [], storeData: "" }, action) => {
+export default (
+  state = { products: [], storeData: "" },
+  action
+) => {
   switch (action.type) {
     case "ISLOADING":
       return { ...state, isLoading: true };
